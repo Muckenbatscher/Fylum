@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36202.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.Api", "Fylum.Api\Fylum.Api.csproj", "{52E2365E-B719-4C14-8AF5-5A02B22B7131}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.Shared", "Fylum.Shared\Fylum.Shared.csproj", "{835F3622-E464-466A-ADC1-D9674E5EF254}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52E2365E-B719-4C14-8AF5-5A02B22B7131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E2365E-B719-4C14-8AF5-5A02B22B7131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E2365E-B719-4C14-8AF5-5A02B22B7131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E2365E-B719-4C14-8AF5-5A02B22B7131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835F3622-E464-466A-ADC1-D9674E5EF254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835F3622-E464-466A-ADC1-D9674E5EF254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835F3622-E464-466A-ADC1-D9674E5EF254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835F3622-E464-466A-ADC1-D9674E5EF254}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69D5DEAA-1774-4ECF-9451-424A145810AD}
+	EndGlobalSection
+EndGlobal
