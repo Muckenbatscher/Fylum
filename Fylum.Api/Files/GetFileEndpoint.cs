@@ -7,9 +7,17 @@ namespace Fylum.Files
         Ok<FileResponse>, 
         NotFound>>
     {
+        private readonly IFileEndpointRouteDefinitionProvider _routeProvider;
+
+        public GetFileEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider)
+        {
+            _routeProvider = fileEndpointRouteDefinitionProvider;
+        }
+
         public override void Configure()
         {
-            Get("/api/files/{id}");
+            string baseRoute = _routeProvider.BaseEndpointRoute;
+            Get($"{baseRoute}/{{id}}");
             AllowAnonymous();
         }
         public override async Task HandleAsync(CancellationToken ct)

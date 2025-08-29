@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fylum.Tags
 {
-    public class TagIntegerValue : TagValue<int>
+    public class TagNumberValue : TagValue<decimal>
     {
     }
 }

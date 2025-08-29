@@ -1,5 +1,6 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using Fylum.EndpointRouteDefinitions;
 
 namespace Fylum
 {
@@ -11,6 +12,7 @@ namespace Fylum
 
             builder.Services.AddFastEndpoints()
                 .SwaggerDocument();
+            builder.Services.AddEndpointRouteDefinitions();
 
             var app = builder.Build();
 
@@ -22,7 +24,7 @@ namespace Fylum
             }
 
             app.UseHttpsRedirection();
-
+            app.UsePathBase("/api");
 
             app.Run();
         }

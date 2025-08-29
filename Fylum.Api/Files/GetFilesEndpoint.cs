@@ -4,17 +4,24 @@ namespace Fylum.Files
 {
     public class GetFilesEndpoint : EndpointWithoutRequest<IEnumerable<FileResponse>>
     {
+        private readonly IFileEndpointRouteDefinitionProvider _routeProvider;
+
+        public GetFilesEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider)
+        {
+            _routeProvider = fileEndpointRouteDefinitionProvider;
+        }
+
         public override void Configure()
         {
-            Get("api/files");
+            string baseRoute = _routeProvider.BaseEndpointRoute;
+            Get(baseRoute);
             AllowAnonymous();
         }
 
-        public override Task HandleAsync(CancellationToken ct)
+        public override async Task HandleAsync(CancellationToken ct)
         {
             var file = new FileResponse() { Id = Guid.NewGuid(), Name = "File1.txt" };
             Response = new List<FileResponse> { file };
-            return Task.CompletedTask;
         }
     }
 }
