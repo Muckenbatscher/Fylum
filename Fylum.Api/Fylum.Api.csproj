@@ -5,10 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Fylum</RootNamespace>
+    <UserSecretsId>3af62b9c-262c-4dd7-8858-642688b5bcdc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FastEndpoints" Version="7.0.1" />
+    <PackageReference Include="FastEndpoints.Security" Version="7.0.1" />
     <PackageReference Include="FastEndpoints.Swagger" Version="7.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>

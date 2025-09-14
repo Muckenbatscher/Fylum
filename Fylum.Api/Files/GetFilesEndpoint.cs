@@ -15,7 +15,7 @@ namespace Fylum.Files
         {
             string baseRoute = _routeProvider.BaseEndpointRoute;
             Get(baseRoute);
-            AllowAnonymous();
+            Claims(Config["JwtAuth:UserIdClaim"]!);
         }
 
         public override async Task HandleAsync(CancellationToken ct)

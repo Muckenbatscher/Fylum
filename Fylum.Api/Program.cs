@@ -1,4 +1,5 @@
 using FastEndpoints;
+using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.EndpointRouteDefinitions;
 
@@ -10,11 +11,17 @@ namespace Fylum
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddFastEndpoints()
+            builder.Services
+                .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration["JwtAuth:SigningKey"])
+                .AddAuthorization()
+                .AddFastEndpoints()
                 .SwaggerDocument();
             builder.Services.AddEndpointRouteDefinitions();
 
             var app = builder.Build();
+
+            app.UseAuthentication()
+               .UseAuthorization();
 
             app.UseFastEndpoints();
 

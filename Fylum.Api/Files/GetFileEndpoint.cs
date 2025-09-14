@@ -18,10 +18,17 @@ namespace Fylum.Files
         {
             string baseRoute = _routeProvider.BaseEndpointRoute;
             Get($"{baseRoute}/{{id}}");
-            AllowAnonymous();
+            Claims(Config["JwtAuth:UserIdClaim"]!);
         }
         public override async Task HandleAsync(CancellationToken ct)
         {
+            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == "UserId");
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+            {
+                await Send.ResultAsync(TypedResults.Unauthorized());
+                return;
+            }
+
             var id = Route<Guid>("id");
             var file = new FileResponse()
             {
@@ -36,7 +43,7 @@ namespace Fylum.Files
                 return;
             }
 
-            await Send.ResponseAsync(TypedResults.Ok(file), cancellation: ct);
+            await Send.ResultAsync(TypedResults.Ok(file));
         }
     }
 }
