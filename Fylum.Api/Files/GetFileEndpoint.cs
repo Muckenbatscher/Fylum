@@ -1,5 +1,7 @@
 ﻿using FastEndpoints;
+using Fylum.Authentication;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Options;
 
 namespace Fylum.Files
 {
@@ -8,21 +10,35 @@ namespace Fylum.Files
         NotFound>>
     {
         private readonly IFileEndpointRouteDefinitionProvider _routeProvider;
+        private readonly IFileRepository _fileRepository;
+        private readonly JwtAuthOptions _jwtAuthOptions;
 
-        public GetFileEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider)
+        public GetFileEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider, 
+            IOptions<JwtAuthOptions> jwtAuthOptions,
+            IFileRepository fileRepository)
         {
             _routeProvider = fileEndpointRouteDefinitionProvider;
+            _fileRepository = fileRepository;
+            _jwtAuthOptions = jwtAuthOptions.Value;
         }
 
         public override void Configure()
         {
             string baseRoute = _routeProvider.BaseEndpointRoute;
             Get($"{baseRoute}/{{id}}");
-            Claims(Config["JwtAuth:UserIdClaim"]!);
+            Claims(_jwtAuthOptions.UserIdClaim);
         }
         public override async Task HandleAsync(CancellationToken ct)
         {
-            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == "UserId");
+            var newFile = new File()
+            {
+                Id = Guid.NewGuid(),
+                Name = "ExampleFile.txt",
+                ParentFolderId = Guid.NewGuid()
+            };
+            _fileRepository.Create(newFile);
+
+            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == _jwtAuthOptions.UserIdClaim);
             if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
             {
                 await Send.ResultAsync(TypedResults.Unauthorized());

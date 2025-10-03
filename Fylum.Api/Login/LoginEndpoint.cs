@@ -1,16 +1,20 @@
 ﻿using FastEndpoints;
 using FastEndpoints.Security;
+using Fylum.Authentication;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Options;
 
 namespace Fylum.Login
 {
     public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
     {
         private readonly ILoginEndpointRouteDefinitionProvider _routeProvider;
+        private readonly JwtAuthOptions _jwtAuthOptions;
 
-        public LoginEndpoint(ILoginEndpointRouteDefinitionProvider routeProvider)
+        public LoginEndpoint(ILoginEndpointRouteDefinitionProvider routeProvider, IOptions<JwtAuthOptions> jwtAuthOptions)
         {
             _routeProvider = routeProvider;
+            _jwtAuthOptions = jwtAuthOptions.Value;
         }
 
         public override void Configure()
@@ -23,7 +27,7 @@ namespace Fylum.Login
         {
             // Simulate user authentication (replace with real authentication logic)
             bool valid = ValidateUser(req.Username, req.Password);
-            if (false)
+            if (!valid)
             {
                 await Send.ResultAsync(TypedResults.Unauthorized());
                 return;

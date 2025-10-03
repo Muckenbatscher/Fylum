@@ -1,21 +1,26 @@
 ﻿using FastEndpoints;
+using Fylum.Authentication;
+using Microsoft.Extensions.Options;
 
 namespace Fylum.Files
 {
     public class GetFilesEndpoint : EndpointWithoutRequest<IEnumerable<FileResponse>>
     {
         private readonly IFileEndpointRouteDefinitionProvider _routeProvider;
+        private readonly JwtAuthOptions _jwtAuthOptions;
 
-        public GetFilesEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider)
+        public GetFilesEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider,
+            IOptions<JwtAuthOptions> jwtAuthOptions)
         {
             _routeProvider = fileEndpointRouteDefinitionProvider;
+            _jwtAuthOptions = jwtAuthOptions.Value;
         }
 
         public override void Configure()
         {
             string baseRoute = _routeProvider.BaseEndpointRoute;
             Get(baseRoute);
-            Claims(Config["JwtAuth:UserIdClaim"]!);
+            Claims(_jwtAuthOptions.UserIdClaim);
         }
 
         public override async Task HandleAsync(CancellationToken ct)

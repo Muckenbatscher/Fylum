@@ -1,6 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
+using Fylum.Authentication;
 using Fylum.EndpointRouteDefinitions;
 
 namespace Fylum
@@ -17,6 +18,22 @@ namespace Fylum
                 .AddFastEndpoints()
                 .SwaggerDocument();
             builder.Services.AddEndpointRouteDefinitions();
+
+            builder.Services.AddPostgreSqlServices(options =>
+            {
+                options.HostName = builder.Configuration["DbConnection:Host"]!;
+                options.Port = int.Parse(builder.Configuration["DbConnection:Port"]!);
+                options.DatabaseName = builder.Configuration["DbConnection:Database"]!;
+                options.Username = builder.Configuration["DbConnection:Username"]!;
+                options.Password = builder.Configuration["DbConnection:Password"]!;
+            });
+
+            builder.Services.Configure<JwtAuthOptions>(options =>
+            {
+                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
+                options.UserIdClaim = builder.Configuration["JwtAuth:UserIdClaim"]!;
+                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
+            });
 
             var app = builder.Build();
 
