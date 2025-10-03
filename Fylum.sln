@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql", "Fylum.P
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Tests", "..\Fylum.PostgreSql.Tests\Fylum.PostgreSql.Tests.csproj", "{C7BE65CE-C633-4C9E-B86E-BECCCF4CD460}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Tests", "Fylum.PostgreSql.Tests\Fylum.PostgreSql.Tests.csproj", "{C7BE65CE-C633-4C9E-B86E-BECCCF4CD460}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
