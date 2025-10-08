@@ -8,7 +8,6 @@ namespace Fylum.PostgreSql.Migration.Domain
 {
     internal abstract class MigrationFromDirectory : IMigration
     {
-        public abstract int ExecutionOrderPosition { get; }
         public abstract Guid Id { get; }
         public abstract string Name { get; }
         public abstract DirectoryInfo MigrationsDirectory { get; }
@@ -16,14 +15,20 @@ namespace Fylum.PostgreSql.Migration.Domain
         {
             get
             {
-                MigrationsDirectory.Refresh();
-                if (!MigrationsDirectory.Exists)
-                {
-                    throw new DirectoryNotFoundException($"The directory '{MigrationsDirectory.FullName}' does not exist.");
-                }
-                return MigrationsDirectory.GetFiles("*.psql").OrderBy(f => f.Name);
+                _cachedMigrationFiles ??= LoadMigrationFiles();
+                return _cachedMigrationFiles!;
             }
         }
+        private IEnumerable<FileInfo>? _cachedMigrationFiles;
 
+        private IEnumerable<FileInfo>? LoadMigrationFiles()
+        {
+            MigrationsDirectory.Refresh();
+            if (!MigrationsDirectory.Exists)
+            {
+                throw new DirectoryNotFoundException($"The directory '{MigrationsDirectory.FullName}' does not exist.");
+            }
+            return MigrationsDirectory.GetFiles("*.psql").OrderBy(f => f.Name);
+        }
     }
 }

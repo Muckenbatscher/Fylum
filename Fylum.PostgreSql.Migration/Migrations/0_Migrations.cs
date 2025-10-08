@@ -9,7 +9,6 @@ namespace Fylum.PostgreSql.Migration.Migrations
 {
     internal class MigrationsMigration : MigrationFromDirectory, IMigration
     {
-        public override int ExecutionOrderPosition => 0;
         public override Guid Id => Guid.Parse("d8d4a2b4-edc7-4b40-a618-f196bf3eb633");
         public override string Name => "0_Migrations";
         public override DirectoryInfo MigrationsDirectory => new DirectoryInfo("MigrationFiles/0_Migrations/");

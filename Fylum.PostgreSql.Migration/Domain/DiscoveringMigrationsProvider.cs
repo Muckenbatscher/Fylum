@@ -17,7 +17,8 @@ namespace Fylum.PostgreSql.Migration.Domain
                 .Where(IsDiscoverableMigration)
                 .Select(type => Activator.CreateInstance(type) as IDiscoveredMigration)
                 .Where(instance => instance != null).Cast<IDiscoveredMigration>()
-                .OrderBy(instance => instance.ExecutionOrderPosition);
+                .OrderBy(instance => instance.ExecutionOrderPosition)
+                .Select(instance => instance.Migration);
             return migrationInstances.ToList();
         }
 

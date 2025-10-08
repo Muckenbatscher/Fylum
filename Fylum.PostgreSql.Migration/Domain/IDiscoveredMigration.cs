@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fylum.PostgreSql.Migration.Domain
 {
-    internal interface IDiscoveredMigration : IMigration
+    internal interface IDiscoveredMigration
     {
         int ExecutionOrderPosition { get; }
+        IMigration Migration { get; }
     }
 }
