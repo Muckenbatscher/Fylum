@@ -3,7 +3,7 @@ services:
     image: ${DOCKER_REGISTRY-}fylumapi
     build:
       context: .
-      dockerfile: Fylum.Api/Dockerfile
+      dockerfile: ../Fylum.Api/Dockerfile
 
   db:
     image: postgres

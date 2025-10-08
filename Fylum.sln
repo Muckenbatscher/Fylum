@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.Shared", "Fylum.Share
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql", "Fylum.PostgreSql\Fylum.PostgreSql.csproj", "{8ABD1D77-9574-437C-8323-0E0B41A53F0E}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose\docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Tests", "Fylum.PostgreSql.Tests\Fylum.PostgreSql.Tests.csproj", "{C7BE65CE-C633-4C9E-B86E-BECCCF4CD460}"
 EndProject

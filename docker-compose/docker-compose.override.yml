@@ -30,7 +30,7 @@ services:
     ports:
       - "8888:80"
     environment:
-      POSTGRES_HOST_AUTH_METHOD: user-name@domain-name.com
+      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
       PGADMIN_DEFAULT_PASSWORD: strong-password
     volumes:
       - pgadmin-data:/var/lib/pgadmin
