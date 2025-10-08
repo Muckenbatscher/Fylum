@@ -1,0 +1,7 @@
+CREATE TABLE migrations_performed
+(
+    id uuid NOT NULL,
+    time_stamp timestamp with time zone NOT NULL,
+    migration_id uuid NOT NULL,
+    PRIMARY KEY (id)
+);

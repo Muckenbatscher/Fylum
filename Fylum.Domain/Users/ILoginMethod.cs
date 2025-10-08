@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fylum.Users
 {
-    public class User : IdentifiableEntity<Guid>
+    internal interface ILoginMethod
     {
-        public string Username { get; set; }
-        public bool IsActive { get; set; }
     }
 }

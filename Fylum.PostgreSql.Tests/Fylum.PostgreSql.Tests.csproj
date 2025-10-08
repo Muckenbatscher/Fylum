@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fylum\Fylum.PostgreSql\Fylum.PostgreSql.csproj" />
+    <ProjectReference Include="..\Fylum.PostgreSql\Fylum.PostgreSql.csproj" />
   </ItemGroup>
 
 </Project>

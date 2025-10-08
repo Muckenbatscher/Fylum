@@ -1,0 +1,7 @@
+﻿CREATE TABLE user_group_members
+(
+    id uuid NOT NULL,
+    user_id uuid NOT NULL,
+    group_id uuid NOT NULL,
+    PRIMARY KEY (id)
+);
