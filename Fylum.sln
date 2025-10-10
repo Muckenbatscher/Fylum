@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.0.11005.162
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose\docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.Api", "Fylum.Api\Fylum.Api.csproj", "{52E2365E-B719-4C14-8AF5-5A02B22B7131}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.Domain", "Fylum.Domain\Fylum.Domain.csproj", "{835F3622-E464-466A-ADC1-D9674E5EF254}"
@@ -11,11 +13,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.Shared", "Fylum.Share
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql", "Fylum.PostgreSql\Fylum.PostgreSql.csproj", "{8ABD1D77-9574-437C-8323-0E0B41A53F0E}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose\docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Shared.Tests", "Fylum.PostgreSql.Shared.Tests\Fylum.PostgreSql.Shared.Tests.csproj", "{C7BE65CE-C633-4C9E-B86E-BECCCF4CD460}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Tests", "Fylum.PostgreSql.Tests\Fylum.PostgreSql.Tests.csproj", "{C7BE65CE-C633-4C9E-B86E-BECCCF4CD460}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fylum.PostgreSql.Migration", "Fylum.PostgreSql.Migration", "{7F5ACE90-7C43-496A-8A24-4F3E1ED531AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migration", "Fylum.PostgreSql.Migration\Fylum.PostgreSql.Migration.csproj", "{36634425-73BE-4FE8-AAAF-D21DFB8EDC74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migration.Domain", "Fylum.PostgreSql.Migration.Domain\Fylum.PostgreSql.Migration.Domain.csproj", "{36634425-73BE-4FE8-AAAF-D21DFB8EDC74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migration.Application", "Fylum.PostgreSql.Migration.Application\Fylum.PostgreSql.Migration.Application.csproj", "{87D09EC6-723C-42B6-A415-EBA020C26BB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migration.Winforms", "Fylum.PostgreSql.Migration.Winforms\Fylum.PostgreSql.Migration.Winforms.csproj", "{782A6079-3A2E-4E14-8524-75C776C84215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migrations.PostgreSql", "Fylum.PostgreSql.Migrations.PostgreSql\Fylum.PostgreSql.Migrations.PostgreSql.csproj", "{DD86C8BD-A4C1-44B2-9FC0-D0B0D9445FD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Shared", "Fylum.PostgreSql.Shared\Fylum.PostgreSql.Shared.csproj", "{AB109951-C16B-4150-B466-8CAE997B4ADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migration.Provider", "Fylum.PostgreSql.Migration.Provider\Fylum.PostgreSql.Migration.Provider.csproj", "{2DB321BD-BAE6-4E75-B0A8-E700113E4961}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +35,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52E2365E-B719-4C14-8AF5-5A02B22B7131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52E2365E-B719-4C14-8AF5-5A02B22B7131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52E2365E-B719-4C14-8AF5-5A02B22B7131}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,10 +55,6 @@ Global
 		{8ABD1D77-9574-437C-8323-0E0B41A53F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ABD1D77-9574-437C-8323-0E0B41A53F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ABD1D77-9574-437C-8323-0E0B41A53F0E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7BE65CE-C633-4C9E-B86E-BECCCF4CD460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7BE65CE-C633-4C9E-B86E-BECCCF4CD460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7BE65CE-C633-4C9E-B86E-BECCCF4CD460}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,9 +63,36 @@ Global
 		{36634425-73BE-4FE8-AAAF-D21DFB8EDC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36634425-73BE-4FE8-AAAF-D21DFB8EDC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36634425-73BE-4FE8-AAAF-D21DFB8EDC74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87D09EC6-723C-42B6-A415-EBA020C26BB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D09EC6-723C-42B6-A415-EBA020C26BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87D09EC6-723C-42B6-A415-EBA020C26BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87D09EC6-723C-42B6-A415-EBA020C26BB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{782A6079-3A2E-4E14-8524-75C776C84215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{782A6079-3A2E-4E14-8524-75C776C84215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{782A6079-3A2E-4E14-8524-75C776C84215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{782A6079-3A2E-4E14-8524-75C776C84215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD86C8BD-A4C1-44B2-9FC0-D0B0D9445FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD86C8BD-A4C1-44B2-9FC0-D0B0D9445FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD86C8BD-A4C1-44B2-9FC0-D0B0D9445FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD86C8BD-A4C1-44B2-9FC0-D0B0D9445FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB109951-C16B-4150-B466-8CAE997B4ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB109951-C16B-4150-B466-8CAE997B4ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB109951-C16B-4150-B466-8CAE997B4ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB109951-C16B-4150-B466-8CAE997B4ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB321BD-BAE6-4E75-B0A8-E700113E4961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB321BD-BAE6-4E75-B0A8-E700113E4961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB321BD-BAE6-4E75-B0A8-E700113E4961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB321BD-BAE6-4E75-B0A8-E700113E4961}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36634425-73BE-4FE8-AAAF-D21DFB8EDC74} = {7F5ACE90-7C43-496A-8A24-4F3E1ED531AE}
+		{87D09EC6-723C-42B6-A415-EBA020C26BB8} = {7F5ACE90-7C43-496A-8A24-4F3E1ED531AE}
+		{782A6079-3A2E-4E14-8524-75C776C84215} = {7F5ACE90-7C43-496A-8A24-4F3E1ED531AE}
+		{DD86C8BD-A4C1-44B2-9FC0-D0B0D9445FD9} = {7F5ACE90-7C43-496A-8A24-4F3E1ED531AE}
+		{2DB321BD-BAE6-4E75-B0A8-E700113E4961} = {7F5ACE90-7C43-496A-8A24-4F3E1ED531AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {69D5DEAA-1774-4ECF-9451-424A145810AD}

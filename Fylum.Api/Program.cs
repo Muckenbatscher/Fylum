@@ -3,6 +3,7 @@ using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Authentication;
 using Fylum.EndpointRouteDefinitions;
+using Fylum.PostgreSql.Shared;
 
 namespace Fylum
 {
@@ -19,7 +20,7 @@ namespace Fylum
                 .SwaggerDocument();
             builder.Services.AddEndpointRouteDefinitions();
 
-            builder.Services.AddPostgreSqlServices(options =>
+            builder.Services.AddPostgreSqlSharedServices(options =>
             {
                 options.HostName = builder.Configuration["DbConnection:Host"]!;
                 options.Port = int.Parse(builder.Configuration["DbConnection:Port"]!);
@@ -27,6 +28,7 @@ namespace Fylum
                 options.Username = builder.Configuration["DbConnection:Username"]!;
                 options.Password = builder.Configuration["DbConnection:Password"]!;
             });
+            builder.Services.AddPostgreSqlServices();
 
             builder.Services.Configure<JwtAuthOptions>(options =>
             {
