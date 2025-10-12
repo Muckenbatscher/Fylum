@@ -39,7 +39,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Fylum.PostgreSql.Migration.Application\Fylum.PostgreSql.Migration.Application.csproj" />
 	  <ProjectReference Include="..\Fylum.PostgreSql.Migration.Provider\Fylum.PostgreSql.Migration.Provider.csproj" />
-	  <ProjectReference Include="..\Fylum.PostgreSql.Migrations.PostgreSql\Fylum.PostgreSql.Migrations.PostgreSql.csproj" />
+	  <ProjectReference Include="..\Fylum.PostgreSql.Migration.PostgreSql\Fylum.PostgreSql.Migration.PostgreSql.csproj" />
 	</ItemGroup>
 
 

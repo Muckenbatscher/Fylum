@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migrations.PostgreSql.PerformMigration
+namespace Fylum.PostgreSql.Migration.PostgreSql.PerformMigration
 {
     public interface IPerformMigrationUnitOfWorkFactory : IUnitOfWorkFactory<PerformMigrationUnitOfWork>
     {

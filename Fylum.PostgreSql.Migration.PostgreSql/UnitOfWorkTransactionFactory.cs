@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migrations.PostgreSql
+namespace Fylum.PostgreSql.Migration.PostgreSql
 {
     public class UnitOfWorkTransactionFactory : IUnitOfWorkTransactionFactory
     {

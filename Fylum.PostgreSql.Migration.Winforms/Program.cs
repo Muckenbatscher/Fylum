@@ -1,10 +1,7 @@
 using Fylum.PostgreSql.Migration.Application;
-using Fylum.PostgreSql.Migration.Domain;
-using Fylum.PostgreSql.Migration.Domain.PerformedMigrations;
+using Fylum.PostgreSql.Migration.PostgreSql;
 using Fylum.PostgreSql.Migration.Provider;
 using Fylum.PostgreSql.Migration.Winforms.MainWindow;
-using Fylum.PostgreSql.Migrations.PostgreSql;
-using Fylum.PostgreSql.Migrations.PostgreSql.PerformedMigrations;
 using Fylum.PostgreSql.Shared;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

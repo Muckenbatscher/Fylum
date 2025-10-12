@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migration.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migration.Winforms", "Fylum.PostgreSql.Migration.Winforms\Fylum.PostgreSql.Migration.Winforms.csproj", "{782A6079-3A2E-4E14-8524-75C776C84215}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migrations.PostgreSql", "Fylum.PostgreSql.Migrations.PostgreSql\Fylum.PostgreSql.Migrations.PostgreSql.csproj", "{DD86C8BD-A4C1-44B2-9FC0-D0B0D9445FD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Migration.PostgreSql", "Fylum.PostgreSql.Migration.PostgreSql\Fylum.PostgreSql.Migration.PostgreSql.csproj", "{DD86C8BD-A4C1-44B2-9FC0-D0B0D9445FD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fylum.PostgreSql.Shared", "Fylum.PostgreSql.Shared\Fylum.PostgreSql.Shared.csproj", "{AB109951-C16B-4150-B466-8CAE997B4ADB}"
 EndProject

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migrations.PostgreSql.PerformedMigrations
+namespace Fylum.PostgreSql.Migration.PostgreSql.PerformedMigrations
 {
     public class PerformedMigrationsRepository : IPerformedMigrationsRepository
     {
@@ -25,7 +25,7 @@ namespace Fylum.PostgreSql.Migrations.PostgreSql.PerformedMigrations
             InsertMigration(performedMigration.Migration);
             InsertPerformedMigration(performedMigration);
         }
-        private void InsertMigration(Migration.Domain.Migration migration)
+        private void InsertMigration(Domain.Migration migration)
         {
             var param = new
             {
