@@ -2,6 +2,8 @@ using Fylum.PostgreSql.Migration.Application;
 using Fylum.PostgreSql.Migration.Domain;
 using Fylum.PostgreSql.Migration.Domain.PerformedMigrations;
 using Fylum.PostgreSql.Migration.Provider;
+using Fylum.PostgreSql.Migration.Winforms.MainWindow;
+using Fylum.PostgreSql.Migrations.PostgreSql;
 using Fylum.PostgreSql.Migrations.PostgreSql.PerformedMigrations;
 using Fylum.PostgreSql.Shared;
 using Microsoft.Extensions.Configuration;
@@ -36,16 +38,18 @@ namespace Fylum.PostgreSql.Migration.Winforms
             builder.Services.AddPostgreSqlMigrationProviderServices();
             builder.Services.AddPostgreSqlMigrationApplicationServices();
 
-            builder.Services.AddTransient<IPerformedMigrationsRepository, PerformedMigrationsRepository>();
+            builder.Services.AddPostgreSqlMigrationPostgreSqlServices();
 
-            builder.Services.AddTransient<MigrationMainWindow>();
+            builder.Services.AddTransient<IMigrationMainWindow, MigrationMainWindow>();
+            builder.Services.AddTransient<MigrationMainWindowPresenter>();
 
             using (var host = builder.Build())
             {
                 var serviceProvider = host.Services;
-                var mainForm = serviceProvider.GetRequiredService<MigrationMainWindow>();
+                var mainFormPresenter = serviceProvider.GetRequiredService<MigrationMainWindowPresenter>();
                 
-                System.Windows.Forms.Application.Run(mainForm);
+                var form = (Form)mainFormPresenter.View;
+                System.Windows.Forms.Application.Run(form);
             }
         }
     }

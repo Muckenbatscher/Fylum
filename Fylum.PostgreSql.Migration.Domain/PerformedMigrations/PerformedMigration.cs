@@ -20,12 +20,9 @@ namespace Fylum.PostgreSql.Migration.Domain.PerformedMigrations
         }
 
         public static PerformedMigration CreateNew(Migration migration)
-        {
-            return new PerformedMigration(Guid.NewGuid(), DateTimeOffset.UtcNow, migration);
-        }
+            => new PerformedMigration(Guid.NewGuid(), DateTimeOffset.UtcNow, migration);
+        
         public static PerformedMigration Create(Guid id, DateTimeOffset timestamp, Migration migration)
-        {
-            return new PerformedMigration(id, timestamp, migration);
-        }
+            => new PerformedMigration(id, timestamp, migration);
     }
 }

@@ -7,22 +7,25 @@ using System.Threading.Tasks;
 
 namespace Fylum.PostgreSql.Migration.Winforms.MainWindow
 {
-    internal class MigrationRow
+    public class MigrationRow
     {
-        public MigrationRow(IMigration migration, bool isApplied, DateTimeOffset? appliedTimestamp)
+        public MigrationRow(Domain.Migration migration, bool isApplied, DateTimeOffset? appliedTimestamp)
         {
             Migration = migration;
             IsApplied = isApplied;
             AppliedTimestamp = appliedTimestamp;
         }
 
-        public IMigration Migration { get; set; }
+        public Domain.Migration Migration { get; set; }
         public string Name
             => Migration.Name;
         public int ScriptCount 
-            => Migration.MigrationFiles.Count();
+            => Migration.MigrationScripts.Count();
 
         public bool IsApplied { get; }
         public DateTimeOffset? AppliedTimestamp { get; }
+
+        public DateTime? LocalAppliedTimestamp 
+            => AppliedTimestamp?.ToLocalTime().DateTime;
     }
 }

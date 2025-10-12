@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Fylum.PostgreSql.Migration.Domain.PerformedMigrations;
-using Fylum.PostgreSql.Shared.Connection;
+using Fylum.PostgreSql.Migration.Domain.UnitOfWork;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -14,16 +14,49 @@ namespace Fylum.PostgreSql.Migrations.PostgreSql.PerformedMigrations
     {
         private const string TableDoesNotExistState = "42P01";
 
-        private readonly IOpenedConnectionProvider _openedConnectionProvider;
-
-        public PerformedMigrationsRepository(IOpenedConnectionProvider openedConnectionProvider)
+        private readonly IUnitOfWorkTransactionFactory _transactionFactory;
+        public PerformedMigrationsRepository(IUnitOfWorkTransactionFactory transactionFactory)
         {
-            _openedConnectionProvider = openedConnectionProvider;
+            _transactionFactory = transactionFactory;
         }
 
         public void AddPerformedMigration(PerformedMigration performedMigration)
         {
-            throw new NotImplementedException();
+            InsertMigration(performedMigration.Migration);
+            InsertPerformedMigration(performedMigration);
+        }
+        private void InsertMigration(Migration.Domain.Migration migration)
+        {
+            var param = new
+            {
+                id = migration.Id,
+                name = migration.Name
+            };
+            string sql = @$"INSERT INTO migrations
+                            (id, name)
+                            VALUES (@{nameof(param.id)}, @{nameof(param.name)})";
+            var transaction = _transactionFactory.GetTransaction();
+            var connection = transaction.Connection;
+            connection.Execute(sql,
+                param: param,
+                transaction: transaction.Transaction);
+        }
+        private void InsertPerformedMigration(PerformedMigration performedMigration)
+        {
+            var param = new
+            {
+                id = performedMigration.Id,
+                timestamp = performedMigration.Timestamp,
+                migrationId = performedMigration.Migration.Id
+            };
+            string sql = @$"INSERT INTO migrations_performed
+                            (id, time_stamp, migration_id)
+                            VALUES (@{nameof(param.id)}, @{nameof(param.timestamp)}, @{nameof(param.migrationId)})";
+            var transaction = _transactionFactory.GetTransaction();
+            var connection = transaction.Connection;
+            connection.Execute(sql,
+                param: param,
+                transaction: transaction.Transaction);
         }
 
         public IEnumerable<PerformedMigration> GetPerformedMigrations()
@@ -35,6 +68,8 @@ namespace Fylum.PostgreSql.Migrations.PostgreSql.PerformedMigrations
             }
             catch (PostgresException pgEx)
             {
+                var transaction = _transactionFactory.GetTransaction();
+                transaction.Connection.Dispose();
                 if (pgEx.SqlState == TableDoesNotExistState)
                     return [];
                 else
@@ -45,20 +80,22 @@ namespace Fylum.PostgreSql.Migrations.PostgreSql.PerformedMigrations
         private IEnumerable<PerformedMigrationQueryModel> QueryPerformedMigrations()
         {
             string sql = @$"SELECT mp.id AS {nameof(PerformedMigrationQueryModel.Id)},
-                                   mp.timestamp AS {nameof(PerformedMigrationQueryModel.Timestamp)},
+                                   mp.time_stamp AS {nameof(PerformedMigrationQueryModel.Timestamp)},
                                    mp.migration_id AS {nameof(PerformedMigrationQueryModel.MigrationId)},    
                                    m.name AS {nameof(PerformedMigrationQueryModel.MigratioName)}
                             FROM migrations_performed mp 
                             JOIN migrations m
                               ON mp.migration_id = m.id
-                            ORDER BY m.timestamp DESC;";
-            using var connection = _openedConnectionProvider.GetOpenedConnection();
-            return connection.Query<PerformedMigrationQueryModel>(sql);
+                            ORDER BY mp.time_stamp DESC;";
+            var transaction = _transactionFactory.GetTransaction();
+            var connection = transaction.Connection;
+            return connection.Query<PerformedMigrationQueryModel>(sql, 
+                transaction: transaction.Transaction);
         }
 
         private PerformedMigration MapToDomain(PerformedMigrationQueryModel queryModel)
         {
-            var migration = Migration.Domain.PerformedMigrations.Migration.Create(
+            var migration = Migration.Domain.Migration.Create(
                 queryModel.MigrationId, 
                 queryModel.MigratioName);
             return PerformedMigration.Create(

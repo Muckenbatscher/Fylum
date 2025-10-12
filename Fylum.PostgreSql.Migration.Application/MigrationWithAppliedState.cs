@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fylum.PostgreSql.Migration.Application
 {
-    public record MigrationWithAppliedState(IMigration Migration, MigrationAppliedState? AppliedState)
+    public record MigrationWithAppliedState(Domain.Migration Migration, MigrationAppliedState? AppliedState)
     {
         public bool IsApplied => AppliedState != null;
     }

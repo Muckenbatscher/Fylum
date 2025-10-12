@@ -10,15 +10,15 @@ namespace Fylum.PostgreSql.Migration.Provider
 {
     public class MigrationsProvider : IMigrationsProvider
     {
-        public IMigration GetInitialMigration()
+        public Domain.Migration GetInitialMigration()
         {
-            return new MigrationsMigration();
+            return new MigrationsMigration().CreateMigration();
         }
 
-        public IEnumerable<IMigration> GetMigrations()
+        public IEnumerable<Domain.Migration> GetMigrations()
         {
-            yield return new MigrationsMigration();
-            yield return new UsersMigration();
+            yield return new MigrationsMigration().CreateMigration();
+            yield return new UsersMigration().CreateMigration();
         }
     }
 }

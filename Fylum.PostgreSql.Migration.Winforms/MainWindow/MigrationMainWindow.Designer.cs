@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle6 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle7 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle8 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle9 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle10 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle1 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle2 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle3 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle4 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle5 = new M2TWinForms.M2TDataGridViewCellStyle();
             DG_Migrations = new M2TWinForms.M2TDataGridView();
             CL_IsApplied = new DataGridViewImageColumn();
             CL_Name = new DataGridViewTextBoxColumn();
@@ -49,32 +49,34 @@
             // 
             DG_Migrations.AllowUserToAddRows = false;
             DG_Migrations.AllowUserToDeleteRows = false;
-            m2tDataGridViewCellStyle6.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            m2tDataGridViewCellStyle6.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            DG_Migrations.AlternatingRowsDefaultCellStyle = m2tDataGridViewCellStyle6;
+            DG_Migrations.AllowUserToResizeRows = false;
+            m2tDataGridViewCellStyle1.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            m2tDataGridViewCellStyle1.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            DG_Migrations.AlternatingRowsDefaultCellStyle = m2tDataGridViewCellStyle1;
             DG_Migrations.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DG_Migrations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            m2tDataGridViewCellStyle7.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.SurfaceContainerHigh;
-            m2tDataGridViewCellStyle7.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            DG_Migrations.ColumnHeadersDefaultCellStyle = m2tDataGridViewCellStyle7;
+            m2tDataGridViewCellStyle2.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.SurfaceContainerHigh;
+            m2tDataGridViewCellStyle2.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            DG_Migrations.ColumnHeadersDefaultCellStyle = m2tDataGridViewCellStyle2;
             DG_Migrations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_Migrations.Columns.AddRange(new DataGridViewColumn[] { CL_IsApplied, CL_Name, CL_ScriptsCount, CL_AppliedTimestamp });
             TLP_Main.SetColumnSpan(DG_Migrations, 2);
-            m2tDataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            m2tDataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
-            m2tDataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            DG_Migrations.DefaultCellStyle = m2tDataGridViewCellStyle8;
+            m2tDataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            m2tDataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            m2tDataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            DG_Migrations.DefaultCellStyle = m2tDataGridViewCellStyle3;
             DG_Migrations.Location = new Point(3, 3);
             DG_Migrations.MultiSelect = false;
             DG_Migrations.Name = "DG_Migrations";
             DG_Migrations.ReadOnly = true;
-            m2tDataGridViewCellStyle9.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.SurfaceContainerHigh;
-            m2tDataGridViewCellStyle9.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            DG_Migrations.RowHeadersDefaultCellStyle = m2tDataGridViewCellStyle9;
+            m2tDataGridViewCellStyle4.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.SurfaceContainerHigh;
+            m2tDataGridViewCellStyle4.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            DG_Migrations.RowHeadersDefaultCellStyle = m2tDataGridViewCellStyle4;
             DG_Migrations.RowHeadersVisible = false;
-            m2tDataGridViewCellStyle10.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            m2tDataGridViewCellStyle10.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            DG_Migrations.RowsDefaultCellStyle = m2tDataGridViewCellStyle10;
+            m2tDataGridViewCellStyle5.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            m2tDataGridViewCellStyle5.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            DG_Migrations.RowsDefaultCellStyle = m2tDataGridViewCellStyle5;
+            DG_Migrations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DG_Migrations.Size = new Size(770, 340);
             DG_Migrations.TabIndex = 12;
             // 
@@ -132,6 +134,7 @@
             BT_ApplyUntilSelected.Size = new Size(382, 44);
             BT_ApplyUntilSelected.TabIndex = 14;
             BT_ApplyUntilSelected.Text = "Apply Until Selected";
+            BT_ApplyUntilSelected.Click += BT_ApplyUntilSelected_Click;
             // 
             // BT_ApplyAll
             // 
@@ -142,6 +145,7 @@
             BT_ApplyAll.Size = new Size(382, 44);
             BT_ApplyAll.TabIndex = 13;
             BT_ApplyAll.Text = "Apply All";
+            BT_ApplyAll.Click += BT_ApplyAll_Click;
             // 
             // MigrationMainWindow
             // 

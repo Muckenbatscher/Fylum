@@ -1,5 +1,4 @@
-﻿using Fylum.Files;
-using Fylum.PostgreSql.Shared.Connection;
+﻿using Fylum.PostgreSql.Shared.Connection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -26,8 +25,8 @@ namespace Fylum.PostgreSql.Shared
         private static void AddConnectionServices(this IServiceCollection services)
         {
             services.AddTransient<IConnectionStringProvider, ConnectionStringProvider>();
-            services.AddTransient<IConnectionProvider, ConnectionProvider>();
-            services.AddTransient<IOpenedConnectionProvider, OpenedConnectionProvider>();
+            services.AddScoped<IConnectionProvider, ConnectionProvider>();
+            services.AddScoped<IOpenedConnectionProvider, OpenedConnectionProvider>();
         }
     }
 }

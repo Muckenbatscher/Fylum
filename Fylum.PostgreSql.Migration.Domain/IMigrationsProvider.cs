@@ -8,7 +8,7 @@ namespace Fylum.PostgreSql.Migration.Domain
 {
     public interface IMigrationsProvider
     {
-        IEnumerable<IMigration> GetMigrations();
-        IMigration GetInitialMigration();
+        IEnumerable<Migration> GetMigrations();
+        Migration GetInitialMigration();
     }
 }

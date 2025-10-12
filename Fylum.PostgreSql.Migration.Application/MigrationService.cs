@@ -1,4 +1,5 @@
-﻿using Fylum.PostgreSql.Migration.Domain;
+﻿using Fylum.PostgreSql.Migration.Application.PerformMigration;
+using Fylum.PostgreSql.Migration.Domain;
 using Fylum.PostgreSql.Migration.Domain.PerformedMigrations;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Fylum.PostgreSql.Migration.Application
         private readonly IMigrationsProvider _migrationsProvider;
         private readonly IPerformedMigrationsRepository _performedMigrationsRepository;
 
-        public MigrationService(IMigrationsProvider migrationsProvider, 
+        public MigrationService(IMigrationsProvider migrationsProvider,
             IPerformedMigrationsRepository performedMigrationsRepository)
         {
             _migrationsProvider = migrationsProvider;
@@ -28,7 +29,8 @@ namespace Fylum.PostgreSql.Migration.Application
             return allMigrations.Select(m => GetMigrationWithAppliedStateFromPerformed(m, performedMigrations));
         }
 
-        private MigrationWithAppliedState GetMigrationWithAppliedStateFromPerformed(IMigration migration, IEnumerable<PerformedMigration> performedMigrations)
+        private static MigrationWithAppliedState GetMigrationWithAppliedStateFromPerformed(Domain.Migration migration, 
+            IEnumerable<PerformedMigration> performedMigrations)
         {
             var matchingPerformed = performedMigrations
                 .FirstOrDefault(pm => pm.Migration.Id == migration.Id);
