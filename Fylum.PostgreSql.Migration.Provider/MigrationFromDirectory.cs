@@ -4,26 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Domain
+namespace Fylum.PostgreSql.Migration.Provider
 {
-    public abstract class MigrationFromDirectory
+    public abstract class MigrationFromDirectory : MigrationFromFiles
     {
-        public abstract Guid Id { get; }
-        public abstract string Name { get; }
         public abstract DirectoryInfo MigrationsDirectory { get; }
+        public override IEnumerable<FileInfo> MigrationScriptFiles => LoadMigrationFiles();
 
-        public Migration CreateMigration()
-        {
-            var scripts = GetMigrationScripts();
-            return Migration.Create(Id, Name, scripts);
-        }
-
-
-        private IEnumerable<MigrationScript> GetMigrationScripts()
-        {
-            var migrationFiles = LoadMigrationFiles();
-            return migrationFiles.Select(f => new MigrationScript(File.ReadAllText(f.FullName)));
-        }
         private IEnumerable<FileInfo> LoadMigrationFiles()
         {
             MigrationsDirectory.Refresh();
