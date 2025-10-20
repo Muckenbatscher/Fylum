@@ -19,6 +19,7 @@ services:
     ports:
       - "5433:5432"
     environment:
+      - POSTGRES_DB=fylum
       - POSTGRES_USER=user-name
       - POSTGRES_PASSWORD=strong-password
     volumes:
