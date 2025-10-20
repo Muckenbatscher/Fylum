@@ -5,7 +5,7 @@ CREATE TABLE migrations_performed
     migration_id uuid NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_migrations FOREIGN KEY (migration_id)
-        REFERENCES public.migrations (id) MATCH SIMPLE
+        REFERENCES migrations (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
