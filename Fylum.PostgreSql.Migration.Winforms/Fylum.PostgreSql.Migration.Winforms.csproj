@@ -14,15 +14,6 @@
 		<None Remove="packages\**" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Reference Include="M2TWinForms">
-			<HintPath>packages\M2TWinForms.dll</HintPath>
-		</Reference>
-		<Reference Include="M2TWinForms.Themes">
-			<HintPath>packages\M2TWinForms.Themes.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-
 
 	<ItemGroup>
 		<Content Include="appSettings.json">
@@ -31,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="M2TWinForms" Version="0.1.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
 	</ItemGroup>
