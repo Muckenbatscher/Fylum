@@ -1,4 +1,5 @@
 using Fylum.PostgreSql.Migration.Winforms.MainWindow;
+using Fylum.PostgreSql.Migration.Winforms.MainWindow.MigrationScript;
 using M2TWinForms;
 
 namespace Fylum.PostgreSql.Migration
@@ -55,5 +56,36 @@ namespace Fylum.PostgreSql.Migration
 
         private void BT_ApplyUntilSelected_Click(object sender, EventArgs e)
             => ApplyUntilSelectedClicked?.Invoke(this, e);
+
+        private void DG_Migrations_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex != CL_IsApplied.Index || e.RowIndex < 0)
+                return;
+
+            var datagrid = (DataGridView)sender;
+            var row = (MigrationRow)datagrid.Rows[e.RowIndex].DataBoundItem;
+            var image = row.IsApplied
+                ? Winforms.Properties.Resources.VerifiedIcon
+                : new Bitmap(1, 1);
+
+        }
+
+        private void DG_Migrations_SelectionChanged(object sender, EventArgs e)
+        {
+            PN_SelectedMigration.Controls.Clear();
+            if (SelectedMigration == null)
+                return;
+
+            foreach (var script in SelectedMigration.Migration.MigrationScripts.Reverse())
+            {
+                var scriptDisplay = new MigrationScriptDisplay
+                {
+                    ScriptText = script.ScriptCommandText,
+                    Dock = DockStyle.Top,
+                    Padding = new Padding(3)
+                };
+                PN_SelectedMigration.Controls.Add(scriptDisplay);
+            }
+        }
     }
 }
