@@ -1,9 +1,8 @@
 ﻿CREATE TABLE user_group_members
 (
-    id uuid NOT NULL,
     user_id uuid NOT NULL,
     group_id uuid NOT NULL,
-    PRIMARY KEY (id),
+    PRIMARY KEY (user_id, group_id),
     CONSTRAINT fk_users FOREIGN KEY (user_id)
         REFERENCES users (id) MATCH SIMPLE
         ON UPDATE NO ACTION

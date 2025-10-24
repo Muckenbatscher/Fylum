@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fylum.Domain.Users
 {
-    public class UserGroupMember : IdentifiableEntity<Guid>
+    public class UserGroupMember
     {
         public Guid UserId { get; set; }
         public Guid GroupId { get; set; }

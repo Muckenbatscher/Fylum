@@ -21,6 +21,7 @@ namespace Fylum.Migration.Provider.Migrations
                 yield return "user_groups.psql";
                 yield return "user_group_members.psql";
                 yield return "user_password_logins.psql";
+                yield return "insert_admin_user.psql";
             }
         }
     }
