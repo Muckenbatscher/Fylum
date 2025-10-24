@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Tags
+namespace Fylum.Domain.Tags
 {
     public class TagBoolValue : TagValue<bool>
     {

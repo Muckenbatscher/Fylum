@@ -1,6 +1,6 @@
-﻿using Fylum.EndpointRouteDefinitions;
+﻿using Fylum.Api.EndpointRouteDefinitions;
 
-namespace Fylum.Tags
+namespace Fylum.Api.Tags
 {
     public interface ITagEndpointRouteDefinitionProvider : IEndpointRouteDefinitionProvider
     {

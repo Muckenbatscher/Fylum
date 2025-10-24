@@ -1,4 +1,4 @@
-﻿namespace Fylum.Tags
+﻿namespace Fylum.Api.Tags
 {
     public class TagEndpointRouteDefinitionProvider : ITagEndpointRouteDefinitionProvider
     {

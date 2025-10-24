@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/Fylum.Migration/">
+    <Project Path="Fylum.Migration.Application/Fylum.Migration.Application.csproj" />
+    <Project Path="Fylum.Migration.Domain/Fylum.Migration.Domain.csproj" />
+    <Project Path="Fylum.Migration.PostgreSql/Fylum.Migration.PostgreSql.csproj" />
+    <Project Path="Fylum.Migration.Provider/Fylum.Migration.Provider.csproj" />
+    <Project Path="Fylum.Migration.Winforms/Fylum.Migration.Winforms.csproj" />
+  </Folder>
+  <Project Path="ConsoleApp1/PasswordhashCalculator.csproj" Id="cf1d1a53-f977-4cc2-b9dd-a6c5f2e006b7" />
+  <Project Path="docker-compose/docker-compose.dcproj">
+    <Build />
+  </Project>
+  <Project Path="Fylum.Api/Fylum.Api.csproj" />
+  <Project Path="Fylum.Domain/Fylum.Domain.csproj" />
+  <Project Path="Fylum.PostgreSql.Shared.Tests/Fylum.PostgreSql.Shared.Tests.csproj" />
+  <Project Path="Fylum.PostgreSql.Shared/Fylum.PostgreSql.Shared.csproj" />
+  <Project Path="Fylum.PostgreSql/Fylum.PostgreSql.csproj" />
+  <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
+</Solution>

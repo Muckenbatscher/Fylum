@@ -1,0 +1,25 @@
+{
+  "profiles": {
+    "Fylum API with Postgres": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "fylum.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "serviceActions": {
+        "fylum.api": "StartDebugging",
+        "db": "StartWithoutDebugging",
+        "pgadmin": "StartWithoutDebugging"
+      }
+    },
+    "Only Postgres Infra": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "db": "StartWithoutDebugging",
+        "fylum.api": "DoNotStart",
+        "pgadmin": "StartWithoutDebugging"
+      }
+    }
+  }
+}

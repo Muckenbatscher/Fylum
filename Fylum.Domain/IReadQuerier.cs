@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum
+namespace Fylum.Domain
 {
     public interface IReadQuerier<T, Key> 
         where T : IdentifiableEntity<Key>

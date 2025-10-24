@@ -1,27 +1,53 @@
 ﻿using FastEndpoints;
+using Fylum.Api.Authentication;
+using Fylum.Domain.Files;
+using Fylum.Files;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Options;
+using File = Fylum.Domain.Files.File;
 
-namespace Fylum.Files
+namespace Fylum.Api.Files
 {
     public class GetFileEndpoint : EndpointWithoutRequest<Results<
         Ok<FileResponse>, 
         NotFound>>
     {
         private readonly IFileEndpointRouteDefinitionProvider _routeProvider;
+        private readonly IFileRepository _fileRepository;
+        private readonly JwtAuthOptions _jwtAuthOptions;
 
-        public GetFileEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider)
+        public GetFileEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider, 
+            IOptions<JwtAuthOptions> jwtAuthOptions,
+            IFileRepository fileRepository)
         {
             _routeProvider = fileEndpointRouteDefinitionProvider;
+            _fileRepository = fileRepository;
+            _jwtAuthOptions = jwtAuthOptions.Value;
         }
 
         public override void Configure()
         {
             string baseRoute = _routeProvider.BaseEndpointRoute;
             Get($"{baseRoute}/{{id}}");
-            AllowAnonymous();
+            Claims(_jwtAuthOptions.UserIdClaim);
         }
         public override async Task HandleAsync(CancellationToken ct)
         {
+            var newFile = new File()
+            {
+                Id = Guid.NewGuid(),
+                Name = "ExampleFile.txt",
+                ParentFolderId = Guid.NewGuid()
+            };
+            _fileRepository.Create(newFile);
+
+            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == _jwtAuthOptions.UserIdClaim);
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+            {
+                await Send.ResultAsync(TypedResults.Unauthorized());
+                return;
+            }
+
             var id = Route<Guid>("id");
             var file = new FileResponse()
             {
@@ -36,7 +62,7 @@ namespace Fylum.Files
                 return;
             }
 
-            await Send.ResponseAsync(TypedResults.Ok(file), cancellation: ct);
+            await Send.ResultAsync(TypedResults.Ok(file));
         }
     }
 }
