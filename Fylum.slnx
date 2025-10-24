@@ -1,10 +1,10 @@
 <Solution>
-  <Folder Name="/Fylum.PostgreSql.Migration/">
-    <Project Path="Fylum.PostgreSql.Migration.Application/Fylum.PostgreSql.Migration.Application.csproj" />
-    <Project Path="Fylum.PostgreSql.Migration.Domain/Fylum.PostgreSql.Migration.Domain.csproj" />
-    <Project Path="Fylum.PostgreSql.Migration.PostgreSql/Fylum.PostgreSql.Migration.PostgreSql.csproj" />
-    <Project Path="Fylum.PostgreSql.Migration.Provider/Fylum.PostgreSql.Migration.Provider.csproj" />
-    <Project Path="Fylum.PostgreSql.Migration.Winforms/Fylum.PostgreSql.Migration.Winforms.csproj" />
+  <Folder Name="/Fylum.Migration/" >
+    <Project Path="Fylum.Migration.Application/Fylum.Migration.Application.csproj" />
+    <Project Path="Fylum.Migration.Domain/Fylum.Migration.Domain.csproj" />
+    <Project Path="Fylum.Migration.PostgreSql/Fylum.Migration.PostgreSql.csproj" />
+    <Project Path="Fylum.Migration.Provider/Fylum.Migration.Provider.csproj" />
+    <Project Path="Fylum.Migration.Winforms/Fylum.Migration.Winforms.csproj" />
   </Folder>
   <Project Path="docker-compose/docker-compose.dcproj">
     <Build />

@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Fylum.PostgreSql.Migration.Domain\Fylum.PostgreSql.Migration.Domain.csproj" />
+		<ProjectReference Include="..\Fylum.Migration.Domain\Fylum.Migration.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

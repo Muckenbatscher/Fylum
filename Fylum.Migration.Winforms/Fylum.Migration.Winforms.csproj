@@ -29,9 +29,9 @@
 
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Fylum.PostgreSql.Migration.Application\Fylum.PostgreSql.Migration.Application.csproj" />
-	  <ProjectReference Include="..\Fylum.PostgreSql.Migration.Provider\Fylum.PostgreSql.Migration.Provider.csproj" />
-	  <ProjectReference Include="..\Fylum.PostgreSql.Migration.PostgreSql\Fylum.PostgreSql.Migration.PostgreSql.csproj" />
+	  <ProjectReference Include="..\Fylum.Migration.Application\Fylum.Migration.Application.csproj" />
+	  <ProjectReference Include="..\Fylum.Migration.Provider\Fylum.Migration.Provider.csproj" />
+	  <ProjectReference Include="..\Fylum.Migration.PostgreSql\Fylum.Migration.PostgreSql.csproj" />
 	</ItemGroup>
 
 
