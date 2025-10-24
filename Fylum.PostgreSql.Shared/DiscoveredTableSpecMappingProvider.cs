@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Shared
+namespace Fylum.PostgreSql
 {
     internal class DiscoveredTableSpecMappingProvider
     {

@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using Fylum.Migration.Domain.UnitOfWork;
+using Fylum.Domain.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,11 +1,11 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using Fylum.Authentication;
-using Fylum.EndpointRouteDefinitions;
-using Fylum.PostgreSql.Shared;
+using Fylum.Api.Authentication;
+using Fylum.Api.EndpointRouteDefinitions;
+using Fylum.PostgreSql;
 
-namespace Fylum
+namespace Fylum.Api
 {
     public class Program
     {

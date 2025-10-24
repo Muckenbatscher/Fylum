@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Fylum.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Folders
+namespace Fylum.Domain.Folders
 {
     public class Folder : IdentifiableEntity<Guid>
     {

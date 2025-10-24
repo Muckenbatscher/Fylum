@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Fylum.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Files
+namespace Fylum.Domain.Files
 {
     public class File : IdentifiableEntity<Guid>
     {

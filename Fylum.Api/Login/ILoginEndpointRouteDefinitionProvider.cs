@@ -1,6 +1,6 @@
-﻿using Fylum.EndpointRouteDefinitions;
+﻿using Fylum.Api.EndpointRouteDefinitions;
 
-namespace Fylum.Login
+namespace Fylum.Api.Login
 {
     public interface ILoginEndpointRouteDefinitionProvider : IEndpointRouteDefinitionProvider
     {

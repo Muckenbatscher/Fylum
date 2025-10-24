@@ -1,4 +1,4 @@
-﻿namespace Fylum.Login
+﻿namespace Fylum.Api.Login
 {
     public class LoginEndpointRouteDefinitionProvider : ILoginEndpointRouteDefinitionProvider
     {

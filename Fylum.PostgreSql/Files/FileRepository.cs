@@ -1,9 +1,11 @@
-﻿using Fylum.PostgreSql.Shared.Connection;
+﻿using Fylum.Domain.Files;
+using Fylum.PostgreSql.Connection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using File = Fylum.Domain.Files.File;
 
 namespace Fylum.Files
 {

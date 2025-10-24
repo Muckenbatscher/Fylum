@@ -1,6 +1,6 @@
 ﻿using Dapper;
+using Fylum.Domain.UnitOfWork;
 using Fylum.Migration.Domain.PerformedMigrations;
-using Fylum.Migration.Domain.UnitOfWork;
 using Npgsql;
 using System;
 using System.Collections.Generic;

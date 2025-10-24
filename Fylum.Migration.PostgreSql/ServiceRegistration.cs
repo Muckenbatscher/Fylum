@@ -1,6 +1,6 @@
-﻿using Fylum.Migration.Application.PerformMigration;
+﻿using Fylum.Domain.UnitOfWork;
+using Fylum.Migration.Application.PerformMigration;
 using Fylum.Migration.Domain.PerformedMigrations;
-using Fylum.Migration.Domain.UnitOfWork;
 using Fylum.Migration.PostgreSql.PerformedMigrations;
 using Fylum.Migration.PostgreSql.PerformMigration;
 using Fylum.Migration.PostgreSql.ScriptExecution;

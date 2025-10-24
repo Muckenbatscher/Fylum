@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Domain.UnitOfWork
+namespace Fylum.Domain.UnitOfWork
 {
     public interface IUnitOfWorkTransactionFactory
     {

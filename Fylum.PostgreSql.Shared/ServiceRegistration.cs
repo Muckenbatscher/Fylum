@@ -1,4 +1,4 @@
-﻿using Fylum.PostgreSql.Shared.Connection;
+﻿using Fylum.PostgreSql.Connection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Shared
+namespace Fylum.PostgreSql
 {
     public static class ServiceRegistration
     {
@@ -20,7 +20,7 @@ namespace Fylum.PostgreSql.Shared
 
         private static void AddConnectionDetails(this IServiceCollection services, Action<DatabaseConnectionDetails> dbConnectionOptions)
         {
-            services.Configure<DatabaseConnectionDetails>(dbConnectionOptions);
+            services.Configure(dbConnectionOptions);
         }
         private static void AddConnectionServices(this IServiceCollection services)
         {

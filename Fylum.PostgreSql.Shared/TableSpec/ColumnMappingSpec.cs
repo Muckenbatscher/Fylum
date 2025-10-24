@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Shared.TableSpec
+namespace Fylum.PostgreSql.TableSpec
 {
     public class ColumnMappingSpec
     {

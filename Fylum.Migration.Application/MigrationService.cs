@@ -1,6 +1,5 @@
 ﻿using Fylum.Migration.Domain;
 using Fylum.Migration.Domain.PerformedMigrations;
-using Fylum.PostgreSql.Migration.Application.PerformMigration;
 using System;
 using System.Collections.Generic;
 using System.Linq;

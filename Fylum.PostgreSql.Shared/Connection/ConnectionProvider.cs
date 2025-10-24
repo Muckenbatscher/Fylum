@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Shared.Connection
+namespace Fylum.PostgreSql.Connection
 {
     public class ConnectionProvider : IConnectionProvider
     {

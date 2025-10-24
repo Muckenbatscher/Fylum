@@ -1,5 +1,5 @@
-﻿using Fylum.Migration.Domain.UnitOfWork;
-using Fylum.PostgreSql.Shared.Connection;
+﻿using Fylum.Domain.UnitOfWork;
+using Fylum.PostgreSql.Connection;
 using System;
 using System.Collections.Generic;
 using System.Data;
