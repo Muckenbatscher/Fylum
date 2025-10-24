@@ -1,3 +1,4 @@
+using Fylum.PostgreSql.Migration.Domain;
 using Fylum.PostgreSql.Migration.Winforms.MainWindow;
 using Fylum.PostgreSql.Migration.Winforms.MainWindow.MigrationScript;
 using M2TWinForms;
@@ -63,18 +64,38 @@ namespace Fylum.PostgreSql.Migration
                 return;
 
             var datagrid = (DataGridView)sender;
-            var row = (MigrationRow)datagrid.Rows[e.RowIndex].DataBoundItem;
-            var image = row.IsApplied
+            var row = datagrid.Rows[e.RowIndex];
+            var migration = (MigrationRow)row.DataBoundItem;
+            var image = migration.IsApplied
                 ? Winforms.Properties.Resources.VerifiedIcon
                 : new Bitmap(1, 1);
 
+            var backColor = row.Selected ? e.CellStyle.SelectionBackColor : e.CellStyle.BackColor;
+            var foreColor = row.Selected ? e.CellStyle.SelectionForeColor : e.CellStyle.ForeColor;
+            var rectWithoutBorder = new Rectangle(new Point(e.CellBounds.X + 1, e.CellBounds.Y), new Size(e.CellBounds.Width - 2, e.CellBounds.Height - 1));
+
+            e.Graphics.PrepareGraphicsForHighQualityDrawing();
+            e.Graphics.FillRectangle(new SolidBrush(backColor), rectWithoutBorder);
+            e.Graphics.DrawImageWithColor(image, foreColor, rectWithoutBorder);
+            e.Handled = true;
         }
 
         private void DG_Migrations_SelectionChanged(object sender, EventArgs e)
         {
-            PN_SelectedMigration.Controls.Clear();
+            ClearCurrentSelectedMigrationDisplay();
             if (SelectedMigration == null)
                 return;
+
+            LB_SelectedMigrationName.Text = SelectedMigration.Name;
+            bool applied = SelectedMigration.IsApplied;
+            LB_SelectedMigrationTimestamp.Text = applied ? 
+                SelectedMigration.LocalAppliedTimestamp?.ToString("G") :
+                string.Empty;
+
+            var image = applied
+                ? Winforms.Properties.Resources.VerifiedIcon
+                : new Bitmap(1, 1);
+            CIB_SelectedMigrationAppliedState.BaseImage = image;
 
             foreach (var script in SelectedMigration.Migration.MigrationScripts.Reverse())
             {
@@ -84,8 +105,16 @@ namespace Fylum.PostgreSql.Migration
                     Dock = DockStyle.Top,
                     Padding = new Padding(3)
                 };
-                PN_SelectedMigration.Controls.Add(scriptDisplay);
+                FLP_SelectedMigrationScripts.Controls.Add(scriptDisplay);
             }
+        }
+
+        private void ClearCurrentSelectedMigrationDisplay()
+        {
+            LB_SelectedMigrationName.Text = "";
+            LB_SelectedMigrationTimestamp.Text = "";
+            FLP_SelectedMigrationScripts.Controls.Clear();
+            CIB_SelectedMigrationAppliedState.BaseImage = new Bitmap(1, 1);
         }
     }
 }

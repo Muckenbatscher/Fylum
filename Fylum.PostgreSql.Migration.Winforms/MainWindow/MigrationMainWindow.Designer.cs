@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle11 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle12 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle13 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle14 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle15 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle1 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle2 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle3 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle4 = new M2TWinForms.M2TDataGridViewCellStyle();
+            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle5 = new M2TWinForms.M2TDataGridViewCellStyle();
             DG_Migrations = new M2TWinForms.M2TDataGridView();
             CL_IsApplied = new DataGridViewImageColumn();
             CL_Name = new DataGridViewTextBoxColumn();
@@ -44,14 +44,17 @@
             PN_Migrations = new M2TWinForms.M2TPanel();
             TLP_Main = new TableLayoutPanel();
             PN_SelectedMigration = new M2TWinForms.M2TPanel();
-            migrationScriptDisplay1 = new Fylum.PostgreSql.Migration.Winforms.MainWindow.MigrationScript.MigrationScriptDisplay();
-            migrationScriptDisplay2 = new Fylum.PostgreSql.Migration.Winforms.MainWindow.MigrationScript.MigrationScriptDisplay();
-            migrationScriptDisplay3 = new Fylum.PostgreSql.Migration.Winforms.MainWindow.MigrationScript.MigrationScriptDisplay();
+            TLP_SelectedMigration = new TableLayoutPanel();
+            FLP_SelectedMigrationScripts = new FlowLayoutPanel();
+            LB_SelectedMigrationName = new M2TWinForms.M2TLabel();
+            LB_SelectedMigrationTimestamp = new M2TWinForms.M2TLabel();
+            CIB_SelectedMigrationAppliedState = new M2TWinForms.M2TColoredImageButton();
             ((System.ComponentModel.ISupportInitialize)DG_Migrations).BeginInit();
             TLP_Migrations.SuspendLayout();
             PN_Migrations.SuspendLayout();
             TLP_Main.SuspendLayout();
             PN_SelectedMigration.SuspendLayout();
+            TLP_SelectedMigration.SuspendLayout();
             SuspendLayout();
             // 
             // DG_Migrations
@@ -59,35 +62,35 @@
             DG_Migrations.AllowUserToAddRows = false;
             DG_Migrations.AllowUserToDeleteRows = false;
             DG_Migrations.AllowUserToResizeRows = false;
-            m2tDataGridViewCellStyle11.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            m2tDataGridViewCellStyle11.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            DG_Migrations.AlternatingRowsDefaultCellStyle = m2tDataGridViewCellStyle11;
+            m2tDataGridViewCellStyle1.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            m2tDataGridViewCellStyle1.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            DG_Migrations.AlternatingRowsDefaultCellStyle = m2tDataGridViewCellStyle1;
             DG_Migrations.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DG_Migrations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DG_Migrations.BackgroundColorRole = M2TWinForms.M2TDataGridViewBackgroundColorSelection.SurfaceContainerHigh;
-            m2tDataGridViewCellStyle12.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.SurfaceContainerHigh;
-            m2tDataGridViewCellStyle12.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            DG_Migrations.ColumnHeadersDefaultCellStyle = m2tDataGridViewCellStyle12;
+            m2tDataGridViewCellStyle2.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.SurfaceContainerHigh;
+            m2tDataGridViewCellStyle2.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            DG_Migrations.ColumnHeadersDefaultCellStyle = m2tDataGridViewCellStyle2;
             DG_Migrations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_Migrations.Columns.AddRange(new DataGridViewColumn[] { CL_IsApplied, CL_Name, CL_ScriptsCount, CL_AppliedTimestamp });
             TLP_Migrations.SetColumnSpan(DG_Migrations, 2);
-            m2tDataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            m2tDataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
-            m2tDataGridViewCellStyle13.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.PrimaryContainer;
-            m2tDataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
-            DG_Migrations.DefaultCellStyle = m2tDataGridViewCellStyle13;
+            m2tDataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            m2tDataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            m2tDataGridViewCellStyle3.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.PrimaryContainer;
+            m2tDataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            DG_Migrations.DefaultCellStyle = m2tDataGridViewCellStyle3;
             DG_Migrations.DefaultCellStyleSelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.PrimaryContainer;
             DG_Migrations.Location = new Point(3, 3);
             DG_Migrations.MultiSelect = false;
             DG_Migrations.Name = "DG_Migrations";
             DG_Migrations.ReadOnly = true;
-            m2tDataGridViewCellStyle14.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.SurfaceContainerHigh;
-            m2tDataGridViewCellStyle14.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            DG_Migrations.RowHeadersDefaultCellStyle = m2tDataGridViewCellStyle14;
+            m2tDataGridViewCellStyle4.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.SurfaceContainerHigh;
+            m2tDataGridViewCellStyle4.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            DG_Migrations.RowHeadersDefaultCellStyle = m2tDataGridViewCellStyle4;
             DG_Migrations.RowHeadersVisible = false;
-            m2tDataGridViewCellStyle15.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            m2tDataGridViewCellStyle15.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
-            DG_Migrations.RowsDefaultCellStyle = m2tDataGridViewCellStyle15;
+            m2tDataGridViewCellStyle5.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            m2tDataGridViewCellStyle5.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
+            DG_Migrations.RowsDefaultCellStyle = m2tDataGridViewCellStyle5;
             DG_Migrations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DG_Migrations.Size = new Size(364, 322);
             DG_Migrations.TabIndex = 12;
@@ -191,53 +194,84 @@
             // 
             PN_SelectedMigration.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PN_SelectedMigration.ColorRole = M2TWinForms.M2TPanelColorRoleSelection.SurfaceContainer;
-            PN_SelectedMigration.Controls.Add(migrationScriptDisplay3);
-            PN_SelectedMigration.Controls.Add(migrationScriptDisplay2);
-            PN_SelectedMigration.Controls.Add(migrationScriptDisplay1);
+            PN_SelectedMigration.Controls.Add(TLP_SelectedMigration);
             PN_SelectedMigration.Location = new Point(394, 6);
             PN_SelectedMigration.Margin = new Padding(6);
             PN_SelectedMigration.Name = "PN_SelectedMigration";
             PN_SelectedMigration.Size = new Size(376, 384);
             PN_SelectedMigration.TabIndex = 16;
             // 
-            // migrationScriptDisplay1
+            // TLP_SelectedMigration
             // 
-            migrationScriptDisplay1.AutoSize = true;
-            migrationScriptDisplay1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            migrationScriptDisplay1.Dock = DockStyle.Top;
-            migrationScriptDisplay1.Location = new Point(0, 0);
-            migrationScriptDisplay1.Margin = new Padding(5);
-            migrationScriptDisplay1.Name = "migrationScriptDisplay1";
-            migrationScriptDisplay1.Padding = new Padding(5);
-            migrationScriptDisplay1.ScriptText = "m2tLabel5656";
-            migrationScriptDisplay1.Size = new Size(376, 155);
-            migrationScriptDisplay1.TabIndex = 0;
+            TLP_SelectedMigration.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TLP_SelectedMigration.ColumnCount = 2;
+            TLP_SelectedMigration.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            TLP_SelectedMigration.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
+            TLP_SelectedMigration.Controls.Add(FLP_SelectedMigrationScripts, 0, 2);
+            TLP_SelectedMigration.Controls.Add(LB_SelectedMigrationName, 0, 0);
+            TLP_SelectedMigration.Controls.Add(LB_SelectedMigrationTimestamp, 0, 1);
+            TLP_SelectedMigration.Controls.Add(CIB_SelectedMigrationAppliedState, 1, 0);
+            TLP_SelectedMigration.Location = new Point(3, 3);
+            TLP_SelectedMigration.Name = "TLP_SelectedMigration";
+            TLP_SelectedMigration.RowCount = 3;
+            TLP_SelectedMigration.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            TLP_SelectedMigration.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            TLP_SelectedMigration.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            TLP_SelectedMigration.Size = new Size(370, 378);
+            TLP_SelectedMigration.TabIndex = 0;
             // 
-            // migrationScriptDisplay2
+            // FLP_SelectedMigrationScripts
             // 
-            migrationScriptDisplay2.AutoSize = true;
-            migrationScriptDisplay2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            migrationScriptDisplay2.Dock = DockStyle.Top;
-            migrationScriptDisplay2.Location = new Point(0, 155);
-            migrationScriptDisplay2.Margin = new Padding(5);
-            migrationScriptDisplay2.Name = "migrationScriptDisplay2";
-            migrationScriptDisplay2.Padding = new Padding(5);
-            migrationScriptDisplay2.ScriptText = "m2tLabel1212";
-            migrationScriptDisplay2.Size = new Size(376, 155);
-            migrationScriptDisplay2.TabIndex = 1;
+            FLP_SelectedMigrationScripts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            FLP_SelectedMigrationScripts.AutoScroll = true;
+            TLP_SelectedMigration.SetColumnSpan(FLP_SelectedMigrationScripts, 2);
+            FLP_SelectedMigrationScripts.Location = new Point(3, 53);
+            FLP_SelectedMigrationScripts.Name = "FLP_SelectedMigrationScripts";
+            FLP_SelectedMigrationScripts.Size = new Size(364, 322);
+            FLP_SelectedMigrationScripts.TabIndex = 0;
             // 
-            // migrationScriptDisplay3
+            // LB_SelectedMigrationName
             // 
-            migrationScriptDisplay3.AutoSize = true;
-            migrationScriptDisplay3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            migrationScriptDisplay3.Dock = DockStyle.Top;
-            migrationScriptDisplay3.Location = new Point(0, 310);
-            migrationScriptDisplay3.Margin = new Padding(5);
-            migrationScriptDisplay3.Name = "migrationScriptDisplay3";
-            migrationScriptDisplay3.Padding = new Padding(5);
-            migrationScriptDisplay3.ScriptText = "m2tLabel1";
-            migrationScriptDisplay3.Size = new Size(376, 155);
-            migrationScriptDisplay3.TabIndex = 2;
+            LB_SelectedMigrationName.Anchor = AnchorStyles.Left;
+            LB_SelectedMigrationName.AutoSize = true;
+            LB_SelectedMigrationName.Font = new Font("Segoe UI", 12F);
+            LB_SelectedMigrationName.Location = new Point(3, 2);
+            LB_SelectedMigrationName.Name = "LB_SelectedMigrationName";
+            LB_SelectedMigrationName.Size = new Size(124, 21);
+            LB_SelectedMigrationName.TabIndex = 1;
+            LB_SelectedMigrationName.Text = "Migration Name";
+            // 
+            // LB_SelectedMigrationTimestamp
+            // 
+            LB_SelectedMigrationTimestamp.Anchor = AnchorStyles.Left;
+            LB_SelectedMigrationTimestamp.AutoSize = true;
+            LB_SelectedMigrationTimestamp.ForeColorRole = M2TWinForms.M2TLabelTextColorRoleSelection.OnSurfaceVariant;
+            LB_SelectedMigrationTimestamp.Location = new Point(3, 30);
+            LB_SelectedMigrationTimestamp.Name = "LB_SelectedMigrationTimestamp";
+            LB_SelectedMigrationTimestamp.Size = new Size(122, 15);
+            LB_SelectedMigrationTimestamp.TabIndex = 2;
+            LB_SelectedMigrationTimestamp.Text = "Migration Timestamp";
+            // 
+            // CIB_SelectedMigrationAppliedState
+            // 
+            CIB_SelectedMigrationAppliedState.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CIB_SelectedMigrationAppliedState.BackColor = Color.FromArgb(29, 32, 28);
+            CIB_SelectedMigrationAppliedState.BackgroundColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.SurfaceContainer;
+            CIB_SelectedMigrationAppliedState.BaseImage = null;
+            CIB_SelectedMigrationAppliedState.ConvertBaseImageToGrayscale = true;
+            CIB_SelectedMigrationAppliedState.HoverBackColor = Color.FromArgb(29, 32, 28);
+            CIB_SelectedMigrationAppliedState.HoverBackgroundColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.SurfaceContainer;
+            CIB_SelectedMigrationAppliedState.HoverEnabled = false;
+            CIB_SelectedMigrationAppliedState.HoverImageColor = Color.FromArgb(226, 227, 219);
+            CIB_SelectedMigrationAppliedState.HoverImageColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.OnSurface;
+            CIB_SelectedMigrationAppliedState.ImageColor = Color.FromArgb(170, 209, 155);
+            CIB_SelectedMigrationAppliedState.ImageColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.Primary;
+            CIB_SelectedMigrationAppliedState.ImagePadding = new Padding(0);
+            CIB_SelectedMigrationAppliedState.Location = new Point(323, 3);
+            CIB_SelectedMigrationAppliedState.Name = "CIB_SelectedMigrationAppliedState";
+            TLP_SelectedMigration.SetRowSpan(CIB_SelectedMigrationAppliedState, 2);
+            CIB_SelectedMigrationAppliedState.Size = new Size(44, 44);
+            CIB_SelectedMigrationAppliedState.TabIndex = 3;
             // 
             // MigrationMainWindow
             // 
@@ -255,7 +289,8 @@
             PN_Migrations.ResumeLayout(false);
             TLP_Main.ResumeLayout(false);
             PN_SelectedMigration.ResumeLayout(false);
-            PN_SelectedMigration.PerformLayout();
+            TLP_SelectedMigration.ResumeLayout(false);
+            TLP_SelectedMigration.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -272,8 +307,10 @@
         private M2TWinForms.M2TPanel PN_Migrations;
         private TableLayoutPanel TLP_Main;
         private M2TWinForms.M2TPanel PN_SelectedMigration;
-        private Winforms.MainWindow.MigrationScript.MigrationScriptDisplay migrationScriptDisplay1;
-        private Winforms.MainWindow.MigrationScript.MigrationScriptDisplay migrationScriptDisplay2;
-        private Winforms.MainWindow.MigrationScript.MigrationScriptDisplay migrationScriptDisplay3;
+        private TableLayoutPanel TLP_SelectedMigration;
+        private FlowLayoutPanel FLP_SelectedMigrationScripts;
+        private M2TWinForms.M2TLabel LB_SelectedMigrationName;
+        private M2TWinForms.M2TLabel LB_SelectedMigrationTimestamp;
+        private M2TWinForms.M2TColoredImageButton CIB_SelectedMigrationAppliedState;
     }
 }
