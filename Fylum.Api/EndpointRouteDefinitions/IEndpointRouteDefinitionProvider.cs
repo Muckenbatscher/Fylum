@@ -1,4 +1,4 @@
-﻿namespace Fylum.EndpointRouteDefinitions
+﻿namespace Fylum.Api.EndpointRouteDefinitions
 {
     public interface IEndpointRouteDefinitionProvider
     {

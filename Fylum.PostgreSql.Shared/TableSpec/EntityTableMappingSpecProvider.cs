@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Fylum.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Shared.TableSpec
+namespace Fylum.PostgreSql.TableSpec
 {
     public abstract class EntityTableMappingSpecProvider<T, K> : IEntityTableMappingSpecProvider<T, K>
         where T : IdentifiableEntity<K>

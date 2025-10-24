@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Users
+namespace Fylum.Domain.Users
 {
     public class UsernamePasswordLoginMethod : IdentifiableEntity<Guid>, ILoginMethod
     {

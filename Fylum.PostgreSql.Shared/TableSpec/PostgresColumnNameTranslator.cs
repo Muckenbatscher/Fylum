@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Shared.TableSpec
+namespace Fylum.PostgreSql.TableSpec
 {
     public class PostgresColumnNameTranslator : IPostgresColumnNameTranslator
     {
@@ -26,7 +26,7 @@ namespace Fylum.PostgreSql.Shared.TableSpec
                     bool isPrevCharUpper = !isFirstChar && char.IsUpper(propertyName[i - 1]);
                     bool isNextCharLower = !isLastChar && char.IsLower(propertyName[i + 1]);
 
-                    if (isPrevCharLower || (isPrevCharUpper && isNextCharLower))
+                    if (isPrevCharLower || isPrevCharUpper && isNextCharLower)
                         normalizedNameBuilder.Append('_');
 
                     normalizedNameBuilder.Append(char.ToLower(currentChar));

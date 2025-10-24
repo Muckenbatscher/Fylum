@@ -1,8 +1,9 @@
 ﻿using FastEndpoints;
-using Fylum.Authentication;
+using Fylum.Api.Authentication;
+using Fylum.Files;
 using Microsoft.Extensions.Options;
 
-namespace Fylum.Files
+namespace Fylum.Api.Files
 {
     public class GetFilesEndpoint : EndpointWithoutRequest<IEnumerable<FileResponse>>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Folders
+namespace Fylum.Domain.Folders
 {
     public interface IFolderRepository
     {

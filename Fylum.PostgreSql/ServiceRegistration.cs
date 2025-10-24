@@ -1,4 +1,5 @@
-﻿using Fylum.Files;
+﻿using Fylum.Domain.Files;
+using Fylum.Files;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

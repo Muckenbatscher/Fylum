@@ -1,6 +1,5 @@
-﻿using Fylum.EndpointRouteDefinitions;
-
-namespace Fylum.Files
+﻿
+namespace Fylum.Api.Files
 {
     public class FileEndpointRouteDefinitionProvider : IFileEndpointRouteDefinitionProvider
     {

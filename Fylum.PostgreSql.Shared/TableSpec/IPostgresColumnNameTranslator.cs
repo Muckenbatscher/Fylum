@@ -1,4 +1,4 @@
-﻿namespace Fylum.PostgreSql.Shared.TableSpec
+﻿namespace Fylum.PostgreSql.TableSpec
 {
     public interface IPostgresColumnNameTranslator
     {

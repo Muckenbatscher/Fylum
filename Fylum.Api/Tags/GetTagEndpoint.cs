@@ -1,8 +1,9 @@
 ﻿using FastEndpoints;
-using Fylum.Authentication;
+using Fylum.Api.Authentication;
+using Fylum.Tags;
 using Microsoft.Extensions.Options;
 
-namespace Fylum.Tags
+namespace Fylum.Api.Tags
 {
     public class GetTagEndpoint : EndpointWithoutRequest<TagResponse>
     {

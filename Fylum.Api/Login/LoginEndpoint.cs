@@ -1,10 +1,11 @@
 ﻿using FastEndpoints;
 using FastEndpoints.Security;
-using Fylum.Authentication;
+using Fylum.Api.Authentication;
+using Fylum.Login;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
 
-namespace Fylum.Login
+namespace Fylum.Api.Login
 {
     public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
     {
