@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Domain.UnitOfWork
+namespace Fylum.Migration.Domain.UnitOfWork
 {
     public interface IUnitOfWorkFactory<TUnitOfWork> 
         where TUnitOfWork : IUnitOfWork

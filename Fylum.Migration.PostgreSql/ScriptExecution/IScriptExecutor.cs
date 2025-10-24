@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.PostgreSql.ScriptExecution
+namespace Fylum.Migration.PostgreSql.ScriptExecution
 {
     public interface IScriptExecutor
     {

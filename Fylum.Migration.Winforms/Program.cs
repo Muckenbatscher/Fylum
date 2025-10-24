@@ -1,13 +1,15 @@
-using Fylum.PostgreSql.Migration.Application;
-using Fylum.PostgreSql.Migration.PostgreSql;
-using Fylum.PostgreSql.Migration.Provider;
-using Fylum.PostgreSql.Migration.Winforms.MainWindow;
+using Fylum.Migration.Application;
+using Fylum.Migration.PostgreSql;
+using Fylum.Migration.Provider;
+using Fylum.Migration.Winforms.MainWindow;
+using Fylum.PostgreSql.Migration;
+using Fylum.PostgreSql.Migration.Winforms;
 using Fylum.PostgreSql.Shared;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Fylum.PostgreSql.Migration.Winforms
+namespace Fylum.Migration.Winforms
 {
     internal static class Program
     {

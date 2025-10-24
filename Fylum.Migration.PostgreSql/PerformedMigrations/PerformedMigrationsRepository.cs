@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using Fylum.PostgreSql.Migration.Domain.PerformedMigrations;
-using Fylum.PostgreSql.Migration.Domain.UnitOfWork;
+using Fylum.Migration.Domain.PerformedMigrations;
+using Fylum.Migration.Domain.UnitOfWork;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.PostgreSql.PerformedMigrations
+namespace Fylum.Migration.PostgreSql.PerformedMigrations
 {
     public class PerformedMigrationsRepository : IPerformedMigrationsRepository
     {
@@ -95,7 +95,7 @@ namespace Fylum.PostgreSql.Migration.PostgreSql.PerformedMigrations
 
         private PerformedMigration MapToDomain(PerformedMigrationQueryModel queryModel)
         {
-            var migration = Migration.Domain.Migration.Create(
+            var migration = Domain.Migration.Create(
                 queryModel.MigrationId, 
                 queryModel.MigratioName);
             return PerformedMigration.Create(

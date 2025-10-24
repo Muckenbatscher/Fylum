@@ -1,12 +1,12 @@
-﻿using Fylum.PostgreSql.Migration.Application;
-using Fylum.PostgreSql.Migration.Application.PerformMigration;
+﻿using Fylum.Migration.Application;
+using Fylum.Migration.Application.PerformMigration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Winforms.MainWindow
+namespace Fylum.Migration.Winforms.MainWindow
 {
     public class MigrationMainWindowPresenter
     {

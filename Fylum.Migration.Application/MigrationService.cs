@@ -1,13 +1,13 @@
-﻿using Fylum.PostgreSql.Migration.Application.PerformMigration;
-using Fylum.PostgreSql.Migration.Domain;
-using Fylum.PostgreSql.Migration.Domain.PerformedMigrations;
+﻿using Fylum.Migration.Domain;
+using Fylum.Migration.Domain.PerformedMigrations;
+using Fylum.PostgreSql.Migration.Application.PerformMigration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Application
+namespace Fylum.Migration.Application
 {
     public class MigrationService : IMigrationService
     {

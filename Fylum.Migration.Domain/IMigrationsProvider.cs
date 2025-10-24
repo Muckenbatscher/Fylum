@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Domain
+namespace Fylum.Migration.Domain
 {
     public interface IMigrationsProvider
     {

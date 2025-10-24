@@ -1,12 +1,11 @@
-﻿using Fylum.PostgreSql.Migration.Domain;
-using Fylum.PostgreSql.Migration.Provider;
+﻿using Fylum.Migration.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Provider
+namespace Fylum.Migration.Provider
 {
     public abstract class MigrationFromFiles
     {

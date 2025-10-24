@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Fylum.Migration.Provider;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Provider.Migrations
+namespace Fylum.Migration.Provider.Migrations
 {
     internal class UsersMigration : MigrationFromFilesInDirectory
     {

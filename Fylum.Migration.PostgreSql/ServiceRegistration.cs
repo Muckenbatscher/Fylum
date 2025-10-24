@@ -1,9 +1,9 @@
-﻿using Fylum.PostgreSql.Migration.Application.PerformMigration;
-using Fylum.PostgreSql.Migration.Domain.PerformedMigrations;
-using Fylum.PostgreSql.Migration.Domain.UnitOfWork;
-using Fylum.PostgreSql.Migration.PostgreSql.PerformedMigrations;
-using Fylum.PostgreSql.Migration.PostgreSql.PerformMigration;
-using Fylum.PostgreSql.Migration.PostgreSql.ScriptExecution;
+﻿using Fylum.Migration.Application.PerformMigration;
+using Fylum.Migration.Domain.PerformedMigrations;
+using Fylum.Migration.Domain.UnitOfWork;
+using Fylum.Migration.PostgreSql.PerformedMigrations;
+using Fylum.Migration.PostgreSql.PerformMigration;
+using Fylum.Migration.PostgreSql.ScriptExecution;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.PostgreSql
+namespace Fylum.Migration.PostgreSql
 {
     public static class ServiceRegistration
     {

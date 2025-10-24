@@ -1,5 +1,5 @@
-﻿using Fylum.PostgreSql.Migration.Application.PerformMigration;
-using Fylum.PostgreSql.Migration.Domain.PerformedMigrations;
+﻿using Fylum.Migration.Application.PerformMigration;
+using Fylum.Migration.Domain.PerformedMigrations;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.PostgreSql.PerformMigration
+namespace Fylum.Migration.PostgreSql.PerformMigration
 {
     public class MigrationPerformingService : IMigrationPerformingService
     {
@@ -32,7 +32,7 @@ namespace Fylum.PostgreSql.Migration.PostgreSql.PerformMigration
 
         private static PerformedMigration CreatePerformedMigration(Domain.Migration migration)
         {
-            var dbMigration = Migration.Domain.Migration.Create(
+            var dbMigration = Domain.Migration.Create(
                             migration.Id,
                             migration.Name);
             var performedMigration = PerformedMigration.CreateNew(dbMigration);

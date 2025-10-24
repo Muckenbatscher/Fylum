@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Application.PerformMigration
+namespace Fylum.Migration.Application.PerformMigration
 {
     public interface IMigrationPerformingService
     {

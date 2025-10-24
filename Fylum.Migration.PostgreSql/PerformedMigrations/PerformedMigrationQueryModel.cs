@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.PostgreSql.PerformedMigrations
+namespace Fylum.Migration.PostgreSql.PerformedMigrations
 {
     internal class PerformedMigrationQueryModel
     {

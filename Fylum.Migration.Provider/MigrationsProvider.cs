@@ -1,4 +1,4 @@
-﻿using Fylum.PostgreSql.Migration.Domain;
+﻿using Fylum.Migration.Domain;
 using Fylum.PostgreSql.Migration.Provider.Migrations;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Provider
+namespace Fylum.Migration.Provider
 {
     public class MigrationsProvider : IMigrationsProvider
     {

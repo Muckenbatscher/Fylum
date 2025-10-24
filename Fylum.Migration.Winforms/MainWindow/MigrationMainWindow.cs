@@ -1,4 +1,4 @@
-using Fylum.PostgreSql.Migration.Winforms.MainWindow;
+using Fylum.Migration.Winforms.MainWindow;
 using M2TWinForms;
 
 namespace Fylum.PostgreSql.Migration

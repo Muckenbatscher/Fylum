@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Application
+namespace Fylum.Migration.Application
 {
     public record MigrationAppliedState(DateTimeOffset TimestampApplied);
 }

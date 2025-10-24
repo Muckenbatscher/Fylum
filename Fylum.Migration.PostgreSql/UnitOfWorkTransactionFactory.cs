@@ -1,4 +1,4 @@
-﻿using Fylum.PostgreSql.Migration.Domain.UnitOfWork;
+﻿using Fylum.Migration.Domain.UnitOfWork;
 using Fylum.PostgreSql.Shared.Connection;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.PostgreSql
+namespace Fylum.Migration.PostgreSql
 {
     public class UnitOfWorkTransactionFactory : IUnitOfWorkTransactionFactory
     {

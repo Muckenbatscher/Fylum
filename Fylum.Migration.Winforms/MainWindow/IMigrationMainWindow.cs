@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.PostgreSql.Migration.Winforms.MainWindow
+namespace Fylum.Migration.Winforms.MainWindow
 {
     public interface IMigrationMainWindow
     {
