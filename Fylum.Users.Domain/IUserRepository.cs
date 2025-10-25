@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Domain.Users
+namespace Fylum.Users.Domain
 {
-    public class UserGroup : IdentifiableEntity<Guid>
+    public interface IUserRepository
     {
-        public string Name { get; set; }
+        User GetById(int id);
     }
 }

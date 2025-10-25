@@ -21,6 +21,7 @@
     <ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
     <ProjectReference Include="..\Fylum.PostgreSql\Fylum.PostgreSql.csproj" />
     <ProjectReference Include="..\Fylum.Shared\Fylum.Shared.csproj" />
+    <ProjectReference Include="..\Fylum.Users.Application\Fylum.Users.Application.csproj" />
   </ItemGroup>
 
 </Project>

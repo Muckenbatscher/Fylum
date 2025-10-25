@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Authentication;
-using Fylum.Files;
+using Fylum.Shared.Files;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Api.Files

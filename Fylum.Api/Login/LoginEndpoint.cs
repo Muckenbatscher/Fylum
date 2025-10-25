@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
-using Fylum.Application.Users;
-using Fylum.Login;
+using Fylum.Shared.Login;
+using Fylum.Users.Application;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Api.Login

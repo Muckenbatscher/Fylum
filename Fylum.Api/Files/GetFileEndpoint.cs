@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Authentication;
 using Fylum.Domain.Files;
-using Fylum.Files;
+using Fylum.Shared.Files;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
 using File = Fylum.Domain.Files.File;

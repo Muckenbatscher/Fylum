@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Fylum.Domain\Fylum.Domain.csproj" />
+    <ProjectReference Include="..\Fylum.Migration.Domain\Fylum.Migration.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

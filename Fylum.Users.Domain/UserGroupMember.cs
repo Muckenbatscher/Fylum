@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Domain.Users
+namespace Fylum.Users.Domain
 {
-    public class UsernamePasswordLoginMethod : IdentifiableEntity<Guid>, ILoginMethod
+    public class UserGroupMember
     {
         public Guid UserId { get; set; }
-        public string PasswordHash { get; set; }
+        public Guid GroupId { get; set; }
     }
 }

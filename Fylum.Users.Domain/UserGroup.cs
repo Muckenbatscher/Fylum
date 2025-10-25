@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Domain.Users
+namespace Fylum.Users.Domain
 {
-    public class UserGroupMember
+    public class UserGroup : IdentifiableEntity<Guid>
     {
-        public Guid UserId { get; set; }
-        public Guid GroupId { get; set; }
+        public string Name { get; set; }
     }
 }

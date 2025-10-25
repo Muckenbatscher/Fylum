@@ -6,7 +6,10 @@
     <Project Path="Fylum.Migration.Provider/Fylum.Migration.Provider.csproj" />
     <Project Path="Fylum.Migration.Winforms/Fylum.Migration.Winforms.csproj" />
   </Folder>
-  <Folder Name="/Fylum.Users/" />
+  <Folder Name="/Fylum.Users/">
+    <Project Path="Fylum.Users.Application/Fylum.Users.Application.csproj" Id="755b0418-9d04-45e3-b11e-a50dcb4cf7dc" />
+    <Project Path="Fylum.Users.Domain/Fylum.Users.Domain.csproj" Id="6ffd8e05-fd2e-4a7b-9e2f-0badb91490be" />
+  </Folder>
   <Project Path="docker-compose/docker-compose.dcproj">
     <Build />
   </Project>

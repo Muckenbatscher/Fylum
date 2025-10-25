@@ -2,7 +2,7 @@
 using FastEndpoints.Security;
 using Fylum.Api.Authentication;
 using Fylum.Api.Login;
-using Fylum.Login;
+using Fylum.Shared.Login;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
 

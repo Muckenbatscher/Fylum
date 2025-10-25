@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Domain.Users
+namespace Fylum.Users.Application
 {
-    internal interface ILoginMethod
-    {
-    }
+    public record UserLoginResult(bool Successful, string? Token);
 }

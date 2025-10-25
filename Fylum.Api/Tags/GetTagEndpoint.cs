@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Authentication;
-using Fylum.Tags;
+using Fylum.Shared.Tags;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Api.Tags

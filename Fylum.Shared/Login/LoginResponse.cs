@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Login
+namespace Fylum.Shared.Login
 {
     public class LoginResponse
     {
