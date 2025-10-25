@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Login
+namespace Fylum.Application
 {
-    public class LoginResponse
+    public interface ICommand<TParam>
     {
-        public string Token { get; set; }
+        TParam Parameter { get; }
     }
 }

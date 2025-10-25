@@ -1,21 +1,20 @@
 ﻿using FastEndpoints;
-using FastEndpoints.Security;
-using Fylum.Api.Authentication;
+using Fylum.Application.Users;
 using Fylum.Login;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.Extensions.Options;
 
 namespace Fylum.Api.Login
 {
     public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
     {
         private readonly ILoginEndpointRouteDefinitionProvider _routeProvider;
-        private readonly JwtAuthOptions _jwtAuthOptions;
+        private readonly IUserLoginCommandHandler _userLoginCommandHandler;
 
-        public LoginEndpoint(ILoginEndpointRouteDefinitionProvider routeProvider, IOptions<JwtAuthOptions> jwtAuthOptions)
+        public LoginEndpoint(ILoginEndpointRouteDefinitionProvider routeProvider,
+            IUserLoginCommandHandler userLoginCommandHandler)
         {
             _routeProvider = routeProvider;
-            _jwtAuthOptions = jwtAuthOptions.Value;
+            _userLoginCommandHandler = userLoginCommandHandler;
         }
 
         public override void Configure()
@@ -24,41 +23,24 @@ namespace Fylum.Api.Login
             Post(baseRoute);
             AllowAnonymous();
         }
+
         public override async Task HandleAsync(LoginRequest req, CancellationToken ct)
         {
-            // Simulate user authentication (replace with real authentication logic)
-            bool valid = ValidateUser(req.Username, req.Password);
-            if (!valid)
+            var commandParam = new UserLoginParameter(req.Username, req.Password);
+            var command = new UserLoginCommand(commandParam);
+            var loginResult = _userLoginCommandHandler.Handle(command);
+
+            if (!loginResult.Successful)
             {
                 await Send.ResultAsync(TypedResults.Unauthorized());
                 return;
             }
 
-            var signingKey = Config["JwtAuth:SigningKey"]!;
-            var userIdClaim = Config["JwtAuth:UserIdClaim"]!;
-            var expirationMinutes = int.Parse(Config["JwtAuth:ExpirationMinutes"]!);
-
-            var userId = Guid.NewGuid();
-            var jwtToken = JwtBearer.CreateToken(o =>
-            {
-                o.SigningKey = signingKey;
-                o.SigningAlgorithm = "HS256";
-                o.ExpireAt = DateTime.UtcNow.AddMinutes(expirationMinutes);
-                o.User.Claims.Add((userIdClaim, userId.ToString()));
-            });
-
             var response = new LoginResponse
             {
-                UserId = userId,
-                Token = jwtToken
+                Token = loginResult.Token!,
             };
             await Send.ResultAsync(TypedResults.Ok(response));
-        }
-
-        private bool ValidateUser(string username, string password)
-        {
-            // Replace with actual user validation logic
-            return username == "user" && password == "password";
         }
     }
 }

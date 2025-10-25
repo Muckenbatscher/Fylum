@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Login
+namespace Fylum.Register
 {
-    public class LoginResponse
+    public class RegisterResponse
     {
+        public Guid UserId { get; set; }
         public string Token { get; set; }
     }
 }

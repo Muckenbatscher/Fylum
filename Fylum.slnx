@@ -6,10 +6,12 @@
     <Project Path="Fylum.Migration.Provider/Fylum.Migration.Provider.csproj" />
     <Project Path="Fylum.Migration.Winforms/Fylum.Migration.Winforms.csproj" />
   </Folder>
+  <Folder Name="/Fylum.Users/" />
   <Project Path="docker-compose/docker-compose.dcproj">
     <Build />
   </Project>
   <Project Path="Fylum.Api/Fylum.Api.csproj" />
+  <Project Path="Fylum.Application/Fylum.Application.csproj" Id="06c1f0cc-3c85-451e-b0fb-8162b24ca445" />
   <Project Path="Fylum.Domain/Fylum.Domain.csproj" />
   <Project Path="Fylum.PostgreSql.Shared.Tests/Fylum.PostgreSql.Shared.Tests.csproj" />
   <Project Path="Fylum.PostgreSql.Shared/Fylum.PostgreSql.Shared.csproj" />

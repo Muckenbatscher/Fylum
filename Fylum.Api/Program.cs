@@ -3,6 +3,7 @@ using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Api.Authentication;
 using Fylum.Api.EndpointRouteDefinitions;
+using Fylum.Application;
 using Fylum.PostgreSql;
 
 namespace Fylum.Api
@@ -29,6 +30,7 @@ namespace Fylum.Api
                 options.Password = builder.Configuration["DbConnection:Password"]!;
             });
             builder.Services.AddPostgreSqlServices();
+            builder.Services.AddApplicationServices();
 
             builder.Services.Configure<JwtAuthOptions>(options =>
             {

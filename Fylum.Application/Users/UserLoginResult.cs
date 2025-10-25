@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Login
+namespace Fylum.Application.Users
 {
-    public class LoginResponse
-    {
-        public string Token { get; set; }
-    }
+    public record UserLoginResult(bool Successful, string? Token);
 }
