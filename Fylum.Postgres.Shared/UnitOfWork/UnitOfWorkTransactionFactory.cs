@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Postgres
+namespace Fylum.Postgres.Shared.UnitOfWork
 {
     public class UnitOfWorkTransactionFactory : IUnitOfWorkTransactionFactory
     {
@@ -35,5 +35,16 @@ namespace Fylum.Migration.Postgres
 
             return new UnitOfWorkTransaction(_connection, _transaction);
         }
+
+
+        public void Dispose()
+        {
+            if (_transaction != null)
+                _transaction.Dispose();
+
+            if (_connection != null)
+                _connection.Dispose();
+        }
+
     }
 }

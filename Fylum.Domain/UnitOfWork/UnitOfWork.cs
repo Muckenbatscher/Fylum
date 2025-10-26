@@ -29,9 +29,7 @@ namespace Fylum.Domain.UnitOfWork
 
         public void Dispose()
         {
-            var transaction = _transactionFactory.GetTransaction();
-            transaction.Transaction.Dispose();
-            transaction.Connection.Dispose();
+            _transactionFactory.Dispose();
             GC.SuppressFinalize(this);
         }
     }

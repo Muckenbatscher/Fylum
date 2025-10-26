@@ -1,4 +1,6 @@
-﻿using Fylum.Postgres.Shared.Connection;
+﻿using Fylum.Domain.UnitOfWork;
+using Fylum.Postgres.Shared.Connection;
+using Fylum.Postgres.Shared.UnitOfWork;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace Fylum.Postgres.Shared
     {
         public static IServiceCollection AddPostgresSharedServices(this IServiceCollection services, Action<DatabaseConnectionDetails> dbConnectionOptions)
         {
+            services.AddScoped<IUnitOfWorkTransactionFactory, UnitOfWorkTransactionFactory>();
+
             services.AddConnectionDetails(dbConnectionOptions);
             services.AddConnectionServices();
             services.AddTableSpecMappingProviders();

@@ -17,7 +17,6 @@ namespace Fylum.Migration.Postgres
     {
         public static void AddMigrationPostgresServices(this IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWorkTransactionFactory, UnitOfWorkTransactionFactory>();
             services.AddScoped<IPerformMigrationUnitOfWorkFactory, PerformMigrationUnitOfWorkFactory>();
 
             services.AddTransient<IPerformedMigrationsRepository, PerformedMigrationsRepository>();
