@@ -10,7 +10,7 @@ namespace Fylum.Migration.Provider
 {
     public static class ServiceRegistration
     {
-        public static IServiceCollection AddPostgreSqlMigrationProviderServices(this IServiceCollection services)
+        public static IServiceCollection AddMigrationProviderServices(this IServiceCollection services)
         {
             services.AddTransient<IMigrationsProvider, MigrationsProvider>();
             return services;

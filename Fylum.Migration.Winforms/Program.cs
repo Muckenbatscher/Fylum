@@ -1,8 +1,8 @@
 using Fylum.Migration.Application;
-using Fylum.Migration.PostgreSql;
+using Fylum.Migration.Postgres;
 using Fylum.Migration.Provider;
 using Fylum.Migration.Winforms.MainWindow;
-using Fylum.PostgreSql;
+using Fylum.Postgres.Shared;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +24,7 @@ namespace Fylum.Migration.Winforms
             var builder = Host.CreateApplicationBuilder();
             builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
 
-            builder.Services.AddPostgreSqlSharedServices(options =>
+            builder.Services.AddPostgresSharedServices(options =>
             {
                 options.HostName = builder.Configuration["DbConnection:Host"]!;
                 options.Port = int.Parse(builder.Configuration["DbConnection:Port"]!);
@@ -32,10 +32,10 @@ namespace Fylum.Migration.Winforms
                 options.Username = builder.Configuration["DbConnection:Username"]!;
                 options.Password = builder.Configuration["DbConnection:Password"]!;
             });
-            builder.Services.AddPostgreSqlMigrationProviderServices();
-            builder.Services.AddPostgreSqlMigrationApplicationServices();
+            builder.Services.AddMigrationProviderServices();
+            builder.Services.AddMigrationApplicationServices();
 
-            builder.Services.AddPostgreSqlMigrationPostgreSqlServices();
+            builder.Services.AddMigrationPostgresServices();
 
             builder.Services.AddTransient<IMigrationMainWindow, MigrationMainWindow>();
             builder.Services.AddTransient<MigrationMainWindowPresenter>();

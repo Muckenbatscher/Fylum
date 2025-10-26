@@ -9,7 +9,7 @@ namespace Fylum.Migration.Application
 {
     public static class ServiceRegistration
     {
-        public static IServiceCollection AddPostgreSqlMigrationApplicationServices(this IServiceCollection services)
+        public static IServiceCollection AddMigrationApplicationServices(this IServiceCollection services)
         {
             services.AddTransient<IMigrationService, MigrationService>();
             return services;

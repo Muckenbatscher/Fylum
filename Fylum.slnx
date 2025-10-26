@@ -2,23 +2,24 @@
   <Folder Name="/Fylum.Migration/">
     <Project Path="Fylum.Migration.Application/Fylum.Migration.Application.csproj" />
     <Project Path="Fylum.Migration.Domain/Fylum.Migration.Domain.csproj" />
-    <Project Path="Fylum.Migration.PostgreSql/Fylum.Migration.PostgreSql.csproj" />
+    <Project Path="Fylum.Migration.Postgres/Fylum.Migration.Postgres.csproj" />
     <Project Path="Fylum.Migration.Provider/Fylum.Migration.Provider.csproj" />
     <Project Path="Fylum.Migration.Winforms/Fylum.Migration.Winforms.csproj" />
   </Folder>
   <Folder Name="/Fylum.Users/">
-    <Project Path="Fylum.Users.Application/Fylum.Users.Application.csproj" Id="755b0418-9d04-45e3-b11e-a50dcb4cf7dc" />
-    <Project Path="Fylum.Users.Domain/Fylum.Users.Domain.csproj" Id="6ffd8e05-fd2e-4a7b-9e2f-0badb91490be" />
+    <Project Path="Fylum.Users.Application/Fylum.Users.Application.csproj" />
+    <Project Path="Fylum.Users.Domain/Fylum.Users.Domain.csproj" />
+    <Project Path="Fylum.Users.Postgres/Fylum.Users.Postgres.csproj" />
   </Folder>
   <Project Path="docker-compose/docker-compose.dcproj">
     <Build />
   </Project>
   <Project Path="Fylum.Api/Fylum.Api.csproj" />
-  <Project Path="Fylum.Application/Fylum.Application.csproj" Id="06c1f0cc-3c85-451e-b0fb-8162b24ca445" />
+  <Project Path="Fylum.Application/Fylum.Application.csproj" />
   <Project Path="Fylum.Domain/Fylum.Domain.csproj" />
-  <Project Path="Fylum.PostgreSql.Shared.Tests/Fylum.PostgreSql.Shared.Tests.csproj" />
-  <Project Path="Fylum.PostgreSql.Shared/Fylum.PostgreSql.Shared.csproj" />
-  <Project Path="Fylum.PostgreSql/Fylum.PostgreSql.csproj" />
+  <Project Path="Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />
+  <Project Path="Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj" />
+  <Project Path="Fylum.Postgres/Fylum.Postgres.csproj" />
   <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
   <Project Path="PasswordhashCalculator/PasswordhashCalculator.csproj" />
 </Solution>

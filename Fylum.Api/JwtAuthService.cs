@@ -1,6 +1,5 @@
 ﻿using FastEndpoints.Security;
 using Fylum.Api.Authentication;
-using Fylum.Domain.Users;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
