@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Fylum.Users.Domain;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,13 @@ namespace Fylum.Users.Application
 {
     public static class ServiceRegistration
     {
-        public static void AddUsersApplicationServices(this IServiceCollection services)
+        public static void AddUsersApplicationServices(this IServiceCollection services, Action<PasswordHashSettings> passwodHashSettingsOptions)
         {
+            services.Configure(passwodHashSettingsOptions);
+
             services.AddTransient<IUserLoginCommandHandler, UserLoginCommandHandler>();
+            services.AddTransient<IPasswordHashCalculator, PasswordHashCalculator>();
+            services.AddTransient<IPasswordLoginVerification, PasswordLoginVerification>();
         }
     }
 }

@@ -9,12 +9,15 @@ namespace Fylum.Api.Login
     {
         private readonly ILoginEndpointRouteDefinitionProvider _routeProvider;
         private readonly IUserLoginCommandHandler _userLoginCommandHandler;
+        private readonly IJwtAuthService _jwtAuthService;
 
         public LoginEndpoint(ILoginEndpointRouteDefinitionProvider routeProvider,
-            IUserLoginCommandHandler userLoginCommandHandler)
+            IUserLoginCommandHandler userLoginCommandHandler,
+            IJwtAuthService jwtAuthService)
         {
             _routeProvider = routeProvider;
             _userLoginCommandHandler = userLoginCommandHandler;
+            _jwtAuthService = jwtAuthService;
         }
 
         public override void Configure()
@@ -36,9 +39,11 @@ namespace Fylum.Api.Login
                 return;
             }
 
+            var token = _jwtAuthService.BuildToken(loginResult.UserId!.Value);
+
             var response = new LoginResponse
             {
-                Token = loginResult.Token!,
+                Token = token,
             };
             await Send.ResultAsync(TypedResults.Ok(response));
         }

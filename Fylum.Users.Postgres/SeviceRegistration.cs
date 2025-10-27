@@ -10,7 +10,7 @@ namespace Fylum.Users.Postgres
 {
     public static class SeviceRegistration
     {
-        public static void AddUserPostgresServices(this IServiceCollection services)
+        public static void AddUsersPostgresServices(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserWithPasswordRepository, UserWithPasswordRepository>();
