@@ -15,7 +15,10 @@ namespace Fylum.Migration.Winforms.MainWindow
         EventHandler? ViewLoaded { get; set; }
         EventHandler? ApplyAllClicked { get; set; }
         EventHandler? ApplyUntilSelectedClicked { get; set; }
+        EventHandler? SelectedMigrationChanged { get; set; }
 
         void UnselectAllMigrations();
+        void DisplaySelectedMigrationDetails(MigrationRow migrationRow);
+        void ClearSelectedMigrationDetails();
     }
 }
