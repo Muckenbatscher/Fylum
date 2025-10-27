@@ -1,5 +1,3 @@
-using Fylum.Migration.Domain;
-using Fylum.Migration.Winforms.MainWindow;
 using Fylum.Migration.Winforms.MainWindow.MigrationScript;
 using M2TWinForms;
 
@@ -43,11 +41,10 @@ namespace Fylum.Migration.Winforms.MainWindow
         public EventHandler? ViewLoaded { get; set; }
         public EventHandler? ApplyAllClicked { get; set; }
         public EventHandler? ApplyUntilSelectedClicked { get; set; }
+        public EventHandler? SelectedMigrationChanged { get; set; }
 
         public void UnselectAllMigrations()
-        {
-            DG_Migrations.ClearSelection();
-        }
+            => DG_Migrations.ClearSelection();
 
         private void MigrationMainWindow_Load(object sender, EventArgs e)
             => ViewLoaded?.Invoke(this, e);
@@ -58,46 +55,58 @@ namespace Fylum.Migration.Winforms.MainWindow
         private void BT_ApplyUntilSelected_Click(object sender, EventArgs e)
             => ApplyUntilSelectedClicked?.Invoke(this, e);
 
+        private void DG_Migrations_SelectionChanged(object sender, EventArgs e)
+            => SelectedMigrationChanged?.Invoke(this, EventArgs.Empty);
+
         private void DG_Migrations_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex != CL_IsApplied.Index || e.RowIndex < 0)
+                return;
+            if (e.Graphics == null)
                 return;
 
             var datagrid = (DataGridView)sender;
             var row = datagrid.Rows[e.RowIndex];
             var migration = (MigrationRow)row.DataBoundItem;
             var image = migration.IsApplied
-                ? Fylum.Migration.Winforms.Properties.Resources.VerifiedIcon
+                ? Properties.Resources.VerifiedIcon
                 : new Bitmap(1, 1);
 
             var backColor = row.Selected ? e.CellStyle.SelectionBackColor : e.CellStyle.BackColor;
             var foreColor = row.Selected ? e.CellStyle.SelectionForeColor : e.CellStyle.ForeColor;
-            var rectWithoutBorder = new Rectangle(new Point(e.CellBounds.X + 1, e.CellBounds.Y), new Size(e.CellBounds.Width - 2, e.CellBounds.Height - 1));
-
+            var correctedRectPoint = new Point(e.CellBounds.X, e.CellBounds.Y - 1);
+            var correctedRectSize = new Size(e.CellBounds.Width - 1, e.CellBounds.Height);
+            var correctedRectangle = new Rectangle(correctedRectPoint, correctedRectSize);
+            e.Graphics.FillRectangle(new SolidBrush(backColor), correctedRectangle); 
+            e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
             e.Graphics.PrepareGraphicsForHighQualityDrawing();
-            e.Graphics.FillRectangle(new SolidBrush(backColor), rectWithoutBorder);
-            e.Graphics.DrawImageWithColor(image, foreColor, rectWithoutBorder);
+            e.Graphics.DrawImageWithColor(image, foreColor, correctedRectangle);
             e.Handled = true;
         }
 
-        private void DG_Migrations_SelectionChanged(object sender, EventArgs e)
-        {
-            ClearCurrentSelectedMigrationDisplay();
-            if (SelectedMigration == null)
-                return;
 
-            LB_SelectedMigrationName.Text = SelectedMigration.Name;
-            bool applied = SelectedMigration.IsApplied;
-            LB_SelectedMigrationTimestamp.Text = applied ? 
-                SelectedMigration.LocalAppliedTimestamp?.ToString("G") :
+        public void ClearSelectedMigrationDetails()
+        {
+            LB_SelectedMigrationName.Text = "";
+            LB_SelectedMigrationTimestamp.Text = "";
+            FLP_SelectedMigrationScripts.Controls.Clear();
+            CIB_SelectedMigrationAppliedState.BaseImage = new Bitmap(1, 1);
+        }
+
+        public void DisplaySelectedMigrationDetails(MigrationRow migrationRow)
+        {
+            LB_SelectedMigrationName.Text = migrationRow.Name;
+            bool applied = migrationRow.IsApplied;
+            LB_SelectedMigrationTimestamp.Text = applied ?
+                migrationRow.LocalAppliedTimestamp?.ToString("G") :
                 string.Empty;
 
             var image = applied
-                ? Winforms.Properties.Resources.VerifiedIcon
+                ? Properties.Resources.VerifiedIcon
                 : new Bitmap(1, 1);
             CIB_SelectedMigrationAppliedState.BaseImage = image;
 
-            foreach (var script in SelectedMigration.Migration.MigrationScripts.Reverse())
+            foreach (var script in migrationRow.Migration.MigrationScripts.Reverse())
             {
                 var scriptDisplay = new MigrationScriptDisplay
                 {
@@ -107,14 +116,6 @@ namespace Fylum.Migration.Winforms.MainWindow
                 };
                 FLP_SelectedMigrationScripts.Controls.Add(scriptDisplay);
             }
-        }
-
-        private void ClearCurrentSelectedMigrationDisplay()
-        {
-            LB_SelectedMigrationName.Text = "";
-            LB_SelectedMigrationTimestamp.Text = "";
-            FLP_SelectedMigrationScripts.Controls.Clear();
-            CIB_SelectedMigrationAppliedState.BaseImage = new Bitmap(1, 1);
         }
     }
 }

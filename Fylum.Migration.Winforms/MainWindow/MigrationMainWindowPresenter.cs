@@ -23,6 +23,7 @@ namespace Fylum.Migration.Winforms.MainWindow
 
             View.ViewLoaded += View_LoadEvent;
             View.ApplyAllClicked += View_ApplyAllClicked;
+            View.SelectedMigrationChanged += View_SelectedMigrationChanged;
         }
 
 
@@ -54,6 +55,15 @@ namespace Fylum.Migration.Winforms.MainWindow
                 _performingService.Perform(migrationRow.Migration);
 
             PresentAppliedMigrations();
+        }
+
+        private void View_SelectedMigrationChanged(object? sender, EventArgs e)
+        {
+            var selectedMigration = View.SelectedMigration;
+            if (selectedMigration is null)
+                View.ClearSelectedMigrationDetails();
+            else
+                View.DisplaySelectedMigrationDetails(selectedMigration);
         }
     }
 }
