@@ -21,5 +21,4 @@
   <Project Path="Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj" />
   <Project Path="Fylum.Postgres/Fylum.Postgres.csproj" />
   <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
-  <Project Path="PasswordhashCalculator/PasswordhashCalculator.csproj" />
 </Solution>
