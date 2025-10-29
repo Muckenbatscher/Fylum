@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Users.Application
+namespace Fylum.Users.Application.Login
 {
-    public interface IUserLoginCommandHandler : IResultCommandHandler<UserLoginCommand, UserLoginParameter, UserLoginResult>
+    public interface IUserLoginCommandHandler : ICommandHandler<UserLoginCommand, UserLoginResult>
     {
     }
 }

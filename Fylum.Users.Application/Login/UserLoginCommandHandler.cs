@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Users.Application
+namespace Fylum.Users.Application.Login
 {
     public class UserLoginCommandHandler : IUserLoginCommandHandler
     {
@@ -21,12 +21,12 @@ namespace Fylum.Users.Application
 
         public UserLoginResult Handle(UserLoginCommand command)
         {
-            var user = _userWithPasswordRepository.GetByUsername(command.Parameter.Username);
+            var user = _userWithPasswordRepository.GetByUsername(command.Username);
             if (user == null)
                 return new UserLoginResult(false, null);
 
             bool passwordValid = _loginVerification.VerifyPasswordLogin(
-                command.Parameter.Password, user.Login);
+                command.Password, user.Login);
 
             if (!passwordValid)
                 return new UserLoginResult(false, null);

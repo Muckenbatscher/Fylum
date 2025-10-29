@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Fylum.Application
 {
-    public interface ICommand<TParam>
+    public interface ICommand
     {
-        TParam Parameter { get; }
+    }
+
+    public interface ICommand<TResult> : ICommand
+    {
     }
 }

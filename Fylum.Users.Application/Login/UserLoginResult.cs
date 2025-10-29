@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Users.Application
+namespace Fylum.Users.Application.Login
 {
-    public record UserLoginParameter(string Username, string Password);
+    public record UserLoginResult(bool Successful, Guid? UserId);
 }

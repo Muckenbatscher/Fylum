@@ -1,4 +1,5 @@
-﻿using Fylum.Users.Domain;
+﻿using Fylum.Users.Application.Login;
+using Fylum.Users.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

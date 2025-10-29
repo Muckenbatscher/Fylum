@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 using Fylum.Shared.Login;
-using Fylum.Users.Application;
+using Fylum.Users.Application.Login;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Api.Login
@@ -29,8 +29,7 @@ namespace Fylum.Api.Login
 
         public override async Task HandleAsync(LoginRequest req, CancellationToken ct)
         {
-            var commandParam = new UserLoginParameter(req.Username, req.Password);
-            var command = new UserLoginCommand(commandParam);
+            var command = new UserLoginCommand(req.Username, req.Password);
             var loginResult = _userLoginCommandHandler.Handle(command);
 
             if (!loginResult.Successful)
