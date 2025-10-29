@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace Fylum.Shared.Login
 {
-    public class LoginResponse
-    {
-        public string Token { get; set; }
-    }
+    public record LoginResponse(string Token);
 }

@@ -13,12 +13,11 @@ namespace Fylum.Users.Application
             _settings = settings.Value;
         }
 
-        public string Hash(string password)
+        public string CreateRandomSalt()
         {
             int saltSizeBytes = _settings.SaltBitsCount / 8; // bits to bytes
             var saltBytes = RandomNumberGenerator.GetBytes(saltSizeBytes);
-            var salt = Convert.ToBase64String(saltBytes);
-            return Hash(password, salt);
+            return Convert.ToBase64String(saltBytes);
         }
 
         public string Hash(string password, string saltInput)

@@ -6,9 +6,5 @@ using System.Threading.Tasks;
 
 namespace Fylum.Shared.Register
 {
-    public class RegisterResponse
-    {
-        public Guid UserId { get; set; }
-        public string Token { get; set; }
-    }
+    public record RegisterResponse(Guid UserId, string Token);
 }
