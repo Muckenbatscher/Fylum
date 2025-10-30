@@ -1,4 +1,5 @@
-﻿using Fylum.Users.Domain;
+﻿using Fylum.Application;
+using Fylum.Users.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +20,18 @@ namespace Fylum.Users.Application.Login
             _loginVerification = loginVerification;
         }
 
-        public UserLoginResult Handle(UserLoginCommand command)
+        public Result<UserLoginResult> Handle(UserLoginCommand command)
         {
             var user = _userWithPasswordRepository.GetByUsername(command.Username);
             if (user == null)
-                return new UserLoginResult(false, null);
+                return Result.Failure<UserLoginResult>(Error.NotFound);
 
             bool passwordValid = _loginVerification.VerifyPasswordLogin(
                 command.Password, user.Login);
 
             if (!passwordValid)
-                return new UserLoginResult(false, null);
-            
+                return Result.Failure<UserLoginResult>(Error.Unauthorized);
+
             return new UserLoginResult(true, user.User.Id);
         }
     }

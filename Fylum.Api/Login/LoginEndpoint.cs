@@ -32,13 +32,12 @@ namespace Fylum.Api.Login
             var command = new UserLoginCommand(req.Username, req.Password);
             var loginResult = _commandHandler.Handle(command);
 
-            if (!loginResult.Successful)
-            {
-                await Send.ResultAsync(TypedResults.Unauthorized());
+            var errorHanding = Send.EnsureErrorResultHandled(loginResult);
+            if (errorHanding.ErrorResultHandled)
                 return;
-            }
 
-            var token = _jwtAuthService.BuildToken(loginResult.UserId!.Value);
+            var result = loginResult.Value;
+            var token = _jwtAuthService.BuildToken(result.UserId!.Value);
             var response = new LoginResponse(token);
             await Send.ResultAsync(TypedResults.Ok(response));
         }

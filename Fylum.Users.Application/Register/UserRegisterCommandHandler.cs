@@ -1,4 +1,5 @@
-﻿using Fylum.Users.Domain;
+﻿using Fylum.Application;
+using Fylum.Users.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +20,18 @@ namespace Fylum.Users.Application.Register
             _hashCalculator = hashCalculator;
         }
 
-        public UserRegisterResult Handle(UserRegisterCommand command)
+        public Result<UserRegisterResult> Handle(UserRegisterCommand command)
         {
             var existingUser = _userWithPasswordRepository.GetByUsername(command.Username);
             if (existingUser != null)
-                throw new UsernameAlreadyExistsException(command.Username);
+                return Result.Failure<UserRegisterResult>(Error.Conflict);
 
             var salt = _hashCalculator.CreateRandomSalt();
             var passwordHash = _hashCalculator.Hash(command.Password, salt);
             var userLogin = UserWithPasswordLogin.CreateNew(command.Username, true, passwordHash, salt);
             _userWithPasswordRepository.Create(userLogin);
-
-            return new UserRegisterResult(userLogin.User.Id);
+            
+            return new UserRegisterResult(userLogin.User.Id); ;
         }
     }
 }
