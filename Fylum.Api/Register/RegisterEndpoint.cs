@@ -2,11 +2,12 @@
 using Fylum.Shared.Login;
 using Fylum.Shared.Register;
 using Fylum.Users.Application.Register;
+using Fylum.Users.Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Api.Register
 {
-    public class RegisterEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
+    public class RegisterEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, BadRequest>>
     {
         private readonly IRegisterEndpointRouteDefinitionProvider _routeProvider;
         private readonly IUserRegisterCommandHandler _commandHandler;
@@ -35,7 +36,7 @@ namespace Fylum.Api.Register
             {
                 registerResult = _commandHandler.Handle(command);
             }
-            catch (Exception ex)
+            catch (UsernameAlreadyExistsException ex)
             {
                 await Send.ResultAsync(TypedResults.BadRequest());
                 return;
