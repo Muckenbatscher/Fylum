@@ -1,33 +1,30 @@
 ﻿using FastEndpoints;
-using Fylum.Shared.Login;
+using Fylum.Api.JwtAuthentication;
+using Fylum.Shared;
 using Fylum.Shared.Register;
 using Fylum.Users.Application.Register;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Api.Register
 {
-    public class RegisterEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, BadRequest>>
+    public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Created<RegisterResponse>, Conflict>>
     {
-        private readonly IRegisterEndpointRouteDefinitionProvider _routeProvider;
         private readonly IUserRegisterCommandHandler _registerCommandHandler;
         private readonly IJwtAuthService _jwtAuthService;
 
-        public RegisterEndpoint(IRegisterEndpointRouteDefinitionProvider routeProvider, 
-            IUserRegisterCommandHandler commandHandler, 
+        public RegisterEndpoint(IUserRegisterCommandHandler commandHandler, 
             IJwtAuthService jwtAuthService)
         {
-            _routeProvider = routeProvider;
             _registerCommandHandler = commandHandler;
             _jwtAuthService = jwtAuthService;
         }
 
         public override void Configure()
         {
-            string baseRoute = _routeProvider.BaseEndpointRoute;
-            Post(baseRoute);
+            Post(EndpointRoutes.RegisterRoute);
             AllowAnonymous();
         }
-        public override async Task HandleAsync(LoginRequest req, CancellationToken ct)
+        public override async Task HandleAsync(RegisterRequest req, CancellationToken ct)
         {
             var command = new UserRegisterCommand(req.Username, req.Password);
             var registerResult = _registerCommandHandler.Handle(command);
@@ -39,7 +36,8 @@ namespace Fylum.Api.Register
             var resultValue = registerResult.Value;
             var token = _jwtAuthService.BuildToken(resultValue.UserId);
             var response = new RegisterResponse(resultValue.UserId, token);
-            await Send.ResultAsync(TypedResults.Ok(response));
+            var newUserUri = $"{EndpointRoutes.UsersBaseRoute}/{resultValue.UserId}";
+            await Send.ResultAsync(TypedResults.Created(newUserUri, response));
         }
     }
 }

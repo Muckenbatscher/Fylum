@@ -1,4 +1,4 @@
-﻿namespace Fylum.Api.Authentication
+﻿namespace Fylum.Api.JwtAuthentication
 {
     public class JwtAuthOptions
     {

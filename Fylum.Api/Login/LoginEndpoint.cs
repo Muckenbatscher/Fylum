@@ -1,4 +1,6 @@
 ﻿using FastEndpoints;
+using Fylum.Api.JwtAuthentication;
+using Fylum.Shared;
 using Fylum.Shared.Login;
 using Fylum.Users.Application.Login;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -7,22 +9,19 @@ namespace Fylum.Api.Login
 {
     public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
     {
-        private readonly ILoginEndpointRouteDefinitionProvider _routeProvider;
         private readonly IUserLoginCommandHandler _commandHandler;
         private readonly IJwtAuthService _jwtAuthService;
 
-        public LoginEndpoint(ILoginEndpointRouteDefinitionProvider routeProvider,
-            IUserLoginCommandHandler commandHandler,
+        public LoginEndpoint(IUserLoginCommandHandler commandHandler,
             IJwtAuthService jwtAuthService)
         {
-            _routeProvider = routeProvider;
             _commandHandler = commandHandler;
             _jwtAuthService = jwtAuthService;
         }
 
         public override void Configure()
         {
-            string baseRoute = _routeProvider.BaseEndpointRoute;
+            string baseRoute = EndpointRoutes.LoginRoute;
             Post(baseRoute);
             AllowAnonymous();
         }

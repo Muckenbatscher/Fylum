@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace Fylum.Api
+namespace Fylum.Api.JwtAuthentication
 {
     public interface IJwtAuthService
     {

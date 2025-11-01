@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
-using Fylum.Api.Authentication;
+using Fylum.Api.JwtAuthentication;
+using Fylum.Shared;
 using Fylum.Shared.Tags;
 using Microsoft.Extensions.Options;
 
@@ -7,20 +8,19 @@ namespace Fylum.Api.Tags
 {
     public class GetTagEndpoint : EndpointWithoutRequest<TagResponse>
     {
-        private readonly ITagEndpointRouteDefinitionProvider _routeProvider;
+        private const string IdParamName = "id";
+
         private readonly JwtAuthOptions _jwtAuthOptions;
 
-        public GetTagEndpoint(ITagEndpointRouteDefinitionProvider tagEndpointRouteDefinitionProvider, 
-            IOptions<JwtAuthOptions> jwtAuthOptions)
+        public GetTagEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions)
         {
-            _routeProvider = tagEndpointRouteDefinitionProvider;
             _jwtAuthOptions = jwtAuthOptions.Value;
         }
 
         public override void Configure()
         {
-            string baseRoute = _routeProvider.BaseEndpointRoute;
-            Get($"{baseRoute}/{{id}}");
+            string baseRoute = EndpointRoutes.TagsBaseRoute;
+            Get($"{baseRoute}/{{{IdParamName}}}");
             Claims(_jwtAuthOptions.UserIdClaim);
         }
 

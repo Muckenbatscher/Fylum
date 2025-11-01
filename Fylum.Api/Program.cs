@@ -1,8 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using Fylum.Api.Authentication;
-using Fylum.Api.EndpointRouteDefinitions;
+using Fylum.Api.JwtAuthentication;
 using Fylum.Users.Application;
 using Fylum.Postgres.Shared;
 using Fylum.Postgres;
@@ -21,7 +20,6 @@ namespace Fylum.Api
                 .AddAuthorization()
                 .AddFastEndpoints()
                 .SwaggerDocument();
-            builder.Services.AddEndpointRouteDefinitions();
 
             builder.Services.AddPostgresSharedServices(options =>
             {

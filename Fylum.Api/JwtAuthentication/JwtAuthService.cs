@@ -1,9 +1,8 @@
 ﻿using FastEndpoints.Security;
-using Fylum.Api.Authentication;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
-namespace Fylum.Api
+namespace Fylum.Api.JwtAuthentication
 {
     public class JwtAuthService : IJwtAuthService
     {

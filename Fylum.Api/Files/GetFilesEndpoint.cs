@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
-using Fylum.Api.Authentication;
+using Fylum.Api.JwtAuthentication;
+using Fylum.Shared;
 using Fylum.Shared.Files;
 using Microsoft.Extensions.Options;
 
@@ -7,20 +8,16 @@ namespace Fylum.Api.Files
 {
     public class GetFilesEndpoint : EndpointWithoutRequest<IEnumerable<FileResponse>>
     {
-        private readonly IFileEndpointRouteDefinitionProvider _routeProvider;
         private readonly JwtAuthOptions _jwtAuthOptions;
 
-        public GetFilesEndpoint(IFileEndpointRouteDefinitionProvider fileEndpointRouteDefinitionProvider,
-            IOptions<JwtAuthOptions> jwtAuthOptions)
+        public GetFilesEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions)
         {
-            _routeProvider = fileEndpointRouteDefinitionProvider;
             _jwtAuthOptions = jwtAuthOptions.Value;
         }
 
         public override void Configure()
         {
-            string baseRoute = _routeProvider.BaseEndpointRoute;
-            Get(baseRoute);
+            Get(EndpointRoutes.FileBaseRoute);
             Claims(_jwtAuthOptions.UserIdClaim);
         }
 
