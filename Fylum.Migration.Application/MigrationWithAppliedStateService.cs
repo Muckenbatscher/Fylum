@@ -1,5 +1,5 @@
 ﻿using Fylum.Migration.Domain;
-using Fylum.Migration.Domain.PerformedMigrations;
+using Fylum.Migration.Domain.Perform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Fylum.Migration.Application
 {
-    public class MigrationService : IMigrationService
+    public class MigrationWithAppliedStateService : IMigrationWithAppliedStateService
     {
         private readonly IMigrationsProvider _migrationsProvider;
         private readonly IPerformedMigrationsRepository _performedMigrationsRepository;
 
-        public MigrationService(IMigrationsProvider migrationsProvider,
+        public MigrationWithAppliedStateService(IMigrationsProvider migrationsProvider,
             IPerformedMigrationsRepository performedMigrationsRepository)
         {
             _migrationsProvider = migrationsProvider;

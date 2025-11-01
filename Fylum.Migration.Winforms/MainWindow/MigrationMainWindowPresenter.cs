@@ -1,5 +1,5 @@
 ﻿using Fylum.Migration.Application;
-using Fylum.Migration.Application.PerformMigration;
+using Fylum.Migration.Application.Perform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +10,11 @@ namespace Fylum.Migration.Winforms.MainWindow
 {
     public class MigrationMainWindowPresenter
     {
-        private readonly IMigrationService _migrationService;
+        private readonly IMigrationWithAppliedStateService _migrationService;
         private readonly IMigrationPerformingService _performingService;
 
         public MigrationMainWindowPresenter(IMigrationMainWindow view,
-            IMigrationService migrationService,
+            IMigrationWithAppliedStateService migrationService,
             IMigrationPerformingService performingService)
         {
             View = view;
@@ -60,9 +60,9 @@ namespace Fylum.Migration.Winforms.MainWindow
         private void View_SelectedMigrationChanged(object? sender, EventArgs e)
         {
             var selectedMigration = View.SelectedMigration;
-            if (selectedMigration is null)
-                View.ClearSelectedMigrationDetails();
-            else
+            View.ClearSelectedMigrationDetails();
+
+            if (selectedMigration is not null)
                 View.DisplaySelectedMigrationDetails(selectedMigration);
         }
     }

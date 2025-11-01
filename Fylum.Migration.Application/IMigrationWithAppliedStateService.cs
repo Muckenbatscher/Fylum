@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fylum.Migration.Application
 {
-    public interface IMigrationService
+    public interface IMigrationWithAppliedStateService
     {
         IEnumerable<MigrationWithAppliedState> GetMigrationsWithAppliedState();
     }

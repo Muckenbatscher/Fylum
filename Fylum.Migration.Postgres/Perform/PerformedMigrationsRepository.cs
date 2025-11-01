@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Fylum.Domain.UnitOfWork;
-using Fylum.Migration.Domain.PerformedMigrations;
+using Fylum.Migration.Domain.Perform;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Postgres.PerformedMigrations
+namespace Fylum.Migration.Postgres.Perform
 {
     public class PerformedMigrationsRepository : IPerformedMigrationsRepository
     {

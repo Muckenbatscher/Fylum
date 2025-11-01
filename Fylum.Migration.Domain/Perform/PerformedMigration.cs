@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Domain.PerformedMigrations
+namespace Fylum.Migration.Domain.Perform
 {
     public class PerformedMigration
     {

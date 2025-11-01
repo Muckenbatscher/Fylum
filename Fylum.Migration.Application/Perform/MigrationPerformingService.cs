@@ -1,5 +1,4 @@
-﻿using Fylum.Migration.Application.PerformMigration;
-using Fylum.Migration.Domain.PerformedMigrations;
+﻿using Fylum.Migration.Domain.Perform;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Postgres.PerformMigration
+namespace Fylum.Migration.Application.Perform
 {
     public class MigrationPerformingService : IMigrationPerformingService
     {

@@ -1,9 +1,5 @@
-﻿using Fylum.Domain.UnitOfWork;
-using Fylum.Migration.Application.PerformMigration;
-using Fylum.Migration.Domain.PerformedMigrations;
-using Fylum.Migration.Postgres.PerformedMigrations;
-using Fylum.Migration.Postgres.PerformMigration;
-using Fylum.Migration.Postgres.ScriptExecution;
+﻿using Fylum.Migration.Domain.Perform;
+using Fylum.Migration.Postgres.Perform;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,13 +11,11 @@ namespace Fylum.Migration.Postgres
 {
     public static class ServiceRegistration
     {
-        public static void AddMigrationPostgresServices(this IServiceCollection services)
+        public static IServiceCollection AddMigrationPostgresServices(this IServiceCollection services)
         {
-            services.AddScoped<IPerformMigrationUnitOfWorkFactory, PerformMigrationUnitOfWorkFactory>();
-
             services.AddTransient<IPerformedMigrationsRepository, PerformedMigrationsRepository>();
-            services.AddTransient<IMigrationPerformingService, MigrationPerformingService>();
             services.AddTransient<IScriptExecutor, ScriptExecutor>();
+            return services;
         }
     }
 }

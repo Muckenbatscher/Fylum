@@ -1,6 +1,5 @@
 ﻿using Fylum.Domain.UnitOfWork;
-using Fylum.Migration.Domain.PerformedMigrations;
-using Fylum.Migration.Postgres.ScriptExecution;
+using Fylum.Migration.Domain.Perform;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Postgres.PerformMigration
+namespace Fylum.Migration.Application.Perform
 {
     public class PerformMigrationUnitOfWorkFactory : IPerformMigrationUnitOfWorkFactory
     {
