@@ -22,17 +22,19 @@ namespace Fylum.Users.Application.Login
 
         public Result<UserLoginResult> Handle(UserLoginCommand command)
         {
-            var user = _userWithPasswordRepository.GetByUsername(command.Username);
-            if (user == null)
+            var userLogin = _userWithPasswordRepository.GetByUsername(command.Username);
+            if (userLogin == null)
                 return Result.Failure<UserLoginResult>(Error.NotFound);
+            if (!userLogin.User.IsActive)
+                return Result.Failure<UserLoginResult>(Error.Unauthorized);
 
             bool passwordValid = _loginVerification.VerifyPasswordLogin(
-                command.Password, user.Login);
+                command.Password, userLogin.Login);
 
             if (!passwordValid)
                 return Result.Failure<UserLoginResult>(Error.Unauthorized);
 
-            return new UserLoginResult(true, user.User.Id);
+            return new UserLoginResult(userLogin.User.Id);
         }
     }
 }

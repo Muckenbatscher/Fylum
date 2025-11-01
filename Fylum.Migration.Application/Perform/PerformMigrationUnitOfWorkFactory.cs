@@ -1,4 +1,5 @@
-﻿using Fylum.Domain.UnitOfWork;
+﻿using Fylum.Application;
+using Fylum.Domain.UnitOfWork;
 using Fylum.Migration.Domain.Perform;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -9,22 +10,20 @@ using System.Threading.Tasks;
 
 namespace Fylum.Migration.Application.Perform
 {
-    public class PerformMigrationUnitOfWorkFactory : IPerformMigrationUnitOfWorkFactory
+    public class PerformMigrationUnitOfWorkFactory : UnitOfWorkFactory, IPerformMigrationUnitOfWorkFactory
     {
-        private readonly IServiceScopeFactory _serviceScopeFactory;
-
-        public PerformMigrationUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory)
+        public PerformMigrationUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) : 
+            base(serviceScopeFactory)
         {
-            _serviceScopeFactory = serviceScopeFactory;
         }
 
         public PerformMigrationUnitOfWork Create()
         {
-            var scope = _serviceScopeFactory.CreateScope();
+            CreateScope();
             
-            var transactionFactory = scope.ServiceProvider.GetRequiredService<IUnitOfWorkTransactionFactory>();
-            var migrationsRepository = scope.ServiceProvider.GetRequiredService<IPerformedMigrationsRepository>();
-            var scriptExecutor = scope.ServiceProvider.GetRequiredService<IScriptExecutor>();
+            var transactionFactory = GetScopedService<IUnitOfWorkTransactionFactory>();
+            var migrationsRepository = GetScopedService<IPerformedMigrationsRepository>();
+            var scriptExecutor = GetScopedService<IScriptExecutor>();
 
             return new PerformMigrationUnitOfWork(
                 transactionFactory,

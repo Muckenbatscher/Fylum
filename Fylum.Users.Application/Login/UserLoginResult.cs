@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Fylum.Users.Application.Login
 {
-    public record UserLoginResult(bool Successful, Guid? UserId);
+    public record UserLoginResult(Guid? UserId);
 }
