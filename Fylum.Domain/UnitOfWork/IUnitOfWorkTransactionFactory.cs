@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fylum.Domain.UnitOfWork
 {
-    public interface IUnitOfWorkTransactionFactory
+    public interface IUnitOfWorkTransactionFactory : IDisposable
     {
         UnitOfWorkTransaction GetTransaction();
     }

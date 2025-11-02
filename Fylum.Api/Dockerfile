@@ -14,8 +14,8 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Fylum.Api/Fylum.Api.csproj", "Fylum.Api/"]
 COPY ["Fylum.Domain/Fylum.Domain.csproj", "Fylum.Domain/"]
-COPY ["Fylum.PostgreSql/Fylum.PostgreSql.csproj", "Fylum.PostgreSql/"]
-COPY ["Fylum.PostgreSql.Shared/Fylum.PostgreSql.Shared.csproj", "Fylum.PostgreSql.Shared/"]
+COPY ["Fylum.Postgres/Fylum.Postgres.csproj", "Fylum.Postgres/"]
+COPY ["Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj", "Fylum.Postgres.Shared/"]
 COPY ["Fylum.Shared/Fylum.Shared.csproj", "Fylum.Shared/"]
 RUN dotnet restore "./Fylum.Api/Fylum.Api.csproj"
 COPY . .

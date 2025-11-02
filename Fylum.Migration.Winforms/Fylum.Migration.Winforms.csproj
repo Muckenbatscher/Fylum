@@ -23,15 +23,16 @@
 
 	<ItemGroup>
 		<PackageReference Include="M2TWinForms" Version="0.1.2" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.10" />
 	</ItemGroup>
 
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Fylum.Migration.Application\Fylum.Migration.Application.csproj" />
 	  <ProjectReference Include="..\Fylum.Migration.Provider\Fylum.Migration.Provider.csproj" />
-	  <ProjectReference Include="..\Fylum.Migration.PostgreSql\Fylum.Migration.PostgreSql.csproj" />
+	  <ProjectReference Include="..\Fylum.Migration.Postgres\Fylum.Migration.Postgres.csproj" />
 	</ItemGroup>
 
 

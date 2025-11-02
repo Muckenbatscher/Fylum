@@ -1,18 +1,30 @@
 <Solution>
-  <Folder Name="/Fylum.Migration/">
+  <Folder Name="/Api/">
+    <Project Path="docker-compose/docker-compose.dcproj">
+      <Build />
+    </Project>
+    <Project Path="Fylum.Api/Fylum.Api.csproj" />
+    <Project Path="Fylum.Application/Fylum.Application.csproj" />
+    <Project Path="Fylum.Domain/Fylum.Domain.csproj" />
+    <Project Path="Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />
+    <Project Path="Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj" />
+    <Project Path="Fylum.Postgres/Fylum.Postgres.csproj" />
+  </Folder>
+  <Folder Name="/Api/Fylum.Users/">
+    <Project Path="Fylum.Users.Application/Fylum.Users.Application.csproj" />
+    <Project Path="Fylum.Users.Domain/Fylum.Users.Domain.csproj" />
+    <Project Path="Fylum.Users.Postgres/Fylum.Users.Postgres.csproj" />
+  </Folder>
+  <Folder Name="/Client/" />
+  <Folder Name="/Desktop/" />
+  <Folder Name="/Desktop/Fylum.Migration/">
     <Project Path="Fylum.Migration.Application/Fylum.Migration.Application.csproj" />
     <Project Path="Fylum.Migration.Domain/Fylum.Migration.Domain.csproj" />
-    <Project Path="Fylum.Migration.PostgreSql/Fylum.Migration.PostgreSql.csproj" />
+    <Project Path="Fylum.Migration.Postgres/Fylum.Migration.Postgres.csproj" />
     <Project Path="Fylum.Migration.Provider/Fylum.Migration.Provider.csproj" />
     <Project Path="Fylum.Migration.Winforms/Fylum.Migration.Winforms.csproj" />
   </Folder>
-  <Project Path="docker-compose/docker-compose.dcproj">
-    <Build />
-  </Project>
-  <Project Path="Fylum.Api/Fylum.Api.csproj" />
-  <Project Path="Fylum.Domain/Fylum.Domain.csproj" />
-  <Project Path="Fylum.PostgreSql.Shared.Tests/Fylum.PostgreSql.Shared.Tests.csproj" />
-  <Project Path="Fylum.PostgreSql.Shared/Fylum.PostgreSql.Shared.csproj" />
-  <Project Path="Fylum.PostgreSql/Fylum.PostgreSql.csproj" />
-  <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
+  <Folder Name="/Shared/">
+    <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
+  </Folder>
 </Solution>

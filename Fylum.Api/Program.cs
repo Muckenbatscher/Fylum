@@ -1,9 +1,11 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using Fylum.Api.Authentication;
-using Fylum.Api.EndpointRouteDefinitions;
-using Fylum.PostgreSql;
+using Fylum.Api.JwtAuthentication;
+using Fylum.Users.Application;
+using Fylum.Postgres.Shared;
+using Fylum.Postgres;
+using Fylum.Users.Postgres;
 
 namespace Fylum.Api
 {
@@ -18,9 +20,8 @@ namespace Fylum.Api
                 .AddAuthorization()
                 .AddFastEndpoints()
                 .SwaggerDocument();
-            builder.Services.AddEndpointRouteDefinitions();
 
-            builder.Services.AddPostgreSqlSharedServices(options =>
+            builder.Services.AddPostgresSharedServices(options =>
             {
                 options.HostName = builder.Configuration["DbConnection:Host"]!;
                 options.Port = int.Parse(builder.Configuration["DbConnection:Port"]!);
@@ -28,7 +29,16 @@ namespace Fylum.Api
                 options.Username = builder.Configuration["DbConnection:Username"]!;
                 options.Password = builder.Configuration["DbConnection:Password"]!;
             });
-            builder.Services.AddPostgreSqlServices();
+            builder.Services.AddPostgresServices();
+
+            builder.Services.AddUsersApplicationServices(options =>
+            {
+                options.IterationCount = int.Parse(builder.Configuration["PasswordHashing:IterationCount"]!);
+                options.SaltBitsCount = int.Parse(builder.Configuration["PasswordHashing:SaltBits"]!);
+                options.HashedBitsCount = int.Parse(builder.Configuration["PasswordHashing:HashedBits"]!);
+                options.PseudoRandomFunction = builder.Configuration["PasswordHashing:PseudoRandomFunction"]!;
+            });
+            builder.Services.AddUsersPostgresServices();
 
             builder.Services.Configure<JwtAuthOptions>(options =>
             {
@@ -36,6 +46,7 @@ namespace Fylum.Api
                 options.UserIdClaim = builder.Configuration["JwtAuth:UserIdClaim"]!;
                 options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
             });
+            builder.Services.AddTransient<IJwtAuthService, JwtAuthService>();
 
             var app = builder.Build();
 
