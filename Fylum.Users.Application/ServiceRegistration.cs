@@ -22,8 +22,10 @@ namespace Fylum.Users.Application
             services.AddTransient<IPasswordLoginVerification, PasswordLoginVerification>();
 
             services.AddScoped<IUserRegisterUnitOfWorkFactory, UserRegisterUnitOfWorkFactory>();
+
             services.AddTransient<IUserLoginCommandHandler, UserLoginCommandHandler>();
             services.AddTransient<IUserRegisterCommandHandler, UserRegisterCommandHandler>();
+            services.AddTransient<IGetUserCommandHandler, GetUserCommandHandler>();
 
             return services;
         }

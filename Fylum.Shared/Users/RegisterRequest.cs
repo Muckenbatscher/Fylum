@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Shared.Login
+namespace Fylum.Shared.Users
 {
-    public record LoginResponse(string Token);
+    public record RegisterRequest(string Username, string Password);
 }

@@ -26,7 +26,7 @@ namespace Fylum.Api.Tags
 
         public override async Task HandleAsync(CancellationToken ct)
         {
-            var id = Route<Guid>("id");
+            var id = Route<Guid>(IdParamName);
             var tag = new TagResponse
             {
                 Id = id,

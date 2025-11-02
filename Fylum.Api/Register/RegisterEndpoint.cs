@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using Fylum.Api.JwtAuthentication;
 using Fylum.Shared;
-using Fylum.Shared.Register;
+using Fylum.Shared.Users;
 using Fylum.Users.Application.Register;
 using Microsoft.AspNetCore.Http.HttpResults;
 

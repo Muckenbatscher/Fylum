@@ -48,7 +48,7 @@ namespace Fylum.Api.Files
                 return;
             }
 
-            var id = Route<Guid>("id");
+            var id = Route<Guid>(IdParamName);
             var file = new FileResponse()
             {
                 Id = id,
