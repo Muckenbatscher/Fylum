@@ -2,19 +2,10 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0-windows</TargetFramework>
-		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>288b3911-509f-459d-ba95-8aa971ca04e8</UserSecretsId>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<Compile Remove="packages\**" />
-		<EmbeddedResource Remove="packages\**" />
-		<None Remove="packages\**" />
-	</ItemGroup>
-
-
+	
 	<ItemGroup>
 		<Content Include="appSettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -22,19 +13,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="M2TWinForms" Version="0.1.2" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.10" />
+		<PackageReference Include="M2TWinForms" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
 	</ItemGroup>
-
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Fylum.Migration.Application\Fylum.Migration.Application.csproj" />
 	  <ProjectReference Include="..\Fylum.Migration.Provider\Fylum.Migration.Provider.csproj" />
 	  <ProjectReference Include="..\Fylum.Migration.Postgres\Fylum.Migration.Postgres.csproj" />
 	</ItemGroup>
-
 
 	<ItemGroup>
 	  <Compile Update="Properties\Resources.Designer.cs">
