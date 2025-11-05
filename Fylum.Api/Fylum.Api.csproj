@@ -1,28 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>3af62b9c-262c-4dd7-8858-642688b5bcdc</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<UserSecretsId>3af62b9c-262c-4dd7-8858-642688b5bcdc</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FastEndpoints" Version="7.1.0" />
-    <PackageReference Include="FastEndpoints.Security" Version="7.1.0" />
-    <PackageReference Include="FastEndpoints.Swagger" Version="7.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0-preview.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FastEndpoints" />
+		<PackageReference Include="FastEndpoints.Security" />
+		<PackageReference Include="FastEndpoints.Swagger" />
+		<PackageReference Include="Swashbuckle.AspNetCore" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
-    <ProjectReference Include="..\Fylum.Postgres\Fylum.Postgres.csproj" />
-    <ProjectReference Include="..\Fylum.Shared\Fylum.Shared.csproj" />
-    <ProjectReference Include="..\Fylum.Users.Application\Fylum.Users.Application.csproj" />
-    <ProjectReference Include="..\Fylum.Users.Postgres\Fylum.Users.Postgres.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
+		<ProjectReference Include="..\Fylum.Postgres\Fylum.Postgres.csproj" />
+		<ProjectReference Include="..\Fylum.Shared\Fylum.Shared.csproj" />
+		<ProjectReference Include="..\Fylum.Users.Application\Fylum.Users.Application.csproj" />
+		<ProjectReference Include="..\Fylum.Users.Postgres\Fylum.Users.Postgres.csproj" />
+	</ItemGroup>
 
 </Project>
