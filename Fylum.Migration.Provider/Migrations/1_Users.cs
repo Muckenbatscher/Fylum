@@ -11,6 +11,7 @@ namespace Fylum.Migration.Provider.Migrations
     {
         public override Guid Id => Guid.Parse("3ead4e8f-16dd-4219-953a-600d0c8f035d");
         public override string Name => "1_Users";
+        public override bool IsMinimallyRequired => true;
 
         public override DirectoryInfo MigrationsDirectory => new("MigrationFiles/1_Users/");
         public override IEnumerable<string> MigrationFileNames

@@ -1,4 +1,5 @@
-﻿using Fylum.Migration.Application.Perform;
+﻿using Fylum.Migration.Application.MinimallyRequired;
+using Fylum.Migration.Application.Perform;
 using Fylum.Migration.Domain.Perform;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,6 +18,7 @@ namespace Fylum.Migration.Application
             services.AddTransient<IMigrationPerformingService, MigrationPerformingService>();
 
             services.AddScoped<IPerformMigrationUnitOfWorkFactory, PerformMigrationUnitOfWorkFactory>();
+            services.AddScoped<IMinimallyRequiredMigrationService, MinimallyRequiredMigrationService>();
             return services;
         }
     }
