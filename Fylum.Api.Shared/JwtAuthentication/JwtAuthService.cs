@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
-namespace Fylum.Api.JwtAuthentication
+namespace Fylum.Api.Shared.JwtAuthentication
 {
     public class JwtAuthService : IJwtAuthService
     {
@@ -33,7 +33,7 @@ namespace Fylum.Api.JwtAuthentication
 
         public Guid? GetUserIdFromClaims(IEnumerable<Claim> claims)
         {
-            var userIdClaim = claims.SingleOrDefault(c => c.Type == _jwtAuthOptions.UserIdClaim);
+            var userIdClaim = claims.SingleOrDefault(c => c.Type == UserIdClaimKey);
 
             if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
                 return null;

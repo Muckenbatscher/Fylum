@@ -1,11 +1,13 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using Fylum.Api.JwtAuthentication;
 using Fylum.Users.Application;
 using Fylum.Postgres.Shared;
 using Fylum.Postgres;
 using Fylum.Users.Postgres;
+using Fylum.Api.Shared;
+using System.Reflection;
+using Fylum.Migrations.Api;
 
 namespace Fylum.Api
 {
@@ -18,8 +20,16 @@ namespace Fylum.Api
             builder.Services
                 .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration["JwtAuth:SigningKey"])
                 .AddAuthorization()
-                .AddFastEndpoints()
+                .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
                 .SwaggerDocument();
+
+
+            builder.Services.AddApiSharedServices(options =>
+            {
+                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
+                options.UserIdClaim = builder.Configuration["JwtAuth:UserIdClaim"]!;
+                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
+            });
 
             builder.Services.AddPostgresSharedServices(options =>
             {
@@ -40,13 +50,8 @@ namespace Fylum.Api
             });
             builder.Services.AddUsersPostgresServices();
 
-            builder.Services.Configure<JwtAuthOptions>(options =>
-            {
-                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
-                options.UserIdClaim = builder.Configuration["JwtAuth:UserIdClaim"]!;
-                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
-            });
-            builder.Services.AddTransient<IJwtAuthService, JwtAuthService>();
+            builder.Services.AddMigrationsServices();
+
 
             var app = builder.Build();
 
@@ -64,6 +69,12 @@ namespace Fylum.Api
             app.UsePathBase("/api");
 
             app.Run();
+        }
+
+        private static IEnumerable<Assembly> GetApiEndpointAssemblies()
+        {
+            yield return Assembly.GetExecutingAssembly();
+            yield return typeof(MigrationsApiModule).Assembly;
         }
     }
 }
