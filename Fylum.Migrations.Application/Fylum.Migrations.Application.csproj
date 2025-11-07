@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
-    <ProjectReference Include="..\Fylum.Migration.Domain\Fylum.Migration.Domain.csproj" />
+    <ProjectReference Include="..\Fylum.Migrations.Domain\Fylum.Migrations.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -20,9 +20,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Fylum.Migration.Application\Fylum.Migrations.Application.csproj" />
-	  <ProjectReference Include="..\Fylum.Migration.Provider\Fylum.Migrations.Provider.csproj" />
-	  <ProjectReference Include="..\Fylum.Migration.Postgres\Fylum.Migrations.Postgres.csproj" />
+	  <ProjectReference Include="..\Fylum.Migrations.Application\Fylum.Migrations.Application.csproj" />
+	  <ProjectReference Include="..\Fylum.Migrations.Provider\Fylum.Migrations.Provider.csproj" />
+	  <ProjectReference Include="..\Fylum.Migrations.Postgres\Fylum.Migrations.Postgres.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
