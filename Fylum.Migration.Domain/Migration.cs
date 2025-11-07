@@ -17,6 +17,7 @@ namespace Fylum.Migration.Domain
 
         public Guid Id { get; private set; }
         public string Name { get; private set; }
+        public bool IsMinimallyRequired { get; private set; }
         public IEnumerable<MigrationScript> MigrationScripts { get; private set; }
 
 
@@ -31,6 +32,9 @@ namespace Fylum.Migration.Domain
         
         public static Migration Create(Guid id, string name)
             => new Migration(id, name, Enumerable.Empty<MigrationScript>());
+
+        public void MakeMinimallyRequired()
+            => IsMinimallyRequired = true;
         
     }
 }

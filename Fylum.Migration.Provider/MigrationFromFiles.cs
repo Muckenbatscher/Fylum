@@ -11,12 +11,16 @@ namespace Fylum.Migration.Provider
     {
         public abstract Guid Id { get; }
         public abstract string Name { get; }
+        public virtual bool IsMinimallyRequired => false; 
         public abstract IEnumerable<FileInfo> MigrationScriptFiles { get; }
 
         public Domain.Migration CreateMigration()
         {
             var scripts = GetMigrationScripts();
-            return Domain.Migration.Create(Id, Name, scripts);
+            var migration =  Domain.Migration.Create(Id, Name, scripts);
+            if (IsMinimallyRequired)
+                migration.MakeMinimallyRequired();
+            return migration;
         }
 
         private IEnumerable<MigrationScript> GetMigrationScripts()
