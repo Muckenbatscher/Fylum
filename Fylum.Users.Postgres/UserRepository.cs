@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Fylum.Users.Postgres
 {
-    internal class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly IUnitOfWorkTransactionFactory _transactionFactory;
 

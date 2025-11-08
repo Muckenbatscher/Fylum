@@ -3,4 +3,4 @@
 /// <summary>
 /// Marker class for Migrations API module
 /// </summary>
-public class MigrationsApiModule { }
+public abstract class MigrationsApiModule { }

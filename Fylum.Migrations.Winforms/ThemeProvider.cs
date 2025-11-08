@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Winforms
+namespace Fylum.Migrations.Winforms
 {
     internal class ThemeProvider : IDefaultThemeProvider
     {

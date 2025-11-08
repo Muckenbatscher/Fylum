@@ -1,6 +1,6 @@
-﻿using Fylum.Migration.Application;
-using Fylum.Migration.Postgres;
-using Fylum.Migration.Provider;
+﻿using Fylum.Migrations.Application;
+using Fylum.Migrations.Postgres;
+using Fylum.Migrations.Provider;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

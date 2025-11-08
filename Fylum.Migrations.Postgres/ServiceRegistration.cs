@@ -1,5 +1,5 @@
-﻿using Fylum.Migration.Domain.Perform;
-using Fylum.Migration.Postgres.Perform;
+﻿using Fylum.Migrations.Domain.Perform;
+using Fylum.Migrations.Postgres.Perform;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Postgres
+namespace Fylum.Migrations.Postgres
 {
     public static class ServiceRegistration
     {

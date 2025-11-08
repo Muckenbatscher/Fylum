@@ -1,5 +1,5 @@
 ﻿using Fylum.Application;
-using Fylum.Users.Domain;
+using Fylum.Users.Domain.Password;
 using Fylum.Users.Domain.Register;
 using System;
 using System.Collections.Generic;

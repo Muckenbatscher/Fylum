@@ -1,13 +1,13 @@
 ﻿using Dapper;
 using Fylum.Domain.UnitOfWork;
-using Fylum.Migration.Domain.Perform;
+using Fylum.Migrations.Domain.Perform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Postgres.Perform
+namespace Fylum.Migrations.Postgres.Perform
 {
     public class ScriptExecutor : IScriptExecutor
     {

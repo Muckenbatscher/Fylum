@@ -1,12 +1,12 @@
-﻿using Fylum.Migration.Application;
-using Fylum.Migration.Application.Perform;
+﻿using Fylum.Migrations.Application.Perform;
+using Fylum.Migrations.Application.WithAppliedState;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Winforms.MainWindow
+namespace Fylum.Migrations.Winforms.MainWindow
 {
     public class MigrationMainWindowPresenter
     {

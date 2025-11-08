@@ -1,12 +1,11 @@
-﻿
-using Fylum.Users.Domain;
+﻿using Fylum.Users.Domain.Password;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Users.Application
+namespace Fylum.Users.Application.Login
 {
     public class PasswordLoginVerification : IPasswordLoginVerification
     {

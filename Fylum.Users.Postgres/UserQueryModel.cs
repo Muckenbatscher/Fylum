@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fylum.Users.Postgres
 {
-    public class UserQueryModel
+    internal class UserQueryModel
     {
         public Guid Id { get; set; }
         public string Username { get; set; } = string.Empty;

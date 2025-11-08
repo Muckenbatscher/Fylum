@@ -1,24 +1,32 @@
-﻿using Fylum.Migration.Domain;
-using Fylum.Migration.Provider.Migrations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fylum.Migrations.Domain;
+using Fylum.Migrations.Provider.Migrations;
 
-namespace Fylum.Migration.Provider
+namespace Fylum.Migrations.Provider
 {
     public class MigrationsProvider : IMigrationsProvider
     {
-        public Domain.Migration GetInitialMigration()
+        private readonly Dictionary<Guid, Migration> _knownMigrations;
+
+        public MigrationsProvider()
         {
-            return new MigrationsMigration().CreateMigration();
+            _knownMigrations = new Dictionary<Guid, Migration>();
+            foreach (var migration in GetMigrations())
+                _knownMigrations.Add(migration.Id, migration);
         }
 
-        public IEnumerable<Domain.Migration> GetMigrations()
+
+        public IEnumerable<Migration> GetMigrations()
         {
             yield return new MigrationsMigration().CreateMigration();
             yield return new UsersMigration().CreateMigration();
+        }
+
+        public Migration? GetMigrationById(Guid id)
+        {
+            if (_knownMigrations.TryGetValue(id, out var migration))
+                return migration;
+
+            return null;
         }
     }
 }

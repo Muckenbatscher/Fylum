@@ -1,11 +1,12 @@
-﻿using Fylum.Migration.Application.Perform;
+﻿using Fylum.Migrations.Application.Perform;
+using Fylum.Migrations.Application.WithAppliedState;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Application.MinimallyRequired
+namespace Fylum.Migrations.Application.MinimallyRequired
 {
     public class MinimallyRequiredMigrationService : IMinimallyRequiredMigrationService
     {

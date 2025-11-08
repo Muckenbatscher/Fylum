@@ -1,4 +1,5 @@
 using Fylum.Migration.Winforms.MainWindow.MigrationScript;
+using Fylum.Migrations.Winforms.MainWindow;
 using M2TWinForms;
 
 namespace Fylum.Migration.Winforms.MainWindow

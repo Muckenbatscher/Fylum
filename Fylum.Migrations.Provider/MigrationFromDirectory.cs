@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Provider
+namespace Fylum.Migrations.Provider
 {
     public abstract class MigrationFromDirectory : MigrationFromFiles
     {

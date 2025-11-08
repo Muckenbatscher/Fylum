@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Shared;
 using Fylum.Shared.Users;
@@ -30,7 +31,7 @@ namespace Fylum.Api.Register
             var registerResult = _registerCommandHandler.Handle(command);
 
             var errorHandling = Send.EnsureErrorResultHandled(registerResult);
-            if (errorHandling.ErrorResultHandled)
+            if (errorHandling.ErrorResultHandlingRequired)
                 return;
 
             var resultValue = registerResult.Value;

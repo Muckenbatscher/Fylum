@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Fylum.Domain.UnitOfWork;
-using Fylum.Migration.Domain.Perform;
+using Fylum.Migrations.Domain;
+using Fylum.Migrations.Domain.Perform;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Postgres.Perform
+namespace Fylum.Migrations.Postgres.Perform
 {
     public class PerformedMigrationsRepository : IPerformedMigrationsRepository
     {
@@ -76,6 +77,14 @@ namespace Fylum.Migration.Postgres.Perform
                     throw;
             }
         }
+        public PerformedMigration? GetPerformedMigrationById(Guid id)
+        {
+            var performed = QueryPerformedMigrationById(id);
+            if (performed == null)
+                return null;
+
+            return MapToDomain(performed);
+        }
 
         private IEnumerable<PerformedMigrationQueryModel> QueryPerformedMigrations()
         {
@@ -92,10 +101,26 @@ namespace Fylum.Migration.Postgres.Perform
             return connection.Query<PerformedMigrationQueryModel>(sql, 
                 transaction: transaction.Transaction);
         }
+        private PerformedMigrationQueryModel? QueryPerformedMigrationById(Guid id)
+        {
+            var param = new { id };
+            string sql = @$"SELECT mp.id AS {nameof(PerformedMigrationQueryModel.Id)},
+                                   mp.time_stamp AS {nameof(PerformedMigrationQueryModel.Timestamp)},
+                                   mp.migration_id AS {nameof(PerformedMigrationQueryModel.MigrationId)},    
+                                   m.name AS {nameof(PerformedMigrationQueryModel.MigratioName)}
+                            FROM migrations_performed mp 
+                            JOIN migrations m
+                              ON mp.migration_id = m.id
+                            WHERE m.id = @{nameof(param.id)};";
+            var transaction = _transactionFactory.GetTransaction();
+            var connection = transaction.Connection;
+            return connection.QueryFirstOrDefault<PerformedMigrationQueryModel>(sql, param,
+                transaction: transaction.Transaction);
+        }
 
         private PerformedMigration MapToDomain(PerformedMigrationQueryModel queryModel)
         {
-            var migration = Domain.Migration.Create(
+            var migration = Migration.Create(
                 queryModel.MigrationId, 
                 queryModel.MigratioName);
             return PerformedMigration.Create(
@@ -103,5 +128,6 @@ namespace Fylum.Migration.Postgres.Perform
                 queryModel.Timestamp,
                 migration);
         }
+
     }
 }

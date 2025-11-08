@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Users.Application
+namespace Fylum.Users.Application.GetUser
 {
     public interface IGetUserCommandHandler : ICommandHandler<GetUserCommand, User>
     {

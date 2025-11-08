@@ -1,4 +1,4 @@
-﻿using Fylum.Migration.Domain.Perform;
+﻿using Fylum.Migrations.Domain.Perform;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Application.Perform
+namespace Fylum.Migrations.Application.Perform
 {
     public class MigrationPerformingService : IMigrationPerformingService
     {

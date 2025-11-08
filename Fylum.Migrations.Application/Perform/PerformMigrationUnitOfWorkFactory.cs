@@ -1,6 +1,6 @@
 ﻿using Fylum.Application;
 using Fylum.Domain.UnitOfWork;
-using Fylum.Migration.Domain.Perform;
+using Fylum.Migrations.Domain.Perform;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Application.Perform
+namespace Fylum.Migrations.Application.Perform
 {
     public class PerformMigrationUnitOfWorkFactory : UnitOfWorkFactory, IPerformMigrationUnitOfWorkFactory
     {

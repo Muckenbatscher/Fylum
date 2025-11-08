@@ -1,11 +1,11 @@
-﻿using Fylum.Migration.Domain;
+﻿using Fylum.Migrations.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Provider
+namespace Fylum.Migrations.Provider
 {
     public abstract class MigrationFromFiles
     {
@@ -14,10 +14,10 @@ namespace Fylum.Migration.Provider
         public virtual bool IsMinimallyRequired => false; 
         public abstract IEnumerable<FileInfo> MigrationScriptFiles { get; }
 
-        public Domain.Migration CreateMigration()
+        public Migration CreateMigration()
         {
             var scripts = GetMigrationScripts();
-            var migration =  Domain.Migration.Create(Id, Name, scripts);
+            var migration = Fylum.Migrations.Domain.Migration.Create(Id, Name, scripts);
             if (IsMinimallyRequired)
                 migration.MakeMinimallyRequired();
             return migration;

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Fylum.Migration.Domain.Perform
+namespace Fylum.Migrations.Domain.Perform
 {
     public class PerformMigrationUnitOfWork : UnitOfWork, IUnitOfWork
     {

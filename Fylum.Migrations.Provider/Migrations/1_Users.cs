@@ -1,11 +1,11 @@
-﻿using Fylum.Migration.Provider;
+﻿using Fylum.Migrations.Provider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migration.Provider.Migrations
+namespace Fylum.Migrations.Provider.Migrations
 {
     internal class UsersMigration : MigrationFromFilesInDirectory
     {
