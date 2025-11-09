@@ -8,11 +8,11 @@ namespace Fylum.Migrations.Winforms.MainWindow
 {
     public class MigrationRow
     {
-        public MigrationRow(Domain.Migration migration, bool isApplied, DateTimeOffset? appliedTimestamp)
+        public MigrationRow(Domain.Migration migration, bool isPerformed, DateTimeOffset? performedTimestamp)
         {
             Migration = migration;
-            IsApplied = isApplied;
-            AppliedTimestamp = appliedTimestamp;
+            IsPerformed = isPerformed;
+            PerformedTimestamp = performedTimestamp;
         }
 
         public Domain.Migration Migration { get; set; }
@@ -21,10 +21,10 @@ namespace Fylum.Migrations.Winforms.MainWindow
         public int ScriptCount 
             => Migration.MigrationScripts.Count();
 
-        public bool IsApplied { get; }
-        public DateTimeOffset? AppliedTimestamp { get; }
+        public bool IsPerformed { get; }
+        public DateTimeOffset? PerformedTimestamp { get; }
 
-        public DateTime? LocalAppliedTimestamp 
-            => AppliedTimestamp?.ToLocalTime().DateTime;
+        public DateTime? LocalPerformedTimestamp 
+            => PerformedTimestamp?.ToLocalTime().DateTime;
     }
 }

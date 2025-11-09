@@ -34,13 +34,13 @@
             M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle4 = new M2TWinForms.M2TDataGridViewCellStyle();
             M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle5 = new M2TWinForms.M2TDataGridViewCellStyle();
             DG_Migrations = new M2TWinForms.M2TDataGridView();
-            CL_IsApplied = new DataGridViewImageColumn();
+            CL_IsPerformed = new DataGridViewImageColumn();
             CL_Name = new DataGridViewTextBoxColumn();
             CL_ScriptsCount = new DataGridViewTextBoxColumn();
-            CL_AppliedTimestamp = new DataGridViewTextBoxColumn();
+            CL_PerformedTimestamp = new DataGridViewTextBoxColumn();
             TLP_Migrations = new TableLayoutPanel();
-            BT_ApplyUntilSelected = new M2TWinForms.M2TButton();
-            BT_ApplyAll = new M2TWinForms.M2TButton();
+            BT_PerformUntilSelected = new M2TWinForms.M2TButton();
+            BT_PerformAll = new M2TWinForms.M2TButton();
             PN_Migrations = new M2TWinForms.M2TPanel();
             TLP_Main = new TableLayoutPanel();
             PN_SelectedMigration = new M2TWinForms.M2TPanel();
@@ -48,7 +48,7 @@
             FLP_SelectedMigrationScripts = new FlowLayoutPanel();
             LB_SelectedMigrationName = new M2TWinForms.M2TLabel();
             LB_SelectedMigrationTimestamp = new M2TWinForms.M2TLabel();
-            CIB_SelectedMigrationAppliedState = new M2TWinForms.M2TColoredImageButton();
+            CIB_SelectedMigrationPerformedState = new M2TWinForms.M2TColoredImageButton();
             ((System.ComponentModel.ISupportInitialize)DG_Migrations).BeginInit();
             TLP_Migrations.SuspendLayout();
             PN_Migrations.SuspendLayout();
@@ -72,7 +72,7 @@
             m2tDataGridViewCellStyle2.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
             DG_Migrations.ColumnHeadersDefaultCellStyle = m2tDataGridViewCellStyle2;
             DG_Migrations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DG_Migrations.Columns.AddRange(new DataGridViewColumn[] { CL_IsApplied, CL_Name, CL_ScriptsCount, CL_AppliedTimestamp });
+            DG_Migrations.Columns.AddRange(new DataGridViewColumn[] { CL_IsPerformed, CL_Name, CL_ScriptsCount, CL_PerformedTimestamp });
             TLP_Migrations.SetColumnSpan(DG_Migrations, 2);
             m2tDataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             m2tDataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -97,13 +97,13 @@
             DG_Migrations.CellPainting += DG_Migrations_CellPainting;
             DG_Migrations.SelectionChanged += DG_Migrations_SelectionChanged;
             // 
-            // CL_IsApplied
+            // CL_IsPerformed
             // 
-            CL_IsApplied.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            CL_IsApplied.HeaderText = "";
-            CL_IsApplied.Name = "CL_IsApplied";
-            CL_IsApplied.ReadOnly = true;
-            CL_IsApplied.Width = 40;
+            CL_IsPerformed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            CL_IsPerformed.HeaderText = "";
+            CL_IsPerformed.Name = "CL_IsPerformed";
+            CL_IsPerformed.ReadOnly = true;
+            CL_IsPerformed.Width = 40;
             // 
             // CL_Name
             // 
@@ -119,11 +119,11 @@
             CL_ScriptsCount.Name = "CL_ScriptsCount";
             CL_ScriptsCount.ReadOnly = true;
             // 
-            // CL_AppliedTimestamp
+            // CL_PerformedTimestamp
             // 
-            CL_AppliedTimestamp.HeaderText = "Applied Timestamp";
-            CL_AppliedTimestamp.Name = "CL_AppliedTimestamp";
-            CL_AppliedTimestamp.ReadOnly = true;
+            CL_PerformedTimestamp.HeaderText = "Performed Timestamp";
+            CL_PerformedTimestamp.Name = "CL_PerformedTimestamp";
+            CL_PerformedTimestamp.ReadOnly = true;
             // 
             // TLP_Migrations
             // 
@@ -131,9 +131,9 @@
             TLP_Migrations.ColumnCount = 2;
             TLP_Migrations.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             TLP_Migrations.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            TLP_Migrations.Controls.Add(BT_ApplyUntilSelected, 0, 1);
+            TLP_Migrations.Controls.Add(BT_PerformUntilSelected, 0, 1);
             TLP_Migrations.Controls.Add(DG_Migrations, 0, 0);
-            TLP_Migrations.Controls.Add(BT_ApplyAll, 1, 1);
+            TLP_Migrations.Controls.Add(BT_PerformAll, 1, 1);
             TLP_Migrations.Location = new Point(3, 3);
             TLP_Migrations.Name = "TLP_Migrations";
             TLP_Migrations.RowCount = 2;
@@ -142,27 +142,27 @@
             TLP_Migrations.Size = new Size(370, 378);
             TLP_Migrations.TabIndex = 13;
             // 
-            // BT_ApplyUntilSelected
+            // BT_PerformUntilSelected
             // 
-            BT_ApplyUntilSelected.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            BT_ApplyUntilSelected.ColorRole = M2TWinForms.M2TButtonColorRoleSelection.Tertiary;
-            BT_ApplyUntilSelected.Location = new Point(3, 331);
-            BT_ApplyUntilSelected.Name = "BT_ApplyUntilSelected";
-            BT_ApplyUntilSelected.Size = new Size(179, 44);
-            BT_ApplyUntilSelected.TabIndex = 14;
-            BT_ApplyUntilSelected.Text = "Apply Until Selected";
-            BT_ApplyUntilSelected.Click += BT_ApplyUntilSelected_Click;
+            BT_PerformUntilSelected.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BT_PerformUntilSelected.ColorRole = M2TWinForms.M2TButtonColorRoleSelection.Tertiary;
+            BT_PerformUntilSelected.Location = new Point(3, 331);
+            BT_PerformUntilSelected.Name = "BT_PerformUntilSelected";
+            BT_PerformUntilSelected.Size = new Size(179, 44);
+            BT_PerformUntilSelected.TabIndex = 14;
+            BT_PerformUntilSelected.Text = "Perform Until Selected";
+            BT_PerformUntilSelected.Click += BT_PerformUntilSelected_Click;
             // 
-            // BT_ApplyAll
+            // BT_PerformAll
             // 
-            BT_ApplyAll.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            BT_ApplyAll.ColorRole = M2TWinForms.M2TButtonColorRoleSelection.Primary;
-            BT_ApplyAll.Location = new Point(188, 331);
-            BT_ApplyAll.Name = "BT_ApplyAll";
-            BT_ApplyAll.Size = new Size(179, 44);
-            BT_ApplyAll.TabIndex = 13;
-            BT_ApplyAll.Text = "Apply All";
-            BT_ApplyAll.Click += BT_ApplyAll_Click;
+            BT_PerformAll.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BT_PerformAll.ColorRole = M2TWinForms.M2TButtonColorRoleSelection.Primary;
+            BT_PerformAll.Location = new Point(188, 331);
+            BT_PerformAll.Name = "BT_PerformAll";
+            BT_PerformAll.Size = new Size(179, 44);
+            BT_PerformAll.TabIndex = 13;
+            BT_PerformAll.Text = "Perform All";
+            BT_PerformAll.Click += BT_PerformAll_Click;
             // 
             // PN_Migrations
             // 
@@ -210,7 +210,7 @@
             TLP_SelectedMigration.Controls.Add(FLP_SelectedMigrationScripts, 0, 2);
             TLP_SelectedMigration.Controls.Add(LB_SelectedMigrationName, 0, 0);
             TLP_SelectedMigration.Controls.Add(LB_SelectedMigrationTimestamp, 0, 1);
-            TLP_SelectedMigration.Controls.Add(CIB_SelectedMigrationAppliedState, 1, 0);
+            TLP_SelectedMigration.Controls.Add(CIB_SelectedMigrationPerformedState, 1, 0);
             TLP_SelectedMigration.Location = new Point(3, 3);
             TLP_SelectedMigration.Name = "TLP_SelectedMigration";
             TLP_SelectedMigration.RowCount = 3;
@@ -252,26 +252,26 @@
             LB_SelectedMigrationTimestamp.TabIndex = 2;
             LB_SelectedMigrationTimestamp.Text = "Migration Timestamp";
             // 
-            // CIB_SelectedMigrationAppliedState
+            // CIB_SelectedMigrationPerformedState
             // 
-            CIB_SelectedMigrationAppliedState.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            CIB_SelectedMigrationAppliedState.BackColor = Color.FromArgb(29, 32, 28);
-            CIB_SelectedMigrationAppliedState.BackgroundColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.SurfaceContainer;
-            CIB_SelectedMigrationAppliedState.BaseImage = null;
-            CIB_SelectedMigrationAppliedState.ConvertBaseImageToGrayscale = true;
-            CIB_SelectedMigrationAppliedState.HoverBackColor = Color.FromArgb(29, 32, 28);
-            CIB_SelectedMigrationAppliedState.HoverBackgroundColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.SurfaceContainer;
-            CIB_SelectedMigrationAppliedState.HoverEnabled = false;
-            CIB_SelectedMigrationAppliedState.HoverImageColor = Color.FromArgb(226, 227, 219);
-            CIB_SelectedMigrationAppliedState.HoverImageColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.OnSurface;
-            CIB_SelectedMigrationAppliedState.ImageColor = Color.FromArgb(170, 209, 155);
-            CIB_SelectedMigrationAppliedState.ImageColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.Primary;
-            CIB_SelectedMigrationAppliedState.ImagePadding = new Padding(0);
-            CIB_SelectedMigrationAppliedState.Location = new Point(323, 3);
-            CIB_SelectedMigrationAppliedState.Name = "CIB_SelectedMigrationAppliedState";
-            TLP_SelectedMigration.SetRowSpan(CIB_SelectedMigrationAppliedState, 2);
-            CIB_SelectedMigrationAppliedState.Size = new Size(44, 44);
-            CIB_SelectedMigrationAppliedState.TabIndex = 3;
+            CIB_SelectedMigrationPerformedState.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CIB_SelectedMigrationPerformedState.BackColor = Color.FromArgb(29, 32, 28);
+            CIB_SelectedMigrationPerformedState.BackgroundColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.SurfaceContainer;
+            CIB_SelectedMigrationPerformedState.BaseImage = null;
+            CIB_SelectedMigrationPerformedState.ConvertBaseImageToGrayscale = true;
+            CIB_SelectedMigrationPerformedState.HoverBackColor = Color.FromArgb(29, 32, 28);
+            CIB_SelectedMigrationPerformedState.HoverBackgroundColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.SurfaceContainer;
+            CIB_SelectedMigrationPerformedState.HoverEnabled = false;
+            CIB_SelectedMigrationPerformedState.HoverImageColor = Color.FromArgb(226, 227, 219);
+            CIB_SelectedMigrationPerformedState.HoverImageColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.OnSurface;
+            CIB_SelectedMigrationPerformedState.ImageColor = Color.FromArgb(170, 209, 155);
+            CIB_SelectedMigrationPerformedState.ImageColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.Primary;
+            CIB_SelectedMigrationPerformedState.ImagePadding = new Padding(0);
+            CIB_SelectedMigrationPerformedState.Location = new Point(323, 3);
+            CIB_SelectedMigrationPerformedState.Name = "CIB_SelectedMigrationPerformedState";
+            TLP_SelectedMigration.SetRowSpan(CIB_SelectedMigrationPerformedState, 2);
+            CIB_SelectedMigrationPerformedState.Size = new Size(44, 44);
+            CIB_SelectedMigrationPerformedState.TabIndex = 3;
             // 
             // MigrationMainWindow
             // 
@@ -297,13 +297,13 @@
         #endregion
 
         private M2TWinForms.M2TDataGridView DG_Migrations;
-        private DataGridViewImageColumn CL_IsApplied;
+        private DataGridViewImageColumn CL_IsPerformed;
         private DataGridViewTextBoxColumn CL_Name;
         private DataGridViewTextBoxColumn CL_ScriptsCount;
-        private DataGridViewTextBoxColumn CL_AppliedTimestamp;
+        private DataGridViewTextBoxColumn CL_PerformedTimestamp;
         private TableLayoutPanel TLP_Migrations;
-        private M2TWinForms.M2TButton BT_ApplyAll;
-        private M2TWinForms.M2TButton BT_ApplyUntilSelected;
+        private M2TWinForms.M2TButton BT_PerformAll;
+        private M2TWinForms.M2TButton BT_PerformUntilSelected;
         private M2TWinForms.M2TPanel PN_Migrations;
         private TableLayoutPanel TLP_Main;
         private M2TWinForms.M2TPanel PN_SelectedMigration;
@@ -311,6 +311,6 @@
         private FlowLayoutPanel FLP_SelectedMigrationScripts;
         private M2TWinForms.M2TLabel LB_SelectedMigrationName;
         private M2TWinForms.M2TLabel LB_SelectedMigrationTimestamp;
-        private M2TWinForms.M2TColoredImageButton CIB_SelectedMigrationAppliedState;
+        private M2TWinForms.M2TColoredImageButton CIB_SelectedMigrationPerformedState;
     }
 }

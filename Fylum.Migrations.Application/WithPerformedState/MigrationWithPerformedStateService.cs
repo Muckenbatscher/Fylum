@@ -1,21 +1,22 @@
 ﻿using Fylum.Migrations.Domain;
 using Fylum.Migrations.Domain.Perform;
+using Fylum.Migrations.Domain.WithPerformedState;
 
-namespace Fylum.Migrations.Application.WithAppliedState
+namespace Fylum.Migrations.Application.WithPerformedState
 {
-    public class MigrationWithAppliedStateService : IMigrationWithAppliedStateService
+    public class MigrationWithPerformedStateService : IMigrationWithPerformedStateService
     {
         private readonly IMigrationsProvider _migrationsProvider;
         private readonly IPerformedMigrationsRepository _performedMigrationsRepository;
 
-        public MigrationWithAppliedStateService(IMigrationsProvider migrationsProvider,
+        public MigrationWithPerformedStateService(IMigrationsProvider migrationsProvider,
             IPerformedMigrationsRepository performedMigrationsRepository)
         {
             _migrationsProvider = migrationsProvider;
             _performedMigrationsRepository = performedMigrationsRepository;
         }
 
-        public IEnumerable<MigrationWithAppliedState> GetMigrationsWithAppliedState()
+        public IEnumerable<MigrationWithPerformedState> GetMigrationsWithPerformedState()
         {
             var allMigrations = _migrationsProvider.GetMigrations();
             var performedMigrations = _performedMigrationsRepository.GetPerformedMigrations();
@@ -23,7 +24,7 @@ namespace Fylum.Migrations.Application.WithAppliedState
             return allMigrations.Select(m => GetMigrationWithAppliedStateFromMatchingPerformed(m, performedMigrations));
         }
 
-        public MigrationWithAppliedState? GetMigrationWithAppliedState(Guid id)
+        public MigrationWithPerformedState? GetMigrationWithPerformedState(Guid id)
         {
             var migration = _migrationsProvider.GetMigrationById(id);
             if (migration == null)
@@ -33,21 +34,20 @@ namespace Fylum.Migrations.Application.WithAppliedState
             return GetMigrationWithAppliedStateFromPerformed(migration, performedMigration);
         }
 
-        private static MigrationWithAppliedState GetMigrationWithAppliedStateFromMatchingPerformed(Migration migration, 
+        private static MigrationWithPerformedState GetMigrationWithAppliedStateFromMatchingPerformed(Migration migration, 
             IEnumerable<PerformedMigration> performedMigrations)
         {
             var matchingPerformed = performedMigrations
                 .FirstOrDefault(pm => pm.Migration.Id == migration.Id);
             return GetMigrationWithAppliedStateFromPerformed(migration, matchingPerformed);
         }
-        private static MigrationWithAppliedState GetMigrationWithAppliedStateFromPerformed(Migration migration,
+        private static MigrationWithPerformedState GetMigrationWithAppliedStateFromPerformed(Migration migration,
             PerformedMigration? performedMigrations)
         {
             var appliedState = performedMigrations != null
-                ? new MigrationAppliedState(performedMigrations.Timestamp)
+                ? new MigrationPeformedState(performedMigrations.Timestamp)
                 : null;
-            return new MigrationWithAppliedState(migration, appliedState);
+            return MigrationWithPerformedState.Create(migration, appliedState?.TimestampPerformed);
         }
-
     }
 }

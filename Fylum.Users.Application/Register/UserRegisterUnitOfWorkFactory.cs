@@ -22,7 +22,7 @@ namespace Fylum.Users.Application.Register
         {
             CreateScope();
 
-            var transactionFactory = GetScopedService<IUnitOfWorkTransactionFactory>();
+            var transactionFactory = GetTransactionFactory();
             var userRepository = GetScopedService<IUserWithPasswordRepository>();
 
             return new UserRegisterUnitOfWork(

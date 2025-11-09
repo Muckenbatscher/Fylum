@@ -6,7 +6,7 @@ namespace Fylum.Api.Shared.ErrorResult;
 
 public static class ErrorResultHandler
 {
-    public static ErrorResultHandlingResponse EnsureErrorResultHandled<TRequest, TResponse, TResultValue>(
+    public static async Task<ErrorResultHandlingResponse> EnsureErrorResultHandled<TRequest, TResponse, TResultValue>(
         this ResponseSender<TRequest, TResponse> send, 
         Result<TResultValue> result) 
         where TRequest : notnull
@@ -19,20 +19,20 @@ public static class ErrorResultHandler
         switch (error.Type)
         {
             case ErrorType.NotFound:
-                send.ResultAsync(TypedResults.NotFound());
+                await send.ResultAsync(TypedResults.NotFound());
                 return true;
             case ErrorType.Validation:
-                send.ResultAsync(TypedResults.BadRequest());
+                await send.ResultAsync(TypedResults.BadRequest());
                 return true;
             case ErrorType.Unauthorized:
-                send.ResultAsync(TypedResults.Unauthorized());
+                await send.ResultAsync(TypedResults.Unauthorized());
                 return true;
             case ErrorType.Conflict:
-                send.ResultAsync(TypedResults.Conflict());
+                await send.ResultAsync(TypedResults.Conflict());
                 return true;
             case ErrorType.Internal:
             default:
-                send.ResultAsync(TypedResults.StatusCode(StatusCodes.Status500InternalServerError));
+                await send.ResultAsync(TypedResults.StatusCode(StatusCodes.Status500InternalServerError));
                 return true;
         }
     }

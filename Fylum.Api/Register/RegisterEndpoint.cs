@@ -30,7 +30,7 @@ namespace Fylum.Api.Register
             var command = new UserRegisterCommand(req.Username, req.Password);
             var registerResult = _registerCommandHandler.Handle(command);
 
-            var errorHandling = Send.EnsureErrorResultHandled(registerResult);
+            var errorHandling = await Send.EnsureErrorResultHandled(registerResult);
             if (errorHandling.ErrorResultHandlingRequired)
                 return;
 

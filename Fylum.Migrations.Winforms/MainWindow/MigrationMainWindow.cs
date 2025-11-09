@@ -16,7 +16,7 @@ namespace Fylum.Migration.Winforms.MainWindow
             DG_Migrations.AutoGenerateColumns = false;
             CL_Name.DataPropertyName = nameof(MigrationRow.Name);
             CL_ScriptsCount.DataPropertyName = nameof(MigrationRow.ScriptCount);
-            CL_AppliedTimestamp.DataPropertyName = nameof(MigrationRow.LocalAppliedTimestamp);
+            CL_PerformedTimestamp.DataPropertyName = nameof(MigrationRow.LocalPerformedTimestamp);
         }
 
         public IEnumerable<MigrationRow> AllMigrations
@@ -33,15 +33,15 @@ namespace Fylum.Migration.Winforms.MainWindow
             }
         }
 
-        public bool ApplyUntilSelectedEnabled
+        public bool PerformUntilSelectedEnabled
         {
-            get => BT_ApplyUntilSelected.Enabled;
-            set => BT_ApplyUntilSelected.Enabled = value;
+            get => BT_PerformUntilSelected.Enabled;
+            set => BT_PerformUntilSelected.Enabled = value;
         }
 
         public EventHandler? ViewLoaded { get; set; }
-        public EventHandler? ApplyAllClicked { get; set; }
-        public EventHandler? ApplyUntilSelectedClicked { get; set; }
+        public EventHandler? PerformAllClicked { get; set; }
+        public EventHandler? PerformUntilSelectedClicked { get; set; }
         public EventHandler? SelectedMigrationChanged { get; set; }
 
         public void UnselectAllMigrations()
@@ -50,18 +50,18 @@ namespace Fylum.Migration.Winforms.MainWindow
         private void MigrationMainWindow_Load(object sender, EventArgs e)
             => ViewLoaded?.Invoke(this, e);
 
-        private void BT_ApplyAll_Click(object sender, EventArgs e)
-            => ApplyAllClicked?.Invoke(this, e);
+        private void BT_PerformAll_Click(object sender, EventArgs e)
+            => PerformAllClicked?.Invoke(this, e);
 
-        private void BT_ApplyUntilSelected_Click(object sender, EventArgs e)
-            => ApplyUntilSelectedClicked?.Invoke(this, e);
+        private void BT_PerformUntilSelected_Click(object sender, EventArgs e)
+            => PerformUntilSelectedClicked?.Invoke(this, e);
 
         private void DG_Migrations_SelectionChanged(object sender, EventArgs e)
             => SelectedMigrationChanged?.Invoke(this, EventArgs.Empty);
 
         private void DG_Migrations_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex != CL_IsApplied.Index || e.RowIndex < 0)
+            if (e.ColumnIndex != CL_IsPerformed.Index || e.RowIndex < 0)
                 return;
             if (e.Graphics == null)
                 return;
@@ -69,7 +69,7 @@ namespace Fylum.Migration.Winforms.MainWindow
             var datagrid = (DataGridView)sender;
             var row = datagrid.Rows[e.RowIndex];
             var migration = (MigrationRow)row.DataBoundItem;
-            var image = migration.IsApplied
+            var image = migration.IsPerformed
                 ? Properties.Resources.VerifiedIcon
                 : new Bitmap(1, 1);
 
@@ -91,21 +91,21 @@ namespace Fylum.Migration.Winforms.MainWindow
             LB_SelectedMigrationName.Text = "";
             LB_SelectedMigrationTimestamp.Text = "";
             FLP_SelectedMigrationScripts.Controls.Clear();
-            CIB_SelectedMigrationAppliedState.BaseImage = new Bitmap(1, 1);
+            CIB_SelectedMigrationPerformedState.BaseImage = new Bitmap(1, 1);
         }
 
         public void DisplaySelectedMigrationDetails(MigrationRow migrationRow)
         {
             LB_SelectedMigrationName.Text = migrationRow.Name;
-            bool applied = migrationRow.IsApplied;
-            LB_SelectedMigrationTimestamp.Text = applied ?
-                migrationRow.LocalAppliedTimestamp?.ToString("G") :
+            bool performed = migrationRow.IsPerformed;
+            LB_SelectedMigrationTimestamp.Text = performed ?
+                migrationRow.LocalPerformedTimestamp?.ToString("G") :
                 string.Empty;
 
-            var image = applied
+            var image = performed
                 ? Properties.Resources.VerifiedIcon
                 : new Bitmap(1, 1);
-            CIB_SelectedMigrationAppliedState.BaseImage = image;
+            CIB_SelectedMigrationPerformedState.BaseImage = image;
 
             foreach (var script in migrationRow.Migration.MigrationScripts.Reverse())
             {

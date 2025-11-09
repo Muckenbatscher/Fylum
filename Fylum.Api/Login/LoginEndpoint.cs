@@ -32,7 +32,7 @@ namespace Fylum.Api.Login
             var command = new UserLoginCommand(req.Username, req.Password);
             var loginResult = _commandHandler.Handle(command);
 
-            var errorHanding = Send.EnsureErrorResultHandled(loginResult);
+            var errorHanding = await Send.EnsureErrorResultHandled(loginResult);
             if (errorHanding.ErrorResultHandlingRequired)
                 return;
 

@@ -42,7 +42,7 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
         var command = new GetMigrationCommand(userId, id);
         var commandResult = _handler.Handle(command);
 
-        var errorHanding = Send.EnsureErrorResultHandled(commandResult);
+        var errorHanding = await Send.EnsureErrorResultHandled(commandResult);
         if (errorHanding.ErrorResultHandlingRequired)
             return;
 
@@ -54,6 +54,6 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
     private MigrationResponse MapToResponse(GetMigrationCommandResult migrationResult)
         => new(migrationResult.Id,
             migrationResult.Name,
-            migrationResult.IsApplied,
+            migrationResult.IsPerformed,
             migrationResult.IsMinimallyRequired);
 }

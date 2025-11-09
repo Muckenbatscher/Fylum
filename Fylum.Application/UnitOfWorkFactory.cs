@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Fylum.Domain.UnitOfWork;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace Fylum.Application
         private IServiceScope CreateNewScope()
             => _serviceScopeFactory.CreateScope();
 
+        protected IUnitOfWorkTransactionFactory GetTransactionFactory()
+            => GetScopedService<IUnitOfWorkTransactionFactory>();
         protected T GetScopedService<T>() where T : notnull
         {
             var scope = sharedScope ?? CreateNewScope();

@@ -1,41 +1,37 @@
-﻿using Fylum.Migrations.Domain.Perform;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fylum.Migrations.Domain;
+using Fylum.Migrations.Domain.Perform;
+using Fylum.Migrations.Domain.WithPerformedState;
 
-namespace Fylum.Migrations.Application.Perform
+namespace Fylum.Migrations.Application.Perform;
+
+public class MigrationPerformingService : IMigrationPerformingService
 {
-    public class MigrationPerformingService : IMigrationPerformingService
+    private readonly IPerformedMigrationsRepository _performedMigrationsRepository;
+    private readonly IScriptExecutor _scriptExecutor;
+
+    public MigrationPerformingService(IPerformedMigrationsRepository performedMigrationsRepository, IScriptExecutor scriptExecutor)
     {
-        private readonly IPerformMigrationUnitOfWorkFactory _unitOfWorkFactory;
-        public MigrationPerformingService(IPerformMigrationUnitOfWorkFactory unitOfWorkFactory)
-        {
-            _unitOfWorkFactory = unitOfWorkFactory;
-        }
+        _performedMigrationsRepository = performedMigrationsRepository;
+        _scriptExecutor = scriptExecutor;
+    }
 
-        public void Perform(Domain.Migration migration)
-        {
-            using var unitOfWork = _unitOfWorkFactory.Create();
+    public MigrationWithPerformedState Perform(Migration migration)
+    {
+        foreach (var script in migration.MigrationScripts)
+            _scriptExecutor.Execute(script.ScriptCommandText);
 
-            foreach (var script in migration.MigrationScripts)
-                unitOfWork.ScriptExecutor.Execute(script.ScriptCommandText);
+        var performedMigration = CreatePerformedMigration(migration);
+        _performedMigrationsRepository.AddPerformedMigration(performedMigration);
 
-            var performedMigration = CreatePerformedMigration(migration);
-            unitOfWork.PerformedMigrationsRepository.AddPerformedMigration(performedMigration);
+        return MigrationWithPerformedState.Create(migration, performedMigration.Timestamp);
+    }
 
-            unitOfWork.Commit();
-        }
-
-        private static PerformedMigration CreatePerformedMigration(Domain.Migration migration)
-        {
-            var dbMigration = Domain.Migration.Create(
-                            migration.Id,
-                            migration.Name);
-            var performedMigration = PerformedMigration.CreateNew(dbMigration);
-            return performedMigration;
-        }
+    private static PerformedMigration CreatePerformedMigration(Migration migration)
+    {
+        var dbMigration = Migration.Create(
+            migration.Id,
+            migration.Name);
+        var performedMigration = PerformedMigration.CreateNew(dbMigration);
+        return performedMigration;
     }
 }

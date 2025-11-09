@@ -2,7 +2,7 @@
 {
     public interface IMinimallyRequiredMigrationService
     {
-        public void EnusreMinimallyRequiredMigrationsApplied();
-        public IEnumerable<Domain.Migration> GetMinimallyRequiredUnappliedMigrations();
+        public void EnusreMinimallyRequiredMigrationsPerformed();
+        public IEnumerable<Domain.Migration> GetMinimallyRequiredUnperformedMigrations();
     }
 }

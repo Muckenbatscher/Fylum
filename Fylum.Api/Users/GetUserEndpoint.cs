@@ -34,7 +34,7 @@ namespace Fylum.Api.Users
             var command = new GetUserCommand(id);
             var userResult = _commandHandler.Handle(command);
 
-            var handling = Send.EnsureErrorResultHandled(userResult);
+            var handling = await Send.EnsureErrorResultHandled(userResult);
             if (handling.ErrorResultHandlingRequired)
                 return;
 

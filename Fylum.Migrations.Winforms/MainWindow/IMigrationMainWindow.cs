@@ -10,11 +10,11 @@ namespace Fylum.Migrations.Winforms.MainWindow
     {
         IEnumerable<MigrationRow> AllMigrations { get; set; }
         MigrationRow? SelectedMigration { get; }
-        bool ApplyUntilSelectedEnabled { get; set; }
+        bool PerformUntilSelectedEnabled { get; set; }
 
         EventHandler? ViewLoaded { get; set; }
-        EventHandler? ApplyAllClicked { get; set; }
-        EventHandler? ApplyUntilSelectedClicked { get; set; }
+        EventHandler? PerformAllClicked { get; set; }
+        EventHandler? PerformUntilSelectedClicked { get; set; }
         EventHandler? SelectedMigrationChanged { get; set; }
 
         void UnselectAllMigrations();

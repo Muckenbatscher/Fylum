@@ -1,34 +1,25 @@
 ﻿using Fylum.Application;
-using Fylum.Domain.UnitOfWork;
 using Fylum.Migrations.Domain.Perform;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Fylum.Migrations.Application.Perform
+namespace Fylum.Migrations.Application.Perform;
+
+public class PerformMigrationUnitOfWorkFactory : UnitOfWorkFactory, IPerformMigrationUnitOfWorkFactory
 {
-    public class PerformMigrationUnitOfWorkFactory : UnitOfWorkFactory, IPerformMigrationUnitOfWorkFactory
+    public PerformMigrationUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) : 
+        base(serviceScopeFactory)
     {
-        public PerformMigrationUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) : 
-            base(serviceScopeFactory)
-        {
-        }
+    }
 
-        public PerformMigrationUnitOfWork Create()
-        {
-            CreateScope();
-            
-            var transactionFactory = GetScopedService<IUnitOfWorkTransactionFactory>();
-            var migrationsRepository = GetScopedService<IPerformedMigrationsRepository>();
-            var scriptExecutor = GetScopedService<IScriptExecutor>();
+    public PerformMigrationUnitOfWork Create()
+    {
+        CreateScope();
+        
+        var transactionFactory = GetTransactionFactory();
+        var migrationPerformingService = GetScopedService<IMigrationPerformingService>();
 
-            return new PerformMigrationUnitOfWork(
-                transactionFactory,
-                migrationsRepository,
-                scriptExecutor);
-        }
+        return new PerformMigrationUnitOfWork(
+            transactionFactory,
+            migrationPerformingService);
     }
 }

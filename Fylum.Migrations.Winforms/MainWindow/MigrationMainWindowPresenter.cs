@@ -1,5 +1,5 @@
-﻿using Fylum.Migrations.Application.Perform;
-using Fylum.Migrations.Application.WithAppliedState;
+﻿using Fylum.Migrations.Domain.Perform;
+using Fylum.Migrations.Domain.WithPerformedState;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +10,11 @@ namespace Fylum.Migrations.Winforms.MainWindow
 {
     public class MigrationMainWindowPresenter
     {
-        private readonly IMigrationWithAppliedStateService _migrationService;
+        private readonly IMigrationWithPerformedStateService _migrationService;
         private readonly IMigrationPerformingService _performingService;
 
         public MigrationMainWindowPresenter(IMigrationMainWindow view,
-            IMigrationWithAppliedStateService migrationService,
+            IMigrationWithPerformedStateService migrationService,
             IMigrationPerformingService performingService)
         {
             View = view;
@@ -22,7 +22,7 @@ namespace Fylum.Migrations.Winforms.MainWindow
             _performingService = performingService;
 
             View.ViewLoaded += View_LoadEvent;
-            View.ApplyAllClicked += View_ApplyAllClicked;
+            View.PerformAllClicked += View_PerformAllClicked;
             View.SelectedMigrationChanged += View_SelectedMigrationChanged;
         }
 
@@ -31,30 +31,30 @@ namespace Fylum.Migrations.Winforms.MainWindow
 
         private void View_LoadEvent(object? sender, EventArgs e)
         {
-            View.ApplyUntilSelectedEnabled = false;
-            PresentAppliedMigrations();
+            View.PerformUntilSelectedEnabled = false;
+            PresentPerformedMigrations();
         }
 
-        private void PresentAppliedMigrations()
+        private void PresentPerformedMigrations()
         {
-            var migrations = _migrationService.GetMigrationsWithAppliedState();
+            var migrations = _migrationService.GetMigrationsWithPerformedState();
             View.AllMigrations = migrations.Select(CreateMigrationRow);
             View.UnselectAllMigrations();
         }
-        private MigrationRow CreateMigrationRow(MigrationWithAppliedState migrationWithAppliedState)
+        private MigrationRow CreateMigrationRow(MigrationWithPerformedState migrationWithPerformedState)
         {
             return new MigrationRow(
-                migrationWithAppliedState.Migration,
-                migrationWithAppliedState.IsApplied,
-                migrationWithAppliedState.AppliedState?.TimestampApplied);
+                migrationWithPerformedState.Migration,
+                migrationWithPerformedState.IsPerformed,
+                migrationWithPerformedState.PerformedState?.TimestampPerformed);
         }
 
-        private void View_ApplyAllClicked(object? sender, EventArgs e)
+        private void View_PerformAllClicked(object? sender, EventArgs e)
         {
-            foreach (var migrationRow in View.AllMigrations.Where(m => !m.IsApplied))
+            foreach (var migrationRow in View.AllMigrations.Where(m => !m.IsPerformed))
                 _performingService.Perform(migrationRow.Migration);
 
-            PresentAppliedMigrations();
+            PresentPerformedMigrations();
         }
 
         private void View_SelectedMigrationChanged(object? sender, EventArgs e)

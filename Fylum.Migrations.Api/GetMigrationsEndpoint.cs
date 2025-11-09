@@ -38,7 +38,7 @@ namespace Fylum.Migrations.Api
             var command = new GetAllMigrationsCommand(userId);
             var commandResult = _handler.Handle(command);
 
-            var errorHanding = Send.EnsureErrorResultHandled(commandResult);
+            var errorHanding = await Send.EnsureErrorResultHandled(commandResult);
             if (errorHanding.ErrorResultHandlingRequired)
                 return;
 
@@ -51,7 +51,7 @@ namespace Fylum.Migrations.Api
         private MigrationResponse MapToResponse(GetMigrationCommandResult migrationResult)
             => new(migrationResult.Id, 
                 migrationResult.Name, 
-                migrationResult.IsApplied, 
+                migrationResult.IsPerformed, 
                 migrationResult.IsMinimallyRequired);
     }
 }
