@@ -1,0 +1,30 @@
+﻿using Fylum.Migrations.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Fylum.Migrations.Provider.MigrationFiles;
+
+public interface IMigrationWithScripts
+{
+    Guid Id { get; }
+    string Name { get; }
+    bool IsMinimallyRequired => false;
+    IEnumerable<FileInfo> MigrationScriptFiles { get; }
+
+    public Migration CreateMigration()
+    {
+        var scripts = GetMigrationScripts();
+        var migration = Fylum.Migrations.Domain.Migration.Create(Id, Name, scripts);
+        if (IsMinimallyRequired)
+            migration.MakeMinimallyRequired();
+        return migration;
+    }
+
+    private IEnumerable<MigrationScript> GetMigrationScripts()
+    {
+        return MigrationScriptFiles.Select(f => new MigrationScript(File.ReadAllText(f.FullName)));
+    }
+}

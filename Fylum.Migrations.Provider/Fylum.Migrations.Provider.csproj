@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
-		<Content Include="MigrationFiles\**\*.psql">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
+		<EmbeddedResource Include="MigrationFiles\**\*.psql" />
 	</ItemGroup>
 
 	<ItemGroup>

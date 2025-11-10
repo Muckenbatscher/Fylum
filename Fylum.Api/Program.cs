@@ -1,13 +1,14 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using Fylum.Users.Application;
-using Fylum.Postgres.Shared;
-using Fylum.Postgres;
-using Fylum.Users.Postgres;
 using Fylum.Api.Shared;
-using System.Reflection;
 using Fylum.Migrations.Api;
+using Fylum.Postgres;
+using Fylum.Postgres.Shared;
+using Fylum.Users.Application;
+using Fylum.Users.Postgres;
+using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace Fylum.Api
 {
@@ -51,7 +52,7 @@ namespace Fylum.Api
             builder.Services.AddUsersPostgresServices();
 
             builder.Services.AddMigrationsServices();
-
+            builder.Services.AddScoped<EnsureMigrationService>();
 
             var app = builder.Build();
 
@@ -67,6 +68,12 @@ namespace Fylum.Api
 
             app.UseHttpsRedirection();
             app.UsePathBase("/api");
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var migrationService = scope.ServiceProvider.GetRequiredService<EnsureMigrationService>();
+                migrationService.EnsureMinimallyRequiredMigrations();
+            }
 
             app.Run();
         }

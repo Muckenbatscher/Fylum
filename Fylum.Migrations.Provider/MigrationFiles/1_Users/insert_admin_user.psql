@@ -2,12 +2,12 @@ SET vars.user_id TO '9499123B-0DE8-4AA7-ABC6-805AFAD3B09D';
 SET vars.group_id TO 'FF7CFB5F-137F-42E0-A857-4E498A7B4E65';
 
 INSERT INTO users (id, username, is_active) 
-SELECT current_setting('vars.user_id')::uuid, 'admin', B'1';
+SELECT current_setting('vars.user_id')::uuid, 'admin', 'true';
 
 INSERT INTO user_password_logins (user_id, password_hash, password_salt)
 SELECT current_setting('vars.user_id')::uuid, 
 	   'LZFBSUTB8AIguR3Dl+ZPgdjR1ymBBWj2Vfc5AdxmIno=', 
-	   'DkKgBl0r/i9mRbvDUhTaUQ=='; --hash for 'admin'
+	   'DkKgBl0r/i9mRbvDUhTaUQ=='; --salt and hash for 'admin'
 
 INSERT INTO user_groups (id, name)
 SELECT current_setting('vars.group_id')::uuid, 'Admin';

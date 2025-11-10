@@ -42,10 +42,10 @@ namespace Fylum.Migrations.Application.WithPerformedState
             return GetMigrationWithAppliedStateFromPerformed(migration, matchingPerformed);
         }
         private static MigrationWithPerformedState GetMigrationWithAppliedStateFromPerformed(Migration migration,
-            PerformedMigration? performedMigrations)
+            PerformedMigration? performedMigration)
         {
-            var appliedState = performedMigrations != null
-                ? new MigrationPeformedState(performedMigrations.Timestamp)
+            var appliedState = performedMigration != null
+                ? new MigrationPeformedState(performedMigration.Timestamp)
                 : null;
             return MigrationWithPerformedState.Create(migration, appliedState?.TimestampPerformed);
         }

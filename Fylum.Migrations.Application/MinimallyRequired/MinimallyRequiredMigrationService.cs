@@ -1,42 +1,42 @@
-﻿using Fylum.Migrations.Domain.Perform;
+﻿using Fylum.Migrations.Domain;
+using Fylum.Migrations.Domain.Perform;
 using Fylum.Migrations.Domain.WithPerformedState;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Fylum.Migrations.Application.MinimallyRequired
+namespace Fylum.Migrations.Application.MinimallyRequired;
+
+public class MinimallyRequiredMigrationService : IMinimallyRequiredMigrationService
 {
-    public class MinimallyRequiredMigrationService : IMinimallyRequiredMigrationService
+    private readonly IPerformMigrationUnitOfWorkFactory _unitOfWorkFactory;
+
+    private readonly IMigrationWithPerformedStateService _migrationWithPerformedStateService;
+
+    public MinimallyRequiredMigrationService(IMigrationWithPerformedStateService migrationWithPeformedStateService,
+        IPerformMigrationUnitOfWorkFactory unitOfWorkFactory)
     {
-        private readonly IMigrationWithPerformedStateService _migrationWithPerformedStateService;
-        private readonly IMigrationPerformingService _migrationPerformingService;
+        _migrationWithPerformedStateService = migrationWithPeformedStateService;
+        _unitOfWorkFactory = unitOfWorkFactory;
+    }
 
-        public MinimallyRequiredMigrationService(IMigrationWithPerformedStateService migrationWithPeformedStateService, 
-            IMigrationPerformingService migrationPerformingService)
-        {
-            _migrationWithPerformedStateService = migrationWithPeformedStateService;
-            _migrationPerformingService = migrationPerformingService;
-        }
+    public IEnumerable<Migration> GetMinimallyRequiredUnperformedMigrations()
+    { 
+        var allMigrationsWithState = _migrationWithPerformedStateService.GetMigrationsWithPerformedState();
+        var unperformedMigrations = allMigrationsWithState.Where(m => !m.IsPerformed).ToList();
+        var lastMinimallyRequiredIndex = unperformedMigrations.FindLastIndex(um => um.Migration.IsMinimallyRequired);
+        if (lastMinimallyRequiredIndex < 0)
+            return Enumerable.Empty<Migration>();
 
-        public IEnumerable<Domain.Migration> GetMinimallyRequiredUnperformedMigrations()
-        { 
-            var allMigrationsWithState = _migrationWithPerformedStateService.GetMigrationsWithPerformedState();
-            var unperformedMigrations = allMigrationsWithState.Where(m => !m.IsPerformed).ToList();
-            var lastMinimallyRequiredIndex = unperformedMigrations.FindLastIndex(um => um.Migration.IsMinimallyRequired);
-            if (lastMinimallyRequiredIndex < 0)
-                return Enumerable.Empty<Domain.Migration>();
+        return unperformedMigrations.Take(lastMinimallyRequiredIndex + 1).Select(mas => mas.Migration)
+            .ToList().AsReadOnly();
+    }
 
-            return unperformedMigrations.Take(lastMinimallyRequiredIndex + 1).Select(mas => mas.Migration)
-                .ToList().AsReadOnly();
-        }
+    public void EnusreMinimallyRequiredMigrationsPerformed()
+    {
+        using var unitOfWork = _unitOfWorkFactory.Create();
 
-        public void EnusreMinimallyRequiredMigrationsPerformed()
-        {
-            var requiredUnperformedMigrations = GetMinimallyRequiredUnperformedMigrations();
-            foreach (var migration in requiredUnperformedMigrations)
-                _migrationPerformingService.Perform(migration);
-        }
+        var requiredUnperformedMigrations = GetMinimallyRequiredUnperformedMigrations();
+        foreach (var migration in requiredUnperformedMigrations)
+            unitOfWork.MigrationPerformingService.Perform(migration);
+
+        unitOfWork.Commit();
     }
 }
