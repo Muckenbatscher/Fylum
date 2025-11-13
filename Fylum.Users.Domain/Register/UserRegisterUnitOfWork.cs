@@ -1,4 +1,5 @@
 ﻿using Fylum.Domain.UnitOfWork;
+using Fylum.Users.Domain.Password;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,11 +1,14 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using Fylum.Api.JwtAuthentication;
-using Fylum.Users.Application;
-using Fylum.Postgres.Shared;
+using Fylum.Api.Shared;
+using Fylum.Migrations.Api;
 using Fylum.Postgres;
+using Fylum.Postgres.Shared;
+using Fylum.Users.Application;
 using Fylum.Users.Postgres;
+using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace Fylum.Api
 {
@@ -18,8 +21,16 @@ namespace Fylum.Api
             builder.Services
                 .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration["JwtAuth:SigningKey"])
                 .AddAuthorization()
-                .AddFastEndpoints()
+                .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
                 .SwaggerDocument();
+
+
+            builder.Services.AddApiSharedServices(options =>
+            {
+                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
+                options.UserIdClaim = builder.Configuration["JwtAuth:UserIdClaim"]!;
+                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
+            });
 
             builder.Services.AddPostgresSharedServices(options =>
             {
@@ -40,13 +51,8 @@ namespace Fylum.Api
             });
             builder.Services.AddUsersPostgresServices();
 
-            builder.Services.Configure<JwtAuthOptions>(options =>
-            {
-                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
-                options.UserIdClaim = builder.Configuration["JwtAuth:UserIdClaim"]!;
-                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
-            });
-            builder.Services.AddTransient<IJwtAuthService, JwtAuthService>();
+            builder.Services.AddMigrationsServices();
+            builder.Services.AddScoped<EnsureMigrationService>();
 
             var app = builder.Build();
 
@@ -63,7 +69,19 @@ namespace Fylum.Api
             app.UseHttpsRedirection();
             app.UsePathBase("/api");
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var migrationService = scope.ServiceProvider.GetRequiredService<EnsureMigrationService>();
+                migrationService.EnsureMinimallyRequiredMigrations();
+            }
+
             app.Run();
+        }
+
+        private static IEnumerable<Assembly> GetApiEndpointAssemblies()
+        {
+            yield return Assembly.GetExecutingAssembly();
+            yield return typeof(MigrationsApiModule).Assembly;
         }
     }
 }

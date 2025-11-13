@@ -1,6 +1,7 @@
-﻿using Fylum.Users.Application.Login;
+﻿using Fylum.Users.Application.GetUser;
+using Fylum.Users.Application.Login;
 using Fylum.Users.Application.Register;
-using Fylum.Users.Domain;
+using Fylum.Users.Domain.Password;
 using Fylum.Users.Domain.Register;
 using Microsoft.Extensions.DependencyInjection;
 using System;

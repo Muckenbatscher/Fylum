@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
+    <ProjectReference Include="..\Fylum.Migrations.Domain\Fylum.Migrations.Domain.csproj" />
+    <ProjectReference Include="..\Fylum.Users.Domain\Fylum.Users.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

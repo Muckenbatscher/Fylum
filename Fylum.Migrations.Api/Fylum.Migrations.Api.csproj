@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+	<ItemGroup>
+		<PackageReference Include="FastEndpoints" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Fylum.Api.Shared\Fylum.Api.Shared.csproj" />
+	  <ProjectReference Include="..\Fylum.Migrations.Api.Shared\Fylum.Migrations.Api.Shared.csproj" />
+	  <ProjectReference Include="..\Fylum.Migrations.Application\Fylum.Migrations.Application.csproj" />
+	  <ProjectReference Include="..\Fylum.Migrations.Postgres\Fylum.Migrations.Postgres.csproj" />
+	  <ProjectReference Include="..\Fylum.Migrations.Provider\Fylum.Migrations.Provider.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,4 +1,6 @@
 ﻿using Fylum.Users.Domain;
+using Fylum.Users.Domain.Groups;
+using Fylum.Users.Domain.Password;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace Fylum.Users.Postgres
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserWithPasswordRepository, UserWithPasswordRepository>();
+            services.AddScoped<IUserWithGroupsRepository, UserWithGroupsRepository>();
         }
     }
 }

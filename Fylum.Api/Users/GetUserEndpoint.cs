@@ -1,8 +1,9 @@
 ﻿using FastEndpoints;
-using Fylum.Api.JwtAuthentication;
+using Fylum.Api.Shared.ErrorResult;
+using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Shared;
 using Fylum.Shared.Users;
-using Fylum.Users.Application;
+using Fylum.Users.Application.GetUser;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Api.Users
@@ -33,8 +34,8 @@ namespace Fylum.Api.Users
             var command = new GetUserCommand(id);
             var userResult = _commandHandler.Handle(command);
 
-            var handling = Send.EnsureErrorResultHandled(userResult);
-            if (handling.ErrorResultHandled)
+            var handling = await Send.EnsureErrorResultHandled(userResult);
+            if (handling.ErrorResultHandlingRequired)
                 return;
 
             var user = userResult.Value!;

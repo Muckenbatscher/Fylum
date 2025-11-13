@@ -34,5 +34,10 @@ namespace Fylum.Application
 
         public static implicit operator Result<T>(T value) =>
             value is not null ? Success(value) : Failure<T>(Error.Internal);
+
+        public static implicit operator Result<T>(Result errorResult) =>
+            errorResult is not null && !errorResult.IsSuccess 
+            ? Failure<T>(errorResult.Error!)
+            : throw new InvalidOperationException("Cannot convert a successful untyped Result to a typed Result.");
     }
 }
