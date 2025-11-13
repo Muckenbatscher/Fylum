@@ -32,4 +32,6 @@
   <Folder Name="/Shared/">
     <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
   </Folder>
+  <Project Path="Fylum.AppHost/Fylum.AppHost.csproj" Id="a7f1283a-56e3-4f4d-a0c6-5ba8aa4f9cad" />
+  <Project Path="Fylum.ServiceDefaults/Fylum.ServiceDefaults.csproj" />
 </Solution>
