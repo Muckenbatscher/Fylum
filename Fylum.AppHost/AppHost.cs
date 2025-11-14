@@ -14,6 +14,7 @@ internal class Program
 
         var migrationPerformingKey = builder.AddParameter("MigrationPerformingKey", secret: true);
 
+        string performingKeyHeader = "X-MigrationPerforming-Key";
         var api = builder.AddProject<Projects.Fylum_Api>("api")
             .WithHttpCommand(
             path: EndpointRoutes.MigrationsPerformMinimallyRequiredRoute,
@@ -28,7 +29,7 @@ internal class Program
                 PrepareRequest = (context) =>
                 {
                     var key = migrationPerformingKey.Resource.GetValueAsync(context.CancellationToken);
-                    context.Request.Headers.Add("X-MigrationPerforming-Key", $"Key: {key}");
+                    context.Request.Headers.Add(performingKeyHeader, $"Key: {key}");
                     return Task.CompletedTask;
                 },
                 IconName = "DatabaseLightningRegular"
@@ -46,7 +47,7 @@ internal class Program
                 PrepareRequest = (context) =>
                 {
                     var key = migrationPerformingKey.Resource.GetValueAsync(context.CancellationToken);
-                    context.Request.Headers.Add("X-MigrationPerforming-Key", $"Key: {key}");
+                    context.Request.Headers.Add(performingKeyHeader, $"Key: {key}");
                     return Task.CompletedTask;
                 },
                 IconName = "DatabaseCheckmarkRegular"

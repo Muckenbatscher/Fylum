@@ -1,6 +1,7 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
+using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.Perform;
 using Fylum.Migrations.Domain.WithPerformedState;
@@ -9,17 +10,14 @@ using Microsoft.Extensions.Options;
 
 namespace Fylum.Migrations.Api;
 
-public class PerformMigrationsUpToEndpoint : EndpointWithoutRequest<PerformMigrationsResponse>
+public class PerformMigrationsUpToEndpoint : Endpoint<UserClaimOrMigrationPerformingKeyRequest, PerformMigrationsResponse>
 {
     private const string MigrationIdParamName = "id";
 
-    private readonly JwtAuthOptions _jwtAuthOptions;
     private readonly IPerformMigrationsUpToCommandHandler _handler;
 
-    public PerformMigrationsUpToEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions,
-        IPerformMigrationsUpToCommandHandler handler)
+    public PerformMigrationsUpToEndpoint( IPerformMigrationsUpToCommandHandler handler)
     {
-        _jwtAuthOptions = jwtAuthOptions.Value;
         _handler = handler;
     }
 
@@ -27,16 +25,23 @@ public class PerformMigrationsUpToEndpoint : EndpointWithoutRequest<PerformMigra
     {
         var route = $"{EndpointRoutes.MigrationsPerformUpToRoute}/{{{MigrationIdParamName}}}";
         Post(route);
-        Claims(_jwtAuthOptions.UserIdClaim);
     }
 
-    public override async Task HandleAsync(CancellationToken ct)
+    public override async Task HandleAsync(UserClaimOrMigrationPerformingKeyRequest request, CancellationToken ct)
     {
+        if (!request.IsAuthenticated)
+        {
+            await Send.ResultAsync(TypedResults.Unauthorized());
+            return;
+        }
+
         var migrationId = Route<Guid>(MigrationIdParamName);
         var command = new PerformMigrationsUpToCommand(migrationId);
 
         var result = _handler.Handle(command);
-        await Send.EnsureErrorResultHandled(result);
+        var error = await Send.EnsureErrorResultHandled(result);
+        if (error.ErrorResultHandlingRequired)
+            return;
 
         var performed = result.Value.PerformedMigrations.Select(MapToResponse);
         var response = new PerformMigrationsResponse(performed);

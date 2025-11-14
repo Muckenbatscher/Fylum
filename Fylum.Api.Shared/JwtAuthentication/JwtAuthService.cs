@@ -13,12 +13,11 @@ namespace Fylum.Api.Shared.JwtAuthentication
             _jwtAuthOptions = jwtAuthOptions.Value;
         }
 
-        public string UserIdClaimKey => _jwtAuthOptions.UserIdClaim;
 
         public string BuildToken(Guid userId)
         {
+            var userIdClaim = JwtAuthConstants.UserIdClaim;
             var signingKey = _jwtAuthOptions.SigningKey;
-            var userIdClaim = _jwtAuthOptions.UserIdClaim;
             var expirationMinutes = _jwtAuthOptions.ExpirationInMinutes;
 
             var jwtToken = JwtBearer.CreateToken(o =>
@@ -33,7 +32,7 @@ namespace Fylum.Api.Shared.JwtAuthentication
 
         public Guid? GetUserIdFromClaims(IEnumerable<Claim> claims)
         {
-            var userIdClaim = claims.SingleOrDefault(c => c.Type == UserIdClaimKey);
+            var userIdClaim = claims.SingleOrDefault(c => c.Type == JwtAuthConstants.UserIdClaim);
 
             if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
                 return null;

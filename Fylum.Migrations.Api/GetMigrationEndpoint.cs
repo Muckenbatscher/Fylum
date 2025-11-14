@@ -12,13 +12,10 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
 {
     private const string IdParamName = "id";
 
-    private readonly JwtAuthOptions _jwtAuthOptions;
     private readonly IGetMigrationCommandHandler _handler;
 
-    public GetMigrationEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions, 
-        IGetMigrationCommandHandler handler)
+    public GetMigrationEndpoint(IGetMigrationCommandHandler handler)
     {
-        _jwtAuthOptions = jwtAuthOptions.Value;
         _handler = handler;
     }
 
@@ -26,12 +23,12 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
     {
         var route = $"{EndpointRoutes.MigrationsBaseRoute}/{{{IdParamName}}}";
         Get(route);
-        Claims(_jwtAuthOptions.UserIdClaim);
+        Claims(JwtAuthConstants.UserIdClaim);
     }
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == _jwtAuthOptions.UserIdClaim);
+        var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == JwtAuthConstants.UserIdClaim);
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
             await Send.ResultAsync(TypedResults.Unauthorized());

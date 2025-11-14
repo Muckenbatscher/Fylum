@@ -2,7 +2,6 @@
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Shared;
 using Fylum.Shared.Tags;
-using Microsoft.Extensions.Options;
 
 namespace Fylum.Api.Tags
 {
@@ -10,18 +9,12 @@ namespace Fylum.Api.Tags
     {
         private const string IdParamName = "id";
 
-        private readonly JwtAuthOptions _jwtAuthOptions;
-
-        public GetTagEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions)
-        {
-            _jwtAuthOptions = jwtAuthOptions.Value;
-        }
 
         public override void Configure()
         {
             string baseRoute = EndpointRoutes.TagsBaseRoute;
             Get($"{baseRoute}/{{{IdParamName}}}");
-            Claims(_jwtAuthOptions.UserIdClaim);
+            Claims(JwtAuthConstants.UserIdClaim);
         }
 
         public override async Task HandleAsync(CancellationToken ct)

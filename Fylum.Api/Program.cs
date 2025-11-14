@@ -7,7 +7,6 @@ using Fylum.Postgres;
 using Fylum.Postgres.Shared;
 using Fylum.Users.Application;
 using Fylum.Users.Postgres;
-using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
 namespace Fylum.Api
@@ -28,7 +27,6 @@ namespace Fylum.Api
             builder.Services.AddApiSharedServices(options =>
             {
                 options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
-                options.UserIdClaim = builder.Configuration["JwtAuth:UserIdClaim"]!;
                 options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
             });
 

@@ -4,7 +4,6 @@ using Fylum.Domain.Files;
 using Fylum.Shared;
 using Fylum.Shared.Files;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.Extensions.Options;
 using File = Fylum.Domain.Files.File;
 
 namespace Fylum.Api.Files
@@ -14,22 +13,19 @@ namespace Fylum.Api.Files
         NotFound>>
     {
         private readonly IFileRepository _fileRepository;
-        private readonly JwtAuthOptions _jwtAuthOptions;
 
         private const string IdParamName = "id";
 
-        public GetFileEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions,
-            IFileRepository fileRepository)
+        public GetFileEndpoint(IFileRepository fileRepository)
         {
             _fileRepository = fileRepository;
-            _jwtAuthOptions = jwtAuthOptions.Value;
         }
 
         public override void Configure()
         {
             string baseRoute = EndpointRoutes.FileBaseRoute;
             Get($"{baseRoute}/{{{IdParamName}}}");
-            Claims(_jwtAuthOptions.UserIdClaim);
+            Claims(JwtAuthConstants.UserIdClaim);
         }
         public override async Task HandleAsync(CancellationToken ct)
         {
@@ -41,7 +37,7 @@ namespace Fylum.Api.Files
             };
             _fileRepository.Create(newFile);
 
-            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == _jwtAuthOptions.UserIdClaim);
+            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == JwtAuthConstants.UserIdClaim);
             if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
             {
                 await Send.ResultAsync(TypedResults.Unauthorized());

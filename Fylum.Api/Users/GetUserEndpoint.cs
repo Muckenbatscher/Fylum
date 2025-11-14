@@ -13,20 +13,17 @@ namespace Fylum.Api.Users
         private const string IdParamName = "id";
 
         private readonly IGetUserCommandHandler _commandHandler;
-        private readonly JwtAuthOptions _jwtAuthOptions;
 
-        public GetUserEndpoint(IGetUserCommandHandler commandHandler, 
-            IOptions<JwtAuthOptions> jwtAuthoptions)
+        public GetUserEndpoint(IGetUserCommandHandler commandHandler)
         {
             _commandHandler = commandHandler;
-            _jwtAuthOptions = jwtAuthoptions.Value;
         }
 
         public override void Configure()
         {
             string baseRoute = EndpointRoutes.UsersBaseRoute;
             Get($"{baseRoute}/{{{IdParamName}}}");
-            Claims(_jwtAuthOptions.UserIdClaim);
+            Claims(JwtAuthConstants.UserIdClaim);
         }
         public override async Task HandleAsync(CancellationToken ct)
         {

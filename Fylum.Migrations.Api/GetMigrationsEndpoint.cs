@@ -10,25 +10,22 @@ namespace Fylum.Migrations.Api
 {
     public class GetMigrationsEndpoint : EndpointWithoutRequest<MultipleMigrationsResponse>
     {
-        private readonly JwtAuthOptions _jwtAuthOptions;
         private readonly IGetAllMigrationsCommandHandler _handler;
 
-        public GetMigrationsEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions,
-            IGetAllMigrationsCommandHandler handler)
+        public GetMigrationsEndpoint(IGetAllMigrationsCommandHandler handler)
         {
-            _jwtAuthOptions = jwtAuthOptions.Value;
             _handler = handler;
         }
 
         public override void Configure()
         {
             Get(EndpointRoutes.MigrationsBaseRoute);
-            Claims(_jwtAuthOptions.UserIdClaim);
+            Claims(JwtAuthConstants.UserIdClaim);
         }
 
         public override async Task HandleAsync(CancellationToken ct)
         {
-            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == _jwtAuthOptions.UserIdClaim);
+            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == JwtAuthConstants.UserIdClaim);
             if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
             {
                 await Send.ResultAsync(TypedResults.Unauthorized());
