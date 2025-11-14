@@ -1,18 +1,23 @@
 ﻿using FastEndpoints;
+using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Migrations.Api.Shared;
-using Fylum.Migrations.Application.GetMigrations;
+using Fylum.Migrations.Application.Perform;
+using Fylum.Migrations.Domain.WithPerformedState;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Migrations.Api;
 
-public class PerformMigrationsUpToEndpoint : Endpoint<PerformMigrationsUpToRequest, PerformMigrationsUpToResponse>
+public class PerformMigrationsUpToEndpoint : EndpointWithoutRequest<PerformMigrationsResponse>
 {
+    private const string MigrationIdParamName = "id";
+
     private readonly JwtAuthOptions _jwtAuthOptions;
-    private readonly IGetAllMigrationsCommandHandler _handler;
+    private readonly IPerformMigrationsUpToCommandHandler _handler;
 
     public PerformMigrationsUpToEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions,
-        IGetAllMigrationsCommandHandler handler)
+        IPerformMigrationsUpToCommandHandler handler)
     {
         _jwtAuthOptions = jwtAuthOptions.Value;
         _handler = handler;
@@ -20,12 +25,28 @@ public class PerformMigrationsUpToEndpoint : Endpoint<PerformMigrationsUpToReque
 
     public override void Configure()
     {
-        Post(EndpointRoutes.MigrationsPerformRoute);
+        var route = $"{EndpointRoutes.MigrationsPerformUpToRoute}/{{{MigrationIdParamName}}}";
+        Post(route);
         Claims(_jwtAuthOptions.UserIdClaim);
     }
 
-    public override async Task HandleAsync(PerformMigrationsUpToRequest req, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
+        var migrationId = Route<Guid>(MigrationIdParamName);
+        var command = new PerformMigrationsUpToCommand(migrationId);
 
+        var result = _handler.Handle(command);
+        await Send.EnsureErrorResultHandled(result);
+
+        var performed = result.Value.PerformedMigrations.Select(MapToResponse);
+        var response = new PerformMigrationsResponse(performed);
+        await Send.ResultAsync(TypedResults.Ok(response));
     }
+
+
+    private MigrationResponse MapToResponse(MigrationWithPerformedState migrationResult)
+        => new(migrationResult.Migration.Id,
+            migrationResult.Migration.Name,
+            migrationResult.IsPerformed,
+            migrationResult.Migration.IsMinimallyRequired);
 }
