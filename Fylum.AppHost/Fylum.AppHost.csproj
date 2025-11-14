@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fylum.Api\Fylum.Api.csproj" />
+    <ProjectReference Include="..\Fylum.Migrations.Api.Shared\Fylum.Migrations.Api.Shared.csproj"
+					  IsAspireProjectResource="false"/>
   </ItemGroup>
 
 </Project>
