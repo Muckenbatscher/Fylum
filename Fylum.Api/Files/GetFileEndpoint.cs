@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using Fylum.Api.Shared;
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Domain.Files;
 using Fylum.Shared;
@@ -8,7 +9,7 @@ using File = Fylum.Domain.Files.File;
 
 namespace Fylum.Api.Files
 {
-    public class GetFileEndpoint : EndpointWithoutRequest<Results<
+    public class GetFileEndpoint : Endpoint<UserClaimRequest, Results<
         Ok<FileResponse>, 
         NotFound>>
     {
@@ -27,7 +28,7 @@ namespace Fylum.Api.Files
             Get($"{baseRoute}/{{{IdParamName}}}");
             Claims(JwtAuthConstants.UserIdClaim);
         }
-        public override async Task HandleAsync(CancellationToken ct)
+        public override async Task HandleAsync(UserClaimRequest request, CancellationToken ct)
         {
             var newFile = new File()
             {
@@ -36,13 +37,6 @@ namespace Fylum.Api.Files
                 ParentFolderId = Guid.NewGuid()
             };
             _fileRepository.Create(newFile);
-
-            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == JwtAuthConstants.UserIdClaim);
-            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
-            {
-                await Send.ResultAsync(TypedResults.Unauthorized());
-                return;
-            }
 
             var id = Route<Guid>(IdParamName);
             var file = new FileResponse()

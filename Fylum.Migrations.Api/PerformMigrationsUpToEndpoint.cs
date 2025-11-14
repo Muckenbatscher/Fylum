@@ -1,12 +1,10 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
-using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.Perform;
 using Fylum.Migrations.Domain.WithPerformedState;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 
 namespace Fylum.Migrations.Api;
 

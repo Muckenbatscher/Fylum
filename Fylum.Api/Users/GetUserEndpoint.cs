@@ -4,7 +4,6 @@ using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Shared;
 using Fylum.Shared.Users;
 using Fylum.Users.Application.GetUser;
-using Microsoft.Extensions.Options;
 
 namespace Fylum.Api.Users
 {

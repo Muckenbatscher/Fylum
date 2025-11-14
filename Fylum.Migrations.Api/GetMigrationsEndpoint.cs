@@ -1,14 +1,14 @@
 ﻿using FastEndpoints;
+using Fylum.Api.Shared;
 using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.GetMigrations;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 
 namespace Fylum.Migrations.Api
 {
-    public class GetMigrationsEndpoint : EndpointWithoutRequest<MultipleMigrationsResponse>
+    public class GetMigrationsEndpoint : Endpoint<UserClaimRequest, MultipleMigrationsResponse>
     {
         private readonly IGetAllMigrationsCommandHandler _handler;
 
@@ -23,16 +23,9 @@ namespace Fylum.Migrations.Api
             Claims(JwtAuthConstants.UserIdClaim);
         }
 
-        public override async Task HandleAsync(CancellationToken ct)
+        public override async Task HandleAsync(UserClaimRequest request, CancellationToken ct)
         {
-            var userIdClaim = User.Claims.SingleOrDefault(c => c.Type == JwtAuthConstants.UserIdClaim);
-            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
-            {
-                await Send.ResultAsync(TypedResults.Unauthorized());
-                return;
-            }
-
-            var command = new GetAllMigrationsCommand(userId);
+            var command = new GetAllMigrationsCommand(request.UserId);
             var commandResult = _handler.Handle(command);
 
             var errorHanding = await Send.EnsureErrorResultHandled(commandResult);
