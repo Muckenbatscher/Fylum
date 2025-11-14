@@ -1,5 +1,4 @@
 ﻿using Fylum.Migrations.Application.GetMigrations;
-using Fylum.Migrations.Application.MinimallyRequired;
 using Fylum.Migrations.Application.Perform;
 using Fylum.Migrations.Application.WithPerformedState;
 using Fylum.Migrations.Domain.Perform;
@@ -16,10 +15,10 @@ public static class ServiceRegistration
         services.AddTransient<IMigrationPerformingService, MigrationPerformingService>();
 
         services.AddScoped<IPerformMigrationUnitOfWorkFactory, PerformMigrationUnitOfWorkFactory>();
-        services.AddScoped<IMinimallyRequiredMigrationService, MinimallyRequiredMigrationService>();
 
         services.AddScoped<IGetMigrationCommandHandler, GetMigrationCommandHandler>();
         services.AddScoped<IGetAllMigrationsCommandHandler, GetAllMigrationsCommandHandler>();
+        services.AddScoped<IPerformMigrationsUpToCommandHandler, PerformMigrationsUpToCommandHandler>();
         return services;
     }
 }
