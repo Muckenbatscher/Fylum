@@ -2,7 +2,7 @@
 using Fylum.Migrations.Domain.Perform;
 using Fylum.Migrations.Domain.WithPerformedState;
 
-namespace Fylum.Migrations.Application.Perform
+namespace Fylum.Migrations.Application.Perform.UpTo
 {
     public class PerformMigrationsUpToCommandHandler : IPerformMigrationsUpToCommandHandler
     {

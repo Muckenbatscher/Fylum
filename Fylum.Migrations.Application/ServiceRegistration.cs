@@ -1,5 +1,7 @@
 ﻿using Fylum.Migrations.Application.GetMigrations;
 using Fylum.Migrations.Application.Perform;
+using Fylum.Migrations.Application.Perform.All;
+using Fylum.Migrations.Application.Perform.UpTo;
 using Fylum.Migrations.Application.WithPerformedState;
 using Fylum.Migrations.Domain.Perform;
 using Fylum.Migrations.Domain.WithPerformedState;
@@ -19,6 +21,7 @@ public static class ServiceRegistration
         services.AddScoped<IGetMigrationCommandHandler, GetMigrationCommandHandler>();
         services.AddScoped<IGetAllMigrationsCommandHandler, GetAllMigrationsCommandHandler>();
         services.AddScoped<IPerformMigrationsUpToCommandHandler, PerformMigrationsUpToCommandHandler>();
+        services.AddScoped<IPerformAllMigrationsCommandHandler, PerformAllMigrationsCommandHandler>();
         return services;
     }
 }

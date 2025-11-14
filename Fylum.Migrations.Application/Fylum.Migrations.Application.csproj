@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Fylum.Users.Domain\Fylum.Users.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Perform\MinimallyRequired\" />
+  </ItemGroup>
+
 </Project>

@@ -2,28 +2,24 @@
 using Fylum.Api.Shared.ErrorResult;
 using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Migrations.Api.Shared;
-using Fylum.Migrations.Application.Perform;
-using Fylum.Migrations.Application.Perform.UpTo;
+using Fylum.Migrations.Application.Perform.All;
 using Fylum.Migrations.Domain.WithPerformedState;
 using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Migrations.Api;
 
-public class PerformMigrationsUpToEndpoint : Endpoint<UserClaimOrMigrationPerformingKeyRequest, PerformMigrationsResponse>
+public class PerformAllMigrationsEndpoint : Endpoint<UserClaimOrMigrationPerformingKeyRequest, PerformMigrationsResponse>
 {
-    private const string MigrationIdParamName = "id";
+    private readonly IPerformAllMigrationsCommandHandler _handler;
 
-    private readonly IPerformMigrationsUpToCommandHandler _handler;
-
-    public PerformMigrationsUpToEndpoint(IPerformMigrationsUpToCommandHandler handler)
+    public PerformAllMigrationsEndpoint(IPerformAllMigrationsCommandHandler handler)
     {
         _handler = handler;
     }
 
     public override void Configure()
     {
-        var route = $"{EndpointRoutes.MigrationsPerformUpToRoute}/{{{MigrationIdParamName}}}";
-        Post(route);
+        Post(EndpointRoutes.MigrationsPerformAllRoute);
         AllowAnonymous();
     }
 
@@ -35,8 +31,7 @@ public class PerformMigrationsUpToEndpoint : Endpoint<UserClaimOrMigrationPerfor
             return;
         }
 
-        var migrationId = Route<Guid>(MigrationIdParamName);
-        var command = new PerformMigrationsUpToCommand(migrationId);
+        var command = new PerformAllMigrationsCommand();
 
         var result = _handler.Handle(command);
         var error = await Send.EnsureErrorResultHandled(result);
@@ -48,9 +43,11 @@ public class PerformMigrationsUpToEndpoint : Endpoint<UserClaimOrMigrationPerfor
         await Send.ResultAsync(TypedResults.Ok(response));
     }
 
+
     private MigrationResponse MapToResponse(MigrationWithPerformedState migrationResult)
         => new(migrationResult.Migration.Id,
             migrationResult.Migration.Name,
             migrationResult.IsPerformed,
             migrationResult.Migration.IsMinimallyRequired);
+
 }
