@@ -1,8 +1,9 @@
-using Fylum.Migration.Winforms.MainWindow.MigrationScript;
+using Fylum.Migrations.Winforms.MainWindow.MigrationScript;
 using Fylum.Migrations.Winforms.MainWindow;
 using M2TWinForms;
+using System.ComponentModel;
 
-namespace Fylum.Migration.Winforms.MainWindow
+namespace Fylum.Migrations.Winforms.MainWindow
 {
     public partial class MigrationMainWindow : M2TForm, IMigrationMainWindow
     {
@@ -19,11 +20,13 @@ namespace Fylum.Migration.Winforms.MainWindow
             CL_PerformedTimestamp.DataPropertyName = nameof(MigrationRow.LocalPerformedTimestamp);
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IEnumerable<MigrationRow> AllMigrations
         {
             get => (IEnumerable<MigrationRow>)DG_Migrations.DataSource;
             set => DG_Migrations.DataSource = value.ToList();
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MigrationRow? SelectedMigration
         {
             get
@@ -32,16 +35,20 @@ namespace Fylum.Migration.Winforms.MainWindow
                 return selectedRows.FirstOrDefault()?.DataBoundItem as MigrationRow;
             }
         }
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool PerformUntilSelectedEnabled
         {
             get => BT_PerformUntilSelected.Enabled;
             set => BT_PerformUntilSelected.Enabled = value;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public EventHandler? ViewLoaded { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public EventHandler? PerformAllClicked { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public EventHandler? PerformUntilSelectedClicked { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public EventHandler? SelectedMigrationChanged { get; set; }
 
         public void UnselectAllMigrations()

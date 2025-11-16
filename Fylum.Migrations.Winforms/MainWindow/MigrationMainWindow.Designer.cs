@@ -1,4 +1,4 @@
-﻿namespace Fylum.Migration.Winforms.MainWindow
+﻿namespace Fylum.Migrations.Winforms.MainWindow
 {
     partial class MigrationMainWindow
     {

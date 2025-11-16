@@ -1,4 +1,4 @@
-﻿namespace Fylum.Migration.Winforms.MainWindow.MigrationScript
+﻿namespace Fylum.Migrations.Winforms.MainWindow.MigrationScript
 {
     partial class MigrationScriptDisplay
     {

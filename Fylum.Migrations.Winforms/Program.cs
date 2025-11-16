@@ -1,5 +1,3 @@
-using Fylum.Migration.Winforms;
-using Fylum.Migration.Winforms.MainWindow;
 using Fylum.Migrations.Application;
 using Fylum.Migrations.Postgres;
 using Fylum.Migrations.Provider;
