@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSTest.Sdk/4.0.0-preview.25415.9">
+﻿<Project Sdk="MSTest.Sdk/4.0.2">
 
   <PropertyGroup>
     <UseVSTest>true</UseVSTest>

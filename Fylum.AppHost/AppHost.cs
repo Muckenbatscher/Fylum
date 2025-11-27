@@ -1,5 +1,3 @@
-using Fylum.Migrations.Api.Shared;
-
 namespace Fylum.AppHost;
 
 internal class Program
