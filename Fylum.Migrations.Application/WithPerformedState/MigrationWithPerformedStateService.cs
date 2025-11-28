@@ -23,6 +23,10 @@ namespace Fylum.Migrations.Application.WithPerformedState
 
             return allMigrations.Select(m => GetMigrationWithAppliedStateFromMatchingPerformed(m, performedMigrations));
         }
+        public IEnumerable<MigrationWithPerformedState> GetUnperformedMigrations()
+            => GetMigrationsWithPerformedState().Where(m => !m.IsPerformed);
+        public IEnumerable<MigrationWithPerformedState> GetMinimallyRequiredUnperformedMigrations() 
+            => GetUnperformedMigrations().Where(m => m.Migration.IsMinimallyRequired);
 
         public MigrationWithPerformedState? GetMigrationWithPerformedState(Guid id)
         {
@@ -49,5 +53,6 @@ namespace Fylum.Migrations.Application.WithPerformedState
                 : null;
             return MigrationWithPerformedState.Create(migration, appliedState?.TimestampPerformed);
         }
+
     }
 }

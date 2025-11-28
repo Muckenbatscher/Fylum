@@ -1,8 +1,5 @@
 <Solution>
   <Folder Name="/Api/">
-    <Project Path="docker-compose/docker-compose.dcproj">
-      <Build />
-    </Project>
     <Project Path="Fylum.Api.Shared/Fylum.Api.Shared.csproj" Id="29ee9d17-9749-4cbb-8bc1-388064e12d31" />
     <Project Path="Fylum.Api/Fylum.Api.csproj" />
     <Project Path="Fylum.Application/Fylum.Application.csproj" />
@@ -32,4 +29,6 @@
   <Folder Name="/Shared/">
     <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
   </Folder>
+  <Project Path="Fylum.AppHost/Fylum.AppHost.csproj" Id="a7f1283a-56e3-4f4d-a0c6-5ba8aa4f9cad" />
+  <Project Path="Fylum.ServiceDefaults/Fylum.ServiceDefaults.csproj" />
 </Solution>

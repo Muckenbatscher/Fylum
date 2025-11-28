@@ -7,7 +7,6 @@ using Fylum.Postgres;
 using Fylum.Postgres.Shared;
 using Fylum.Users.Application;
 using Fylum.Users.Postgres;
-using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
 namespace Fylum.Api
@@ -17,6 +16,8 @@ namespace Fylum.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.AddServiceDefaults(); // from Aspire Service Defaults
 
             builder.Services
                 .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration["JwtAuth:SigningKey"])
@@ -28,17 +29,16 @@ namespace Fylum.Api
             builder.Services.AddApiSharedServices(options =>
             {
                 options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
-                options.UserIdClaim = builder.Configuration["JwtAuth:UserIdClaim"]!;
                 options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
             });
 
             builder.Services.AddPostgresSharedServices(options =>
             {
-                options.HostName = builder.Configuration["DbConnection:Host"]!;
-                options.Port = int.Parse(builder.Configuration["DbConnection:Port"]!);
-                options.DatabaseName = builder.Configuration["DbConnection:Database"]!;
-                options.Username = builder.Configuration["DbConnection:Username"]!;
-                options.Password = builder.Configuration["DbConnection:Password"]!;
+                options.HostName = builder.Configuration["POSTGRES_HOST"]!;
+                options.Port = int.Parse(builder.Configuration["POSTGRES_PORT"]!);
+                options.DatabaseName = builder.Configuration["POSTGRES_DATABASE"]!;
+                options.Username = builder.Configuration["POSTGRES_USERNAME"]!;
+                options.Password = builder.Configuration["POSTGRES_PASSWORD"]!;
             });
             builder.Services.AddPostgresServices();
 
@@ -52,7 +52,6 @@ namespace Fylum.Api
             builder.Services.AddUsersPostgresServices();
 
             builder.Services.AddMigrationsServices();
-            builder.Services.AddScoped<EnsureMigrationService>();
 
             var app = builder.Build();
 
@@ -68,12 +67,6 @@ namespace Fylum.Api
 
             app.UseHttpsRedirection();
             app.UsePathBase("/api");
-
-            using (var scope = app.Services.CreateScope())
-            {
-                var migrationService = scope.ServiceProvider.GetRequiredService<EnsureMigrationService>();
-                migrationService.EnsureMinimallyRequiredMigrations();
-            }
 
             app.Run();
         }

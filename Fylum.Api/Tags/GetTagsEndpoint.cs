@@ -2,23 +2,15 @@
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Shared;
 using Fylum.Shared.Tags;
-using Microsoft.Extensions.Options;
 
 namespace Fylum.Api.Tags
 {
     public class GetTagsEndpoint : EndpointWithoutRequest<IEnumerable<TagResponse>>
     {
-        private readonly JwtAuthOptions _jwtAuthOptions;
-
-        public GetTagsEndpoint(IOptions<JwtAuthOptions> jwtAuthOptions)
-        {
-            _jwtAuthOptions = jwtAuthOptions.Value;
-        }
-
         public override void Configure()
         {
             Get(EndpointRoutes.TagsBaseRoute);
-            Claims(_jwtAuthOptions.UserIdClaim);
+            Claims(JwtAuthConstants.UserIdClaim);
         }
 
         public override async Task HandleAsync(CancellationToken ct)

@@ -2,8 +2,6 @@
 
 	<PropertyGroup>
 		<UserSecretsId>3af62b9c-262c-4dd7-8858-642688b5bcdc</UserSecretsId>
-		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,6 +17,7 @@
 		<ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
 		<ProjectReference Include="..\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />
 		<ProjectReference Include="..\Fylum.Postgres\Fylum.Postgres.csproj" />
+		<ProjectReference Include="..\Fylum.ServiceDefaults\Fylum.ServiceDefaults.csproj" />
 		<ProjectReference Include="..\Fylum.Shared\Fylum.Shared.csproj" />
 		<ProjectReference Include="..\Fylum.Users.Application\Fylum.Users.Application.csproj" />
 		<ProjectReference Include="..\Fylum.Users.Postgres\Fylum.Users.Postgres.csproj" />

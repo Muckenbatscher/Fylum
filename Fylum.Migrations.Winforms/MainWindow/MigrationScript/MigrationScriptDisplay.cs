@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Fylum.Migration.Winforms.MainWindow.MigrationScript
+namespace Fylum.Migrations.Winforms.MainWindow.MigrationScript
 {
     public partial class MigrationScriptDisplay : UserControl
     {
@@ -17,6 +17,7 @@ namespace Fylum.Migration.Winforms.MainWindow.MigrationScript
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string ScriptText 
         { 
             get => LB_ScriptText.Text;
