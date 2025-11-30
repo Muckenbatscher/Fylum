@@ -6,8 +6,7 @@ internal class Program
     {
         var builder = DistributedApplication.CreateBuilder(args);
 
-        var passwordParameter = builder.AddParameter("postgres-password", secret: true);
-        var postgres = builder.AddPostgres("postgres", password: passwordParameter)
+        var postgres = builder.AddPostgres("postgres")
             .WithDataVolume("fylum_pgdata")
             .WithLifetime(ContainerLifetime.Persistent);
         var database = postgres.AddDatabase("fylum");

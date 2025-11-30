@@ -1,4 +1,5 @@
-﻿using Aspire.Hosting.Postgres;
+﻿using Aspire.Hosting;
+using Aspire.Hosting.Postgres;
 using System.Text.Json;
 
 namespace Fylum.AppHost;
@@ -9,40 +10,45 @@ public static class PgAdminExtensions
         this IResourceBuilder<PgAdminContainerResource> pgAdminBuilder,
         IResourceBuilder<PostgresDatabaseResource> defaultConnectedDatabase)
     {
-        // 2. Define paths in the "obj" directory to keep the project clean
-        var configDir = Path.Combine(Directory.GetCurrentDirectory(),  "generated-config");
+        //paths on host machine
+        var configDir = Path.Combine(Directory.GetCurrentDirectory(), "bin", "generated-config");
         Directory.CreateDirectory(configDir);
 
         var serversJsonPath = Path.Combine(configDir, "servers.json");
         var pgPassPath = Path.Combine(configDir, "pgpass");
 
-        // 3. Define Container Paths
-        // pgAdmin runs as user 5050 by default, so we map to a folder it can read
-        var containerPassFilePath = "/pgadmin4/pgpass";
+        //use a TEMP path for the mount, and the FINAL path for the actual usage.
+        var tempPassFilePath = "/tmp/pgpass_temp";
+        var finalPassFilePath = "/var/lib/pgadmin/pgpass";
 
-        // 4. Generate 'pgpass' file
-        // Note: We use the resource name (postgresBuilder.Resource.Name) as the hostname.
         var databaseResource = defaultConnectedDatabase.Resource;
         var serverResource = databaseResource.Parent;
-        // Format: hostname:port:database:username:password
+
+        var valueEvalCancellationToken = new CancellationToken();
         string hostname = serverResource.Name;
-        int port = serverResource.Port.Endpoint.TargetPort!.Value;
+        int port = serverResource.Port.Endpoint.TargetPort ?? 5432;
         string databaseName = databaseResource.DatabaseName;
-        string username = serverResource.UserNameParameter?.Value 
+        var usernameEvalTask = serverResource.UserNameParameter?.GetValueAsync(valueEvalCancellationToken);
+        while (!usernameEvalTask.HasValue || !usernameEvalTask.Value.IsCompleted) { }
+        string username = usernameEvalTask.Value.Result
             ?? serverResource.UserNameReference?.ValueExpression
-            ?? string.Empty;
-        string password = serverResource.PasswordParameter.Value;
+            ?? "postgres";
+        var passwordEvalTask = serverResource.PasswordParameter?.GetValueAsync(valueEvalCancellationToken);
+        while (!passwordEvalTask.HasValue || !passwordEvalTask.Value.IsCompleted) { }
+        string password = passwordEvalTask.Value.Result ?? "";
+
         IEnumerable<string> segments = [
             hostname,
-            port.ToString()!,
+            port.ToString(),
             databaseName,
             username,
             password
-            ];
+        ];
+
+        // pgpass format: hostname:port:database:username:password
         var pgPassContent = string.Join(":", segments);
         File.WriteAllText(pgPassPath, pgPassContent);
 
-        // 5. Generate 'servers.json'
         var serverConfig = new
         {
             Servers = new Dictionary<string, object>
@@ -56,7 +62,7 @@ public static class PgAdminExtensions
                         Username = username,
                         SSLMode = "prefer",
                         MaintenanceDB = databaseName,
-                        PassFile = containerPassFilePath // Point to the file we generated
+                        PassFile = finalPassFilePath // Point to the FINAL path
                     }
                 }
             }
@@ -65,10 +71,19 @@ public static class PgAdminExtensions
         var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
         File.WriteAllText(serversJsonPath, JsonSerializer.Serialize(serverConfig, jsonOptions));
 
-        // 6. Mount the files
         pgAdminBuilder
             .WithBindMount(serversJsonPath, "/pgadmin4/servers.json")
-            .WithBindMount(pgPassPath, containerPassFilePath);
+            // Mount the passfile to the TEMP location, not the final one
+            .WithBindMount(pgPassPath, tempPassFilePath)
+            .WithEnvironment("PGPASSFILE", finalPassFilePath);
+
+        //copy the passfile from the TEMP location to the final location
+        //set the file permission that pgadmin expects in order to be able to use the file
+        pgAdminBuilder.WithEntrypoint("/bin/sh");
+        pgAdminBuilder.WithArgs("-c",
+            $"cp {tempPassFilePath} {finalPassFilePath} && " +
+            $"chmod 600 {finalPassFilePath} && " +
+            $"exec /entrypoint.sh");
 
         return pgAdminBuilder;
     }
