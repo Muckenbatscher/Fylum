@@ -1,6 +1,5 @@
 ﻿using Fylum.Application;
 using Fylum.Migrations.Domain;
-using Fylum.Users.Domain.Groups;
 
 namespace Fylum.Migrations.Application.GetMigrations;
 
@@ -19,7 +18,6 @@ public class GetAllMigrationsCommandHandler : IGetAllMigrationsCommandHandler
         var migrationResults = migrations.Select(MapToResult).ToList();
         return migrationResults;
     }
-
 
     private GetMigrationCommandResult MapToResult(Migration m)
         => new GetMigrationCommandResult(m.ProvidedMigration.Id,
