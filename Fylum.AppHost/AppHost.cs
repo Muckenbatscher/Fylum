@@ -16,6 +16,10 @@ internal class Program
 
         var api = builder.AddProject<Projects.Fylum_Api>("api")
             .WithReference(database, "postgres")
+            .WaitFor(database);
+
+        var migrationsApi = builder.AddProject<Projects.Fylum_Migrations_Api>("migrations-api")
+            .WithReference(database, "postgres")
             .WaitFor(database)
             .WithChildRelationship(migrationPerformingKey)
             .WithMigrationCommands(migrationPerformingKey);

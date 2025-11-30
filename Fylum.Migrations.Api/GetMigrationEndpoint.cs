@@ -4,7 +4,6 @@ using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.GetMigrations;
-using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Migrations.Api;
 
