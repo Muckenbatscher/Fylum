@@ -7,24 +7,14 @@ namespace Fylum.Migrations.Application.GetMigrations;
 public class GetMigrationCommandHandler : IGetMigrationCommandHandler
 {
     private readonly IMigrationService _migrationService;
-    private readonly IUserWithGroupsRepository _userRepo;
 
-    public GetMigrationCommandHandler(IMigrationService migrationService,
-        IUserWithGroupsRepository userRepo)
+    public GetMigrationCommandHandler(IMigrationService migrationService)
     {
         _migrationService = migrationService;
-        _userRepo = userRepo;
     }
 
     public Result<GetMigrationCommandResult> Handle(GetMigrationCommand command)
     {
-        var user = _userRepo.GetByUserId(command.UserId);
-        if (user is null)
-            return Result.Failure(Error.Unauthorized);
-        var isAdmin = user.Groups.Any(g => g.IsAdmin);
-        if (!isAdmin)
-            return Result.Failure(Error.Unauthorized);
-
         var migration = _migrationService.GetMigration(command.MigrationId);
         if (migration == null)
             return Result.Failure(Error.NotFound);
