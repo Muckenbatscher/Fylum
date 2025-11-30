@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Fylum Local DB",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "Username": "postgres",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "fylum",
+      "PassFile": "/pgadmin4/pgpass"
+    }
+  }
+}

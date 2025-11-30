@@ -6,18 +6,12 @@ internal class Program
     {
         var builder = DistributedApplication.CreateBuilder(args);
 
-        var postgres = builder.AddPostgres("postgres")
+        var passwordParameter = builder.AddParameter("postgres-password", secret: true);
+        var postgres = builder.AddPostgres("postgres", password: passwordParameter)
             .WithDataVolume("fylum_pgdata")
-            .WithLifetime(ContainerLifetime.Persistent)
-            .WithPgAdmin(
-            containerName: "pgadmin",
-            configureContainer: pgAdminResource =>
-            {
-                pgAdminResource
-                    .WithVolume(target: "/var/lib/pgadmin", name: "pgadmin_data")
-                    .WithLifetime(ContainerLifetime.Persistent);
-            });
+            .WithLifetime(ContainerLifetime.Persistent);
         var database = postgres.AddDatabase("fylum");
+        postgres.WithPreconfiguredPgAdmin(database, containerName: "pgadmin");
 
         var migrationPerformingKey = builder.AddParameter("MigrationPerformingKey", secret: true);
 
