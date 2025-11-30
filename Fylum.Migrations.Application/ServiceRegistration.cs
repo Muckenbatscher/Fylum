@@ -3,9 +3,8 @@ using Fylum.Migrations.Application.Perform;
 using Fylum.Migrations.Application.Perform.All;
 using Fylum.Migrations.Application.Perform.MinimallyRequired;
 using Fylum.Migrations.Application.Perform.UpTo;
-using Fylum.Migrations.Application.WithPerformedState;
+using Fylum.Migrations.Domain;
 using Fylum.Migrations.Domain.Perform;
-using Fylum.Migrations.Domain.WithPerformedState;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Migrations.Application;
@@ -14,7 +13,7 @@ public static class ServiceRegistration
 {
     public static IServiceCollection AddMigrationApplicationServices(this IServiceCollection services)
     {
-        services.AddTransient<IMigrationWithPerformedStateService, MigrationWithPerformedStateService>();
+        services.AddTransient<IMigrationService, MigrationService>();
         services.AddTransient<IMigrationPerformingService, MigrationPerformingService>();
 
         services.AddScoped<IPerformMigrationUnitOfWorkFactory, PerformMigrationUnitOfWorkFactory>();

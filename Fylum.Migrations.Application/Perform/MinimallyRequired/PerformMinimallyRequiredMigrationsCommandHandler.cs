@@ -1,17 +1,17 @@
 ﻿using Fylum.Application;
 using Fylum.Migrations.Application.Perform.All;
+using Fylum.Migrations.Domain;
 using Fylum.Migrations.Domain.Perform;
-using Fylum.Migrations.Domain.WithPerformedState;
 
 namespace Fylum.Migrations.Application.Perform.MinimallyRequired;
 
 public class PerformMinimallyRequiredMigrationsCommandHandler : IPerformMinimallyRequiredMigrationsCommandHandler
 {
     private readonly IPerformMigrationUnitOfWorkFactory _unitOfWorkFactory;
-    private readonly IMigrationWithPerformedStateService _migrationService;
+    private readonly IMigrationService _migrationService;
 
     public PerformMinimallyRequiredMigrationsCommandHandler(IPerformMigrationUnitOfWorkFactory unitOfWorkFactory,
-        IMigrationWithPerformedStateService migrationService)
+        IMigrationService migrationService)
     {
         _unitOfWorkFactory = unitOfWorkFactory;
         _migrationService = migrationService;
@@ -22,11 +22,11 @@ public class PerformMinimallyRequiredMigrationsCommandHandler : IPerformMinimall
     {
         var migrationsToPerform = _migrationService.GetMinimallyRequiredUnperformedMigrations().ToList();
 
-        var performedMigrations = new List<MigrationWithPerformedState>();
+        var performedMigrations = new List<Migration>();
         using var unitOfWork = _unitOfWorkFactory.Create();
         foreach (var migration in migrationsToPerform)
         {
-            var performed = unitOfWork.MigrationPerformingService.Perform(migration.Migration);
+            var performed = unitOfWork.MigrationPerformingService.Perform(migration.ProvidedMigration);
             performedMigrations.Add(performed);
         }
         unitOfWork.Commit();

@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Fylum.Domain.UnitOfWork;
-using Fylum.Migrations.Domain;
 using Fylum.Migrations.Domain.Perform;
+using Fylum.Migrations.Domain.Providing;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace Fylum.Migrations.Postgres.Perform
             InsertMigration(performedMigration.Migration);
             InsertPerformedMigration(performedMigration);
         }
-        private void InsertMigration(Domain.Migration migration)
+        private void InsertMigration(ProvidedMigration migration)
         {
             var param = new
             {
@@ -120,7 +120,7 @@ namespace Fylum.Migrations.Postgres.Perform
 
         private PerformedMigration MapToDomain(PerformedMigrationQueryModel queryModel)
         {
-            var migration = Migration.Create(
+            var migration = ProvidedMigration.Create(
                 queryModel.MigrationId, 
                 queryModel.MigratioName);
             return PerformedMigration.Create(

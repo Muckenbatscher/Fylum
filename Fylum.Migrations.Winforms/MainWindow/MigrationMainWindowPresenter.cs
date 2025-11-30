@@ -1,5 +1,5 @@
-﻿using Fylum.Migrations.Domain.Perform;
-using Fylum.Migrations.Domain.WithPerformedState;
+﻿using Fylum.Migrations.Domain;
+using Fylum.Migrations.Domain.Perform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +10,11 @@ namespace Fylum.Migrations.Winforms.MainWindow
 {
     public class MigrationMainWindowPresenter
     {
-        private readonly IMigrationWithPerformedStateService _migrationService;
+        private readonly IMigrationService _migrationService;
         private readonly IMigrationPerformingService _performingService;
 
         public MigrationMainWindowPresenter(IMigrationMainWindow view,
-            IMigrationWithPerformedStateService migrationService,
+            IMigrationService migrationService,
             IMigrationPerformingService performingService)
         {
             View = view;
@@ -37,14 +37,14 @@ namespace Fylum.Migrations.Winforms.MainWindow
 
         private void PresentPerformedMigrations()
         {
-            var migrations = _migrationService.GetMigrationsWithPerformedState();
+            var migrations = _migrationService.GetMigrations();
             View.AllMigrations = migrations.Select(CreateMigrationRow);
             View.UnselectAllMigrations();
         }
-        private MigrationRow CreateMigrationRow(MigrationWithPerformedState migrationWithPerformedState)
+        private MigrationRow CreateMigrationRow(Migration migrationWithPerformedState)
         {
             return new MigrationRow(
-                migrationWithPerformedState.Migration,
+                migrationWithPerformedState.ProvidedMigration,
                 migrationWithPerformedState.IsPerformed,
                 migrationWithPerformedState.PerformedState?.TimestampPerformed);
         }

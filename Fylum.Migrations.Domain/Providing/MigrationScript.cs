@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migrations.Domain
+namespace Fylum.Migrations.Domain.Providing
 {
     public class MigrationScript
     {

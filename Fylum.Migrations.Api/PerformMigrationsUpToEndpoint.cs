@@ -4,7 +4,7 @@ using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.Perform;
 using Fylum.Migrations.Application.Perform.UpTo;
-using Fylum.Migrations.Domain.WithPerformedState;
+using Fylum.Migrations.Domain;
 using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Migrations.Api;
@@ -48,9 +48,9 @@ public class PerformMigrationsUpToEndpoint : Endpoint<UserClaimOrMigrationPerfor
         await Send.ResultAsync(TypedResults.Ok(response));
     }
 
-    private MigrationResponse MapToResponse(MigrationWithPerformedState migrationResult)
-        => new(migrationResult.Migration.Id,
-            migrationResult.Migration.Name,
+    private MigrationResponse MapToResponse(Migration migrationResult)
+        => new(migrationResult.ProvidedMigration.Id,
+            migrationResult.ProvidedMigration.Name,
             migrationResult.IsPerformed,
-            migrationResult.Migration.IsMinimallyRequired);
+            migrationResult.ProvidedMigration.IsMinimallyRequired);
 }

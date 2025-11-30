@@ -1,5 +1,5 @@
-﻿using Fylum.Migrations.Domain.WithPerformedState;
+﻿using Fylum.Migrations.Domain;
 
 namespace Fylum.Migrations.Application.Perform.MinimallyRequired;
 
-public record PerformMinimallyRequiredMigrationsResult(IEnumerable<MigrationWithPerformedState> PerformedMigrations);
+public record PerformMinimallyRequiredMigrationsResult(IEnumerable<Migration> PerformedMigrations);

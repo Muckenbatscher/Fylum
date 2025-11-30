@@ -1,15 +1,15 @@
 ﻿using Fylum.Application;
-using Fylum.Migrations.Domain.WithPerformedState;
+using Fylum.Migrations.Domain;
 using Fylum.Users.Domain.Groups;
 
 namespace Fylum.Migrations.Application.GetMigrations;
 
 public class GetMigrationCommandHandler : IGetMigrationCommandHandler
 {
-    private readonly IMigrationWithPerformedStateService _migrationService;
+    private readonly IMigrationService _migrationService;
     private readonly IUserWithGroupsRepository _userRepo;
 
-    public GetMigrationCommandHandler(IMigrationWithPerformedStateService migrationService,
+    public GetMigrationCommandHandler(IMigrationService migrationService,
         IUserWithGroupsRepository userRepo)
     {
         _migrationService = migrationService;
@@ -25,16 +25,16 @@ public class GetMigrationCommandHandler : IGetMigrationCommandHandler
         if (!isAdmin)
             return Result.Failure(Error.Unauthorized);
 
-        var migration = _migrationService.GetMigrationWithPerformedState(command.MigrationId);
+        var migration = _migrationService.GetMigration(command.MigrationId);
         if (migration == null)
             return Result.Failure(Error.NotFound);
 
         return MapToResponse(migration);
     }
 
-    private GetMigrationCommandResult MapToResponse(MigrationWithPerformedState m)
-        => new GetMigrationCommandResult(m.Migration.Id,
-            m.Migration.Name,
+    private GetMigrationCommandResult MapToResponse(Migration m)
+        => new GetMigrationCommandResult(m.ProvidedMigration.Id,
+            m.ProvidedMigration.Name,
             m.IsPerformed,
-            m.Migration.IsMinimallyRequired);
+            m.ProvidedMigration.IsMinimallyRequired);
 }

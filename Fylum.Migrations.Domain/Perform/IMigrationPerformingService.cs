@@ -1,8 +1,8 @@
-﻿using Fylum.Migrations.Domain.WithPerformedState;
+﻿using Fylum.Migrations.Domain.Providing;
 
 namespace Fylum.Migrations.Domain.Perform;
 
 public interface IMigrationPerformingService
 {
-    MigrationWithPerformedState Perform(Migration migration);
+    Migration Perform(ProvidedMigration migration);
 }

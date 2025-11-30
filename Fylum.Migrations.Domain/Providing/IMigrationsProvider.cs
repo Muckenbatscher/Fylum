@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fylum.Migrations.Domain
+namespace Fylum.Migrations.Domain.Providing
 {
     public interface IMigrationsProvider
     {
-        IEnumerable<Migration> GetMigrations();
-        Migration? GetMigrationById(Guid id);
+        IEnumerable<ProvidedMigration> GetMigrations();
+        ProvidedMigration? GetMigrationById(Guid id);
     }
 }

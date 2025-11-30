@@ -1,5 +1,5 @@
-﻿using Fylum.Migrations.Domain.WithPerformedState;
+﻿using Fylum.Migrations.Domain;
 
 namespace Fylum.Migrations.Application.Perform.UpTo;
 
-public record PerformMigrationsUpToResult(IEnumerable<MigrationWithPerformedState> PerformedMigrations);
+public record PerformMigrationsUpToResult(IEnumerable<Migration> PerformedMigrations);

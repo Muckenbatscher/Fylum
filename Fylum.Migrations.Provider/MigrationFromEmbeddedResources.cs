@@ -1,4 +1,4 @@
-using Fylum.Migrations.Domain;
+using Fylum.Migrations.Domain.Providing;
 using System.Reflection;
 using System.Text;
 
@@ -15,10 +15,10 @@ public abstract class MigrationFromEmbeddedResources
 
     protected virtual Assembly ResourceAssembly => GetType().Assembly;
 
-    public Migration CreateMigration()
+    public ProvidedMigration CreateMigration()
     {
         var scripts = GetMigrationScripts();
-        var migration = Migration.Create(Id, Name, scripts);
+        var migration = ProvidedMigration.Create(Id, Name, scripts);
         if (IsMinimallyRequired)
             migration.MakeMinimallyRequired();
         return migration;

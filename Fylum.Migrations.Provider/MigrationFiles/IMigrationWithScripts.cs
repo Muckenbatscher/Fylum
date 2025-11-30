@@ -1,4 +1,4 @@
-﻿using Fylum.Migrations.Domain;
+﻿using Fylum.Migrations.Domain.Providing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +14,10 @@ public interface IMigrationWithScripts
     bool IsMinimallyRequired => false;
     IEnumerable<FileInfo> MigrationScriptFiles { get; }
 
-    public Migration CreateMigration()
+    public ProvidedMigration CreateMigration()
     {
         var scripts = GetMigrationScripts();
-        var migration = Fylum.Migrations.Domain.Migration.Create(Id, Name, scripts);
+        var migration = ProvidedMigration.Create(Id, Name, scripts);
         if (IsMinimallyRequired)
             migration.MakeMinimallyRequired();
         return migration;
