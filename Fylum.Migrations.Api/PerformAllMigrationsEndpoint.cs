@@ -4,16 +4,18 @@ using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.Perform.All;
 using Fylum.Migrations.Domain;
-using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Migrations.Api;
 
-public class PerformAllMigrationsEndpoint : Endpoint<UserClaimOrMigrationPerformingKeyRequest, PerformMigrationsResponse>
+public class PerformAllMigrationsEndpoint : Endpoint<PerformingKeyRequest, PerformMigrationsResponse>
 {
+    private readonly IPerformingKeyRequestValidator _requestValidator;
     private readonly IPerformAllMigrationsCommandHandler _handler;
 
-    public PerformAllMigrationsEndpoint(IPerformAllMigrationsCommandHandler handler)
+    public PerformAllMigrationsEndpoint(IPerformingKeyRequestValidator requestValidator,
+        IPerformAllMigrationsCommandHandler handler)
     {
+        _requestValidator = requestValidator;
         _handler = handler;
     }
 
@@ -23,9 +25,9 @@ public class PerformAllMigrationsEndpoint : Endpoint<UserClaimOrMigrationPerform
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(UserClaimOrMigrationPerformingKeyRequest request, CancellationToken ct)
+    public override async Task HandleAsync(PerformingKeyRequest request, CancellationToken ct)
     {
-        if (!request.IsAuthenticated)
+        if (!_requestValidator.IsAuthenticated(request))
         {
             await Send.ResultAsync(TypedResults.Unauthorized());
             return;

@@ -7,7 +7,7 @@ using Fylum.Migrations.Application.GetMigrations;
 
 namespace Fylum.Migrations.Api;
 
-public class GetMigrationEndpoint : Endpoint<UserClaimRequest, MigrationResponse>
+public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
 {
     private const string IdParamName = "id";
 
@@ -25,10 +25,10 @@ public class GetMigrationEndpoint : Endpoint<UserClaimRequest, MigrationResponse
         Claims(JwtAuthConstants.UserIdClaim);
     }
 
-    public override async Task HandleAsync(UserClaimRequest request, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
         var id = Route<Guid>(IdParamName);
-        var command = new GetMigrationCommand(request.UserId, id);
+        var command = new GetMigrationCommand(id);
         var commandResult = _handler.Handle(command);
 
         var errorHanding = await Send.EnsureErrorResultHandled(commandResult);

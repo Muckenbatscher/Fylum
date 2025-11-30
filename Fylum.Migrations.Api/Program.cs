@@ -3,6 +3,7 @@ using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Api.Shared;
 using Fylum.Migrations.Api;
+using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Postgres;
 using Fylum.Postgres.Shared;
 using System.Reflection;
@@ -24,10 +25,9 @@ namespace Fylum.Migrations.Api
                 .SwaggerDocument();
 
 
-            builder.Services.AddApiSharedServices(options =>
+            builder.Services.Configure<PerformingKeyOptions>(options =>
             {
-                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
-                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
+                options.MigrationPerformingKey = builder.Configuration["MIGRATION_PERFORMING_KEY"]!;
             });
 
             builder.Services.AddPostgresSharedServices(options =>

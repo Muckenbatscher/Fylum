@@ -1,6 +1,5 @@
 ﻿using Fylum.Application;
 using Fylum.Migrations.Domain;
-using Fylum.Users.Domain.Groups;
 
 namespace Fylum.Migrations.Application.GetMigrations;
 
