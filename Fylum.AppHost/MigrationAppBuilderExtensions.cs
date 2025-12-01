@@ -9,7 +9,6 @@ internal static class MigrationAppBuilderExtensions
         public IResourceBuilder<TProject> WithMigrationCommands(IResourceBuilder<ParameterResource> migrationPerformingKey)
         {
             return projectBuilder
-                .WithMigrateMinimallyRequiredCommand(migrationPerformingKey)
                 .WithMigrateAllCommand(migrationPerformingKey);
         }
 
@@ -32,33 +31,13 @@ internal static class MigrationAppBuilderExtensions
                     IconName = "DatabaseCheckmark"
                 });
         }
-        private IResourceBuilder<TProject> WithMigrateMinimallyRequiredCommand(IResourceBuilder<ParameterResource> migrationPerformingKey)
-        {
-            return projectBuilder.WithHttpCommand(
-               path: EndpointRoutes.MigrationsPerformMinimallyRequiredRoute,
-               displayName: "Perform Minimally Required Migrations",
-               commandOptions: new HttpCommandOptions()
-               {
-                   Description = """
-                    Migrates the database to the minimally required state.
-                    The migrations and users contexts are ensured to exist.
-                    """,
-                   PrepareRequest = (context) =>
-                   {
-                       PrepareContextHeaderWithMigrationPerformingKey(context, migrationPerformingKey);
-                       return Task.CompletedTask;
-                   },
-                   IconName = "DatabaseLightning"
-               });
-        }
     }
-
 
     private static void PrepareContextHeaderWithMigrationPerformingKey(
         HttpCommandRequestContext context,
         IResourceBuilder<ParameterResource> migrationPerformingKey)
     {
-        const string performingKeyHeader = "X-MigrationPerforming-Key";
+        var performingKeyHeader = PerfomAuthConstants.MigrationPerformingKeyHeaderName;
         var key = migrationPerformingKey.Resource.GetValueAsync(context.CancellationToken);
         context.Request.Headers.Add(performingKeyHeader, $"Key: {key}");
     }

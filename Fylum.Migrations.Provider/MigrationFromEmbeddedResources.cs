@@ -8,7 +8,6 @@ public abstract class MigrationFromEmbeddedResources
 {
     public abstract Guid Id { get; }
     public abstract string Name { get; }
-    public virtual bool IsMinimallyRequired => false;
 
     protected abstract IEnumerable<string> ResourceFolderNameParts { get; }
     protected abstract IEnumerable<string> ResourceNames { get; }
@@ -18,10 +17,7 @@ public abstract class MigrationFromEmbeddedResources
     public ProvidedMigration CreateMigration()
     {
         var scripts = GetMigrationScripts();
-        var migration = ProvidedMigration.Create(Id, Name, scripts);
-        if (IsMinimallyRequired)
-            migration.MakeMinimallyRequired();
-        return migration;
+        return ProvidedMigration.Create(Id, Name, scripts);
     }
 
     protected IEnumerable<MigrationScript> GetMigrationScripts()

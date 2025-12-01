@@ -25,8 +25,6 @@ namespace Fylum.Migrations.Application
         }
         public IEnumerable<Migration> GetUnperformedMigrations()
             => GetMigrations().Where(m => !m.IsPerformed);
-        public IEnumerable<Migration> GetMinimallyRequiredUnperformedMigrations() 
-            => GetUnperformedMigrations().Where(m => m.ProvidedMigration.IsMinimallyRequired);
 
         public Migration? GetMigration(Guid id)
         {

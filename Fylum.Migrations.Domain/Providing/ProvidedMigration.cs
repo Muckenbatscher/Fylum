@@ -11,7 +11,6 @@ public class ProvidedMigration
 
     public Guid Id { get; private set; }
     public string Name { get; private set; }
-    public bool IsMinimallyRequired { get; private set; }
     public IEnumerable<MigrationScript> MigrationScripts { get; private set; }
 
 
@@ -26,7 +25,4 @@ public class ProvidedMigration
     
     public static ProvidedMigration Create(Guid id, string name)
         => new ProvidedMigration(id, name, Enumerable.Empty<MigrationScript>());
-
-    public void MakeMinimallyRequired()
-        => IsMinimallyRequired = true;
 }

@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using Fylum.Migrations.Api.Shared;
 
 namespace Fylum.Migrations.Api.PerformingAuthentication;
 

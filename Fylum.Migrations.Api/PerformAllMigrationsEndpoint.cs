@@ -49,7 +49,6 @@ public class PerformAllMigrationsEndpoint : Endpoint<PerformingKeyRequest, Perfo
     private MigrationResponse MapToResponse(Migration migrationResult)
         => new(migrationResult.ProvidedMigration.Id,
             migrationResult.ProvidedMigration.Name,
-            migrationResult.IsPerformed,
-            migrationResult.ProvidedMigration.IsMinimallyRequired);
+            migrationResult.IsPerformed);
 
 }

@@ -1,7 +1,5 @@
 ﻿using FastEndpoints;
-using Fylum.Api.Shared;
 using Fylum.Api.Shared.ErrorResult;
-using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.GetMigrations;
 
@@ -22,7 +20,7 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
     {
         var route = $"{EndpointRoutes.MigrationsBaseRoute}/{{{IdParamName}}}";
         Get(route);
-        Claims(JwtAuthConstants.UserIdClaim);
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(CancellationToken ct)
@@ -43,6 +41,5 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
     private MigrationResponse MapToResponse(GetMigrationCommandResult migrationResult)
         => new(migrationResult.Id,
             migrationResult.Name,
-            migrationResult.IsPerformed,
-            migrationResult.IsMinimallyRequired);
+            migrationResult.IsPerformed);
 }

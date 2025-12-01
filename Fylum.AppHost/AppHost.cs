@@ -12,12 +12,11 @@ internal class Program
         var database = postgres.AddDatabase("fylum");
         postgres.WithPreconfiguredPgAdmin(database, containerName: "pgadmin");
 
-        var migrationPerformingKey = builder.AddParameter("MigrationPerformingKey", secret: true);
-
         var api = builder.AddProject<Projects.Fylum_Api>("api")
             .WithReference(database, "postgres")
             .WaitFor(database);
 
+        var migrationPerformingKey = builder.AddParameter("MigrationPerformingKey", secret: true);
         var migrationsApi = builder.AddProject<Projects.Fylum_Migrations_Api>("migrations-api")
             .WithReference(database, "postgres")
             .WaitFor(database)

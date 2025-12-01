@@ -24,6 +24,5 @@ public class GetMigrationCommandHandler : IGetMigrationCommandHandler
     private GetMigrationCommandResult MapToResponse(Migration m)
         => new GetMigrationCommandResult(m.ProvidedMigration.Id,
             m.ProvidedMigration.Name,
-            m.IsPerformed,
-            m.ProvidedMigration.IsMinimallyRequired);
+            m.IsPerformed);
 }
