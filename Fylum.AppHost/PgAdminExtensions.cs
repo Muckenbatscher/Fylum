@@ -24,18 +24,24 @@ public static class PgAdminExtensions
         var databaseResource = defaultConnectedDatabase.Resource;
         var serverResource = databaseResource.Parent;
 
-        var valueEvalCancellationToken = new CancellationToken();
         string hostname = serverResource.Name;
         int port = serverResource.Port.Endpoint.TargetPort ?? 5432;
         string databaseName = databaseResource.DatabaseName;
-        var usernameEvalTask = serverResource.UserNameParameter?.GetValueAsync(valueEvalCancellationToken);
-        while (!usernameEvalTask.HasValue || !usernameEvalTask.Value.IsCompleted) { }
-        string username = usernameEvalTask.Value.Result
+
+        var valueEvalCancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+        var usernameEvalTask = serverResource.UserNameParameter?.GetValueAsync(valueEvalCancellationTokenSource.Token);
+        var usernameEvalValue = usernameEvalTask.HasValue 
+            ? usernameEvalTask.Value.GetAwaiter().GetResult() 
+            : null;
+        string username = usernameEvalValue
             ?? serverResource.UserNameReference?.ValueExpression
             ?? "postgres";
-        var passwordEvalTask = serverResource.PasswordParameter?.GetValueAsync(valueEvalCancellationToken);
-        while (!passwordEvalTask.HasValue || !passwordEvalTask.Value.IsCompleted) { }
-        string password = passwordEvalTask.Value.Result ?? "";
+
+        var passwordEvalTask = serverResource.PasswordParameter?.GetValueAsync(valueEvalCancellationTokenSource.Token);
+        var passwordEvalValue = passwordEvalTask.HasValue 
+            ? passwordEvalTask.Value.GetAwaiter().GetResult()
+            : null;
+        string password = passwordEvalValue ?? "";
 
         IEnumerable<string> segments = [
             hostname,

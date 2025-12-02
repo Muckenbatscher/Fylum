@@ -8,14 +8,6 @@
     <Project Path="Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj" />
     <Project Path="Fylum.Postgres/Fylum.Postgres.csproj" />
   </Folder>
-  <Folder Name="/Api/Fylum.Migrations/">
-    <Project Path="Fylum.Migrations.Api.Shared/Fylum.Migrations.Api.Shared.csproj" Id="b10bec70-40c0-4498-8ea8-764a5e2752e5" />
-    <Project Path="Fylum.Migrations.Api/Fylum.Migrations.Api.csproj" Id="3d2255b0-9529-44a7-a567-abfea9766efe" />
-    <Project Path="Fylum.Migrations.Application/Fylum.Migrations.Application.csproj" />
-    <Project Path="Fylum.Migrations.Domain/Fylum.Migrations.Domain.csproj" />
-    <Project Path="Fylum.Migrations.Postgres/Fylum.Migrations.Postgres.csproj" />
-    <Project Path="Fylum.Migrations.Provider/Fylum.Migrations.Provider.csproj" />
-  </Folder>
   <Folder Name="/Api/Fylum.Users/">
     <Project Path="Fylum.Users.Application/Fylum.Users.Application.csproj" />
     <Project Path="Fylum.Users.Domain/Fylum.Users.Domain.csproj" />
@@ -25,6 +17,14 @@
   <Folder Name="/Desktop/" />
   <Folder Name="/Desktop/Fylum.Migrations/">
     <Project Path="Fylum.Migrations.Winforms/Fylum.Migrations.Winforms.csproj" />
+  </Folder>
+  <Folder Name="/Migrations.Api/">
+    <Project Path="Fylum.Migrations.Api.Shared/Fylum.Migrations.Api.Shared.csproj" Id="b10bec70-40c0-4498-8ea8-764a5e2752e5" />
+    <Project Path="Fylum.Migrations.Api/Fylum.Migrations.Api.csproj" Id="3d2255b0-9529-44a7-a567-abfea9766efe" />
+    <Project Path="Fylum.Migrations.Application/Fylum.Migrations.Application.csproj" />
+    <Project Path="Fylum.Migrations.Domain/Fylum.Migrations.Domain.csproj" />
+    <Project Path="Fylum.Migrations.Postgres/Fylum.Migrations.Postgres.csproj" />
+    <Project Path="Fylum.Migrations.Provider/Fylum.Migrations.Provider.csproj" />
   </Folder>
   <Folder Name="/Shared/">
     <Project Path="Fylum.Shared/Fylum.Shared.csproj" />

@@ -15,7 +15,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Fylum.Api.Shared\Fylum.Api.Shared.csproj" />
 		<ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
-		<ProjectReference Include="..\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />
 		<ProjectReference Include="..\Fylum.Postgres\Fylum.Postgres.csproj" />
 		<ProjectReference Include="..\Fylum.ServiceDefaults\Fylum.ServiceDefaults.csproj" />
 		<ProjectReference Include="..\Fylum.Shared\Fylum.Shared.csproj" />

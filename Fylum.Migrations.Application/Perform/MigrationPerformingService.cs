@@ -1,6 +1,6 @@
 ﻿using Fylum.Migrations.Domain;
 using Fylum.Migrations.Domain.Perform;
-using Fylum.Migrations.Domain.WithPerformedState;
+using Fylum.Migrations.Domain.Providing;
 
 namespace Fylum.Migrations.Application.Perform;
 
@@ -15,7 +15,7 @@ public class MigrationPerformingService : IMigrationPerformingService
         _scriptExecutor = scriptExecutor;
     }
 
-    public MigrationWithPerformedState Perform(Migration migration)
+    public Migration Perform(ProvidedMigration migration)
     {
         foreach (var script in migration.MigrationScripts)
             _scriptExecutor.Execute(script.ScriptCommandText);
@@ -23,12 +23,12 @@ public class MigrationPerformingService : IMigrationPerformingService
         var performedMigration = CreatePerformedMigration(migration);
         _performedMigrationsRepository.AddPerformedMigration(performedMigration);
 
-        return MigrationWithPerformedState.Create(migration, performedMigration.Timestamp);
+        return Migration.Create(migration, performedMigration.Timestamp);
     }
 
-    private static PerformedMigration CreatePerformedMigration(Migration migration)
+    private static PerformedMigration CreatePerformedMigration(ProvidedMigration migration)
     {
-        var dbMigration = Migration.Create(
+        var dbMigration = ProvidedMigration.Create(
             migration.Id,
             migration.Name);
         var performedMigration = PerformedMigration.CreateNew(dbMigration);

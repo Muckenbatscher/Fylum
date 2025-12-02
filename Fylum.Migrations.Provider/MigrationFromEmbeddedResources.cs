@@ -1,4 +1,4 @@
-using Fylum.Migrations.Domain;
+using Fylum.Migrations.Domain.Providing;
 using System.Reflection;
 using System.Text;
 
@@ -8,20 +8,16 @@ public abstract class MigrationFromEmbeddedResources
 {
     public abstract Guid Id { get; }
     public abstract string Name { get; }
-    public virtual bool IsMinimallyRequired => false;
 
     protected abstract IEnumerable<string> ResourceFolderNameParts { get; }
     protected abstract IEnumerable<string> ResourceNames { get; }
 
     protected virtual Assembly ResourceAssembly => GetType().Assembly;
 
-    public Migration CreateMigration()
+    public ProvidedMigration CreateMigration()
     {
         var scripts = GetMigrationScripts();
-        var migration = Migration.Create(Id, Name, scripts);
-        if (IsMinimallyRequired)
-            migration.MakeMinimallyRequired();
-        return migration;
+        return ProvidedMigration.Create(Id, Name, scripts);
     }
 
     protected IEnumerable<MigrationScript> GetMigrationScripts()

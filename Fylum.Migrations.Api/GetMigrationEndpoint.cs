@@ -1,14 +1,11 @@
 ﻿using FastEndpoints;
-using Fylum.Api.Shared;
 using Fylum.Api.Shared.ErrorResult;
-using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.GetMigrations;
-using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Migrations.Api;
 
-public class GetMigrationEndpoint : Endpoint<UserClaimRequest, MigrationResponse>
+public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
 {
     private const string IdParamName = "id";
 
@@ -23,13 +20,13 @@ public class GetMigrationEndpoint : Endpoint<UserClaimRequest, MigrationResponse
     {
         var route = $"{EndpointRoutes.MigrationsBaseRoute}/{{{IdParamName}}}";
         Get(route);
-        Claims(JwtAuthConstants.UserIdClaim);
+        AllowAnonymous();
     }
 
-    public override async Task HandleAsync(UserClaimRequest request, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
         var id = Route<Guid>(IdParamName);
-        var command = new GetMigrationCommand(request.UserId, id);
+        var command = new GetMigrationCommand(id);
         var commandResult = _handler.Handle(command);
 
         var errorHanding = await Send.EnsureErrorResultHandled(commandResult);
@@ -44,6 +41,5 @@ public class GetMigrationEndpoint : Endpoint<UserClaimRequest, MigrationResponse
     private MigrationResponse MapToResponse(GetMigrationCommandResult migrationResult)
         => new(migrationResult.Id,
             migrationResult.Name,
-            migrationResult.IsPerformed,
-            migrationResult.IsMinimallyRequired);
+            migrationResult.IsPerformed);
 }

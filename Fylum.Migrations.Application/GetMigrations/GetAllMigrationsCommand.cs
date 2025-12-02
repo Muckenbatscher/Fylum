@@ -2,4 +2,4 @@
 
 namespace Fylum.Migrations.Application.GetMigrations;
 
-public record GetAllMigrationsCommand(Guid UserId) : ICommand<IEnumerable<GetMigrationCommandResult>>;
+public record GetAllMigrationsCommand() : ICommand<IEnumerable<GetMigrationCommandResult>>;

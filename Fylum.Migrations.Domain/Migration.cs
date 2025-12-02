@@ -1,32 +1,25 @@
-﻿namespace Fylum.Migrations.Domain;
+﻿using Fylum.Migrations.Domain.Providing;
+
+namespace Fylum.Migrations.Domain;
 
 public class Migration
 {
-    private Migration(Guid id, string name, IEnumerable<MigrationScript> migrationScripts)
+    private Migration(ProvidedMigration migration, MigrationPeformedState? performedState)
     {
-        Id = id;
-        Name = name;
-        MigrationScripts = migrationScripts;
+        ProvidedMigration = migration;
+        PerformedState = performedState;
     }
 
-    public Guid Id { get; private set; }
-    public string Name { get; private set; }
-    public bool IsMinimallyRequired { get; private set; }
-    public IEnumerable<MigrationScript> MigrationScripts { get; private set; }
+    public ProvidedMigration ProvidedMigration { get; init; }
+    public MigrationPeformedState? PerformedState { get; private set; }
 
+    public bool IsPerformed => PerformedState != null;
 
-    public static Migration CreateNew(string name)
-        => new Migration(Guid.NewGuid(), name, Enumerable.Empty<MigrationScript>());
-
-    public static Migration CreateNew(string name, IEnumerable<MigrationScript> migrationScripts)
-        => new Migration(Guid.NewGuid(), name, migrationScripts);
-
-    public static Migration Create(Guid id, string name, IEnumerable<MigrationScript> migrationScripts)
-        => new Migration(id, name, migrationScripts);
-    
-    public static Migration Create(Guid id, string name)
-        => new Migration(id, name, Enumerable.Empty<MigrationScript>());
-
-    public void MakeMinimallyRequired()
-        => IsMinimallyRequired = true;
+    public static Migration Create(ProvidedMigration migration, DateTimeOffset? performedTimestamp)
+    {
+        var performedState = performedTimestamp.HasValue
+            ? new MigrationPeformedState(performedTimestamp.Value)
+            : null;
+        return new Migration(migration, performedState);
+    }
 }

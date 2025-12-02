@@ -2,13 +2,13 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Api.Shared;
+using Fylum.Migrations.Api;
+using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Postgres;
 using Fylum.Postgres.Shared;
-using Fylum.Users.Application;
-using Fylum.Users.Postgres;
 using System.Reflection;
 
-namespace Fylum.Api
+namespace Fylum.Migrations.Api
 {
     public class Program
     {
@@ -21,14 +21,13 @@ namespace Fylum.Api
             builder.Services
                 .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration["JwtAuth:SigningKey"])
                 .AddAuthorization()
-                .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
+                .AddFastEndpoints()
                 .SwaggerDocument();
 
 
-            builder.Services.AddApiSharedServices(options =>
+            builder.Services.Configure<PerformingKeyOptions>(options =>
             {
-                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
-                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
+                options.MigrationPerformingKey = builder.Configuration["MIGRATION_PERFORMING_KEY"]!;
             });
 
             builder.Services.AddPostgresSharedServices(options =>
@@ -41,15 +40,8 @@ namespace Fylum.Api
             });
             builder.Services.AddPostgresServices();
 
-            builder.Services.AddUsersApplicationServices(options =>
-            {
-                options.IterationCount = int.Parse(builder.Configuration["PasswordHashing:IterationCount"]!);
-                options.SaltBitsCount = int.Parse(builder.Configuration["PasswordHashing:SaltBits"]!);
-                options.HashedBitsCount = int.Parse(builder.Configuration["PasswordHashing:HashedBits"]!);
-                options.PseudoRandomFunction = builder.Configuration["PasswordHashing:PseudoRandomFunction"]!;
-            });
-            builder.Services.AddUsersPostgresServices();
 
+            builder.Services.AddMigrationsServices();
 
             var app = builder.Build();
 
@@ -67,11 +59,6 @@ namespace Fylum.Api
             app.UsePathBase("/api");
 
             app.Run();
-        }
-
-        private static IEnumerable<Assembly> GetApiEndpointAssemblies()
-        {
-            yield return Assembly.GetExecutingAssembly();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Fylum.Migrations.Domain;
+﻿using Fylum.Migrations.Domain.Providing;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

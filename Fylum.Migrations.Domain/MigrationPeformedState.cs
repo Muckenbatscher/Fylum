@@ -1,3 +1,3 @@
-﻿namespace Fylum.Migrations.Domain.WithPerformedState;
+﻿namespace Fylum.Migrations.Domain;
 
 public record MigrationPeformedState(DateTimeOffset TimestampPerformed);
