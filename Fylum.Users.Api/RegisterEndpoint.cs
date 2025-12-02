@@ -1,12 +1,12 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
-using Fylum.Shared;
-using Fylum.Shared.Users;
+using Fylum.Users.Api.Shared;
 using Fylum.Users.Application.Register;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Fylum.Api.Register
+namespace Fylum.Users.Api
 {
     public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Created<RegisterResponse>, Conflict>>
     {

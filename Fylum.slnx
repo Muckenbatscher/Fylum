@@ -9,6 +9,8 @@
     <Project Path="Fylum.Postgres/Fylum.Postgres.csproj" />
   </Folder>
   <Folder Name="/Api/Fylum.Users/">
+    <Project Path="Fylum.Users.Api.Shared/Fylum.Users.Api.Shared.csproj" Id="7770caee-7e08-458c-b91c-05bb4e46b4c2" />
+    <Project Path="Fylum.Users.Api/Fylum.Users.Api.csproj" Id="fad89faa-82b2-4ad6-9340-8302a2c341bb" />
     <Project Path="Fylum.Users.Application/Fylum.Users.Application.csproj" />
     <Project Path="Fylum.Users.Domain/Fylum.Users.Domain.csproj" />
     <Project Path="Fylum.Users.Postgres/Fylum.Users.Postgres.csproj" />

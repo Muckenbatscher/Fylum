@@ -1,12 +1,12 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
-using Fylum.Shared;
-using Fylum.Shared.Users;
+using Fylum.Users.Api.Shared;
 using Fylum.Users.Application.Login;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Fylum.Api.Login
+namespace Fylum.Users.Api
 {
     public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
     {

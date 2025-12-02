@@ -1,11 +1,11 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
-using Fylum.Shared;
-using Fylum.Shared.Users;
+using Fylum.Users.Api.Shared;
 using Fylum.Users.Application.GetUser;
+using Microsoft.AspNetCore.Http;
 
-namespace Fylum.Api.Users
+namespace Fylum.Users.Api
 {
     public class GetUserEndpoint : EndpointWithoutRequest<UserResponse>
     {
