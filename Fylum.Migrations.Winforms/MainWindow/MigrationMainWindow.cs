@@ -23,7 +23,7 @@ namespace Fylum.Migrations.Winforms.MainWindow
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IEnumerable<MigrationRow> AllMigrations
         {
-            get => (IEnumerable<MigrationRow>)DG_Migrations.DataSource;
+            get => (IEnumerable<MigrationRow>)DG_Migrations.DataSource!;
             set => DG_Migrations.DataSource = value.ToList();
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -70,12 +70,13 @@ namespace Fylum.Migrations.Winforms.MainWindow
         {
             if (e.ColumnIndex != CL_IsPerformed.Index || e.RowIndex < 0)
                 return;
-            if (e.Graphics == null)
+            if (e.CellStyle == null || e.Graphics == null)
                 return;
 
             var datagrid = (DataGridView)sender;
             var row = datagrid.Rows[e.RowIndex];
-            var migration = (MigrationRow)row.DataBoundItem;
+            if (row.DataBoundItem is not MigrationRow migration)
+                return;
             var image = migration.IsPerformed
                 ? Properties.Resources.VerifiedIcon
                 : new Bitmap(1, 1);

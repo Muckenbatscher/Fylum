@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fylum.Domain.Tags
 {
-    public abstract class TagValue<T> : Tag
+    public abstract class TagValue<T> : Tag 
+        where T : notnull
     {
-        public T Value { get; set; }
+        public T Value { get; set; } = default!;
     }
 }
