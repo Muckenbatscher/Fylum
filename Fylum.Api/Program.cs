@@ -4,6 +4,7 @@ using FastEndpoints.Swagger;
 using Fylum.Api.Shared;
 using Fylum.Postgres;
 using Fylum.Postgres.Shared;
+using Fylum.Users.Api;
 using Fylum.Users.Application;
 using Fylum.Users.Postgres;
 using System.Reflection;
@@ -72,6 +73,7 @@ namespace Fylum.Api
         private static IEnumerable<Assembly> GetApiEndpointAssemblies()
         {
             yield return Assembly.GetExecutingAssembly();
+            yield return typeof(UsersModule).Assembly;
         }
     }
 }

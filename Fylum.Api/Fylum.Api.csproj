@@ -18,6 +18,7 @@
 		<ProjectReference Include="..\Fylum.Postgres\Fylum.Postgres.csproj" />
 		<ProjectReference Include="..\Fylum.ServiceDefaults\Fylum.ServiceDefaults.csproj" />
 		<ProjectReference Include="..\Fylum.Shared\Fylum.Shared.csproj" />
+		<ProjectReference Include="..\Fylum.Users.Api\Fylum.Users.Api.csproj" />
 		<ProjectReference Include="..\Fylum.Users.Application\Fylum.Users.Application.csproj" />
 		<ProjectReference Include="..\Fylum.Users.Postgres\Fylum.Users.Postgres.csproj" />
 	</ItemGroup>
