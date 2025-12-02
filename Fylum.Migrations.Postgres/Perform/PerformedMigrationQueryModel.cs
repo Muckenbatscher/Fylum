@@ -11,6 +11,6 @@ namespace Fylum.Migrations.Postgres.Perform
         public Guid Id { get; set; }
         public DateTimeOffset Timestamp { get; set; }
         public Guid MigrationId { get; set; }
-        public string MigratioName { get; set; }
+        public string MigratioName { get; set; } = string.Empty;
     }
 }
