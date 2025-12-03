@@ -1,12 +1,10 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using Fylum.Api.Shared;
-using Fylum.Migrations.Api;
 using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Postgres;
 using Fylum.Postgres.Shared;
-using System.Reflection;
+using Scalar.AspNetCore;
 
 namespace Fylum.Migrations.Api
 {
@@ -52,7 +50,11 @@ namespace Fylum.Migrations.Api
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwaggerGen();
+                app.UseSwaggerGen(options =>
+                {
+                    options.Path = "/openapi/{documentName}.json";
+                });
+                app.MapScalarApiReference();
             }
 
             app.UseHttpsRedirection();

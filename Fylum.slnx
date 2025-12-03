@@ -15,7 +15,9 @@
     <Project Path="Fylum.Users.Domain/Fylum.Users.Domain.csproj" />
     <Project Path="Fylum.Users.Postgres/Fylum.Users.Postgres.csproj" />
   </Folder>
-  <Folder Name="/Client/" />
+  <Folder Name="/Client/">
+    <Project Path="Fylum.Client/Fylum.Client.csproj" Id="e868982b-3a05-4931-aff8-8bea19109f98" />
+  </Folder>
   <Folder Name="/Desktop/" />
   <Folder Name="/Desktop/Fylum.Migrations/">
     <Project Path="Fylum.Migrations.Winforms/Fylum.Migrations.Winforms.csproj" />

@@ -8,6 +8,7 @@ using Fylum.Users.Api;
 using Fylum.Users.Application;
 using Fylum.Users.Postgres;
 using System.Reflection;
+using Scalar.AspNetCore;
 
 namespace Fylum.Api
 {
@@ -28,17 +29,17 @@ namespace Fylum.Api
 
             builder.Services.AddApiSharedServices(options =>
             {
-                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"]!;
-                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"]!);
+                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"] ?? string.Empty;
+                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"] ?? "1");
             });
 
             builder.Services.AddPostgresSharedServices(options =>
             {
-                options.HostName = builder.Configuration["POSTGRES_HOST"]!;
-                options.Port = int.Parse(builder.Configuration["POSTGRES_PORT"]!);
-                options.DatabaseName = builder.Configuration["POSTGRES_DATABASE"]!;
-                options.Username = builder.Configuration["POSTGRES_USERNAME"]!;
-                options.Password = builder.Configuration["POSTGRES_PASSWORD"]!;
+                options.HostName = builder.Configuration["POSTGRES_HOST"] ?? string.Empty;
+                options.Port = int.Parse(builder.Configuration["POSTGRES_PORT"] ?? "0");
+                options.DatabaseName = builder.Configuration["POSTGRES_DATABASE"] ?? string.Empty;
+                options.Username = builder.Configuration["POSTGRES_USERNAME"] ?? string.Empty;
+                options.Password = builder.Configuration["POSTGRES_PASSWORD"] ?? string.Empty;
             });
             builder.Services.AddPostgresServices();
 
@@ -61,7 +62,11 @@ namespace Fylum.Api
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwaggerGen();
+                app.UseSwaggerGen(options =>
+                {
+                    options.Path = "/openapi/{documentName}.json";
+                });
+                app.MapScalarApiReference();
             }
 
             app.UseHttpsRedirection();
