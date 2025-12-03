@@ -26,12 +26,11 @@ public class Program
             .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
             .SwaggerDocument();
 
-
-        builder.Services.AddApiSharedServices(options =>
-        {
-            options.SigningKey = builder.Configuration["JwtAuth:SigningKey"] ?? string.Empty;
-            options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"] ?? "1");
-        });
+            builder.Services.AddApiSharedServices(options =>
+            {
+                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"] ?? string.Empty;
+                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"] ?? "1");
+            });
 
         builder.Services.AddPostgresSharedServices(options =>
         {
