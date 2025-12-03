@@ -14,12 +14,16 @@ internal class Program
 
         var api = builder.AddProject<Projects.Fylum_Api>("api")
             .WithReference(database, "postgres")
-            .WaitFor(database);
+            .WaitFor(database)
+            .WithScalarDisplayNameUrls()
+            .WithOpenApiSpecUrl();
 
         var migrationPerformingKey = builder.AddParameter("MigrationPerformingKey", secret: true);
         var migrationsApi = builder.AddProject<Projects.Fylum_Migrations_Api>("migrations-api")
             .WithReference(database, "postgres")
             .WaitFor(database)
+            .WithScalarDisplayNameUrls()
+            .WithOpenApiSpecUrl()
             .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey)
             .WithChildRelationship(migrationPerformingKey)
             .WithMigrationCommands(migrationPerformingKey);
