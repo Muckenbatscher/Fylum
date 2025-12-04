@@ -1,3 +1,3 @@
 ﻿namespace Fylum.Users.Application.Login;
 
-public record UserLoginResult(Guid? UserId);
+public record UserLoginResult(Guid UserId, Guid RefreshTokenId);

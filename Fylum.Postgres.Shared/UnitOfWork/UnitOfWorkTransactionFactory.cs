@@ -23,22 +23,14 @@ public class UnitOfWorkTransactionFactory : IUnitOfWorkTransactionFactory
             _connection = _connectionProvider.GetOpenedConnection();
             _transaction = _connection.BeginTransaction();
         }
-        if (_transaction == null)
-        {
-            _transaction = _connection.BeginTransaction();
-        }
+        _transaction ??= _connection.BeginTransaction();
 
         return new UnitOfWorkTransaction(_connection, _transaction);
     }
 
-
     public void Dispose()
     {
-        if (_transaction != null)
-            _transaction.Dispose();
-
-        if (_connection != null)
-            _connection.Dispose();
+        _transaction?.Dispose();
+        _connection?.Dispose();
     }
-
 }

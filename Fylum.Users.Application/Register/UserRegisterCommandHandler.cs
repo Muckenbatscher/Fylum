@@ -31,7 +31,8 @@ public class UserRegisterCommandHandler : IUserRegisterCommandHandler
         repository.Create(userLogin);
         unitOfWork.Commit();
 
-        return new UserRegisterResult(userLogin.User.Id);
-        ;
+        //TODO: Store refresh token in database with expiry
+        var refreshTokenId = Guid.NewGuid();
+        return new UserRegisterResult(userLogin.User.Id, refreshTokenId);
     }
 }

@@ -6,5 +6,5 @@ public class EndpointRoutes
     public static string UserGroupsBaseRoute => $"{UsersBaseRoute}/groups";
     public static string LoginRoute => "login";
     public static string RegisterRoute => "register";
-    public static string RefreshTokenRoute => "token/refresh";
+    public static string TokenRefreshRoute => "token/refresh";
 }

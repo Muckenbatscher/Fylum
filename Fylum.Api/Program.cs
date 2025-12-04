@@ -26,11 +26,12 @@ public class Program
             .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
             .SwaggerDocument();
 
-            builder.Services.AddApiSharedServices(options =>
-            {
-                options.SigningKey = builder.Configuration["JwtAuth:SigningKey"] ?? string.Empty;
-                options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"] ?? "1");
-            });
+        builder.Services.AddApiSharedServices(options =>
+        {
+            options.SigningKey = builder.Configuration["JwtAuth:SigningKey"] ?? string.Empty;
+            options.AccessTokenExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:AccessTokenExpirationMinutes"] ?? "1");
+            options.RefreshTokenExpirationInDays = int.Parse(builder.Configuration["JwtAuth:RefreshTokenExpirationDays"] ?? "1");
+        });
 
         builder.Services.AddPostgresSharedServices(options =>
         {
@@ -51,7 +52,6 @@ public class Program
         });
         builder.Services.AddUsersPostgresServices();
 
-
         var app = builder.Build();
 
         app.UseAuthentication()
@@ -61,10 +61,7 @@ public class Program
 
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwaggerGen(options =>
-            {
-                options.Path = "/openapi/{documentName}.json";
-            });
+            app.UseSwaggerGen(options => options.Path = "/openapi/{documentName}.json");
             app.MapScalarApiReference();
         }
 

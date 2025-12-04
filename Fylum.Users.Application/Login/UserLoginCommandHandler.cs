@@ -29,6 +29,8 @@ public class UserLoginCommandHandler : IUserLoginCommandHandler
         if (!passwordValid)
             return Result.Failure<UserLoginResult>(Error.Unauthorized);
 
-        return new UserLoginResult(userLogin.User.Id);
+        //TODO: Store refresh token in database with expiry
+        var refreshTokenId = Guid.NewGuid();
+        return new UserLoginResult(userLogin.User.Id, refreshTokenId);
     }
 }
