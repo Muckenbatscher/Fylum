@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Migrations.Domain.Perform;
 
-namespace Fylum.Migrations.Domain.Perform
+public interface IScriptExecutor
 {
-    public interface IScriptExecutor
-    {
-        void Execute(string script);
-    }
+    void Execute(string script);
 }

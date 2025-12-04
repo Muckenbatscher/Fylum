@@ -5,7 +5,7 @@ internal class UsersMigration : MigrationFromEmbeddedResources
     public override Guid Id => Guid.Parse("3ead4e8f-16dd-4219-953a-600d0c8f035d");
     public override string Name => "1_Users";
 
-    protected override IEnumerable<string> ResourceFolderNameParts 
+    protected override IEnumerable<string> ResourceFolderNameParts
         => ["MigrationFiles", "1_Users"];
 
     protected override IEnumerable<string> ResourceNames

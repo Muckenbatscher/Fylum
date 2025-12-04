@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Application;
 
-namespace Fylum.Application
+public interface ICommand
 {
-    public interface ICommand
-    {
-    }
+}
 
-    public interface ICommand<TResult> : ICommand
-    {
-    }
+public interface ICommand<TResult> : ICommand
+{
 }

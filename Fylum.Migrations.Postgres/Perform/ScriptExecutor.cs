@@ -1,28 +1,22 @@
 ﻿using Dapper;
 using Fylum.Domain.UnitOfWork;
 using Fylum.Migrations.Domain.Perform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Fylum.Migrations.Postgres.Perform
+namespace Fylum.Migrations.Postgres.Perform;
+
+public class ScriptExecutor : IScriptExecutor
 {
-    public class ScriptExecutor : IScriptExecutor
+    private readonly IUnitOfWorkTransactionFactory _transactionFactory;
+
+    public ScriptExecutor(IUnitOfWorkTransactionFactory transactionfactory)
     {
-        private readonly IUnitOfWorkTransactionFactory _transactionFactory;
+        _transactionFactory = transactionfactory;
+    }
 
-        public ScriptExecutor(IUnitOfWorkTransactionFactory transactionfactory)
-        {
-            _transactionFactory = transactionfactory;
-        }
-
-        public void Execute(string script)
-        {
-            var transaction = _transactionFactory.GetTransaction();
-            transaction.Connection.Execute(script, 
-                transaction: transaction.Transaction);
-        }
+    public void Execute(string script)
+    {
+        var transaction = _transactionFactory.GetTransaction();
+        transaction.Connection.Execute(script,
+            transaction: transaction.Transaction);
     }
 }

@@ -23,8 +23,8 @@ public static class ProjectResourceUrlsExtensions
         });
     }
 
-    public static IResourceBuilder<ProjectResource> WithOpenApiSpecUrl(this IResourceBuilder<ProjectResource> project, 
-        string openApiSpecPath = "/openapi/v1.json", 
+    public static IResourceBuilder<ProjectResource> WithOpenApiSpecUrl(this IResourceBuilder<ProjectResource> project,
+        string openApiSpecPath = "/openapi/v1.json",
         string displayText = "Open API Spec",
         string endpointName = "https",
         UrlDisplayLocation displayLocation = UrlDisplayLocation.DetailsOnly)

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Users.Api.Shared;
 
-namespace Fylum.Users.Api.Shared
+public class UserResponse
 {
-    public class UserResponse
-    {
-        public Guid Id { get; set; }
-        public string Username { get; set; } = string.Empty;
-        public bool IsActive { get; set; }
-    }
+    public Guid Id { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public bool IsActive { get; set; }
 }

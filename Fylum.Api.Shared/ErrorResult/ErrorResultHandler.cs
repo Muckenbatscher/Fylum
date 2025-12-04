@@ -7,8 +7,8 @@ namespace Fylum.Api.Shared.ErrorResult;
 public static class ErrorResultHandler
 {
     public static async Task<ErrorResultHandlingResponse> EnsureErrorResultHandled<TRequest, TResponse, TResultValue>(
-        this ResponseSender<TRequest, TResponse> send, 
-        Result<TResultValue> result) 
+        this ResponseSender<TRequest, TResponse> send,
+        Result<TResultValue> result)
         where TRequest : notnull
     {
         if (result.IsSuccess)

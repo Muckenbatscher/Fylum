@@ -33,7 +33,7 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
         if (errorHanding.ErrorResultHandlingRequired)
             return;
 
-        var migration= commandResult.Value;
+        var migration = commandResult.Value;
         var response = MapToResponse(migration);
         await Send.ResultAsync(TypedResults.Ok(response));
     }

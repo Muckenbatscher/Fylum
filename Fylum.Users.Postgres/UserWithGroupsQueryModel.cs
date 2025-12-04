@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Users.Postgres;
 
-namespace Fylum.Users.Postgres
+internal class UserWithGroupsQueryModel
 {
-    internal class UserWithGroupsQueryModel
-    {
-        public Guid UserId { get; set; }
-        public string Username { get; set; } = string.Empty;
-        public bool IsActive { get; set; }
-        public Guid? UserGroupId { get; set; }
-        public string? UserGroupName { get; set; }
-    }
+    public Guid UserId { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public bool IsActive { get; set; }
+    public Guid? UserGroupId { get; set; }
+    public string? UserGroupName { get; set; }
 }

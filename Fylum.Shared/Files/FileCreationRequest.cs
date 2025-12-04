@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Shared.Files;
 
-namespace Fylum.Shared.Files
+public class FileCreationRequest
 {
-    public class FileCreationRequest
-    {
-        public string Name { get; set; } = string.Empty;
-        public Guid ParentFolderId { get; set; }
-    }
+    public string Name { get; set; } = string.Empty;
+    public Guid ParentFolderId { get; set; }
 }

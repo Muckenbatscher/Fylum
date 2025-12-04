@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
-namespace Fylum.Postgres.Shared.Connection
+namespace Fylum.Postgres.Shared.Connection;
+
+public interface IOpenedConnectionProvider
 {
-    public interface IOpenedConnectionProvider
-    {
-        IDbConnection GetOpenedConnection();
-    }
+    IDbConnection GetOpenedConnection();
 }

@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
-namespace Fylum.Postgres.Shared.Connection
+namespace Fylum.Postgres.Shared.Connection;
+
+public class OpenedConnectionProvider : IOpenedConnectionProvider
 {
-    public class OpenedConnectionProvider : IOpenedConnectionProvider
+    private readonly IConnectionProvider _connectionProvider;
+
+    public OpenedConnectionProvider(IConnectionProvider connectionProvider)
     {
-        private readonly IConnectionProvider _connectionProvider;
+        _connectionProvider = connectionProvider;
+    }
 
-        public OpenedConnectionProvider(IConnectionProvider connectionProvider)
-        {
-            _connectionProvider = connectionProvider;
-        }
+    public IDbConnection GetOpenedConnection()
+    {
+        var connection = _connectionProvider.CreateConnection();
+        if (connection.State != ConnectionState.Open)
+            connection.Open();
 
-        public IDbConnection GetOpenedConnection()
-        {
-            var connection = _connectionProvider.CreateConnection();
-            if (connection.State != ConnectionState.Open)
-                connection.Open();
-
-            return connection;
-        }
+        return connection;
     }
 }

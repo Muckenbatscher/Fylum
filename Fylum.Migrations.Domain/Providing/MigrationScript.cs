@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Migrations.Domain.Providing;
 
-namespace Fylum.Migrations.Domain.Providing
+public class MigrationScript
 {
-    public class MigrationScript
+    public MigrationScript(string scriptCommandText)
     {
-        public MigrationScript(string scriptCommandText)
-        {
-            ScriptCommandText = scriptCommandText;
-        }
-
-        public string ScriptCommandText { get; }
+        ScriptCommandText = scriptCommandText;
     }
+
+    public string ScriptCommandText { get; }
 }

@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Domain.Files;
 
-namespace Fylum.Domain.Files
+public interface IFileRepository
 {
-    public interface IFileRepository
-    {
-        File Get(Guid id);
-        IEnumerable<File> GetAllInFolder(Guid folderId);
-        void Create(File file);
-        void Delete(Guid id);
-        void Update(Guid id, File file);
-    }
+    File Get(Guid id);
+    IEnumerable<File> GetAllInFolder(Guid folderId);
+    void Create(File file);
+    void Delete(Guid id);
+    void Update(Guid id, File file);
 }

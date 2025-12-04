@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Application;
 
-namespace Fylum.Application
+public class Error
 {
-    public class Error
+    private Error(ErrorType type)
     {
-        private Error(ErrorType type)
-        {
-            Type = type;
-        }
-
-        public ErrorType Type { get; }
-
-        public static Error NotFound => new(ErrorType.NotFound);
-        public static Error Validation => new(ErrorType.Validation);
-        public static Error Unauthorized => new(ErrorType.Unauthorized);
-        public static Error Conflict => new(ErrorType.Conflict);
-        public static Error Internal => new(ErrorType.Internal);
+        Type = type;
     }
+
+    public ErrorType Type { get; }
+
+    public static Error NotFound => new(ErrorType.NotFound);
+    public static Error Validation => new(ErrorType.Validation);
+    public static Error Unauthorized => new(ErrorType.Unauthorized);
+    public static Error Conflict => new(ErrorType.Conflict);
+    public static Error Internal => new(ErrorType.Internal);
 }
