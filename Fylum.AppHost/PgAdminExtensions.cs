@@ -5,9 +5,12 @@ namespace Fylum.AppHost;
 
 public static class PgAdminExtensions
 {
+    private static JsonSerializerOptions JsonSerializerOptions
+        => field ?? new JsonSerializerOptions { WriteIndented = true };
+
     public static IResourceBuilder<PgAdminContainerResource> WithSecureDynamicConfiguration(
-        this IResourceBuilder<PgAdminContainerResource> pgAdminBuilder,
-        IResourceBuilder<PostgresDatabaseResource> defaultConnectedDatabase)
+            this IResourceBuilder<PgAdminContainerResource> pgAdminBuilder,
+            IResourceBuilder<PostgresDatabaseResource> defaultConnectedDatabase)
     {
         //paths on host machine
         var configDir = Path.Combine(Directory.GetCurrentDirectory(), "bin", "generated-config");
@@ -73,8 +76,7 @@ public static class PgAdminExtensions
             }
         };
 
-        var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
-        File.WriteAllText(serversJsonPath, JsonSerializer.Serialize(serverConfig, jsonOptions));
+        File.WriteAllText(serversJsonPath, JsonSerializer.Serialize(serverConfig, JsonSerializerOptions));
 
         pgAdminBuilder
             .WithBindMount(serversJsonPath, "/pgadmin4/servers.json")
