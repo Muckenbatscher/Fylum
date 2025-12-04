@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Postgres.Shared.TableSpec;
 
-namespace Fylum.Postgres.Shared.TableSpec
+public class ColumnMappingSpec
 {
-    public class ColumnMappingSpec
-    {
-        public string ColumnName { get; set; }
-        public string MappedPropertyName { get; set; }
+    public string ColumnName { get; set; }
+    public string MappedPropertyName { get; set; }
 
-        public ColumnMappingSpec(string columnName, string mappedPropertyName)
-        {
-            ColumnName = columnName;
-            MappedPropertyName = mappedPropertyName;
-        }
+    public ColumnMappingSpec(string columnName, string mappedPropertyName)
+    {
+        ColumnName = columnName;
+        MappedPropertyName = mappedPropertyName;
     }
 }

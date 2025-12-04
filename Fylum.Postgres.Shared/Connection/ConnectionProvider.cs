@@ -1,26 +1,20 @@
 ﻿using Npgsql;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Fylum.Postgres.Shared.Connection
+namespace Fylum.Postgres.Shared.Connection;
+
+public class ConnectionProvider : IConnectionProvider
 {
-    public class ConnectionProvider : IConnectionProvider
+    private readonly IConnectionStringProvider _connectionStringProvider;
+
+    public ConnectionProvider(IConnectionStringProvider connectionStringProvider)
     {
-        private readonly IConnectionStringProvider _connectionStringProvider;
+        _connectionStringProvider = connectionStringProvider;
+    }
 
-        public ConnectionProvider(IConnectionStringProvider connectionStringProvider)
-        {
-            _connectionStringProvider = connectionStringProvider;
-        }
-
-        public IDbConnection CreateConnection()
-        {
-            var connectionString = _connectionStringProvider.GetConnectionString();
-            return new NpgsqlConnection(connectionString);
-        }
+    public IDbConnection CreateConnection()
+    {
+        var connectionString = _connectionStringProvider.GetConnectionString();
+        return new NpgsqlConnection(connectionString);
     }
 }

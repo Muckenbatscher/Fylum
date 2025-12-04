@@ -1,20 +1,14 @@
 ﻿using Fylum.Postgres.Shared.TableSpec;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Fylum.Postgres.Shared.QueryBuilding
+namespace Fylum.Postgres.Shared.QueryBuilding;
+
+internal class SelectQueryBuilder
 {
-    internal class SelectQueryBuilder
+    private readonly ITableMappingSpecProvider _tableMappingSpecProvider;
+
+    public SelectQueryBuilder(ITableMappingSpecProvider tableMappingSpecProvider)
     {
-        private readonly ITableMappingSpecProvider _tableMappingSpecProvider;
-
-        public SelectQueryBuilder(ITableMappingSpecProvider tableMappingSpecProvider)
-        {
-            _tableMappingSpecProvider = tableMappingSpecProvider;
-        }
-
+        _tableMappingSpecProvider = tableMappingSpecProvider;
     }
+
 }

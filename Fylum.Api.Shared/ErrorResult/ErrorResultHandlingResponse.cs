@@ -9,6 +9,6 @@ public class ErrorResultHandlingResponse
     public bool ErrorResultHandlingRequired { get; }
 
 
-    public static implicit operator ErrorResultHandlingResponse(bool errorResultHandlingRequired) 
+    public static implicit operator ErrorResultHandlingResponse(bool errorResultHandlingRequired)
         => new ErrorResultHandlingResponse(errorResultHandlingRequired);
 }

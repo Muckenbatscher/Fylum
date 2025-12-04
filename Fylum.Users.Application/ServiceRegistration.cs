@@ -4,31 +4,25 @@ using Fylum.Users.Application.Register;
 using Fylum.Users.Domain.Password;
 using Fylum.Users.Domain.Register;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Fylum.Users.Application
+namespace Fylum.Users.Application;
+
+public static class ServiceRegistration
 {
-    public static class ServiceRegistration
+    public static IServiceCollection AddUsersApplicationServices(this IServiceCollection services,
+        Action<PasswordHashSettings> passwodHashSettingsOptions)
     {
-        public static IServiceCollection AddUsersApplicationServices(this IServiceCollection services, 
-            Action<PasswordHashSettings> passwodHashSettingsOptions)
-        {
-            services.Configure(passwodHashSettingsOptions);
+        services.Configure(passwodHashSettingsOptions);
 
-            services.AddTransient<IPasswordHashCalculator, PasswordHashCalculator>();
-            services.AddTransient<IPasswordLoginVerification, PasswordLoginVerification>();
+        services.AddTransient<IPasswordHashCalculator, PasswordHashCalculator>();
+        services.AddTransient<IPasswordLoginVerification, PasswordLoginVerification>();
 
-            services.AddScoped<IUserRegisterUnitOfWorkFactory, UserRegisterUnitOfWorkFactory>();
+        services.AddScoped<IUserRegisterUnitOfWorkFactory, UserRegisterUnitOfWorkFactory>();
 
-            services.AddTransient<IUserLoginCommandHandler, UserLoginCommandHandler>();
-            services.AddTransient<IUserRegisterCommandHandler, UserRegisterCommandHandler>();
-            services.AddTransient<IGetUserCommandHandler, GetUserCommandHandler>();
+        services.AddTransient<IUserLoginCommandHandler, UserLoginCommandHandler>();
+        services.AddTransient<IUserRegisterCommandHandler, UserRegisterCommandHandler>();
+        services.AddTransient<IGetUserCommandHandler, GetUserCommandHandler>();
 
-            return services;
-        }
+        return services;
     }
 }

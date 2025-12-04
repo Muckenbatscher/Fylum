@@ -6,7 +6,7 @@ public class PerformMigrationUnitOfWork : UnitOfWork, IUnitOfWork
 {
     public IMigrationPerformingService MigrationPerformingService { get; init; }
 
-    public PerformMigrationUnitOfWork(IUnitOfWorkTransactionFactory transactionFactory, 
+    public PerformMigrationUnitOfWork(IUnitOfWorkTransactionFactory transactionFactory,
         IMigrationPerformingService migrationPerformingService)
         : base(transactionFactory)
     {

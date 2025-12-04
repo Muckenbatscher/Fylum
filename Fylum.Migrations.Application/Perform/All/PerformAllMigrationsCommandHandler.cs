@@ -1,5 +1,4 @@
 ﻿using Fylum.Application;
-using Fylum.Migrations.Application.Perform.UpTo;
 using Fylum.Migrations.Domain;
 using Fylum.Migrations.Domain.Perform;
 
@@ -10,7 +9,7 @@ public class PerformAllMigrationsCommandHandler : IPerformAllMigrationsCommandHa
     private readonly IPerformMigrationUnitOfWorkFactory _unitOfWorkFactory;
     private readonly IMigrationService _migrationService;
 
-    public PerformAllMigrationsCommandHandler(IPerformMigrationUnitOfWorkFactory unitOfWorkFactory, 
+    public PerformAllMigrationsCommandHandler(IPerformMigrationUnitOfWorkFactory unitOfWorkFactory,
         IMigrationService migrationService)
     {
         _unitOfWorkFactory = unitOfWorkFactory;

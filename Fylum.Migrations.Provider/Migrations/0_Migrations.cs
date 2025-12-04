@@ -6,7 +6,7 @@ internal class MigrationsMigration : MigrationFromEmbeddedResources
     public override string Name => "0_Migrations";
 
 
-    protected override IEnumerable<string> ResourceFolderNameParts 
+    protected override IEnumerable<string> ResourceFolderNameParts
         => ["MigrationFiles", "0_Migrations"];
 
     protected override IEnumerable<string> ResourceNames

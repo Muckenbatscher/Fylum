@@ -1,7 +1,6 @@
-﻿namespace Fylum.Postgres.Shared.TableSpec
+﻿namespace Fylum.Postgres.Shared.TableSpec;
+
+public interface IPostgresColumnNameTranslator
 {
-    public interface IPostgresColumnNameTranslator
-    {
-        string GetNormalizedPostgresColumnName(string propertyName);
-    }
+    string GetNormalizedPostgresColumnName(string propertyName);
 }

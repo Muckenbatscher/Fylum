@@ -1,31 +1,25 @@
 ﻿using Fylum.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Fylum.Users.Domain
+namespace Fylum.Users.Domain;
+
+public class User : IdentifiableEntity<Guid>
 {
-    public class User : IdentifiableEntity<Guid>
+    private User(Guid id, string username, bool isActive)
     {
-        private User(Guid id, string username, bool isActive)
-        {
-            Id = id;
-            Username = username;
-            IsActive = isActive;
-        }
+        Id = id;
+        Username = username;
+        IsActive = isActive;
+    }
 
-        public string Username { get; private set; }
-        public bool IsActive { get; private set; }
+    public string Username { get; private set; }
+    public bool IsActive { get; private set; }
 
-        public static User Create(Guid id, string username, bool isActive)
-        {
-            return new User(id, username, isActive);
-        }
-        public static User CreateNew(string username, bool isActive)
-        {
-            return new User(Guid.NewGuid(), username, isActive);
-        }
+    public static User Create(Guid id, string username, bool isActive)
+    {
+        return new User(id, username, isActive);
+    }
+    public static User CreateNew(string username, bool isActive)
+    {
+        return new User(Guid.NewGuid(), username, isActive);
     }
 }

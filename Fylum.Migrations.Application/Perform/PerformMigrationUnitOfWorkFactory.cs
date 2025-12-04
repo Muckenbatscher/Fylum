@@ -6,7 +6,7 @@ namespace Fylum.Migrations.Application.Perform;
 
 public class PerformMigrationUnitOfWorkFactory : UnitOfWorkFactory, IPerformMigrationUnitOfWorkFactory
 {
-    public PerformMigrationUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) : 
+    public PerformMigrationUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) :
         base(serviceScopeFactory)
     {
     }
@@ -14,7 +14,7 @@ public class PerformMigrationUnitOfWorkFactory : UnitOfWorkFactory, IPerformMigr
     public PerformMigrationUnitOfWork Create()
     {
         CreateScope();
-        
+
         var transactionFactory = GetTransactionFactory();
         var migrationPerformingService = GetScopedService<IMigrationPerformingService>();
 

@@ -1,5 +1,4 @@
-﻿using Aspire.Hosting;
-using Aspire.Hosting.Postgres;
+﻿using Aspire.Hosting.Postgres;
 using System.Text.Json;
 
 namespace Fylum.AppHost;
@@ -30,15 +29,15 @@ public static class PgAdminExtensions
 
         var valueEvalCancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5));
         var usernameEvalTask = serverResource.UserNameParameter?.GetValueAsync(valueEvalCancellationTokenSource.Token);
-        var usernameEvalValue = usernameEvalTask.HasValue 
-            ? usernameEvalTask.Value.GetAwaiter().GetResult() 
+        var usernameEvalValue = usernameEvalTask.HasValue
+            ? usernameEvalTask.Value.GetAwaiter().GetResult()
             : null;
         string username = usernameEvalValue
             ?? serverResource.UserNameReference?.ValueExpression
             ?? "postgres";
 
         var passwordEvalTask = serverResource.PasswordParameter?.GetValueAsync(valueEvalCancellationTokenSource.Token);
-        var passwordEvalValue = passwordEvalTask.HasValue 
+        var passwordEvalValue = passwordEvalTask.HasValue
             ? passwordEvalTask.Value.GetAwaiter().GetResult()
             : null;
         string password = passwordEvalValue ?? "";

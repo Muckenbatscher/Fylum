@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Users.Domain.Groups;
 
-namespace Fylum.Users.Domain.Groups
+public interface IUserWithGroupsRepository
 {
-    public interface IUserWithGroupsRepository
-    {
-        UserWithGroups? GetByUserId(Guid userId);
-    }
+    UserWithGroups? GetByUserId(Guid userId);
 }

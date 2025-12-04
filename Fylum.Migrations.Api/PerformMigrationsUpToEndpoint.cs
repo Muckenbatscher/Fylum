@@ -14,7 +14,7 @@ public class PerformMigrationsUpToEndpoint : Endpoint<PerformingKeyRequest, Perf
     private readonly IPerformingKeyRequestValidator _requestValidator;
     private readonly IPerformMigrationsUpToCommandHandler _handler;
 
-    public PerformMigrationsUpToEndpoint(IPerformingKeyRequestValidator requestValidator, 
+    public PerformMigrationsUpToEndpoint(IPerformingKeyRequestValidator requestValidator,
         IPerformMigrationsUpToCommandHandler handler)
     {
         _requestValidator = requestValidator;

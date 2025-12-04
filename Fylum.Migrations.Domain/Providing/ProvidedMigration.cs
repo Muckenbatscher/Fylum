@@ -22,7 +22,7 @@ public class ProvidedMigration
 
     public static ProvidedMigration Create(Guid id, string name, IEnumerable<MigrationScript> migrationScripts)
         => new ProvidedMigration(id, name, migrationScripts);
-    
+
     public static ProvidedMigration Create(Guid id, string name)
         => new ProvidedMigration(id, name, Enumerable.Empty<MigrationScript>());
 }

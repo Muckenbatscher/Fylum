@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Fylum.Users.Domain;
 
-namespace Fylum.Users.Domain
+public interface IUserRepository
 {
-    public interface IUserRepository
-    {
-        User? GetById(Guid id);
-        User? GetByUsername(string username);
-    }
+    User? GetById(Guid id);
+    User? GetByUsername(string username);
 }
