@@ -22,7 +22,6 @@ public static class PgAdminExtensions
 
         var databaseResource = defaultConnectedDatabase.Resource;
         var serverResource = databaseResource.Parent;
-		
 
         string hostname = serverResource.Name;
         int port = serverResource.Port.Endpoint.TargetPort ?? 5432;
