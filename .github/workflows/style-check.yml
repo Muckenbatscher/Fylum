@@ -28,7 +28,5 @@ jobs:
           --name github
     - name: Restore dependencies
       run: dotnet restore --property:EnableWindowsTargeting=true
-    - name: Verify Style with .editorconfig
-      run: dotnet format style --verify-no-changes --verbosity detailed --no-restore
-    - name: Verify Analyzers with .editorconfig
-      run: dotnet format analyzers --verify-no-changes --verbosity detailed --no-restore
+    - name: Verify Format with .editorconfig
+      run: dotnet format --verify-no-changes --verbosity detailed --no-restore
