@@ -14,18 +14,17 @@ public class MigrationsProvider : IMigrationsProvider
             _knownMigrations.Add(migration.Id, migration);
     }
 
-
     public IEnumerable<ProvidedMigration> GetMigrations()
     {
         yield return new MigrationsMigration().CreateMigration();
         yield return new UsersMigration().CreateMigration();
+        yield return new RefreshKeysMigration().CreateMigration();
     }
 
     public ProvidedMigration? GetMigrationById(Guid id)
     {
-        if (_knownMigrations.TryGetValue(id, out var migration))
-            return migration;
-
-        return null;
+        return _knownMigrations.TryGetValue(id, out var migration)
+            ? migration
+            : null;
     }
 }
