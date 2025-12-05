@@ -4,9 +4,8 @@ namespace Fylum.Users.Domain;
 
 public class User : IdentifiableEntity<Guid>
 {
-    private User(Guid id, string username, bool isActive)
+    private User(Guid id, string username, bool isActive) : base(id)
     {
-        Id = id;
         Username = username;
         IsActive = isActive;
     }

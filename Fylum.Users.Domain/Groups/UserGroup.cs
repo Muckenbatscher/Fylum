@@ -6,9 +6,8 @@ public class UserGroup : IdentifiableEntity<Guid>
 {
     private const string AdminGroupId = "FF7CFB5F-137F-42E0-A857-4E498A7B4E65";
 
-    private UserGroup(Guid id, string name)
+    private UserGroup(Guid id, string name) : base(id)
     {
-        Id = id;
         Name = name;
     }
 
