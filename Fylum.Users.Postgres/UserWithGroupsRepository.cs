@@ -21,7 +21,6 @@ public class UserWithGroupsRepository : IUserWithGroupsRepository
         return usersWithGroups.FirstOrDefault();
     }
 
-
     private IEnumerable<UserWithGroupsQueryModel> GetQueryModelsByUserId(Guid id)
     {
         var param = new { id };

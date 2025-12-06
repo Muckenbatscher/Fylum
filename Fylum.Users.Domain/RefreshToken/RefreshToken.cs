@@ -6,16 +6,16 @@ public class RefreshToken : IdentifiableEntity<Guid>
 {
     public Guid UserId { get; }
     public DateTimeOffset IssuedAt { get; private set; }
-    public DateTimeOffset ExpiredAt { get; private set; }
+    public DateTimeOffset ExpiresAt { get; private set; }
 
     public bool IsValid
-        => DateTimeOffset.UtcNow < ExpiredAt && DateTimeOffset.UtcNow > IssuedAt;
+        => DateTimeOffset.UtcNow < ExpiresAt && DateTimeOffset.UtcNow > IssuedAt;
 
     private RefreshToken(Guid id, Guid userId, DateTimeOffset issuedAt, DateTimeOffset expiredAt) : base(id)
     {
         UserId = userId;
         IssuedAt = issuedAt;
-        ExpiredAt = expiredAt;
+        ExpiresAt = expiredAt;
     }
 
     public static RefreshToken IssueNew(Guid userId, TimeSpan validFor)
@@ -33,6 +33,6 @@ public class RefreshToken : IdentifiableEntity<Guid>
 
     public void Invalidate()
     {
-        ExpiredAt = DateTimeOffset.UtcNow;
+        ExpiresAt = DateTimeOffset.UtcNow;
     }
 }
