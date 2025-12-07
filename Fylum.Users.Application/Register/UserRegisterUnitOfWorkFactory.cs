@@ -1,5 +1,6 @@
 ﻿using Fylum.Application;
 using Fylum.Users.Domain.Password;
+using Fylum.Users.Domain.RefreshTokens;
 using Fylum.Users.Domain.Register;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,9 +19,11 @@ public class UserRegisterUnitOfWorkFactory : UnitOfWorkFactory, IUserRegisterUni
 
         var transactionFactory = GetTransactionFactory();
         var userRepository = GetScopedService<IUserWithPasswordRepository>();
+        var refreshTokenRepository = GetScopedService<IRefreshTokenRepository>();
 
         return new UserRegisterUnitOfWork(
             transactionFactory,
-            userRepository);
+            userRepository,
+            refreshTokenRepository);
     }
 }
