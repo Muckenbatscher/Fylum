@@ -2,7 +2,7 @@
 using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Users.Api.Shared;
-using Fylum.Users.Application.TokenRefresh;
+using Fylum.Users.Application.RefreshTokens;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 

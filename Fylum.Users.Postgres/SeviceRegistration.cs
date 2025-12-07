@@ -1,7 +1,7 @@
 ﻿using Fylum.Users.Domain;
 using Fylum.Users.Domain.Groups;
 using Fylum.Users.Domain.Password;
-using Fylum.Users.Domain.RefreshToken;
+using Fylum.Users.Domain.RefreshTokens;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Users.Postgres;

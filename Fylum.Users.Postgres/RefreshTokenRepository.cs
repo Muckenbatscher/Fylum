@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Fylum.Domain.UnitOfWork;
-using Fylum.Users.Domain.RefreshToken;
+using Fylum.Users.Domain.RefreshTokens;
 
 namespace Fylum.Users.Postgres;
 
@@ -19,7 +19,7 @@ public class RefreshTokenRepository : IRefreshTokenRepository
         var query = $@"SELECT id as {nameof(RefreshTokenQueryModel.Id)},
                               user_id as {nameof(RefreshTokenQueryModel.UserId)},
                               issued_at as {nameof(RefreshTokenQueryModel.IssuedAt)},
-                              expired_at as {nameof(RefreshTokenQueryModel.ExpiresAt)}
+                              expires_at as {nameof(RefreshTokenQueryModel.ExpiresAt)}
                        FROM user_refresh_keys
                        WHERE id = @{nameof(param.Id)};";
         var transaction = _transactionFactory.GetTransaction();
@@ -41,7 +41,7 @@ public class RefreshTokenRepository : IRefreshTokenRepository
             refreshToken.ExpiresAt
         };
         var command = $@"INSERT INTO user_refresh_keys 
-                         (id, user_id, issued_at, expired_at)
+                         (id, user_id, issued_at, expires_at)
                          VALUES (@{nameof(param.Id)}, 
                                  @{nameof(param.UserId)}, 
                                  @{nameof(param.IssuedAt)}, 
@@ -60,7 +60,7 @@ public class RefreshTokenRepository : IRefreshTokenRepository
         };
         var command = $@"UPDATE user_refresh_keys
                          SET issued_at = @{nameof(param.IssuedAt)},
-                             expired_at = @{nameof(param.ExpiresAt)}
+                             expires_at = @{nameof(param.ExpiresAt)}
                          WHERE id = @{nameof(param.Id)};";
         var transaction = _transactionFactory.GetTransaction();
         var connection = transaction.Connection;

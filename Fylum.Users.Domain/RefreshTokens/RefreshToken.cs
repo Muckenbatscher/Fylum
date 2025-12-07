@@ -1,6 +1,6 @@
 ﻿using Fylum.Domain;
 
-namespace Fylum.Users.Domain.RefreshToken;
+namespace Fylum.Users.Domain.RefreshTokens;
 
 public class RefreshToken : IdentifiableEntity<Guid>
 {

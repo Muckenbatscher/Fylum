@@ -1,4 +1,4 @@
-﻿namespace Fylum.Users.Domain.RefreshToken;
+﻿namespace Fylum.Users.Domain.RefreshTokens;
 
 public interface IRefreshTokenRepository
 {

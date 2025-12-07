@@ -30,7 +30,6 @@ public class Program
         {
             options.SigningKey = builder.Configuration["JwtAuth:SigningKey"] ?? string.Empty;
             options.AccessTokenExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:AccessTokenExpirationMinutes"] ?? "1");
-            options.RefreshTokenExpirationInDays = int.Parse(builder.Configuration["JwtAuth:RefreshTokenExpirationDays"] ?? "1");
         });
 
         builder.Services.AddPostgresSharedServices(options =>
@@ -43,12 +42,17 @@ public class Program
         });
         builder.Services.AddPostgresServices();
 
-        builder.Services.AddUsersApplicationServices(options =>
+        builder.Services.AddUsersApplicationServices(passwordHashOptions =>
         {
-            options.IterationCount = int.Parse(builder.Configuration["PasswordHashing:IterationCount"]!);
-            options.SaltBitsCount = int.Parse(builder.Configuration["PasswordHashing:SaltBits"]!);
-            options.HashedBitsCount = int.Parse(builder.Configuration["PasswordHashing:HashedBits"]!);
-            options.PseudoRandomFunction = builder.Configuration["PasswordHashing:PseudoRandomFunction"]!;
+            passwordHashOptions.IterationCount = int.Parse(builder.Configuration["PasswordHashing:IterationCount"]!);
+            passwordHashOptions.SaltBitsCount = int.Parse(builder.Configuration["PasswordHashing:SaltBits"]!);
+            passwordHashOptions.HashedBitsCount = int.Parse(builder.Configuration["PasswordHashing:HashedBits"]!);
+            passwordHashOptions.PseudoRandomFunction = builder.Configuration["PasswordHashing:PseudoRandomFunction"]!;
+        },
+        refreshTokenOptions =>
+        {
+            var configValue = builder.Configuration["RefreshToken:RefreshTokenExpirationDays"];
+            refreshTokenOptions.RefreshTokenExpirationInDays = configValue != null ? int.Parse(configValue) : 1;
         });
         builder.Services.AddUsersPostgresServices();
 
