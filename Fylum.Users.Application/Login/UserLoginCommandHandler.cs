@@ -44,6 +44,6 @@ public class UserLoginCommandHandler : IUserLoginCommandHandler
 
         loginUnitOfWork.Commit();
 
-        return new UserLoginResult(userLogin.User.Id, refreshToken.Id);
+        return new UserLoginResult(userLogin.User.Id, refreshToken.Id, refreshToken.ExpiresAt);
     }
 }

@@ -35,7 +35,7 @@ public class TokenRefreshCommandHandler : ITokenRefreshCommandHandler
 
         unitOfWork.Commit();
 
-        var refreshResult = new TokenRefreshResult(command.UserId, newToken.Id);
+        var refreshResult = new TokenRefreshResult(command.UserId, newToken.Id, newToken.ExpiresAt);
         return refreshResult;
     }
 }

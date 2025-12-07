@@ -38,7 +38,8 @@ public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, U
 
         var result = loginResult.Value;
         var accessToken = _jwtTokenBuilder.BuildAccessToken(result.UserId);
-        var refreshToken = _jwtTokenBuilder.BuildRefreshToken(result.UserId, result.RefreshTokenId);
+        var refreshToken = _jwtTokenBuilder.BuildRefreshToken(
+            result.UserId, result.RefreshTokenId, result.RefreshTokenExpiration);
         var response = new LoginResponse(accessToken, refreshToken);
         await Send.ResultAsync(TypedResults.Ok(response));
     }

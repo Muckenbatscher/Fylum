@@ -36,7 +36,8 @@ public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Created<Regist
 
         var resultValue = registerResult.Value;
         var accessToken = _jwtTokenBuilder.BuildAccessToken(resultValue.UserId);
-        var refreshToken = _jwtTokenBuilder.BuildRefreshToken(resultValue.UserId, resultValue.RefreshTokenId);
+        var refreshToken = _jwtTokenBuilder.BuildRefreshToken(
+            resultValue.UserId, resultValue.RefreshTokenId, resultValue.RefreshTokenExpiration);
         var response = new RegisterResponse(resultValue.UserId, accessToken, refreshToken);
         var newUserUri = $"{EndpointRoutes.UsersBaseRoute}/{resultValue.UserId}";
         await Send.ResultAsync(TypedResults.Created(newUserUri, response));

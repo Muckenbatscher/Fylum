@@ -1,5 +1,4 @@
 ﻿using FastEndpoints.Security;
-using Fylum.Users.Application.RefreshTokens;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
@@ -8,28 +7,26 @@ namespace Fylum.Api.Shared.JwtAuthentication;
 public class JwtTokenBuilder : IJwtTokenBuilder
 {
     private readonly JwtAuthOptions _jwtAuthOptions;
-    private readonly RefreshTokenOptions _refreshTokenOptions;
 
-    public JwtTokenBuilder(IOptions<JwtAuthOptions> jwtAuthOptions,
-        IOptions<RefreshTokenOptions> refresTokenOptions)
+    public JwtTokenBuilder(IOptions<JwtAuthOptions> jwtAuthOptions)
     {
         _jwtAuthOptions = jwtAuthOptions.Value;
-        _refreshTokenOptions = refresTokenOptions.Value;
     }
 
     public string BuildAccessToken(Guid userId)
     {
         var userIdClaim = new Claim(JwtAuthConstants.UserIdClaim, userId.ToString());
-        return BuildToken([userIdClaim], _jwtAuthOptions.AccessTokenExpiration);
+        var expiration = DateTimeOffset.UtcNow.Add(_jwtAuthOptions.AccessTokenExpiration);
+        return BuildToken([userIdClaim], expiration);
     }
-    public string BuildRefreshToken(Guid userId, Guid refreshId)
+    public string BuildRefreshToken(Guid userId, Guid refreshId, DateTimeOffset refreshTokenExpiration)
     {
         var userIdClaim = new Claim(JwtAuthConstants.RefreshUserIdClaim, userId.ToString());
         var refreshIdClaim = new Claim(JwtAuthConstants.RefreshIdClaim, refreshId.ToString());
-        return BuildToken([userIdClaim, refreshIdClaim], _refreshTokenOptions.RefreshTokenExpiration);
+        return BuildToken([userIdClaim, refreshIdClaim], refreshTokenExpiration);
     }
 
-    private string BuildToken(IEnumerable<Claim> claims, TimeSpan validDuration)
+    private string BuildToken(IEnumerable<Claim> claims, DateTimeOffset expiration)
     {
         var signingKey = _jwtAuthOptions.SigningKey;
 
@@ -37,7 +34,7 @@ public class JwtTokenBuilder : IJwtTokenBuilder
         {
             o.SigningKey = signingKey;
             o.SigningAlgorithm = "HS256";
-            o.ExpireAt = DateTime.UtcNow.Add(validDuration);
+            o.ExpireAt = expiration.UtcDateTime;
             o.User.Claims.Add(claims.ToArray());
         });
         return jwtToken;

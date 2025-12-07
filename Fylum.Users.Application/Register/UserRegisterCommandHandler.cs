@@ -33,6 +33,6 @@ public class UserRegisterCommandHandler : IUserRegisterCommandHandler
 
         //TODO: Store refresh token in database with expiry
         var refreshTokenId = Guid.NewGuid();
-        return new UserRegisterResult(userLogin.User.Id, refreshTokenId);
+        return new UserRegisterResult(userLogin.User.Id, refreshTokenId, DateTimeOffset.UtcNow);
     }
 }

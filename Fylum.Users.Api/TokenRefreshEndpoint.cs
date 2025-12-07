@@ -38,7 +38,8 @@ public class TokenRefreshEndpoint : Endpoint<TokenRefreshClaimRequest, Results<O
 
         var result = refreshResult.Value;
         var accessToken = _jwtTokenBuilder.BuildAccessToken(result.UserId);
-        var refreshToken = _jwtTokenBuilder.BuildRefreshToken(result.UserId, result.TokenRefreshId);
+        var refreshToken = _jwtTokenBuilder.BuildRefreshToken(
+            result.UserId, result.TokenRefreshId, result.RefreshTokenExpiration);
         var response = new TokenRefreshResponse(accessToken, refreshToken);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
