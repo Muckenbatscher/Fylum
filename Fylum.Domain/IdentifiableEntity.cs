@@ -5,6 +5,11 @@ public abstract class IdentifiableEntity<Key>
 {
     public Key Id { get; init; }
 
+    protected IdentifiableEntity(Key id)
+    {
+        Id = id;
+    }
+
     public override bool Equals(object? obj)
     {
         return obj is IdentifiableEntity<Key> entity &&

@@ -26,11 +26,10 @@ public class Program
             .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
             .SwaggerDocument();
 
-
         builder.Services.AddApiSharedServices(options =>
         {
             options.SigningKey = builder.Configuration["JwtAuth:SigningKey"] ?? string.Empty;
-            options.ExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:ExpirationMinutes"] ?? "1");
+            options.AccessTokenExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:AccessTokenExpirationMinutes"] ?? "1");
         });
 
         builder.Services.AddPostgresSharedServices(options =>
@@ -43,15 +42,19 @@ public class Program
         });
         builder.Services.AddPostgresServices();
 
-        builder.Services.AddUsersApplicationServices(options =>
+        builder.Services.AddUsersApplicationServices(passwordHashOptions =>
         {
-            options.IterationCount = int.Parse(builder.Configuration["PasswordHashing:IterationCount"]!);
-            options.SaltBitsCount = int.Parse(builder.Configuration["PasswordHashing:SaltBits"]!);
-            options.HashedBitsCount = int.Parse(builder.Configuration["PasswordHashing:HashedBits"]!);
-            options.PseudoRandomFunction = builder.Configuration["PasswordHashing:PseudoRandomFunction"]!;
+            passwordHashOptions.IterationCount = int.Parse(builder.Configuration["PasswordHashing:IterationCount"]!);
+            passwordHashOptions.SaltBitsCount = int.Parse(builder.Configuration["PasswordHashing:SaltBits"]!);
+            passwordHashOptions.HashedBitsCount = int.Parse(builder.Configuration["PasswordHashing:HashedBits"]!);
+            passwordHashOptions.PseudoRandomFunction = builder.Configuration["PasswordHashing:PseudoRandomFunction"]!;
+        },
+        refreshTokenOptions =>
+        {
+            var configValue = builder.Configuration["RefreshToken:RefreshTokenExpirationDays"];
+            refreshTokenOptions.RefreshTokenExpirationInDays = configValue != null ? int.Parse(configValue) : 1;
         });
         builder.Services.AddUsersPostgresServices();
-
 
         var app = builder.Build();
 
@@ -62,10 +65,7 @@ public class Program
 
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwaggerGen(options =>
-            {
-                options.Path = "/openapi/{documentName}.json";
-            });
+            app.UseSwaggerGen(options => options.Path = "/openapi/{documentName}.json");
             app.MapScalarApiReference();
         }
 

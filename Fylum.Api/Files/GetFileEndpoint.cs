@@ -30,9 +30,8 @@ public class GetFileEndpoint : Endpoint<UserClaimRequest, Results<
     }
     public override async Task HandleAsync(UserClaimRequest request, CancellationToken ct)
     {
-        var newFile = new File()
+        var newFile = new File(Guid.NewGuid())
         {
-            Id = Guid.NewGuid(),
             Name = "ExampleFile.txt",
             ParentFolderId = Guid.NewGuid()
         };

@@ -24,7 +24,6 @@ public class Result<T>
     public static Result Failure(Error error)
         => Result.Failure(error);
 
-
     public static implicit operator Result<T>(T value) =>
         value is not null ? Success(value) : Failure<T>(Error.Internal);
 

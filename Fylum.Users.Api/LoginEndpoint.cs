@@ -11,13 +11,13 @@ namespace Fylum.Users.Api;
 public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
 {
     private readonly IUserLoginCommandHandler _commandHandler;
-    private readonly IJwtAuthService _jwtAuthService;
+    private readonly IJwtTokenBuilder _jwtTokenBuilder;
 
     public LoginEndpoint(IUserLoginCommandHandler commandHandler,
-        IJwtAuthService jwtAuthService)
+        IJwtTokenBuilder jwtTokenBuilder)
     {
         _commandHandler = commandHandler;
-        _jwtAuthService = jwtAuthService;
+        _jwtTokenBuilder = jwtTokenBuilder;
     }
 
     public override void Configure()
@@ -37,8 +37,10 @@ public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, U
             return;
 
         var result = loginResult.Value;
-        var token = _jwtAuthService.BuildToken(result.UserId!.Value);
-        var response = new LoginResponse(token);
+        var accessToken = _jwtTokenBuilder.BuildAccessToken(result.UserId);
+        var refreshToken = _jwtTokenBuilder.BuildRefreshToken(
+            result.UserId, result.RefreshTokenId, result.RefreshTokenExpiration);
+        var response = new LoginResponse(accessToken, refreshToken);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
 }

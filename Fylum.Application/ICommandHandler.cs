@@ -6,7 +6,6 @@ public interface ICommandHandler<TCommand>
     Result Handle(TCommand command);
 }
 
-
 public interface ICommandHandler<TCommand, TResult>
     where TCommand : ICommand<TResult>
 {

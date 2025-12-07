@@ -20,18 +20,9 @@ public class MigrationPerformingService : IMigrationPerformingService
         foreach (var script in migration.MigrationScripts)
             _scriptExecutor.Execute(script.ScriptCommandText);
 
-        var performedMigration = CreatePerformedMigration(migration);
+        var performedMigration = PerformedMigration.CreateNew(migration);
         _performedMigrationsRepository.AddPerformedMigration(performedMigration);
 
         return Migration.Create(migration, performedMigration.Timestamp);
-    }
-
-    private static PerformedMigration CreatePerformedMigration(ProvidedMigration migration)
-    {
-        var dbMigration = ProvidedMigration.Create(
-            migration.Id,
-            migration.Name);
-        var performedMigration = PerformedMigration.CreateNew(dbMigration);
-        return performedMigration;
     }
 }

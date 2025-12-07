@@ -11,13 +11,13 @@ namespace Fylum.Users.Api;
 public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Created<RegisterResponse>, Conflict>>
 {
     private readonly IUserRegisterCommandHandler _registerCommandHandler;
-    private readonly IJwtAuthService _jwtAuthService;
+    private readonly IJwtTokenBuilder _jwtTokenBuilder;
 
     public RegisterEndpoint(IUserRegisterCommandHandler commandHandler,
-        IJwtAuthService jwtAuthService)
+        IJwtTokenBuilder jwtTokenBuilder)
     {
         _registerCommandHandler = commandHandler;
-        _jwtAuthService = jwtAuthService;
+        _jwtTokenBuilder = jwtTokenBuilder;
     }
 
     public override void Configure()
@@ -35,8 +35,10 @@ public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Created<Regist
             return;
 
         var resultValue = registerResult.Value;
-        var token = _jwtAuthService.BuildToken(resultValue.UserId);
-        var response = new RegisterResponse(resultValue.UserId, token);
+        var accessToken = _jwtTokenBuilder.BuildAccessToken(resultValue.UserId);
+        var refreshToken = _jwtTokenBuilder.BuildRefreshToken(
+            resultValue.UserId, resultValue.RefreshTokenId, resultValue.RefreshTokenExpiration);
+        var response = new RegisterResponse(resultValue.UserId, accessToken, refreshToken);
         var newUserUri = $"{EndpointRoutes.UsersBaseRoute}/{resultValue.UserId}";
         await Send.ResultAsync(TypedResults.Created(newUserUri, response));
     }

@@ -1,23 +1,33 @@
 ﻿using Fylum.Application;
+using Fylum.Users.Application.RefreshTokens;
+using Fylum.Users.Domain.Login;
 using Fylum.Users.Domain.Password;
+using Fylum.Users.Domain.RefreshTokens;
+using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Application.Login;
 
 public class UserLoginCommandHandler : IUserLoginCommandHandler
 {
-    private readonly IUserWithPasswordRepository _userWithPasswordRepository;
+    private readonly ILoginUnitOfWorkFactory _loginUnitOfWorkFactory;
     private readonly IPasswordLoginVerification _loginVerification;
+    private readonly RefreshTokenOptions _refreshTokenOptions;
 
-    public UserLoginCommandHandler(IUserWithPasswordRepository userWithPasswordRepository,
-        IPasswordLoginVerification loginVerification)
+    public UserLoginCommandHandler(ILoginUnitOfWorkFactory loginUnitOfWorkFactory,
+        IPasswordLoginVerification loginVerification,
+        IOptions<RefreshTokenOptions> refreshTokenOptions)
     {
-        _userWithPasswordRepository = userWithPasswordRepository;
+        _loginUnitOfWorkFactory = loginUnitOfWorkFactory;
         _loginVerification = loginVerification;
+        _refreshTokenOptions = refreshTokenOptions.Value;
     }
 
     public Result<UserLoginResult> Handle(UserLoginCommand command)
     {
-        var userLogin = _userWithPasswordRepository.GetByUsername(command.Username);
+        using var loginUnitOfWork = _loginUnitOfWorkFactory.Create();
+
+        var userLogin = loginUnitOfWork.UserWithPasswordRepository
+            .GetByUsername(command.Username);
         if (userLogin == null)
             return Result.Failure<UserLoginResult>(Error.NotFound);
         if (!userLogin.User.IsActive)
@@ -29,6 +39,11 @@ public class UserLoginCommandHandler : IUserLoginCommandHandler
         if (!passwordValid)
             return Result.Failure<UserLoginResult>(Error.Unauthorized);
 
-        return new UserLoginResult(userLogin.User.Id);
+        var refreshToken = RefreshToken.IssueNew(userLogin.User.Id, _refreshTokenOptions.RefreshTokenExpiration);
+        loginUnitOfWork.RefreshTokenRepository.Add(refreshToken);
+
+        loginUnitOfWork.Commit();
+
+        return new UserLoginResult(userLogin.User.Id, refreshToken.Id, refreshToken.ExpiresAt);
     }
 }
