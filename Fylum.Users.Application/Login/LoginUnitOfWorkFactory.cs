@@ -1,9 +1,10 @@
 ﻿using Fylum.Application;
+using Fylum.Users.Domain.Login;
 using Fylum.Users.Domain.Password;
 using Fylum.Users.Domain.RefreshTokens;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Users.Domain.Login;
+namespace Fylum.Users.Application.Login;
 
 public class LoginUnitOfWorkFactory : UnitOfWorkFactory, ILoginUnitOfWorkFactory
 {

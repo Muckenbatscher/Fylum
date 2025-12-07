@@ -4,6 +4,7 @@ using Fylum.Users.Application.RefreshTokens;
 using Fylum.Users.Application.Register;
 using Fylum.Users.Domain.Login;
 using Fylum.Users.Domain.Password;
+using Fylum.Users.Domain.RefreshTokens;
 using Fylum.Users.Domain.Register;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +24,7 @@ public static class ServiceRegistration
 
         services.AddScoped<IUserRegisterUnitOfWorkFactory, UserRegisterUnitOfWorkFactory>();
         services.AddScoped<ILoginUnitOfWorkFactory, LoginUnitOfWorkFactory>();
+        services.AddScoped<IRefreshTokenUnitOfWorkFactory, RefreshTokenUnitOfWorkFactory>();
 
         services.AddTransient<IUserLoginCommandHandler, UserLoginCommandHandler>();
         services.AddTransient<IUserRegisterCommandHandler, UserRegisterCommandHandler>();
