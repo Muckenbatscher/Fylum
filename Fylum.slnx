@@ -37,6 +37,7 @@
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
   </Folder>
   <Project Path="Fylum.AppHost/Fylum.AppHost.csproj" Id="a7f1283a-56e3-4f4d-a0c6-5ba8aa4f9cad" />
   <Project Path="Fylum.ServiceDefaults/Fylum.ServiceDefaults.csproj" />
