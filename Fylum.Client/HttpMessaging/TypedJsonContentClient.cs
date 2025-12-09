@@ -4,11 +4,11 @@ using System.Text.Json;
 
 namespace Fylum.Client.HttpMessaging;
 
-internal class TypedJsonContentClientHandler
+internal abstract class TypedJsonContentClient
 {
     private readonly HttpClient _httpClient;
 
-    public TypedJsonContentClientHandler(HttpClient httpClient)
+    public TypedJsonContentClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
     }

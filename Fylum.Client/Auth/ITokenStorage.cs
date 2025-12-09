@@ -2,7 +2,7 @@
 
 public interface ITokenStorage
 {
-    Task<TokenPair> GetTokenPairAsync();
+    Task<TokenPair?> GetTokenPairAsync();
     Task StoreTokenPairAsync(TokenPair tokenPair);
     Task ClearTokenPair();
 }
