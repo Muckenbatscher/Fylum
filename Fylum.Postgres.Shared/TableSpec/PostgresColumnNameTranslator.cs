@@ -39,7 +39,6 @@ public class PostgresColumnNameTranslator : IPostgresColumnNameTranslator
             }
         }
 
-        // Entfernt am Ende führende oder nachfolgende Unterstriche
         string result = normalizedNameBuilder.ToString();
         return result.Trim('_').ToLower();
     }
