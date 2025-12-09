@@ -2,6 +2,11 @@
 
 public class ClientOptions
 {
-    public string BaseUrl { get; set; } = string.Empty;
+    public Uri BaseUri
+    {
+        get => field ?? throw new InvalidOperationException($"{nameof(BaseUri)} needs to be set first");
+        set;
+    }
+
     public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
 }

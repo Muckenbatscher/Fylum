@@ -7,12 +7,12 @@ internal class AuthService
 {
     private readonly ITokenStorage _storage;
     private readonly HttpClient _authClient; // Separate client just for auth calls
-    private readonly SemaphoreSlim _lock = new(1, 1); // Thread safety lock
+    private readonly SemaphoreSlim _refreshTokenLock = new(1, 1); // Thread safety lock
 
     public AuthService(ITokenStorage storage, IHttpClientFactory factory)
     {
         _storage = storage;
-        // We use a clean client to avoid infinite loops in the handler
+        // use a clean client to avoid infinite loops in the handler
         _authClient = factory.CreateClient("AuthClient");
     }
 
@@ -39,7 +39,7 @@ internal class AuthService
     public async Task<string?> RefreshTokenAsync()
     {
         // 1. Wait for the lock
-        await _lock.WaitAsync();
+        await _refreshTokenLock.WaitAsync();
         try
         {
             // 2. Double-check: Did someone else refresh it while we were waiting?
@@ -65,7 +65,7 @@ internal class AuthService
         }
         finally
         {
-            _lock.Release();
+            _refreshTokenLock.Release();
         }
     }
 }
