@@ -8,6 +8,8 @@ public sealed class PostgresColumNameTranslatorTests
     [DataRow("PropertyName")]
     [DataRow("PROPERTY")]
     [DataRow("propertyName")]
+    [DataRow("_PROPERTY")]
+    [DataRow(" Property")]
     [TestMethod]
     public void NormalizedColumName_GivenPropertyName_ReturnsNoUpperCase(string propertyName)
     {
@@ -44,7 +46,7 @@ public sealed class PostgresColumNameTranslatorTests
     {
         var translator = new PostgresColumnNameTranslator();
 
-        var translationAction = () => translator.GetNormalizedPostgresColumnName(string.Empty);
+        var translationAction = () => translator.GetNormalizedPostgresColumnName(propertyName);
 
         Assert.Throws<ArgumentException>(translationAction);
     }
