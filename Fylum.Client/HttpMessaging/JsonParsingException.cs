@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Fylum.Client.HttpMessaging;
+﻿namespace Fylum.Client.HttpMessaging;
 
 public class JsonParsingException : Exception
 {

@@ -18,16 +18,10 @@ public static class FylumClientServiceCollectionExtensions
         {
             services.Configure(configureClientOptions);
 
-            services.AddScoped<ITokenStorage>(tokenStorageFactory);
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddTransient<AccessTokenAuthHeaderHandler>();
-            services.AddHttpClient<IFylumClient, FylumClient>((serviceProvider, client) =>
-            {
-                var clientOptions = serviceProvider.GetRequiredService<IOptions<ClientOptions>>().Value;
-                client.BaseAddress = clientOptions.BaseUri;
-                client.Timeout = clientOptions.Timeout;
-            }).AddHttpMessageHandler<AccessTokenAuthHeaderHandler>();
+            services.AddSingleton<ITokenStorage>(tokenStorageFactory);
 
+            services.AddSingleton<ITokenService, TokenService>();
+            services.AddTransient<AccessTokenAuthHeaderHandler>();
             services.AddHttpClient<IAuthClient, AuthClient>((serviceProvider, client) =>
             {
                 var clientOptions = serviceProvider.GetRequiredService<IOptions<ClientOptions>>().Value;
@@ -40,6 +34,22 @@ public static class FylumClientServiceCollectionExtensions
                 client.BaseAddress = clientOptions.BaseUri;
                 client.Timeout = clientOptions.Timeout;
             });
+
+            services.AddAccessTokenConfiguredTypedHttpClient<IFylumClient, FylumClient>();
+
+            return services;
+        }
+
+        private IServiceCollection AddAccessTokenConfiguredTypedHttpClient<TClient, TImplementation>()
+            where TImplementation : class, TClient
+            where TClient : class
+        {
+            services.AddHttpClient<TClient, TImplementation>(configureClient: (serviceProvider, client) =>
+            {
+                var clientOptions = serviceProvider.GetRequiredService<IOptions<ClientOptions>>().Value;
+                client.BaseAddress = clientOptions.BaseUri;
+                client.Timeout = clientOptions.Timeout;
+            }).AddHttpMessageHandler<AccessTokenAuthHeaderHandler>();
 
             return services;
         }

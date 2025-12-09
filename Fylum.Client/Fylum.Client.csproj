@@ -4,6 +4,7 @@
     <PackageReference Include="Microsoft.Extensions.Http" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fylum.Shared\Fylum.Shared.csproj" />
     <ProjectReference Include="..\Fylum.Users.Api.Shared\Fylum.Users.Api.Shared.csproj" />
   </ItemGroup>
 </Project>
