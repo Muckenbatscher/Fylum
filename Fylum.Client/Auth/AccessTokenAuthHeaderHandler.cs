@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Fylum.Client.Auth.Token;
+using System.Net;
 using System.Net.Http.Headers;
 
 namespace Fylum.Client.Auth;

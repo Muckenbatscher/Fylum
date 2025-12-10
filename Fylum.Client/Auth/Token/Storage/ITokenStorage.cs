@@ -1,4 +1,4 @@
-﻿namespace Fylum.Client.Auth;
+﻿namespace Fylum.Client.Auth.Token.Storage;
 
 public interface ITokenStorage
 {

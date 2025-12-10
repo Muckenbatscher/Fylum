@@ -1,5 +1,4 @@
-﻿
-namespace Fylum.Client.Auth;
+﻿namespace Fylum.Client.Auth.Token;
 
 public interface ITokenService
 {

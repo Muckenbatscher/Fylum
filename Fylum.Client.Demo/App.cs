@@ -1,4 +1,4 @@
-﻿using Fylum.Client.Auth;
+﻿using Fylum.Client.Auth.Token;
 
 namespace Fylum.Client.Demo;
 

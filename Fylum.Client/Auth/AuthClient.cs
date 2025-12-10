@@ -1,5 +1,7 @@
-﻿using Fylum.Users.Api.Shared;
+﻿using Fylum.Client.HttpMessaging;
+using Fylum.Users.Api.Shared;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Fylum.Client.Auth;
 
@@ -18,9 +20,10 @@ public class AuthClient : IAuthClient
             EndpointRoutes.LoginRoute, loginRequest, cancellationToken);
         if (!response.IsSuccessStatusCode)
             throw new Exception("Login failed");
-        var loginResult = await response.Content.ReadFromJsonAsync<LoginResponse>(cancellationToken)
-            ?? throw new Exception("Invalid login response");
-        return loginResult;
+        var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
+        var result = JsonSerializer.Deserialize<LoginResponse>(responseContent)
+            ?? throw new JsonParsingException<LoginResponse>(responseContent);
+        return result;
     }
     public async Task<RegisterResponse> RegisterAsync(RegisterRequest registerRequest, CancellationToken cancellationToken)
     {
@@ -28,8 +31,9 @@ public class AuthClient : IAuthClient
             EndpointRoutes.RegisterRoute, registerRequest, cancellationToken);
         if (!response.IsSuccessStatusCode)
             throw new Exception("Registering failed");
-        var loginResult = await response.Content.ReadFromJsonAsync<RegisterResponse>(cancellationToken)
-            ?? throw new Exception("Invalid register response");
-        return loginResult;
+        var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
+        var result = JsonSerializer.Deserialize<RegisterResponse>(responseContent)
+            ?? throw new JsonParsingException<RegisterResponse>(responseContent);
+        return result;
     }
 }

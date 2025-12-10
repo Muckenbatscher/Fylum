@@ -1,7 +1,7 @@
 ﻿using Fylum.Users.Api.Shared;
 using System.Net.Http.Json;
 
-namespace Fylum.Client.Auth;
+namespace Fylum.Client.Auth.Token;
 
 public class RefreshTokenClient : IRefreshTokenClient
 {

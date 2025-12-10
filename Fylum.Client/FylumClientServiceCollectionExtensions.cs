@@ -1,4 +1,6 @@
 ﻿using Fylum.Client.Auth;
+using Fylum.Client.Auth.Token;
+using Fylum.Client.Auth.Token.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -14,7 +16,8 @@ public static class FylumClientServiceCollectionExtensions
             return services.AddFylumClient(configureClientOptions, defaultTokenStorageFactory);
         }
 
-        public IServiceCollection AddFylumClient(Action<ClientOptions> configureClientOptions, Func<IServiceProvider, ITokenStorage> tokenStorageFactory)
+        public IServiceCollection AddFylumClient(Action<ClientOptions> configureClientOptions,
+            Func<IServiceProvider, ITokenStorage> tokenStorageFactory)
         {
             services.Configure(configureClientOptions);
 

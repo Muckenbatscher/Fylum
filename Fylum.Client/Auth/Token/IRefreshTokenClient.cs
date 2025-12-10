@@ -1,6 +1,6 @@
 ﻿using Fylum.Users.Api.Shared;
 
-namespace Fylum.Client.Auth;
+namespace Fylum.Client.Auth.Token;
 
 public interface IRefreshTokenClient
 {

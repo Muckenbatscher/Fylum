@@ -1,6 +1,7 @@
-﻿using Fylum.Users.Api.Shared;
+﻿using Fylum.Client.Auth.Token.Storage;
+using Fylum.Users.Api.Shared;
 
-namespace Fylum.Client.Auth;
+namespace Fylum.Client.Auth.Token;
 
 public class TokenService : ITokenService
 {
