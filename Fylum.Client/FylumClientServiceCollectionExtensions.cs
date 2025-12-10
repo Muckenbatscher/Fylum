@@ -25,36 +25,34 @@ public static class FylumClientServiceCollectionExtensions
 
             services.AddSingleton<ITokenService, TokenService>();
             services.AddTransient<AccessTokenAuthHeaderHandler>();
-            services.AddHttpClient<IAuthClient, AuthClient>((serviceProvider, client) =>
-            {
-                var clientOptions = serviceProvider.GetRequiredService<IOptions<ClientOptions>>().Value;
-                client.BaseAddress = clientOptions.BaseUri;
-                client.Timeout = clientOptions.Timeout;
-            });
-            services.AddHttpClient<IRefreshTokenClient, RefreshTokenClient>((serviceProvider, client) =>
-            {
-                var clientOptions = serviceProvider.GetRequiredService<IOptions<ClientOptions>>().Value;
-                client.BaseAddress = clientOptions.BaseUri;
-                client.Timeout = clientOptions.Timeout;
-            });
+            services.AddTransient<RefreshTokenAuthHeaderHandler>();
+            services.AddConfiguredHttpClient<IAuthClient, AuthClient>();
+            services.AddConfiguredHttpClient<IRefreshTokenClient, RefreshTokenClient>()
+                .AddHttpMessageHandler<RefreshTokenAuthHeaderHandler>();
 
-            services.AddAccessTokenConfiguredTypedHttpClient<IFylumClient, FylumClient>();
+            services.AddConfiguredAccessTokenHttpClient<IFylumClient, FylumClient>();
 
             return services;
         }
 
-        private IServiceCollection AddAccessTokenConfiguredTypedHttpClient<TClient, TImplementation>()
+        private IHttpClientBuilder AddConfiguredAccessTokenHttpClient<TClient, TImplementation>()
             where TImplementation : class, TClient
             where TClient : class
         {
-            services.AddHttpClient<TClient, TImplementation>(configureClient: (serviceProvider, client) =>
+            return services
+                .AddConfiguredHttpClient<TClient, TImplementation>()
+                .AddHttpMessageHandler<AccessTokenAuthHeaderHandler>();
+        }
+        private IHttpClientBuilder AddConfiguredHttpClient<TClient, TImplementation>()
+            where TClient : class
+            where TImplementation : class, TClient
+        {
+            return services.AddHttpClient<TClient, TImplementation>((serviceProvider, client) =>
             {
                 var clientOptions = serviceProvider.GetRequiredService<IOptions<ClientOptions>>().Value;
                 client.BaseAddress = clientOptions.BaseUri;
                 client.Timeout = clientOptions.Timeout;
-            }).AddHttpMessageHandler<AccessTokenAuthHeaderHandler>();
-
-            return services;
+            });
         }
     }
 }

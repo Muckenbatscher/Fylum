@@ -21,7 +21,7 @@ public class AuthClient : IAuthClient
         if (!response.IsSuccessStatusCode)
             throw new Exception("Login failed");
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
-        var result = JsonSerializer.Deserialize<LoginResponse>(responseContent)
+        var result = JsonSerializer.Deserialize<LoginResponse>(responseContent, JsonSerializerOptions.Web)
             ?? throw new JsonParsingException<LoginResponse>(responseContent);
         return result;
     }
@@ -32,7 +32,7 @@ public class AuthClient : IAuthClient
         if (!response.IsSuccessStatusCode)
             throw new Exception("Registering failed");
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
-        var result = JsonSerializer.Deserialize<RegisterResponse>(responseContent)
+        var result = JsonSerializer.Deserialize<RegisterResponse>(responseContent, JsonSerializerOptions.Web)
             ?? throw new JsonParsingException<RegisterResponse>(responseContent);
         return result;
     }

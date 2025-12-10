@@ -20,8 +20,8 @@ public class FylumClient : IFylumClient
 
         if (!response.IsSuccessStatusCode)
             throw new Exception("Get file failed");
-        var fieResult = await response.Content.ReadFromJsonAsync<FileResponse>(cancellationToken)
+        var fileResult = await response.Content.ReadFromJsonAsync<FileResponse>(cancellationToken)
             ?? throw new Exception("Invalid file response");
-        return fieResult;
+        return fileResult;
     }
 }

@@ -42,7 +42,7 @@ internal class Program
         services.AddFylumClient(options =>
         {
             options.BaseUri = new Uri(baseUrl);
-            options.Timeout = TimeSpan.FromSeconds(30);
+            options.Timeout = TimeSpan.FromSeconds(60);
         });
     }
 }

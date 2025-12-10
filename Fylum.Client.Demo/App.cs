@@ -18,11 +18,13 @@ public class App
     {
         Console.WriteLine("App gestartet...");
         Console.Write("Username: ");
-        var username = Console.ReadLine();
+        var usernameRead = Console.ReadLine();
+        var username = string.IsNullOrEmpty(usernameRead) ? "admin" : usernameRead;
         Console.Write("Password: ");
-        var password = Console.ReadLine();
+        var passwordRead = Console.ReadLine();
+        var password = string.IsNullOrEmpty(passwordRead) ? "admin" : passwordRead;
 
-        await _tokenService.LoginAsync(username!, password!, cancellationToken);
+        await _tokenService.LoginAsync(username, password, cancellationToken);
         Console.WriteLine("Login erfolgreich!");
 
         var parsed = true;
