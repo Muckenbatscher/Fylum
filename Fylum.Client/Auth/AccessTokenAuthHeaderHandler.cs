@@ -1,4 +1,5 @@
 ﻿using Fylum.Client.Auth.Token;
+using Fylum.Client.Auth.Token.Expiration;
 using System.Net;
 using System.Net.Http.Headers;
 
@@ -7,16 +8,26 @@ namespace Fylum.Client.Auth;
 public class AccessTokenAuthHeaderHandler : DelegatingHandler
 {
     private readonly ITokenService _tokenService;
+    private readonly ITokenExpirationValidator _tokenExpirationValidator;
 
-    public AccessTokenAuthHeaderHandler(ITokenService tokenService)
+    public AccessTokenAuthHeaderHandler(ITokenService tokenService,
+        ITokenExpirationValidator tokenExpirationValidator)
     {
         _tokenService = tokenService;
+        _tokenExpirationValidator = tokenExpirationValidator;
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var token = await _tokenService.GetAccessTokenAsync(cancellationToken);
+        var tokenExpired = token == null || _tokenExpirationValidator.IsTokenExpired(token);
+        if (tokenExpired)
+        {
+            await _tokenService.RefreshTokenAsync(cancellationToken);
+            token = await _tokenService.GetAccessTokenAsync(cancellationToken);
+        }
+
         if (!string.IsNullOrEmpty(token))
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 

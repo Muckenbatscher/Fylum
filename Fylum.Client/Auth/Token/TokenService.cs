@@ -1,4 +1,5 @@
-﻿using Fylum.Client.Auth.Token.Storage;
+﻿using Fylum.Client.Auth.Token.Expiration;
+using Fylum.Client.Auth.Token.Storage;
 using Fylum.Users.Api.Shared;
 
 namespace Fylum.Client.Auth.Token;
@@ -6,16 +7,19 @@ namespace Fylum.Client.Auth.Token;
 public class TokenService : ITokenService
 {
     private readonly ITokenStorage _storage;
+    private readonly ITokenExpirationValidator _tokenExpirationValidator;
     private readonly IAuthClient _authClient;
     private readonly IRefreshTokenClient _refreshTokenClient;
 
     private readonly SemaphoreSlim _refreshTokenLock = new(1, 1); // Thread safety lock
 
     public TokenService(ITokenStorage storage,
+        ITokenExpirationValidator tokenExpirationValidator,
         IAuthClient authClient,
         IRefreshTokenClient refreshTokenClient)
     {
         _storage = storage;
+        _tokenExpirationValidator = tokenExpirationValidator;
         _authClient = authClient;
         _refreshTokenClient = refreshTokenClient;
     }
@@ -42,7 +46,9 @@ public class TokenService : ITokenService
         {
             var tokenPair = await _storage.GetTokenPairAsync();
             if (tokenPair == null || string.IsNullOrEmpty(tokenPair.RefreshToken))
-                throw new InvalidOperationException("No refresh token available. Explicitly Login first.");
+                throw new InitialLoginMissingException();
+            if (_tokenExpirationValidator.IsTokenExpired(tokenPair.RefreshToken))
+                throw new RefreshTokenExpiredException();
 
             var refreshResult = await _refreshTokenClient.RefreshToken(cancellationToken);
 
