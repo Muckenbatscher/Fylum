@@ -6,7 +6,9 @@ internal class Program
     {
         var builder = DistributedApplication.CreateBuilder(args);
 
-        var postgres = builder.AddPostgres("postgres")
+        var portConfig = builder.Configuration["Postgres:Port"];
+        var postgresPort = int.TryParse(portConfig, out int port) ? port : 56789;
+        var postgres = builder.AddPostgres("postgres", port: postgresPort)
             .WithDataVolume("fylum_pgdata")
             .WithLifetime(ContainerLifetime.Persistent);
         var database = postgres.AddDatabase("fylum");
