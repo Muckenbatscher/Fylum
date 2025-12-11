@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.JwtAuthentication;
 
-namespace Fylum.Users.Api.Shared;
+namespace Fylum.Users.Api;
 
 public class TokenRefreshClaimRequest
 {
