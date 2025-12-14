@@ -1,5 +1,2 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\Fylum.Api.Shared\Fylum.Api.Shared.csproj" />
-  </ItemGroup>
 </Project>
