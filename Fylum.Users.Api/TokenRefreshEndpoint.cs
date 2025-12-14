@@ -24,7 +24,7 @@ public class TokenRefreshEndpoint : Endpoint<TokenRefreshClaimRequest, Results<O
     {
         string baseRoute = EndpointRoutes.TokenRefreshRoute;
         Post(baseRoute);
-        Claims(JwtAuthConstants.RefreshIdClaim, JwtAuthConstants.RefreshUserIdClaim);
+        ClaimsAll(JwtAuthConstants.RefreshIdClaim, JwtAuthConstants.RefreshUserIdClaim);
     }
 
     public override async Task HandleAsync(TokenRefreshClaimRequest req, CancellationToken ct)
