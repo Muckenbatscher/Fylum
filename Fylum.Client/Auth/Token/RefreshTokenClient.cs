@@ -12,7 +12,7 @@ public class RefreshTokenClient : IRefreshTokenClient
         _httpClient = httpClient;
     }
 
-    public async Task<TokenRefreshResponse> RefreshToken(CancellationToken cancellationToken)
+    public async Task<TokenRefreshResponse> RefreshTokenAsync(CancellationToken cancellationToken)
     {
         var emptyContent = new StringContent(string.Empty);
         var response = await _httpClient.PostAsync(
@@ -22,5 +22,14 @@ public class RefreshTokenClient : IRefreshTokenClient
         var loginResult = await response.Content.ReadFromJsonAsync<TokenRefreshResponse>(cancellationToken)
             ?? throw new Exception("Invalid token refresh response");
         return loginResult;
+    }
+
+    public async Task LogoutAsync(CancellationToken cancellationToken)
+    {
+        var emptyContent = new StringContent(string.Empty);
+        var response = await _httpClient.PostAsync(
+            EndpointRoutes.LogoutRoute, emptyContent, cancellationToken);
+        if (!response.IsSuccessStatusCode)
+            throw new Exception("Logout failed");
     }
 }

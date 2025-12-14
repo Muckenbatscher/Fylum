@@ -38,6 +38,7 @@ public class App
             var file = await _fylumClient.GetById(fileId, cancellationToken);
             Console.WriteLine($"file found: {file.Name} (latest revision: {file.LatestRevisionId})");
         }
+        await _tokenService.LogoutAsync(cancellationToken);
 
         Console.WriteLine("App beendet.");
     }
