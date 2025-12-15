@@ -9,7 +9,7 @@ public class App
     private readonly IMigrationsClient _migrationsClient;
     private readonly IPerformingClient _performingClient;
 
-    public App(IMigrationsClient migrationsClient, 
+    public App(IMigrationsClient migrationsClient,
         IPerformingClient performingClient)
     {
         _migrationsClient = migrationsClient;
@@ -18,7 +18,7 @@ public class App
 
     public async Task Run(CancellationToken cancellationToken)
     {
-        Console.WriteLine("App gestartet...");
+        Console.WriteLine("App started...");
 
         var queriedMigrations = await _migrationsClient.GetMigrationsAsync(cancellationToken);
         var migrations = queriedMigrations.Migrations.ToList();
@@ -26,7 +26,7 @@ public class App
 
         Console.ForegroundColor = ConsoleColor.White;
         Console.Write("Select migration by ");
-        Console.ForegroundColor = ConsoleColor.Blue; 
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.Write("number");
         Console.ForegroundColor = ConsoleColor.White;
         Console.Write(" up to which to perform: ");
@@ -67,8 +67,8 @@ public class App
         Console.WriteLine($"\t{migration.MigrationId}");
 
         Console.Write("\t");
-        Console.ForegroundColor = migration.IsAlreadyPerformed 
-            ? ConsoleColor.Green 
+        Console.ForegroundColor = migration.IsAlreadyPerformed
+            ? ConsoleColor.Green
             : ConsoleColor.Red;
         Console.Write(migration.IsAlreadyPerformed ? "Performed" : "Not performed");
         if (migration.IsAlreadyPerformed)

@@ -15,7 +15,8 @@ public class App
 
     public async Task Run(CancellationToken cancellationToken)
     {
-        Console.WriteLine("App gestartet...");
+        Console.WriteLine("App started...");
+
         Console.Write("Username: ");
         var usernameRead = Console.ReadLine();
         var username = string.IsNullOrEmpty(usernameRead) ? "admin" : usernameRead;

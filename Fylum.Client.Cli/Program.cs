@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Fylum.Client.Cli;
 
@@ -6,25 +7,29 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine("Fylum Client CLI");
+        Console.ForegroundColor = ConsoleColor.White;
+
         Console.Write("BaseUrl: ");
         var baseUrl = Console.ReadLine()!;
 
-        var serviceCollection = new ServiceCollection();
-        ConfigureServices(serviceCollection, baseUrl);
-        var serviceProvider = serviceCollection.BuildServiceProvider();
+        var builder = Host.CreateApplicationBuilder(args);
+        ConfigureServices(builder.Services, baseUrl);
 
+        var host = builder.Build();
         try
         {
-            var app = serviceProvider.GetRequiredService<App>();
+            var app = host.Services.GetRequiredService<App>();
             await app.Run(CancellationToken.None);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ein Fehler ist aufgetreten: {ex.Message}");
+            Console.WriteLine($"An error occurred: {ex.Message}");
         }
         finally
         {
-            if (serviceProvider is IDisposable disposable)
+            if (host.Services is IDisposable disposable)
             {
                 disposable.Dispose();
             }

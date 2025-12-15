@@ -7,19 +7,19 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine("Migrations Client CLI");
+        Console.ForegroundColor = ConsoleColor.White;
+
+        Console.Write("BaseUrl: ");
+        var baseUrl = Console.ReadLine()!;
+        Console.Write("PerformingKey: ");
+        var performingKey = Console.ReadLine()!;
+
         var builder = Host.CreateApplicationBuilder(args);
-        builder.Services.AddServiceDiscovery();
+        ConfigureServices(builder.Services, baseUrl, performingKey);
 
-        var performingKey = builder.Configuration["MIGRATION_PERFORMING_KEY"];
-        if (string.IsNullOrEmpty(performingKey))
-        {
-            Console.Write("PerformingKey: ");
-            performingKey = Console.ReadLine()!;
-        }
-
-        ConfigureServices(builder.Services, performingKey);
         var host = builder.Build();
-
         try
         {
             var app = host.Services.GetRequiredService<App>();
@@ -27,7 +27,7 @@ internal class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ein Fehler ist aufgetreten: {ex.Message}");
+            Console.WriteLine($"An error occurred: {ex.Message}");
         }
         finally
         {
@@ -39,13 +39,13 @@ internal class Program
         Console.ReadLine();
     }
 
-    private static void ConfigureServices(IServiceCollection services, string performingKey)
+    private static void ConfigureServices(IServiceCollection services, string baseUrl, string performingKey)
     {
         services.AddTransient<App>();
 
         services.AddMigrationClient(options =>
         {
-            options.BaseUri = new Uri("https+http://migrations-api");
+            options.BaseUri = new Uri(baseUrl);
             options.MigrationPerformingKey = performingKey;
             options.Timeout = TimeSpan.FromSeconds(60);
         });

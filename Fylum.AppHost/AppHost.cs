@@ -30,11 +30,6 @@ internal class Program
             .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey)
             .WithMigrationCommands(migrationPerformingKey);
 
-        var migrationsCli = builder.AddProject<Projects.Fylum_Migrations_Client_Cli>("migrations-cli")
-            .WithReference(migrationsApi)
-            .WaitFor(migrationsApi)
-            .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey);
-
         var app = builder.Build();
 
         app.Run();
