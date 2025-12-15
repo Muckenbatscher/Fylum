@@ -27,11 +27,12 @@ public class PerformMigrationsUpToCommandHandler : IPerformMigrationsUpToCommand
         if (upToMigration.IsPerformed)
         {
             var followingMigrations = allMigrations.Skip(upToMigrationIndex + 1);
+            var anyFollowing = followingMigrations.Any();
             var anyFollowingAlreadyPerformed = followingMigrations.Any(m => m.IsPerformed);
-            if (anyFollowingAlreadyPerformed)
+            if (anyFollowing && anyFollowingAlreadyPerformed)
                 return Result.Failure(Error.Validation);
             else
-                return Result.Success(new PerformMigrationsUpToResult([]));
+                return new PerformMigrationsUpToResult([]);
         }
 
         var migrationsToPerform = allMigrations
@@ -50,6 +51,6 @@ public class PerformMigrationsUpToCommandHandler : IPerformMigrationsUpToCommand
         unitOfWork.Commit();
 
         var result = new PerformMigrationsUpToResult(performedMigrations);
-        return Result.Success(result);
+        return result;
     }
 }
