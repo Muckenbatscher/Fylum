@@ -2,7 +2,7 @@
 using Fylum.Migrations.Client.Listing;
 using Fylum.Migrations.Client.Performing;
 
-namespace Fylum.Migrations.Client.Demo;
+namespace Fylum.Migrations.Client.Cli;
 
 public class App
 {

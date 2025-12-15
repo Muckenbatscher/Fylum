@@ -1,6 +1,6 @@
 ﻿using Fylum.Client.Auth.Token;
 
-namespace Fylum.Client.Demo;
+namespace Fylum.Client.Cli;
 
 public class App
 {

@@ -3,7 +3,7 @@ using Fylum.Migrations.Client.Listing;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace Fylum.Migrations.Client.Demo;
+namespace Fylum.Migrations.Client.Cli;
 
 internal class Program
 {

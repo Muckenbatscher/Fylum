@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Client.Demo;
+namespace Fylum.Client.Cli;
 
 internal class Program
 {
