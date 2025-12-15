@@ -7,7 +7,6 @@ public class App
     private readonly ITokenService _tokenService;
     private readonly IFylumClient _fylumClient;
 
-    // Constructor Injection: Der ServiceProvider füllt diese Variable automatisch!
     public App(ITokenService tokenService, IFylumClient fylumClient)
     {
         _tokenService = tokenService;

@@ -10,7 +10,7 @@ public static class FylumMigrationsClientServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddFylumClient(Action<ClientOptions> configureClientOptions)
+        public IServiceCollection AddMigrationClient(Action<ClientOptions> configureClientOptions)
         {
             services.Configure(configureClientOptions);
 

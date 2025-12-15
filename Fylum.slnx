@@ -18,6 +18,7 @@
   <Folder Name="/Client/">
     <Project Path="Fylum.Client.Demo/Fylum.Client.Demo.csproj" />
     <Project Path="Fylum.Client/Fylum.Client.csproj" />
+    <Project Path="Fylum.Migrations.Client.Demo/Fylum.Migrations.Client.Demo.csproj" Id="6b3caf9c-701c-40b0-9681-c280357928c4" />
     <Project Path="Fylum.Migrations.Client/Fylum.Migrations.Client.csproj" Id="9519f2b4-a386-4dc6-9e58-7844b312e5c6" />
   </Folder>
   <Folder Name="/Desktop/" />
