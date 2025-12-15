@@ -4,5 +4,6 @@ namespace Fylum.Client.Auth.Token;
 
 public interface IRefreshTokenClient
 {
-    Task<TokenRefreshResponse> RefreshToken(CancellationToken cancellationToken);
+    Task<TokenRefreshResponse> RefreshTokenAsync(CancellationToken cancellationToken);
+    Task LogoutAsync(CancellationToken cancellationToken);
 }

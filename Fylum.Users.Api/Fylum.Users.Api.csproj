@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+	  <None Include="LogoutClaimRequest.cs" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="FastEndpoints" />
 	</ItemGroup>
 	<ItemGroup>

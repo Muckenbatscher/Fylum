@@ -38,6 +38,15 @@ public class TokenService : ITokenService
         var tokenPair = new TokenPair(loginResult.AccessToken, loginResult.RefreshToken);
         await _storage.StoreTokenPairAsync(tokenPair);
     }
+    public async Task LogoutAsync(CancellationToken cancellationToken)
+    {
+        var tokenPair = await _storage.GetTokenPairAsync();
+        if (tokenPair == null || string.IsNullOrEmpty(tokenPair.RefreshToken))
+            throw new InitialLoginMissingException();
+
+        await _refreshTokenClient.LogoutAsync(cancellationToken);
+        await _storage.ClearTokenPairAsync();
+    }
 
     public async Task RefreshTokenAsync(CancellationToken cancellationToken)
     {
@@ -50,7 +59,7 @@ public class TokenService : ITokenService
             if (_tokenExpirationValidator.IsTokenExpired(tokenPair.RefreshToken))
                 throw new RefreshTokenExpiredException();
 
-            var refreshResult = await _refreshTokenClient.RefreshToken(cancellationToken);
+            var refreshResult = await _refreshTokenClient.RefreshTokenAsync(cancellationToken);
 
             var newTokenPair = new TokenPair(
                 refreshResult.AccessToken, refreshResult.RefreshToken);

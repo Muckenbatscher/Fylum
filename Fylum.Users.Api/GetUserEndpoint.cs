@@ -35,12 +35,7 @@ public class GetUserEndpoint : EndpointWithoutRequest<UserResponse>
             return;
 
         var user = userResult.Value!;
-        var userResponse = new UserResponse
-        {
-            Id = user.Id,
-            Username = user.Username,
-            IsActive = user.IsActive
-        };
+        var userResponse = new UserResponse(user.Id, user.Username, user.IsActive);
         await Send.ResultAsync(TypedResults.Ok(userResponse));
     }
 }

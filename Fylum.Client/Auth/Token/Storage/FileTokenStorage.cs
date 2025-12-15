@@ -9,7 +9,7 @@ public class FileTokenStorage : ITokenStorage
         _tokenStoreFilePath = tokenStoreFilePath;
     }
 
-    public async Task ClearTokenPair()
+    public async Task ClearTokenPairAsync()
     {
         EnsureTokenStoreFileExists();
         await File.WriteAllLinesAsync(_tokenStoreFilePath, []);

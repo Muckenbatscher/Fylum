@@ -14,26 +14,37 @@ public static class ErrorResultHandler
         if (result.IsSuccess)
             return false;
 
-        var error = result.Error!;
+        await SendErrorResult(send, result.Error!);
+        return true;
+    }
 
-        switch (error.Type)
+    public static async Task<ErrorResultHandlingResponse> EnsureErrorResultHandled<TRequest, TResponse>(
+        this ResponseSender<TRequest, TResponse> send,
+        Result result)
+        where TRequest : notnull
+    {
+        if (result.IsSuccess)
+            return false;
+
+        await SendErrorResult(send, result.Error!);
+        return true;
+    }
+
+    private static async Task SendErrorResult<TRequest, TResponse>(
+        ResponseSender<TRequest, TResponse> send,
+        Error error)
+        where TRequest : notnull
+    {
+        IResult result = error.Type switch
         {
-            case ErrorType.NotFound:
-                await send.ResultAsync(TypedResults.NotFound());
-                return true;
-            case ErrorType.Validation:
-                await send.ResultAsync(TypedResults.BadRequest());
-                return true;
-            case ErrorType.Unauthorized:
-                await send.ResultAsync(TypedResults.Unauthorized());
-                return true;
-            case ErrorType.Conflict:
-                await send.ResultAsync(TypedResults.Conflict());
-                return true;
-            case ErrorType.Internal:
-            default:
-                await send.ResultAsync(TypedResults.StatusCode(StatusCodes.Status500InternalServerError));
-                return true;
-        }
+            ErrorType.NotFound => TypedResults.NotFound(),
+            ErrorType.Validation => TypedResults.BadRequest(),
+            ErrorType.Unauthorized => TypedResults.Unauthorized(),
+            ErrorType.Forbidden => TypedResults.Forbid(),
+            ErrorType.Conflict => TypedResults.Conflict(),
+            _ => TypedResults.InternalServerError()
+        };
+
+        await send.ResultAsync(result);
     }
 }

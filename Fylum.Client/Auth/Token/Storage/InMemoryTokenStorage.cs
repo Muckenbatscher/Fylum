@@ -10,6 +10,6 @@ public class InMemoryTokenStorage : ITokenStorage
     public async Task StoreTokenPairAsync(TokenPair tokenPair)
         => _storedTokenPair = tokenPair;
 
-    public async Task ClearTokenPair()
+    public async Task ClearTokenPairAsync()
         => _storedTokenPair = null;
 }
