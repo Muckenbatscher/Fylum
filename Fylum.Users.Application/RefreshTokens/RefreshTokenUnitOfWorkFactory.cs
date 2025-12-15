@@ -4,19 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Users.Application.RefreshTokens;
 
-internal class RefreshTokenUnitOfWorkFactory : UnitOfWorkFactory, IRefreshTokenUnitOfWorkFactory
+internal class RefreshTokenUnitOfWorkFactory : UnitOfWorkFactory<RefreshTokenUnitOfWork>, IRefreshTokenUnitOfWorkFactory
 {
     public RefreshTokenUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) : base(serviceScopeFactory)
     {
-    }
-
-    public RefreshTokenUnitOfWork Create()
-    {
-        CreateScope();
-        var transactionFactory = GetTransactionFactory();
-        var refreshTokenRepository = GetScopedService<IRefreshTokenRepository>();
-        return new RefreshTokenUnitOfWork(
-            transactionFactory,
-            refreshTokenRepository);
     }
 }
