@@ -20,6 +20,8 @@ public static class FylumClientServiceCollectionExtensions
         public IServiceCollection AddFylumClient(Action<ClientOptions> configureClientOptions,
             Func<IServiceProvider, ITokenStorage> tokenStorageFactory)
         {
+            services.Configure(configureClientOptions);
+
             services.AddSingleton<ITokenStorage>(tokenStorageFactory);
 
             services.AddSingleton<ITokenService, TokenService>();
@@ -28,7 +30,6 @@ public static class FylumClientServiceCollectionExtensions
             services.AddTransient<AccessTokenAuthHeaderHandler>();
             services.AddTransient<RefreshTokenAuthHeaderHandler>();
 
-            services.Configure(configureClientOptions);
             services.AddConfiguredHttpClient<IAuthClient, AuthClient>();
             services.AddConfiguredHttpClient<IRefreshTokenClient, RefreshTokenClient>()
                 .AddHttpMessageHandler<RefreshTokenAuthHeaderHandler>();

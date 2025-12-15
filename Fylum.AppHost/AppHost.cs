@@ -26,8 +26,8 @@ internal class Program
             .WaitFor(database)
             .WithScalarDisplayNameUrls()
             .WithOpenApiSpecUrl()
-            .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey)
             .WithChildRelationship(migrationPerformingKey)
+            .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey)
             .WithMigrationCommands(migrationPerformingKey);
 
         var app = builder.Build();

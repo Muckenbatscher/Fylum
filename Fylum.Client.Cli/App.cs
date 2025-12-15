@@ -1,13 +1,12 @@
 ﻿using Fylum.Client.Auth.Token;
 
-namespace Fylum.Client.Demo;
+namespace Fylum.Client.Cli;
 
 public class App
 {
     private readonly ITokenService _tokenService;
     private readonly IFylumClient _fylumClient;
 
-    // Constructor Injection: Der ServiceProvider füllt diese Variable automatisch!
     public App(ITokenService tokenService, IFylumClient fylumClient)
     {
         _tokenService = tokenService;
@@ -16,7 +15,8 @@ public class App
 
     public async Task Run(CancellationToken cancellationToken)
     {
-        Console.WriteLine("App gestartet...");
+        Console.WriteLine("App started...");
+
         Console.Write("Username: ");
         var usernameRead = Console.ReadLine();
         var username = string.IsNullOrEmpty(usernameRead) ? "admin" : usernameRead;

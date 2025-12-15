@@ -22,7 +22,6 @@ public class Program
             .AddFastEndpoints()
             .SwaggerDocument();
 
-
         builder.Services.Configure<PerformingKeyOptions>(options =>
         {
             options.MigrationPerformingKey = builder.Configuration["MIGRATION_PERFORMING_KEY"]!;
@@ -37,7 +36,6 @@ public class Program
             options.Password = builder.Configuration["POSTGRES_PASSWORD"]!;
         });
         builder.Services.AddPostgresServices();
-
 
         builder.Services.AddMigrationsServices();
 

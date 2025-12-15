@@ -16,8 +16,10 @@
     <Project Path="Fylum.Users.Postgres/Fylum.Users.Postgres.csproj" />
   </Folder>
   <Folder Name="/Client/">
-    <Project Path="Fylum.Client.Demo/Fylum.Client.Demo.csproj" />
+    <Project Path="Fylum.Client.Cli/Fylum.Client.Cli.csproj" />
     <Project Path="Fylum.Client/Fylum.Client.csproj" />
+    <Project Path="Fylum.Migrations.Client.Cli/Fylum.Migrations.Client.Cli.csproj" />
+    <Project Path="Fylum.Migrations.Client/Fylum.Migrations.Client.csproj" />
   </Folder>
   <Folder Name="/Desktop/" />
   <Folder Name="/Desktop/Fylum.Migrations/">
