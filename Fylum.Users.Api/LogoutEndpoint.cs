@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Users.Api;
 
-public class LogoutEndpoint : Endpoint<LogoutClaimRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
+public class LogoutEndpoint : Endpoint<LogoutClaimRequest, Results<Ok, UnauthorizedHttpResult>>
 {
     private readonly ILogoutCommandHandler _commandHandler;
 
@@ -33,7 +33,6 @@ public class LogoutEndpoint : Endpoint<LogoutClaimRequest, Results<Ok<LoginRespo
         if (errorHanding.ErrorResultHandlingRequired)
             return;
 
-        var response = new LogoutResponse();
-        await Send.ResultAsync(TypedResults.Ok(response));
+        await Send.ResultAsync(TypedResults.Ok());
     }
 }
