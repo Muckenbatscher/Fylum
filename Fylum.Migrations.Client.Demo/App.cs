@@ -1,15 +1,19 @@
 ﻿using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Client.Listing;
+using Fylum.Migrations.Client.Performing;
 
 namespace Fylum.Migrations.Client.Demo;
 
 public class App
 {
     private readonly IMigrationsClient _migrationsClient;
+    private readonly IPerformingClient _performingClient;
 
-    public App(IMigrationsClient migrationsClient)
+    public App(IMigrationsClient migrationsClient, 
+        IPerformingClient performingClient)
     {
         _migrationsClient = migrationsClient;
+        _performingClient = performingClient;
     }
 
     public async Task Run(CancellationToken cancellationToken)
@@ -19,6 +23,25 @@ public class App
         var queriedMigrations = await _migrationsClient.GetMigrationsAsync(cancellationToken);
         var migrations = queriedMigrations.Migrations.ToList();
         PrintMigrations(migrations);
+
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("Select migration by ");
+        Console.ForegroundColor = ConsoleColor.Blue; 
+        Console.Write("number");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write(" up to which to perform: ");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        var enteredMigrationNumber = Console.ReadLine()!;
+        Console.ForegroundColor = ConsoleColor.White;
+        int parsedMigrationNumber = int.TryParse(enteredMigrationNumber, out parsedMigrationNumber) ? parsedMigrationNumber : -1;
+        if (parsedMigrationNumber < 0)
+            return;
+        var selectedMigration = migrations[parsedMigrationNumber - 1];
+
+        var performed = await _performingClient.PerformMigrationsUpToAsync(
+            selectedMigration.MigrationId, cancellationToken);
+
+        PrintMigrations(performed.PerformedMigrations.ToList());
 
         Console.WriteLine("App beendet.");
     }
@@ -37,7 +60,7 @@ public class App
         string AnsiReset = "\x1b[0m";
 
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.Write($"[ {index} ]");
+        Console.Write($"[ {index + 1} ]");
         Console.WriteLine($"\t{migration.Name}");
 
         Console.ForegroundColor = ConsoleColor.White;
