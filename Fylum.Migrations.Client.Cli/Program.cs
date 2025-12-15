@@ -1,7 +1,5 @@
-﻿using Fylum.Migrations.Api.Shared;
-using Fylum.Migrations.Client.Listing;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Fylum.Migrations.Client.Cli;
 
@@ -9,18 +7,22 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-        Console.Write("BaseUrl: ");
-        var baseUrl = Console.ReadLine()!;
-        Console.Write("PerformingKey: ");
-        var performingKey = Console.ReadLine()!;
+        var builder = Host.CreateApplicationBuilder(args);
+        builder.Services.AddServiceDiscovery();
 
-        var serviceCollection = new ServiceCollection();
-        ConfigureServices(serviceCollection, baseUrl, performingKey);
-        var serviceProvider = serviceCollection.BuildServiceProvider();
+        var performingKey = builder.Configuration["MIGRATION_PERFORMING_KEY"];
+        if (string.IsNullOrEmpty(performingKey))
+        {
+            Console.Write("PerformingKey: ");
+            performingKey = Console.ReadLine()!;
+        }
+
+        ConfigureServices(builder.Services, performingKey);
+        var host = builder.Build();
 
         try
         {
-            var app = serviceProvider.GetRequiredService<App>();
+            var app = host.Services.GetRequiredService<App>();
             await app.Run(CancellationToken.None);
         }
         catch (Exception ex)
@@ -29,7 +31,7 @@ internal class Program
         }
         finally
         {
-            if (serviceProvider is IDisposable disposable)
+            if (host.Services is IDisposable disposable)
             {
                 disposable.Dispose();
             }
@@ -37,33 +39,15 @@ internal class Program
         Console.ReadLine();
     }
 
-    /// <summary>
-    /// Hier werden alle Abhängigkeiten definiert.
-    /// </summary>
-    private static void ConfigureServices(IServiceCollection services, string baseUrl, string performingKey)
+    private static void ConfigureServices(IServiceCollection services, string performingKey)
     {
         services.AddTransient<App>();
-        services.AddTransient<IMigrationsClient>((sp) =>
+
+        services.AddMigrationClient(options =>
         {
-            var mock = new Mock<IMigrationsClient>();
-            mock.Setup(x => x.GetMigrationsAsync(It.IsAny<CancellationToken>()))
-                .ReturnsAsync(GetDummyMultipleMigrationsResponse());
-            return mock.Object;
+            options.BaseUri = new Uri("https+http://migrations-api");
+            options.MigrationPerformingKey = performingKey;
+            options.Timeout = TimeSpan.FromSeconds(60);
         });
-
-        //services.AddMigrationClient(options =>
-        //{
-        //    options.BaseUri = new Uri(baseUrl);
-        //    options.MigrationPerformingKey = performingKey;
-        //    options.Timeout = TimeSpan.FromSeconds(60);
-        //});
-    }
-
-    private static MultipleMigrationsResponse GetDummyMultipleMigrationsResponse()
-    {
-        var migrationOne = new MigrationResponse(Guid.NewGuid(), "migration One", true);
-        var migrationTwo = new MigrationResponse(Guid.NewGuid(), "migration Two", true);
-        var migrationThree = new MigrationResponse(Guid.NewGuid(), "migration Three", false);
-        return new MultipleMigrationsResponse([migrationOne, migrationTwo, migrationThree]);
     }
 }

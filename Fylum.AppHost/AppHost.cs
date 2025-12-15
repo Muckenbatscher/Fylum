@@ -26,9 +26,14 @@ internal class Program
             .WaitFor(database)
             .WithScalarDisplayNameUrls()
             .WithOpenApiSpecUrl()
-            .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey)
             .WithChildRelationship(migrationPerformingKey)
+            .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey)
             .WithMigrationCommands(migrationPerformingKey);
+
+        var migrationsCli = builder.AddProject<Projects.Fylum_Migrations_Client_Cli>("migrations-cli")
+            .WithReference(migrationsApi)
+            .WaitFor(migrationsApi)
+            .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey);
 
         var app = builder.Build();
 

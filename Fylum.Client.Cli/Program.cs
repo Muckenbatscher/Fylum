@@ -32,9 +32,6 @@ internal class Program
         Console.ReadLine();
     }
 
-    /// <summary>
-    /// Hier werden alle Abhängigkeiten definiert.
-    /// </summary>
     private static void ConfigureServices(IServiceCollection services, string baseUrl)
     {
         services.AddTransient<App>();
