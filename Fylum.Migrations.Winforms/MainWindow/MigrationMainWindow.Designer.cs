@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle1 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle2 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle3 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle4 = new M2TWinForms.M2TDataGridViewCellStyle();
-            M2TWinForms.M2TDataGridViewCellStyle m2tDataGridViewCellStyle5 = new M2TWinForms.M2TDataGridViewCellStyle();
+            var m2tDataGridViewCellStyle1 = new M2TWinForms.M2TDataGridViewCellStyle();
+            var m2tDataGridViewCellStyle2 = new M2TWinForms.M2TDataGridViewCellStyle();
+            var m2tDataGridViewCellStyle3 = new M2TWinForms.M2TDataGridViewCellStyle();
+            var m2tDataGridViewCellStyle4 = new M2TWinForms.M2TDataGridViewCellStyle();
+            var m2tDataGridViewCellStyle5 = new M2TWinForms.M2TDataGridViewCellStyle();
             DG_Migrations = new M2TWinForms.M2TDataGridView();
             CL_IsPerformed = new DataGridViewImageColumn();
             CL_Name = new DataGridViewTextBoxColumn();
@@ -88,6 +88,7 @@
             m2tDataGridViewCellStyle4.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
             DG_Migrations.RowHeadersDefaultCellStyle = m2tDataGridViewCellStyle4;
             DG_Migrations.RowHeadersVisible = false;
+            DG_Migrations.RowHeadersWidth = 51;
             m2tDataGridViewCellStyle5.ColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
             m2tDataGridViewCellStyle5.SelectionColorRole = M2TWinForms.M2TDataGridViewCellStyleColorRoleSelection.Empty;
             DG_Migrations.RowsDefaultCellStyle = m2tDataGridViewCellStyle5;
@@ -101,6 +102,7 @@
             // 
             CL_IsPerformed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             CL_IsPerformed.HeaderText = "";
+            CL_IsPerformed.MinimumWidth = 6;
             CL_IsPerformed.Name = "CL_IsPerformed";
             CL_IsPerformed.ReadOnly = true;
             CL_IsPerformed.Width = 40;
@@ -109,6 +111,7 @@
             // 
             CL_Name.FillWeight = 150F;
             CL_Name.HeaderText = "Name";
+            CL_Name.MinimumWidth = 6;
             CL_Name.Name = "CL_Name";
             CL_Name.ReadOnly = true;
             // 
@@ -116,12 +119,14 @@
             // 
             CL_ScriptsCount.FillWeight = 50F;
             CL_ScriptsCount.HeaderText = "Script Count";
+            CL_ScriptsCount.MinimumWidth = 6;
             CL_ScriptsCount.Name = "CL_ScriptsCount";
             CL_ScriptsCount.ReadOnly = true;
             // 
             // CL_PerformedTimestamp
             // 
             CL_PerformedTimestamp.HeaderText = "Performed Timestamp";
+            CL_PerformedTimestamp.MinimumWidth = 6;
             CL_PerformedTimestamp.Name = "CL_PerformedTimestamp";
             CL_PerformedTimestamp.ReadOnly = true;
             // 
@@ -235,9 +240,9 @@
             LB_SelectedMigrationName.Anchor = AnchorStyles.Left;
             LB_SelectedMigrationName.AutoSize = true;
             LB_SelectedMigrationName.Font = new Font("Segoe UI", 12F);
-            LB_SelectedMigrationName.Location = new Point(3, 2);
+            LB_SelectedMigrationName.Location = new Point(3, 0);
             LB_SelectedMigrationName.Name = "LB_SelectedMigrationName";
-            LB_SelectedMigrationName.Size = new Size(124, 21);
+            LB_SelectedMigrationName.Size = new Size(156, 25);
             LB_SelectedMigrationName.TabIndex = 1;
             LB_SelectedMigrationName.Text = "Migration Name";
             // 
@@ -246,25 +251,25 @@
             LB_SelectedMigrationTimestamp.Anchor = AnchorStyles.Left;
             LB_SelectedMigrationTimestamp.AutoSize = true;
             LB_SelectedMigrationTimestamp.ForeColorRole = M2TWinForms.M2TLabelTextColorRoleSelection.OnSurfaceVariant;
-            LB_SelectedMigrationTimestamp.Location = new Point(3, 30);
+            LB_SelectedMigrationTimestamp.Location = new Point(3, 27);
             LB_SelectedMigrationTimestamp.Name = "LB_SelectedMigrationTimestamp";
-            LB_SelectedMigrationTimestamp.Size = new Size(122, 15);
+            LB_SelectedMigrationTimestamp.Size = new Size(152, 20);
             LB_SelectedMigrationTimestamp.TabIndex = 2;
             LB_SelectedMigrationTimestamp.Text = "Migration Timestamp";
             // 
             // CIB_SelectedMigrationPerformedState
             // 
             CIB_SelectedMigrationPerformedState.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            CIB_SelectedMigrationPerformedState.BackColor = Color.FromArgb(29, 32, 28);
+            CIB_SelectedMigrationPerformedState.BackColor = Color.FromArgb(244, 237, 227);
             CIB_SelectedMigrationPerformedState.BackgroundColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.SurfaceContainer;
             CIB_SelectedMigrationPerformedState.BaseImage = null;
             CIB_SelectedMigrationPerformedState.ConvertBaseImageToGrayscale = true;
-            CIB_SelectedMigrationPerformedState.HoverBackColor = Color.FromArgb(29, 32, 28);
+            CIB_SelectedMigrationPerformedState.HoverBackColor = Color.FromArgb(244, 237, 227);
             CIB_SelectedMigrationPerformedState.HoverBackgroundColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.SurfaceContainer;
             CIB_SelectedMigrationPerformedState.HoverEnabled = false;
-            CIB_SelectedMigrationPerformedState.HoverImageColor = Color.FromArgb(226, 227, 219);
+            CIB_SelectedMigrationPerformedState.HoverImageColor = Color.FromArgb(30, 28, 19);
             CIB_SelectedMigrationPerformedState.HoverImageColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.OnSurface;
-            CIB_SelectedMigrationPerformedState.ImageColor = Color.FromArgb(170, 209, 155);
+            CIB_SelectedMigrationPerformedState.ImageColor = Color.FromArgb(109, 94, 15);
             CIB_SelectedMigrationPerformedState.ImageColorRole = M2TWinForms.Themes.MaterialDesign.ColorRoles.Primary;
             CIB_SelectedMigrationPerformedState.ImagePadding = new Padding(0);
             CIB_SelectedMigrationPerformedState.Location = new Point(323, 3);
@@ -275,13 +280,13 @@
             // 
             // MigrationMainWindow
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(TLP_Main);
             Name = "MigrationMainWindow";
             Text = "Migrations";
-            WindowIcon = Winforms.Properties.Resources.MigrateIcon;
+            WindowIcon = Properties.Resources.MigrateIcon;
             Load += MigrationMainWindow_Load;
             Controls.SetChildIndex(TLP_Main, 0);
             ((System.ComponentModel.ISupportInitialize)DG_Migrations).EndInit();

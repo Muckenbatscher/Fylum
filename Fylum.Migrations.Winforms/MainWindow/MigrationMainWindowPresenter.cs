@@ -1,55 +1,77 @@
-﻿using Fylum.Migrations.Domain;
-using Fylum.Migrations.Domain.Perform;
+﻿using Fylum.Migrations.Api.Shared;
+using Fylum.Migrations.Client.Listing;
+using Fylum.Migrations.Client.Performing;
 
 namespace Fylum.Migrations.Winforms.MainWindow;
 
 public class MigrationMainWindowPresenter
 {
-    private readonly IMigrationService _migrationService;
-    private readonly IMigrationPerformingService _performingService;
+    private readonly IMigrationsClient _migrationsClient;
+    private readonly IPerformingClient _performingClient;
 
     public MigrationMainWindowPresenter(IMigrationMainWindow view,
-        IMigrationService migrationService,
-        IMigrationPerformingService performingService)
+        IMigrationsClient migrationsClient,
+        IPerformingClient performingClient)
     {
         View = view;
-        _migrationService = migrationService;
-        _performingService = performingService;
+        _migrationsClient = migrationsClient;
+        _performingClient = performingClient;
 
         View.ViewLoaded += View_LoadEvent;
         View.PerformAllClicked += View_PerformAllClicked;
         View.SelectedMigrationChanged += View_SelectedMigrationChanged;
     }
 
-
     public IMigrationMainWindow View { get; private set; }
 
-    private void View_LoadEvent(object? sender, EventArgs e)
+    private async void View_LoadEvent(object? sender, EventArgs e)
     {
         View.PerformUntilSelectedEnabled = false;
-        PresentPerformedMigrations();
+        try
+        {
+            await PresentPerformedMigrations(CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+            _ = ex;
+        }
     }
 
-    private void PresentPerformedMigrations()
+    private async Task PresentPerformedMigrations(CancellationToken cancellationToken)
     {
-        var migrations = _migrationService.GetMigrations();
-        View.AllMigrations = migrations.Select(CreateMigrationRow);
+        var migrations = await _migrationsClient.GetMigrationsAsync(cancellationToken);
+        View.AllMigrations = migrations.Migrations.Select(CreateMigrationRow).ToList();
         View.UnselectAllMigrations();
     }
-    private MigrationRow CreateMigrationRow(Migration migrationWithPerformedState)
+    private MigrationRow CreateMigrationRow(MigrationResponse migrationWithPerformedState)
     {
+        DateTimeOffset? performed = migrationWithPerformedState.PerformedUtc.HasValue
+            ? new DateTimeOffset(migrationWithPerformedState.PerformedUtc.Value)
+            : null;
         return new MigrationRow(
-            migrationWithPerformedState.ProvidedMigration,
-            migrationWithPerformedState.IsPerformed,
-            migrationWithPerformedState.PerformedState?.TimestampPerformed);
+            migrationWithPerformedState.MigrationId,
+            migrationWithPerformedState.Name,
+            migrationWithPerformedState.IsAlreadyPerformed,
+            performed);
     }
 
-    private void View_PerformAllClicked(object? sender, EventArgs e)
+    private async void View_PerformAllClicked(object? sender, EventArgs e)
     {
-        foreach (var migrationRow in View.AllMigrations.Where(m => !m.IsPerformed))
-            _performingService.Perform(migrationRow.Migration);
+        View.PerformAllEnabled = false;
+        try
+        {
+            foreach (var migrationRow in View.AllMigrations.Where(m => !m.IsPerformed))
+                await _performingClient.PerformMigrationsUpToAsync(migrationRow.Id, CancellationToken.None);
 
-        PresentPerformedMigrations();
+            await PresentPerformedMigrations(CancellationToken.None);
+        }
+        catch (Exception)
+        {
+        }
+        finally
+        {
+            View.PerformAllEnabled = true;
+        }
     }
 
     private void View_SelectedMigrationChanged(object? sender, EventArgs e)

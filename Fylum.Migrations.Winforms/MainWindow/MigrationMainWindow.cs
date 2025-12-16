@@ -1,4 +1,3 @@
-using Fylum.Migrations.Winforms.MainWindow.MigrationScript;
 using M2TWinForms;
 using System.ComponentModel;
 
@@ -19,6 +18,12 @@ public partial class MigrationMainWindow : M2TForm, IMigrationMainWindow
         CL_PerformedTimestamp.DataPropertyName = nameof(MigrationRow.LocalPerformedTimestamp);
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public bool PerformAllEnabled
+    {
+        get => BT_PerformAll.Enabled;
+        set => BT_PerformAll.Enabled = value;
+    }
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public IEnumerable<MigrationRow> AllMigrations
     {
@@ -114,15 +119,15 @@ public partial class MigrationMainWindow : M2TForm, IMigrationMainWindow
             : new Bitmap(1, 1);
         CIB_SelectedMigrationPerformedState.BaseImage = image;
 
-        foreach (var script in migrationRow.Migration.MigrationScripts.Reverse())
-        {
-            var scriptDisplay = new MigrationScriptDisplay
-            {
-                ScriptText = script.ScriptCommandText,
-                Dock = DockStyle.Top,
-                Padding = new Padding(3)
-            };
-            FLP_SelectedMigrationScripts.Controls.Add(scriptDisplay);
-        }
+        //foreach (var script in migrationRow.Migration.MigrationScripts.Reverse())
+        //{
+        //    var scriptDisplay = new MigrationScriptDisplay
+        //    {
+        //        ScriptText = script.ScriptCommandText,
+        //        Dock = DockStyle.Top,
+        //        Padding = new Padding(3)
+        //    };
+        //    FLP_SelectedMigrationScripts.Controls.Add(scriptDisplay);
+        //}
     }
 }
