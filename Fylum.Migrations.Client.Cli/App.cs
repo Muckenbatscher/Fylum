@@ -27,7 +27,7 @@ public class App
         Console.WriteInColor("Select migration by ", ConsoleColor.White);
         Console.WriteInColor("number", ConsoleColor.Blue);
         Console.WriteInColor(" up to which to perform: ", ConsoleColor.White);
-        
+
         Console.ForegroundColor = ConsoleColor.Blue;
         var enteredMigrationNumber = Console.ReadLine()!;
         Console.ForegroundColor = ConsoleColor.White;
@@ -42,7 +42,7 @@ public class App
         PrintMigrations(performed.PerformedMigrations.ToList());
     }
 
-    private static void PrintMigrations(IReadOnlyList<MigrationResponse> migrations)
+    private static void PrintMigrations(IList<MigrationResponse> migrations)
     {
         for (int index = 0; index < migrations.Count; index++)
         {
@@ -56,26 +56,26 @@ public class App
         string AnsiBrightBlack = "\x1b[90m";
         string AnsiReset = "\x1b[0m";
 
-        Console.WriteRightPaddedInColor($"[ {index + 1} ]", 
+        Console.WriteRightPaddedInColor($"[ {index + 1} ]",
             indexWhiteSpaceChars, ConsoleColor.Blue);
         Console.WriteInColor(migration.Name, ConsoleColor.Blue);
         Console.WriteLine();
 
-        Console.WriteLeftPaddednColor(migration.MigrationId.ToString(), 
+        Console.WriteLeftPaddednColor(migration.MigrationId.ToString(),
             indexWhiteSpaceChars, ConsoleColor.White);
         Console.WriteLine();
 
-        var performedState = migration.IsAlreadyPerformed 
+        var performedState = migration.IsAlreadyPerformed
             ? "Performed" : "Not performed";
-        var performedColor = migration.IsAlreadyPerformed 
+        var performedColor = migration.IsAlreadyPerformed
             ? ConsoleColor.Green : ConsoleColor.Red;
-        Console.WriteLeftPaddednColor(performedState, 
+        Console.WriteLeftPaddednColor(performedState,
             indexWhiteSpaceChars, performedColor);
         Console.ForegroundColor = migration.IsAlreadyPerformed
             ? ConsoleColor.Green
             : ConsoleColor.Red;
         if (migration.IsAlreadyPerformed)
-            Console.Write($" {AnsiBrightBlack}{DateTime.Now:G}{AnsiReset}");
+            Console.Write($" {AnsiBrightBlack}{migration.PerformedUtc:G}{AnsiReset}");
         Console.WriteLine();
     }
 }
