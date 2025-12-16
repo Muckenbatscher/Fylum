@@ -46,7 +46,7 @@ public class App
         Console.WriteLine("App beendet.");
     }
 
-    private void PrintMigrations(IReadOnlyList<MigrationResponse> migrations)
+    private void PrintMigrations(IList<MigrationResponse> migrations)
     {
         for (int index = 0; index < migrations.Count; index++)
         {
@@ -72,7 +72,7 @@ public class App
             : ConsoleColor.Red;
         Console.Write(migration.IsAlreadyPerformed ? "Performed" : "Not performed");
         if (migration.IsAlreadyPerformed)
-            Console.Write($" {AnsiBrightBlack}{DateTime.Now:G}{AnsiReset}");
+            Console.Write($" {AnsiBrightBlack}{migration.PerformedUtc:G}{AnsiReset}");
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.White;
     }

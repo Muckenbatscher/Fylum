@@ -41,5 +41,6 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
     private MigrationResponse MapToResponse(GetMigrationCommandResult migrationResult)
         => new(migrationResult.Id,
             migrationResult.Name,
-            migrationResult.IsPerformed);
+            migrationResult.IsPerformed,
+            migrationResult.PerformedTimestamp?.UtcDateTime);
 }
