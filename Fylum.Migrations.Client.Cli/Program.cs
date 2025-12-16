@@ -7,9 +7,8 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine("Migrations Client CLI");
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteInColor("Migrations Client CLI", ConsoleColor.Magenta);
+        Console.WriteLine();
 
         Console.Write("BaseUrl: ");
         var baseUrl = Console.ReadLine()!;
@@ -27,7 +26,8 @@ internal class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.WriteInColor($"An error occurred: {ex.Message}", ConsoleColor.Red);
+            Console.WriteLine();
         }
         finally
         {
