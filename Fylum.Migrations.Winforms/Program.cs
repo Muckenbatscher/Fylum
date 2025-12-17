@@ -1,8 +1,5 @@
-using Fylum.Migrations.Application;
-using Fylum.Migrations.Postgres;
-using Fylum.Migrations.Provider;
+using Fylum.Migrations.Client;
 using Fylum.Migrations.Winforms.MainWindow;
-using Fylum.Postgres.Shared;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,29 +21,23 @@ internal static class Program
         var builder = Host.CreateApplicationBuilder();
         builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
 
-        builder.Services.AddPostgresSharedServices(options =>
+        builder.Services.AddMigrationClient(options =>
         {
-            options.HostName = builder.Configuration["DbConnection:Host"]!;
-            options.Port = int.Parse(builder.Configuration["DbConnection:Port"]!);
-            options.DatabaseName = builder.Configuration["DbConnection:Database"]!;
-            options.Username = builder.Configuration["DbConnection:Username"]!;
-            options.Password = builder.Configuration["DbConnection:Password"]!;
+            var baseUri = builder.Configuration["MigrationsApiBaseUrl"]!;
+            options.BaseUri = new Uri(baseUri);
+            options.MigrationPerformingKey = builder.Configuration["MigrationPerformingKey"]!;
+            var timeoutSeconds = builder.Configuration["ApiTimeoutSeconds"];
+            options.Timeout = TimeSpan.FromSeconds(int.Parse(timeoutSeconds!));
         });
-        builder.Services.AddMigrationProviderServices();
-        builder.Services.AddMigrationApplicationServices();
-
-        builder.Services.AddMigrationPostgresServices();
 
         builder.Services.AddTransient<IMigrationMainWindow, MigrationMainWindow>();
         builder.Services.AddTransient<MigrationMainWindowPresenter>();
 
-        using (var host = builder.Build())
-        {
-            var serviceProvider = host.Services;
-            var mainFormPresenter = serviceProvider.GetRequiredService<MigrationMainWindowPresenter>();
+        using var host = builder.Build();
+        var serviceProvider = host.Services;
+        var mainFormPresenter = serviceProvider.GetRequiredService<MigrationMainWindowPresenter>();
 
-            var form = (Form)mainFormPresenter.View;
-            System.Windows.Forms.Application.Run(form);
-        }
+        var form = (Form)mainFormPresenter.View;
+        Application.Run(form);
     }
 }

@@ -2,6 +2,7 @@
 
 public interface IMigrationMainWindow
 {
+    bool PerformAllEnabled { get; set; }
     IEnumerable<MigrationRow> AllMigrations { get; set; }
     MigrationRow? SelectedMigration { get; }
     bool PerformUntilSelectedEnabled { get; set; }

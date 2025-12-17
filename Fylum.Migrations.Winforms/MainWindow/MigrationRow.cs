@@ -1,22 +1,19 @@
-﻿using Fylum.Migrations.Domain.Providing;
-
-namespace Fylum.Migrations.Winforms.MainWindow;
+﻿namespace Fylum.Migrations.Winforms.MainWindow;
 
 public class MigrationRow
 {
-    public MigrationRow(ProvidedMigration migration, bool isPerformed, DateTimeOffset? performedTimestamp)
+    public MigrationRow(Guid id, string name, bool isPerformed, DateTimeOffset? performedTimestamp)
     {
-        Migration = migration;
+        Id = id;
+        Name = name;
         IsPerformed = isPerformed;
         PerformedTimestamp = performedTimestamp;
     }
 
-    public ProvidedMigration Migration { get; set; }
-    public string Name
-        => Migration.Name;
-    public int ScriptCount
-        => Migration.MigrationScripts.Count();
+    public string Name { get; }
+    public int ScriptCount => 0;
 
+    public Guid Id { get; }
     public bool IsPerformed { get; }
     public DateTimeOffset? PerformedTimestamp { get; }
 
