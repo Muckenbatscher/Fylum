@@ -39,7 +39,5 @@ public class App
             Console.WriteLine($"file found: {file.Name} (latest revision: {file.LatestRevisionId})");
         }
         await _tokenService.LogoutAsync(cancellationToken);
-
-        Console.WriteLine("App beendet.");
     }
 }

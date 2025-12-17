@@ -24,12 +24,10 @@ public class App
         var migrations = queriedMigrations.Migrations.ToList();
         PrintMigrations(migrations);
 
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("Select migration by ");
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.Write("number");
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write(" up to which to perform: ");
+        Console.WriteInColor("Select migration by ", ConsoleColor.White);
+        Console.WriteInColor("number", ConsoleColor.Blue);
+        Console.WriteInColor(" up to which to perform: ", ConsoleColor.White);
+
         Console.ForegroundColor = ConsoleColor.Blue;
         var enteredMigrationNumber = Console.ReadLine()!;
         Console.ForegroundColor = ConsoleColor.White;
@@ -42,11 +40,9 @@ public class App
             selectedMigration.MigrationId, cancellationToken);
 
         PrintMigrations(performed.PerformedMigrations.ToList());
-
-        Console.WriteLine("App beendet.");
     }
 
-    private void PrintMigrations(IList<MigrationResponse> migrations)
+    private static void PrintMigrations(IList<MigrationResponse> migrations)
     {
         for (int index = 0; index < migrations.Count; index++)
         {
@@ -54,26 +50,32 @@ public class App
             Console.WriteLine();
         }
     }
-    private void PrintMigration(MigrationResponse migration, int index)
+    private static void PrintMigration(MigrationResponse migration, int index)
     {
+        const int indexWhiteSpaceChars = 8;
         string AnsiBrightBlack = "\x1b[90m";
         string AnsiReset = "\x1b[0m";
 
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.Write($"[ {index + 1} ]");
-        Console.WriteLine($"\t{migration.Name}");
+        Console.WriteRightPaddedInColor($"[ {index + 1} ]",
+            indexWhiteSpaceChars, ConsoleColor.Blue);
+        Console.WriteInColor(migration.Name, ConsoleColor.Blue);
+        Console.WriteLine();
 
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine($"\t{migration.MigrationId}");
+        Console.WriteLeftPaddednColor(migration.MigrationId.ToString(),
+            indexWhiteSpaceChars, ConsoleColor.White);
+        Console.WriteLine();
 
-        Console.Write("\t");
+        var performedState = migration.IsAlreadyPerformed
+            ? "Performed" : "Not performed";
+        var performedColor = migration.IsAlreadyPerformed
+            ? ConsoleColor.Green : ConsoleColor.Red;
+        Console.WriteLeftPaddednColor(performedState,
+            indexWhiteSpaceChars, performedColor);
         Console.ForegroundColor = migration.IsAlreadyPerformed
             ? ConsoleColor.Green
             : ConsoleColor.Red;
-        Console.Write(migration.IsAlreadyPerformed ? "Performed" : "Not performed");
         if (migration.IsAlreadyPerformed)
             Console.Write($" {AnsiBrightBlack}{migration.PerformedUtc:G}{AnsiReset}");
         Console.WriteLine();
-        Console.ForegroundColor = ConsoleColor.White;
     }
 }
