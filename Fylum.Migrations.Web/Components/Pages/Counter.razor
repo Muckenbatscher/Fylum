@@ -1,0 +1,25 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Counter</MudText>
+
+<MudText Typo="Typo.body1" Class="mb-4">Current count: @currentCount</MudText>
+
+<MudButton Color="Color.Primary" Variant="Variant.Filled" @onclick=@(() => IncrementCount(1))>Increment one</MudButton>
+<MudButton Color="Color.Secondary" Variant="Variant.Filled" @onclick=@(() => IncrementCount(10))>Increment ten</MudButton>
+<MudButton Color="Color.Tertiary" Variant="Variant.Filled" @onclick=@(() => IncrementCount(100))>Increment hundred</MudButton>
+<MudButton Color="Color.Surface" Variant="Variant.Outlined" @onclick=Reset>Reset</MudButton>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount(int increment)
+    {
+        currentCount += increment;
+    }
+    private void Reset()
+    {
+        currentCount = 0;
+    }
+}
