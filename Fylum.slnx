@@ -43,5 +43,6 @@
     <File Path="global.json" />
   </Folder>
   <Project Path="Fylum.AppHost/Fylum.AppHost.csproj" />
+  <Project Path="Fylum.Migrations.Web/Fylum.Migrations.Web.csproj" />
   <Project Path="Fylum.ServiceDefaults/Fylum.ServiceDefaults.csproj" />
 </Solution>

@@ -1,0 +1,102 @@
+﻿@page "/migrations"
+
+@using Fylum.Migrations.Api.Shared
+@using Fylum.Migrations.Client.Listing
+@using Fylum.Migrations.Client.Performing
+@inject IMigrationsClient MigrationsClient
+@inject IPerformingClient PerformingClient
+
+@implements IDisposable
+
+<PageTitle>Migrations</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Migrations</MudText>
+<MudText Typo="Typo.body1" Class="mb-8">The migrations that the server knows about and whether or not they are already performed on the database.</MudText>
+
+@if (migrations == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+}
+else
+{
+    <MudTable Items="migrations" Hover="true" SortLabel="Sort By" Elevation="0" AllowUnsorted="false">
+        <HeaderContent>
+            <MudTh>ID</MudTh>
+            <MudTh>Name</MudTh>
+            <MudTh>Performed</MudTh>
+            <MudTh/>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="ID">@context.MigrationId</MudTd>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd>
+                @if (context.IsAlreadyPerformed)
+                {
+                    <MudChip T="string" Color="Color.Secondary">Performed</MudChip>
+                    <MudText Inline="true" Typo="Typo.body2" Class="mud-text-secondary">@context.PerformedUtc!.Value.ToLocalTime().ToString("G")</MudText>
+                }
+                else
+                {
+                    <MudChip T="string" Color="Color.Error">Not Performed</MudChip>
+                }
+            </MudTd>
+            <MudTd>
+                @if (!context.IsAlreadyPerformed)
+                {
+                    <MudButton Disabled="@_currentlyPerformingMigration" 
+                        Variant="Variant.Filled" Color="Color.Primary" 
+                        OnClick="() => PerformUpToMigration(context.MigrationId)">
+                        Perform up to
+                    </MudButton>
+                }
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    private bool _currentlyPerformingMigration = false;
+
+    private readonly CancellationTokenSource _cts = new();
+
+    private MigrationResponse[]? migrations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshMigrations();
+    }
+
+    private async Task RefreshMigrations()
+    {
+        try
+        {
+            var migrationsResponse = await MigrationsClient.GetMigrationsAsync(_cts.Token);
+            migrations = migrationsResponse.Migrations.Reverse().ToArray();
+        }
+        catch (OperationCanceledException)
+        {
+            // Task was successfully cancelled during navigation
+        }
+    }
+
+    async Task PerformUpToMigration(Guid migrationId)
+    {
+        _currentlyPerformingMigration = true;
+        try
+        {
+            await PerformingClient.PerformMigrationsUpToAsync(migrationId, _cts.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            // Task was successfully cancelled during navigation
+        }
+        await RefreshMigrations();
+        _currentlyPerformingMigration = false;
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+    }
+}
