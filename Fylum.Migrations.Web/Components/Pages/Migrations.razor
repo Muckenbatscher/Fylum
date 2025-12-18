@@ -4,6 +4,7 @@
 @using Fylum.Migrations.Client.Listing
 @inject IMigrationsClient MigrationsClient
 
+@implements IDisposable
 
 <PageTitle>Migrations</PageTitle>
 
@@ -40,12 +41,21 @@ else
 }
 
 @code {
+    private readonly CancellationTokenSource _cts = new();
+
     private MigrationResponse[]? migrations;
 
     protected override async Task OnInitializedAsync()
     {
-        var migrationsResponse = await MigrationsClient.GetMigrationsAsync(CancellationToken.None);
-        migrations = migrationsResponse.Migrations.ToArray();
+        try
+        {
+            var migrationsResponse = await MigrationsClient.GetMigrationsAsync(_cts.Token);
+            migrations = migrationsResponse.Migrations.ToArray();
+        }
+        catch (OperationCanceledException)
+        {
+            // Task was successfully cancelled during navigation
+        }
 
         // Dummy Test Data
         // await Task.Delay(500);
@@ -58,6 +68,12 @@ else
         //         ? DateTime.UtcNow.AddDays(-2).AddHours(index)
         //         : null)
         // ).ToArray();
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
     }
 
 }
