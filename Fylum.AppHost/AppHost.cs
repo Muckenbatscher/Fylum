@@ -31,7 +31,7 @@ internal class Program
             .WithMigrationCommands(migrationPerformingKey);
 
         var migrationsWeb = builder.AddProject<Projects.Fylum_Migrations_Web>("migrations-web")
-            .WithReference(migrationsApi, "migrationsApi")
+            .WithReference(migrationsApi, "migrations-api")
             .WaitFor(migrationsApi)
             .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey);
 

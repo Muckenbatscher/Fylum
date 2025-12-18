@@ -2,7 +2,9 @@
 
 @using Fylum.Migrations.Api.Shared
 @using Fylum.Migrations.Client.Listing
+@using Fylum.Migrations.Client.Performing
 @inject IMigrationsClient MigrationsClient
+@inject IPerformingClient PerformingClient
 
 @implements IDisposable
 
@@ -22,6 +24,7 @@ else
             <MudTh>ID</MudTh>
             <MudTh>Name</MudTh>
             <MudTh>Performed</MudTh>
+            <MudTh/>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="ID">@context.MigrationId</MudTd>
@@ -36,38 +39,58 @@ else
                     <MudChip T="string" Color="Color.Error">Not Performed</MudChip>
                 }
             </MudTd>
+            <MudTd>
+                @if (!context.IsAlreadyPerformed)
+                {
+                    <MudButton Disabled="@_currentlyPerformingMigration" 
+                        Variant="Variant.Filled" Color="Color.Primary" 
+                        OnClick="() => PerformUpToMigration(context.MigrationId)">
+                        Perform up to
+                    </MudButton>
+                }
+            </MudTd>
         </RowTemplate>
     </MudTable>
 }
 
 @code {
+    private bool _currentlyPerformingMigration = false;
+
     private readonly CancellationTokenSource _cts = new();
 
     private MigrationResponse[]? migrations;
 
     protected override async Task OnInitializedAsync()
     {
+        await RefreshMigrations();
+    }
+
+    private async Task RefreshMigrations()
+    {
         try
         {
             var migrationsResponse = await MigrationsClient.GetMigrationsAsync(_cts.Token);
-            migrations = migrationsResponse.Migrations.ToArray();
+            migrations = migrationsResponse.Migrations.Reverse().ToArray();
         }
         catch (OperationCanceledException)
         {
             // Task was successfully cancelled during navigation
         }
+    }
 
-        // Dummy Test Data
-        // await Task.Delay(500);
-        // migrations = Enumerable.Range(1, 5)
-        // .Select(index => new MigrationResponse(
-        //     Guid.NewGuid(),
-        //     $"migration {index}",
-        //     index < 5,
-        //     index < 5
-        //         ? DateTime.UtcNow.AddDays(-2).AddHours(index)
-        //         : null)
-        // ).ToArray();
+    async Task PerformUpToMigration(Guid migrationId)
+    {
+        _currentlyPerformingMigration = true;
+        try
+        {
+            await PerformingClient.PerformMigrationsUpToAsync(migrationId, _cts.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            // Task was successfully cancelled during navigation
+        }
+        await RefreshMigrations();
+        _currentlyPerformingMigration = false;
     }
 
     public void Dispose()
@@ -75,5 +98,4 @@ else
         _cts.Cancel();
         _cts.Dispose();
     }
-
 }

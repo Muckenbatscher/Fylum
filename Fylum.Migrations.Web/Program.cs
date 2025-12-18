@@ -1,7 +1,7 @@
-using MudBlazor.Services;
-using Fylum.Migrations.Web.Components;
-using Fylum.Migrations.Web;
 using Fylum.Migrations.Client;
+using Fylum.Migrations.Web;
+using Fylum.Migrations.Web.Components;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();

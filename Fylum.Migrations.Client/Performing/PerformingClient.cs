@@ -26,7 +26,7 @@ public class PerformingClient : IPerformingClient
     }
     public async Task<PerformMigrationsResponse> PerformMigrationsUpToAsync(Guid upToMigrationId, CancellationToken cancellationToken)
     {
-        var route = $"{EndpointRoutes.MigrationsPerformUpToRoute}/{{{upToMigrationId}}}";
+        var route = $"{EndpointRoutes.MigrationsPerformUpToRoute}/{upToMigrationId}";
         var content = new StringContent(string.Empty);
         var response = await _httpClient.PostAsync(route, content, cancellationToken);
 
