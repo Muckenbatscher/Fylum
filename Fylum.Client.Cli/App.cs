@@ -5,12 +5,10 @@ namespace Fylum.Client.Cli;
 public class App
 {
     private readonly ITokenService _tokenService;
-    private readonly IFylumClient _fylumClient;
 
-    public App(ITokenService tokenService, IFylumClient fylumClient)
+    public App(ITokenService tokenService)
     {
         _tokenService = tokenService;
-        _fylumClient = fylumClient;
     }
 
     public async Task Run(CancellationToken cancellationToken)
@@ -25,19 +23,8 @@ public class App
         var password = string.IsNullOrEmpty(passwordRead) ? "admin" : passwordRead;
 
         await _tokenService.LoginAsync(username, password, cancellationToken);
-        Console.WriteLine("Login erfolgreich!");
+        Console.WriteLine("Login successful!");
 
-        var parsed = true;
-        while (parsed)
-        {
-            Console.Write("File ID: ");
-            parsed = Guid.TryParse(Console.ReadLine()!, out Guid fileId);
-            if (!parsed)
-                break;
-
-            var file = await _fylumClient.GetById(fileId, cancellationToken);
-            Console.WriteLine($"file found: {file.Name} (latest revision: {file.LatestRevisionId})");
-        }
         await _tokenService.LogoutAsync(cancellationToken);
     }
 }

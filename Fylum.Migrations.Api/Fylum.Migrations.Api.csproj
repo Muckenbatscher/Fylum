@@ -21,7 +21,6 @@
 		<ProjectReference Include="..\Fylum.Migrations.Provider\Fylum.Migrations.Provider.csproj" />
 		<ProjectReference Include="..\Fylum.Postgres\Fylum.Postgres.csproj" />
 		<ProjectReference Include="..\Fylum.ServiceDefaults\Fylum.ServiceDefaults.csproj" />
-		<ProjectReference Include="..\Fylum.Shared\Fylum.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

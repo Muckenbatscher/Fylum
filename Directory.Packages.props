@@ -1,34 +1,50 @@
 <Project>
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="13.0.2" />
-    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.0.2" />
-    <PackageVersion Include="M2TWinForms.Themes" Version="0.1.3" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.1.0" />
-    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.1.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.0.1" />
-    <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.15.0" />
-    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
-    <PackageVersion Include="Dapper" Version="2.1.66" />
-    <PackageVersion Include="FastEndpoints" Version="7.1.1" />
-    <PackageVersion Include="FastEndpoints.Security" Version="7.1.1" />
-    <PackageVersion Include="FastEndpoints.Swagger" Version="7.1.1" />
-    <PackageVersion Include="M2TWinforms" Version="0.1.3" />
-    <PackageVersion Include="MudBlazor" Version="8.15.0" />
-    <PackageVersion Include="Npgsql" Version="10.0.0" />
-    <PackageVersion Include="Scalar.AspNetCore" Version="2.11.6" />
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.14.0" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.14.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.14.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.14.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.14.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+	</PropertyGroup>
+	<ItemGroup>
+		<!--Containerization-->
+		<PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+
+		<!--Aspire Orchestration-->
+		<PackageVersion Include="Aspire.Hosting.AppHost" Version="13.0.2" />
+		<PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.0.2" />
+
+		<!--Hosting and Dependency Injection-->
+		<PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
+		<PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.1" />
+		<PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.1" />
+		<PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.1" />
+		<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
+		<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
+		
+		<!--Networking-->
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.1.0" />
+		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.1.0" />
+
+		<!--FastEndpoints-->
+		<PackageVersion Include="FastEndpoints" Version="7.1.1" />
+		<PackageVersion Include="FastEndpoints.Security" Version="7.1.1" />
+		<PackageVersion Include="FastEndpoints.Swagger" Version="7.1.1" />
+
+		<!--JWT Authentication-->
+		<PackageVersion Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.0.1" />
+		<PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.15.0" />
+		
+		<!--Database Access-->
+		<PackageVersion Include="Dapper" Version="2.1.66" />
+		<PackageVersion Include="Npgsql" Version="10.0.0" />
+		
+		<!--Web UI-->
+		<PackageVersion Include="MudBlazor" Version="8.15.0" />
+		<PackageVersion Include="Scalar.AspNetCore" Version="2.11.6" />
+		<PackageVersion Include="M2TWinforms.Themes" Version="0.1.3" /> <!--to generate a web theme for now, will refactor later to not imply WinForms-->
+
+		<!--OpenTelemetry Service Defaults-->
+		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.14.0" />
+		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.14.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.14.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.14.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.14.0" />
+	</ItemGroup>
 </Project>

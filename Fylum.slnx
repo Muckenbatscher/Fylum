@@ -1,31 +1,31 @@
 <Solution>
-  <Folder Name="/Api/">
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/Source/">
+    <Project Path="Fylum.AppHost/Fylum.AppHost.csproj" />
+    <Project Path="Fylum.ServiceDefaults/Fylum.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/Source/Api/" />
+  <Folder Name="/Source/Api/Fylum/">
     <Project Path="Fylum.Api.Shared/Fylum.Api.Shared.csproj" />
     <Project Path="Fylum.Api/Fylum.Api.csproj" />
     <Project Path="Fylum.Application/Fylum.Application.csproj" />
     <Project Path="Fylum.Domain/Fylum.Domain.csproj" />
-    <Project Path="Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />
     <Project Path="Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj" />
     <Project Path="Fylum.Postgres/Fylum.Postgres.csproj" />
   </Folder>
-  <Folder Name="/Api/Fylum.Users/">
+  <Folder Name="/Source/Api/Fylum/Fylum.Users/">
     <Project Path="Fylum.Users.Api.Shared/Fylum.Users.Api.Shared.csproj" />
     <Project Path="Fylum.Users.Api/Fylum.Users.Api.csproj" />
     <Project Path="Fylum.Users.Application/Fylum.Users.Application.csproj" />
     <Project Path="Fylum.Users.Domain/Fylum.Users.Domain.csproj" />
     <Project Path="Fylum.Users.Postgres/Fylum.Users.Postgres.csproj" />
   </Folder>
-  <Folder Name="/Client/">
-    <Project Path="Fylum.Client.Cli/Fylum.Client.Cli.csproj" />
-    <Project Path="Fylum.Client/Fylum.Client.csproj" />
-    <Project Path="Fylum.Migrations.Client.Cli/Fylum.Migrations.Client.Cli.csproj" />
-    <Project Path="Fylum.Migrations.Client/Fylum.Migrations.Client.csproj" />
-  </Folder>
-  <Folder Name="/Desktop/" />
-  <Folder Name="/Desktop/Fylum.Migrations/">
-    <Project Path="Fylum.Migrations.Winforms/Fylum.Migrations.Winforms.csproj" />
-  </Folder>
-  <Folder Name="/Migrations.Api/">
+  <Folder Name="/Source/Api/Migrations/">
     <Project Path="Fylum.Migrations.Api.Shared/Fylum.Migrations.Api.Shared.csproj" />
     <Project Path="Fylum.Migrations.Api/Fylum.Migrations.Api.csproj" />
     <Project Path="Fylum.Migrations.Application/Fylum.Migrations.Application.csproj" />
@@ -33,16 +33,18 @@
     <Project Path="Fylum.Migrations.Postgres/Fylum.Migrations.Postgres.csproj" />
     <Project Path="Fylum.Migrations.Provider/Fylum.Migrations.Provider.csproj" />
   </Folder>
-  <Folder Name="/Shared/">
-    <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
+  <Folder Name="/Source/Client/" />
+  <Folder Name="/Source/Client/Fylum/">
+    <Project Path="Fylum.Client.Cli/Fylum.Client.Cli.csproj" />
+    <Project Path="Fylum.Client/Fylum.Client.csproj" />
   </Folder>
-  <Folder Name="/Solution Items/">
-    <File Path=".editorconfig" />
-    <File Path="Directory.Build.props" />
-    <File Path="Directory.Packages.props" />
-    <File Path="global.json" />
+  <Folder Name="/Source/Client/Migrations/">
+    <Project Path="Fylum.Migrations.Client.Cli/Fylum.Migrations.Client.Cli.csproj" />
+    <Project Path="Fylum.Migrations.Client/Fylum.Migrations.Client.csproj" />
+    <Project Path="Fylum.Migrations.Web/Fylum.Migrations.Web.csproj" />
   </Folder>
-  <Project Path="Fylum.AppHost/Fylum.AppHost.csproj" />
-  <Project Path="Fylum.Migrations.Web/Fylum.Migrations.Web.csproj" />
-  <Project Path="Fylum.ServiceDefaults/Fylum.ServiceDefaults.csproj" />
+  <Folder Name="/Test/" />
+  <Folder Name="/Test/Api/">
+    <Project Path="Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />
+  </Folder>
 </Solution>
