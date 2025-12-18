@@ -11,7 +11,7 @@
 <PageTitle>Migrations</PageTitle>
 
 <MudText Typo="Typo.h3" GutterBottom="true">Migrations</MudText>
-<MudText Typo="Typo.body1" Class="mb-8">This component demonstrates fetching data from the server.</MudText>
+<MudText Typo="Typo.body1" Class="mb-8">The migrations that the server knows about and whether or not they are already performed on the database.</MudText>
 
 @if (migrations == null)
 {
@@ -33,6 +33,7 @@ else
                 @if (context.IsAlreadyPerformed)
                 {
                     <MudChip T="string" Color="Color.Secondary">Performed</MudChip>
+                    <MudText Inline="true" Typo="Typo.body2" Class="mud-text-secondary">@context.PerformedUtc!.Value.ToLocalTime().ToString("G")</MudText>
                 }
                 else
                 {
