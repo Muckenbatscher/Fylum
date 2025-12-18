@@ -1,0 +1,63 @@
+﻿@page "/migrations"
+
+@using Fylum.Migrations.Api.Shared
+@using Fylum.Migrations.Client.Listing
+@inject IMigrationsClient MigrationsClient
+
+
+<PageTitle>Migrations</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Migrations</MudText>
+<MudText Typo="Typo.body1" Class="mb-8">This component demonstrates fetching data from the server.</MudText>
+
+@if (migrations == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+}
+else
+{
+    <MudTable Items="migrations" Hover="true" SortLabel="Sort By" Elevation="0" AllowUnsorted="false">
+        <HeaderContent>
+            <MudTh>ID</MudTh>
+            <MudTh>Name</MudTh>
+            <MudTh>Performed</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="ID">@context.MigrationId</MudTd>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd>
+                @if (context.IsAlreadyPerformed)
+                {
+                    <MudChip T="string" Color="Color.Secondary">Performed</MudChip>
+                }
+                else
+                {
+                    <MudChip T="string" Color="Color.Error">Not Performed</MudChip>
+                }
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    private MigrationResponse[]? migrations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var migrationsResponse = await MigrationsClient.GetMigrationsAsync(CancellationToken.None);
+        migrations = migrationsResponse.Migrations.ToArray();
+
+        // Dummy Test Data
+        // await Task.Delay(500);
+        // migrations = Enumerable.Range(1, 5)
+        // .Select(index => new MigrationResponse(
+        //     Guid.NewGuid(),
+        //     $"migration {index}",
+        //     index < 5,
+        //     index < 5
+        //         ? DateTime.UtcNow.AddDays(-2).AddHours(index)
+        //         : null)
+        // ).ToArray();
+    }
+
+}

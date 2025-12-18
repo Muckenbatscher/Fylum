@@ -1,8 +1,10 @@
 using MudBlazor.Services;
 using Fylum.Migrations.Web.Components;
 using Fylum.Migrations.Web;
+using Fylum.Migrations.Client;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.AddServiceDefaults();
 
 // Add MudBlazor services
 builder.Services.AddMudServices();
@@ -12,6 +14,16 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSingleton<IThemeProvider, ThemeProvider>();
+builder.Services.AddMigrationClient(options =>
+{
+    var baseAddress = builder.Configuration["MigrationsClientOptions:BaseAddress"]!;
+    options.BaseUri = new Uri(baseAddress!);
+
+    int timeOutSeconds = int.TryParse(builder.Configuration["MigrationsClientOptions:TimeOutSeconds"], out timeOutSeconds)
+        ? timeOutSeconds : 30;
+    options.Timeout = TimeSpan.FromSeconds(timeOutSeconds);
+    options.MigrationPerformingKey = builder.Configuration["MIGRATION_PERFORMING_KEY"]!;
+});
 
 var app = builder.Build();
 
