@@ -1,11 +1,11 @@
-CREATE TABLE migrations_performed
+CREATE TABLE migration.migrations_performed
 (
     id uuid NOT NULL,
     time_stamp timestamp with time zone NOT NULL,
     migration_id uuid NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_migrations FOREIGN KEY (migration_id)
-        REFERENCES migrations (id) MATCH SIMPLE
+        REFERENCES migration.migrations (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
