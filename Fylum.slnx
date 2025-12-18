@@ -43,9 +43,6 @@
     <Project Path="Fylum.Migrations.Client/Fylum.Migrations.Client.csproj" />
     <Project Path="Fylum.Migrations.Web/Fylum.Migrations.Web.csproj" />
   </Folder>
-  <Folder Name="/Source/Shared/">
-    <Project Path="Fylum.Shared/Fylum.Shared.csproj" />
-  </Folder>
   <Folder Name="/Test/" />
   <Folder Name="/Test/Api/">
     <Project Path="Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />

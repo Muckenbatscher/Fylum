@@ -34,8 +34,6 @@ public static class FylumClientServiceCollectionExtensions
             services.AddConfiguredHttpClient<IRefreshTokenClient, RefreshTokenClient>()
                 .AddHttpMessageHandler<RefreshTokenAuthHeaderHandler>();
 
-            services.AddConfiguredAccessTokenHttpClient<IFylumClient, FylumClient>();
-
             return services;
         }
 
