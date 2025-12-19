@@ -36,7 +36,7 @@ public class Program
         {
             options.HostName = builder.Configuration["POSTGRES_HOST"] ?? string.Empty;
             options.Port = int.Parse(builder.Configuration["POSTGRES_PORT"] ?? "0");
-            options.DatabaseName = builder.Configuration["POSTGRES_DATABASE"] ?? string.Empty;
+            options.DatabaseName = builder.Configuration["POSTGRES_DATABASENAME"] ?? string.Empty;
             options.Username = builder.Configuration["POSTGRES_USERNAME"] ?? string.Empty;
             options.Password = builder.Configuration["POSTGRES_PASSWORD"] ?? string.Empty;
         });
