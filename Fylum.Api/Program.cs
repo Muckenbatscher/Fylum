@@ -2,7 +2,6 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Api.Shared;
-using Fylum.Postgres;
 using Fylum.Postgres.Shared;
 using Fylum.Users.Api;
 using Fylum.Users.Application;
@@ -40,7 +39,6 @@ public class Program
             options.Username = builder.Configuration["POSTGRES_USERNAME"] ?? string.Empty;
             options.Password = builder.Configuration["POSTGRES_PASSWORD"] ?? string.Empty;
         });
-        builder.Services.AddPostgresServices();
 
         builder.Services.AddUsersApplicationServices(passwordHashOptions =>
         {

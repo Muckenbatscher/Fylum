@@ -2,7 +2,6 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Migrations.Api.PerformingAuthentication;
-using Fylum.Postgres;
 using Fylum.Postgres.Shared;
 using Scalar.AspNetCore;
 
@@ -35,7 +34,6 @@ public class Program
             options.Username = builder.Configuration["POSTGRES_USERNAME"]!;
             options.Password = builder.Configuration["POSTGRES_PASSWORD"]!;
         });
-        builder.Services.AddPostgresServices();
 
         builder.Services.AddMigrationsServices();
 
