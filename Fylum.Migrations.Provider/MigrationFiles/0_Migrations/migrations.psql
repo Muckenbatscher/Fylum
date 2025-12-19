@@ -1,4 +1,4 @@
-CREATE TABLE migrations
+CREATE TABLE migration.migrations
 (
     id uuid NOT NULL,
     name text NOT NULL,

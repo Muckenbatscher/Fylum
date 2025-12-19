@@ -28,7 +28,7 @@ public class PerformedMigrationsRepository : IPerformedMigrationsRepository
             id = migration.Id,
             name = migration.Name
         };
-        string sql = @$"INSERT INTO migrations
+        string sql = @$"INSERT INTO migration.migrations
                             (id, name)
                             VALUES (@{nameof(param.id)}, @{nameof(param.name)})";
         var transaction = _transactionFactory.GetTransaction();
@@ -45,7 +45,7 @@ public class PerformedMigrationsRepository : IPerformedMigrationsRepository
             timestamp = performedMigration.Timestamp,
             migrationId = performedMigration.Migration.Id
         };
-        string sql = @$"INSERT INTO migrations_performed
+        string sql = @$"INSERT INTO migration.migrations_performed
                             (id, time_stamp, migration_id)
                             VALUES (@{nameof(param.id)}, @{nameof(param.timestamp)}, @{nameof(param.migrationId)})";
         var transaction = _transactionFactory.GetTransaction();
@@ -87,8 +87,8 @@ public class PerformedMigrationsRepository : IPerformedMigrationsRepository
                                    mp.time_stamp AS {nameof(PerformedMigrationQueryModel.Timestamp)},
                                    mp.migration_id AS {nameof(PerformedMigrationQueryModel.MigrationId)},    
                                    m.name AS {nameof(PerformedMigrationQueryModel.MigratioName)}
-                            FROM migrations_performed mp 
-                            JOIN migrations m
+                            FROM migration.migrations_performed mp 
+                            JOIN migration.migrations m
                               ON mp.migration_id = m.id
                             ORDER BY mp.time_stamp DESC;";
         var transaction = _transactionFactory.GetTransaction();
@@ -103,8 +103,8 @@ public class PerformedMigrationsRepository : IPerformedMigrationsRepository
                                    mp.time_stamp AS {nameof(PerformedMigrationQueryModel.Timestamp)},
                                    mp.migration_id AS {nameof(PerformedMigrationQueryModel.MigrationId)},    
                                    m.name AS {nameof(PerformedMigrationQueryModel.MigratioName)}
-                            FROM migrations_performed mp 
-                            JOIN migrations m
+                            FROM migration.migrations_performed mp 
+                            JOIN migration.migrations m
                               ON mp.migration_id = m.id
                             WHERE m.id = @{nameof(param.id)};";
         var transaction = _transactionFactory.GetTransaction();
