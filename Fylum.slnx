@@ -16,7 +16,6 @@
     <Project Path="Fylum.Application/Fylum.Application.csproj" />
     <Project Path="Fylum.Domain/Fylum.Domain.csproj" />
     <Project Path="Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj" />
-    <Project Path="Fylum.Postgres/Fylum.Postgres.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Fylum.Users/">
     <Project Path="Fylum.Users.Api.Shared/Fylum.Users.Api.Shared.csproj" />
