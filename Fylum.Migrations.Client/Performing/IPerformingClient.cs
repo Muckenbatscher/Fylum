@@ -5,5 +5,8 @@ namespace Fylum.Migrations.Client.Performing;
 public interface IPerformingClient
 {
     Task<PerformMigrationsResponse> PerformAllMigrationsAsync(CancellationToken cancellationToken);
+    Task<PerformMigrationsResponse> PerformAllMigrationsAsync();
+
     Task<PerformMigrationsResponse> PerformMigrationsUpToAsync(Guid upToMigrationId, CancellationToken cancellationToken);
+    Task<PerformMigrationsResponse> PerformMigrationsUpToAsync(Guid upToMigrationId);
 }

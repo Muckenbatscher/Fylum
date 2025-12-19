@@ -24,6 +24,9 @@ public class PerformingClient : IPerformingClient
             ?? throw new Exception("Invalid Performing migrations response");
         return migrationsResult;
     }
+    public async Task<PerformMigrationsResponse> PerformAllMigrationsAsync()
+        => await PerformAllMigrationsAsync(CancellationToken.None);
+
     public async Task<PerformMigrationsResponse> PerformMigrationsUpToAsync(Guid upToMigrationId, CancellationToken cancellationToken)
     {
         var route = $"{EndpointRoutes.MigrationsPerformUpToRoute}/{upToMigrationId}";
@@ -36,4 +39,6 @@ public class PerformingClient : IPerformingClient
             ?? throw new Exception("Invalid Performing migrations response");
         return migrationsResult;
     }
+    public async Task<PerformMigrationsResponse> PerformMigrationsUpToAsync(Guid upToMigrationId)
+        => await PerformMigrationsUpToAsync(upToMigrationId, CancellationToken.None);
 }
