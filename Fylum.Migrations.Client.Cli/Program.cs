@@ -7,6 +7,14 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
+        var cts = new CancellationTokenSource();
+        Console.CancelKeyPress += (s, e) =>
+        {
+            Console.WriteLine("Canceling...");
+            cts.Cancel();
+            e.Cancel = true;
+        };
+
         Console.WriteInColor("Migrations Client CLI", ConsoleColor.Magenta);
         Console.WriteLine();
 
@@ -22,7 +30,7 @@ internal class Program
         try
         {
             var app = host.Services.GetRequiredService<App>();
-            await app.Run(CancellationToken.None);
+            await app.Run(cts.Token);
         }
         catch (Exception ex)
         {

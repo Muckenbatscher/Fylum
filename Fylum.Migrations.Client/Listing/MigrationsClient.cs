@@ -23,6 +23,8 @@ public class MigrationsClient : IMigrationsClient
             ?? throw new Exception("Invalid migrations response");
         return migrationsResult;
     }
+    public async Task<MultipleMigrationsResponse> GetMigrationsAsync() => await GetMigrationsAsync(CancellationToken.None);
+
     public async Task<MigrationResponse> GetMigrationByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var route = $"{EndpointRoutes.MigrationsBaseRoute}/{{{id}}}";
@@ -34,4 +36,5 @@ public class MigrationsClient : IMigrationsClient
             ?? throw new Exception("Invalid migration response");
         return migrationResult;
     }
+    public async Task<MigrationResponse> GetMigrationByIdAsync(Guid id) => await GetMigrationByIdAsync(id, CancellationToken.None);
 }

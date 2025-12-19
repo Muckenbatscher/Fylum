@@ -24,7 +24,7 @@ public class TokenService : ITokenService
         _refreshTokenClient = refreshTokenClient;
     }
 
-    public async Task<string?> GetAccessTokenAsync(CancellationToken cancellationToken)
+    public async Task<string?> GetAccessTokenAsync()
     {
         var tokens = await _storage.GetTokenPairAsync();
         return tokens?.AccessToken;
@@ -38,6 +38,8 @@ public class TokenService : ITokenService
         var tokenPair = new TokenPair(loginResult.AccessToken, loginResult.RefreshToken);
         await _storage.StoreTokenPairAsync(tokenPair);
     }
+    public async Task LoginAsync(string username, string password) => await LoginAsync(username, password, CancellationToken.None);
+
     public async Task LogoutAsync(CancellationToken cancellationToken)
     {
         var tokenPair = await _storage.GetTokenPairAsync();
@@ -47,6 +49,7 @@ public class TokenService : ITokenService
         await _refreshTokenClient.LogoutAsync(cancellationToken);
         await _storage.ClearTokenPairAsync();
     }
+    public async Task LogoutAsync() => await LogoutAsync(CancellationToken.None);
 
     public async Task RefreshTokenAsync(CancellationToken cancellationToken)
     {
@@ -70,4 +73,5 @@ public class TokenService : ITokenService
             _refreshTokenLock.Release();
         }
     }
+    public async Task RefreshTokenAsync() => await RefreshTokenAsync(CancellationToken.None);
 }

@@ -23,6 +23,7 @@ public class RefreshTokenClient : IRefreshTokenClient
             ?? throw new Exception("Invalid token refresh response");
         return loginResult;
     }
+    public async Task<TokenRefreshResponse> RefreshTokenAsync() => await RefreshTokenAsync(CancellationToken.None);
 
     public async Task LogoutAsync(CancellationToken cancellationToken)
     {
@@ -32,4 +33,5 @@ public class RefreshTokenClient : IRefreshTokenClient
         if (!response.IsSuccessStatusCode)
             throw new Exception("Logout failed");
     }
+    public async Task LogoutAsync() => await LogoutAsync(CancellationToken.None);
 }

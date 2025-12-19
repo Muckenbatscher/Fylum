@@ -25,6 +25,8 @@ public class AuthClient : IAuthClient
             ?? throw new JsonParsingException<LoginResponse>(responseContent);
         return result;
     }
+    public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest) => await LoginAsync(loginRequest, CancellationToken.None);
+
     public async Task<RegisterResponse> RegisterAsync(RegisterRequest registerRequest, CancellationToken cancellationToken)
     {
         var response = await _httpClient.PostAsJsonAsync(
@@ -36,4 +38,5 @@ public class AuthClient : IAuthClient
             ?? throw new JsonParsingException<RegisterResponse>(responseContent);
         return result;
     }
+    public async Task<RegisterResponse> RegisterAsync(RegisterRequest registerRequest) => await RegisterAsync(registerRequest, CancellationToken.None);
 }

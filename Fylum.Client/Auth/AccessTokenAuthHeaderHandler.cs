@@ -20,12 +20,12 @@ public class AccessTokenAuthHeaderHandler : DelegatingHandler
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        var token = await _tokenService.GetAccessTokenAsync(cancellationToken);
+        var token = await _tokenService.GetAccessTokenAsync();
         var tokenExpired = token == null || _tokenExpirationValidator.IsTokenExpired(token);
         if (tokenExpired)
         {
             await _tokenService.RefreshTokenAsync(cancellationToken);
-            token = await _tokenService.GetAccessTokenAsync(cancellationToken);
+            token = await _tokenService.GetAccessTokenAsync();
         }
 
         if (!string.IsNullOrEmpty(token))
@@ -36,7 +36,7 @@ public class AccessTokenAuthHeaderHandler : DelegatingHandler
         if (response.StatusCode == HttpStatusCode.Unauthorized)
         {
             await _tokenService.RefreshTokenAsync(cancellationToken);
-            var newToken = await _tokenService.GetAccessTokenAsync(cancellationToken);
+            var newToken = await _tokenService.GetAccessTokenAsync();
 
             if (!string.IsNullOrEmpty(newToken))
             {
