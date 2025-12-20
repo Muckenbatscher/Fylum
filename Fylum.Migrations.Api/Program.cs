@@ -28,11 +28,7 @@ public class Program
 
         builder.Services.AddPostgresSharedServices(options =>
         {
-            options.HostName = builder.Configuration["POSTGRES_HOST"]!;
-            options.Port = int.Parse(builder.Configuration["POSTGRES_PORT"]!);
-            options.DatabaseName = builder.Configuration["POSTGRES_DATABASENAME"]!;
-            options.Username = builder.Configuration["POSTGRES_USERNAME"]!;
-            options.Password = builder.Configuration["POSTGRES_PASSWORD"]!;
+            options.ConnectionString = builder.Configuration.GetConnectionString("postgres")!;
         });
 
         builder.Services.AddMigrationsServices();

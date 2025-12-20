@@ -5,32 +5,24 @@ namespace Fylum.Postgres.Shared.Connection;
 
 public class ConnectionStringProvider : IConnectionStringProvider
 {
-    private const string ApplicationName = "FylumApi";
+    private const string FylumApplicationName = "FylumApi";
 
-    private readonly DatabaseConnectionDetails _connectionDetails;
+    private readonly IOptionsMonitor<DatabaseConnectionDetails> _connectionDetails;
 
-    public ConnectionStringProvider(IOptions<DatabaseConnectionDetails> dbConnectionDetails)
+    public ConnectionStringProvider(IOptionsMonitor<DatabaseConnectionDetails> dbConnectionDetails)
     {
-        _connectionDetails = dbConnectionDetails.Value;
+        _connectionDetails = dbConnectionDetails;
     }
 
     public string GetConnectionString()
-    {
-        var builder = CreateConnectionStringBuilder(_connectionDetails);
-        return builder.ConnectionString;
-    }
+        => CreateConnectionStringBuilder(_connectionDetails.CurrentValue).ConnectionString;
 
     private static NpgsqlConnectionStringBuilder CreateConnectionStringBuilder(DatabaseConnectionDetails connectionDetails)
     {
-        return new NpgsqlConnectionStringBuilder
+        var connectionString = connectionDetails.ConnectionString;
+        return new NpgsqlConnectionStringBuilder(connectionDetails.ConnectionString)
         {
-            Host = connectionDetails.HostName,
-            Port = connectionDetails.Port,
-            Database = connectionDetails.DatabaseName,
-            Username = connectionDetails.Username,
-            Password = connectionDetails.Password,
-            ApplicationName = ApplicationName
+            ApplicationName = FylumApplicationName
         };
     }
-
 }
