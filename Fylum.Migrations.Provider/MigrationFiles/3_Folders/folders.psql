@@ -1,0 +1,11 @@
+CREATE TABLE folders
+(
+	id uuid NOT NULL,
+	name text not NULL,
+	parent_folder_id uuid NULL,
+	PRIMARY KEY (id),
+	CONSTRAINT fk_parent FOREIGN KEY (parent_folder_id)
+        REFERENCES folders (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);

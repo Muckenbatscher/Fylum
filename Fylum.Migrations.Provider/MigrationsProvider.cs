@@ -19,6 +19,7 @@ public class MigrationsProvider : IMigrationsProvider
         yield return new MigrationsMigration().CreateMigration();
         yield return new UsersMigration().CreateMigration();
         yield return new RefreshKeysMigration().CreateMigration();
+        yield return new FoldersMigration().CreateMigration();
     }
 
     public ProvidedMigration? GetMigrationById(Guid id)
