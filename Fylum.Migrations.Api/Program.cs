@@ -16,7 +16,7 @@ public class Program
         builder.AddServiceDefaults(); // from Aspire Service Defaults
 
         builder.Services
-            .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration["JwtAuth:SigningKey"])
+            .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration.GetValue<string>("JwtAuth:SigningKey")!)
             .AddAuthorization()
             .AddFastEndpoints()
             .SwaggerDocument();
