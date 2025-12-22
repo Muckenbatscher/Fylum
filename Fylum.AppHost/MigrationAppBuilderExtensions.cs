@@ -17,6 +17,7 @@ internal static class MigrationAppBuilderExtensions
             return projectBuilder.WithHttpCommand(
                 path: EndpointRoutes.MigrationsPerformAllRoute,
                 displayName: "Perform All Available Migrations",
+                commandName: "perform-all",
                 commandOptions: new HttpCommandOptions()
                 {
                     Description = """

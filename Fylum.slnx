@@ -44,6 +44,7 @@
   </Folder>
   <Folder Name="/Test/" />
   <Folder Name="/Test/Api/">
+    <Project Path="Fylum.EndToEnd/Fylum.EndToEnd.csproj" Id="83a6eebb-9371-46ea-a7b0-ae58f3a8689f" />
     <Project Path="Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />
   </Folder>
 </Solution>
