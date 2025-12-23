@@ -1,6 +1,4 @@
-﻿using Aspire.Hosting;
-using Aspire.Hosting.Testing;
-using Fylum.Client.Auth;
+﻿using Fylum.Client.Auth;
 using Fylum.Users.Api.Shared;
 
 namespace Fylum.EndToEnd;
@@ -8,26 +6,15 @@ namespace Fylum.EndToEnd;
 [TestClass]
 public sealed class RegisterTests
 {
-    private static IDistributedApplicationTestingBuilder? _appHost;
-    private static DistributedApplication? _app;
-    private static HttpClient? _httpClient;
+    private static DistributedApplicationContainer? _app;
 
     public TestContext TestContext { get; set; }
 
     [ClassInitialize]
     public static async Task ClassInit(TestContext context)
     {
-        _appHost = await DistributedApplicationTestingBuilder
-            .CreateAsync<Projects.Fylum_AppHost>(["NonPersistent=true"], context.CancellationToken);
-
-        _app = await _appHost.BuildAsync(context.CancellationToken);
-        await _app.StartAsync(context.CancellationToken);
-
-        var migrateResult = await _app.ResourceCommands.ExecuteCommandAsync("migrations-api", "perform-all", context.CancellationToken);
-        if (migrateResult == null || !migrateResult.Success)
-            throw new Exception("Could not perform the migrations to the temporary database");
-
-        _httpClient = _app.CreateHttpClient("api");
+        _app = await DistributedApplicationContainerFactory.CreateAsync(context.CancellationToken,
+            migrate: true, persistent: false);
     }
     [ClassCleanup]
     public static async Task ClassCleanup()
@@ -39,10 +26,11 @@ public sealed class RegisterTests
     [TestMethod]
     public async Task Register_ThenLogin_ReturnsAccessTokenAndRefreshToken()
     {
-        if (_httpClient == null)
+        var httpClient = _app?.CreateHttpClient(HttpClientType.Api);
+        if (httpClient == null)
             throw new Exception("HttpClient is not initialized");
 
-        var authClient = new AuthClient(_httpClient);
+        var authClient = new AuthClient(httpClient);
 
         const string testUsername = "test-username";
         const string testPassword = "test-password";
