@@ -49,8 +49,8 @@ jobs:
         path: .
     - name: Run Unit Tests
       run: |
-        dotnet test ${{ matrix.project }}/${{ matrix.project }}.csproj --no-build -c Release
-          --verbosity normal --property:EnableWindowsTargeting=true
+        dotnet test --project ${{ matrix.project }}/${{ matrix.project }}.csproj \
+          --no-build -c Release --verbosity normal --property:EnableWindowsTargeting=true
 
   e2e-tests:
     needs: build
@@ -71,8 +71,8 @@ jobs:
         sudo update-ca-certificates
     - name: Run End To End Test
       run: |
-        dotnet test ${{ matrix.project }}/${{ matrix.project }}.csproj --no-build -c Release
-          --verbosity normal --property:EnableWindowsTargeting=true
+        dotnet test --project ${{ matrix.project }}/${{ matrix.project }}.csproj \
+          --no-build -c Release --verbosity normal --property:EnableWindowsTargeting=true
       env:
         Parameters__MigrationPerformingKey: "AnyRandomMigrationPerformingKey"
         JwtAuth__SigningKey: "Any sufficiently long enough key to sign the JWT Access Token with"
