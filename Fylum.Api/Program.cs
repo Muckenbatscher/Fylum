@@ -20,15 +20,15 @@ public class Program
         builder.AddServiceDefaults(); // from Aspire Service Defaults
 
         builder.Services
-            .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration["JwtAuth:SigningKey"])
+            .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration.GetValue<string>("JwtAuth:SigningKey")!)
             .AddAuthorization()
             .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
             .SwaggerDocument();
 
         builder.Services.AddApiSharedServices(options =>
         {
-            options.SigningKey = builder.Configuration["JwtAuth:SigningKey"] ?? string.Empty;
-            options.AccessTokenExpirationInMinutes = int.Parse(builder.Configuration["JwtAuth:AccessTokenExpirationMinutes"] ?? "1");
+            options.SigningKey = builder.Configuration.GetValue<string>("JwtAuth:SigningKey")!;
+            options.AccessTokenExpirationInMinutes = builder.Configuration.GetValue("JwtAuth:AccessTokenExpirationMinutes", 1);
         });
 
         builder.Services.AddPostgresSharedServices(options =>
@@ -39,15 +39,15 @@ public class Program
 
         builder.Services.AddUsersApplicationServices(passwordHashOptions =>
         {
-            passwordHashOptions.IterationCount = int.Parse(builder.Configuration["PasswordHashing:IterationCount"]!);
-            passwordHashOptions.SaltBitsCount = int.Parse(builder.Configuration["PasswordHashing:SaltBits"]!);
-            passwordHashOptions.HashedBitsCount = int.Parse(builder.Configuration["PasswordHashing:HashedBits"]!);
-            passwordHashOptions.PseudoRandomFunction = builder.Configuration["PasswordHashing:PseudoRandomFunction"]!;
+            passwordHashOptions.IterationCount = builder.Configuration.GetValue<int>("PasswordHashing:IterationCount");
+            passwordHashOptions.SaltBitsCount = builder.Configuration.GetValue<int>("PasswordHashing:SaltBits");
+            passwordHashOptions.HashedBitsCount = builder.Configuration.GetValue<int>("PasswordHashing:HashedBits");
+            passwordHashOptions.PseudoRandomFunction = builder.Configuration.GetValue<string>("PasswordHashing:PseudoRandomFunction")!;
         },
         refreshTokenOptions =>
         {
-            var configValue = builder.Configuration["RefreshToken:RefreshTokenExpirationDays"];
-            refreshTokenOptions.RefreshTokenExpirationInDays = configValue != null ? int.Parse(configValue) : 1;
+            var expirationDays = builder.Configuration.GetValue("RefreshToken:RefreshTokenExpirationDays", 1);
+            refreshTokenOptions.RefreshTokenExpirationInDays = expirationDays;
         });
         builder.Services.AddUsersPostgresServices();
 
