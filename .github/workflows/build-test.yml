@@ -32,5 +32,14 @@ jobs:
       run: dotnet restore --property:EnableWindowsTargeting=true
     - name: Build
       run: dotnet build --no-restore --property:EnableWindowsTargeting=true
+    - name: Install and Trust Dotnet Dev Certificate
+      run: |
+        mkdir -p ${HOME}/.aspnet/https
+        dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.crt --format PEM
+        sudo cp ${HOME}/.aspnet/https/aspnetapp.crt /usr/local/share/ca-certificates/aspnetapp.crt
+        sudo update-ca-certificates
     - name: Test
       run: dotnet test --no-build --verbosity normal --property:EnableWindowsTargeting=true
+      env:
+        Parameters__MigrationPerformingKey: "AnyRandomMigrationPerformingKey"
+        JwtAuth__SigningKey: "Any sufficiently long enough key to sign the JWT Access Token with"

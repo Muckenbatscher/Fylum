@@ -16,7 +16,7 @@ internal class Program
             postgres.WithDataVolume("fylum_pgdata")
                 .WithLifetime(ContainerLifetime.Persistent);
         }
-            
+
         var database = postgres.AddDatabase("fylum");
         if (!isNonPersistent)
             postgres.WithPreconfiguredPgAdmin(database, containerName: "pgadmin");
