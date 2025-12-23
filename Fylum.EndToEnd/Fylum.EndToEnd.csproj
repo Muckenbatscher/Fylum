@@ -1,0 +1,19 @@
+﻿<Project Sdk="MSTest.Sdk/4.0.1">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.Testing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fylum.AppHost\Fylum.AppHost.csproj" />
+    <ProjectReference Include="..\Fylum.Client\Fylum.Client.csproj" />
+  </ItemGroup>
+
+</Project>

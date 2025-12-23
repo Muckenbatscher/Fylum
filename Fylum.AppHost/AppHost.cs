@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Configuration;
+
 namespace Fylum.AppHost;
 
 internal class Program
@@ -5,14 +7,19 @@ internal class Program
     private static void Main(string[] args)
     {
         var builder = DistributedApplication.CreateBuilder(args);
+        bool isNonPersistent = builder.Configuration.GetValue("NonPersistent", false);
 
-        var portConfig = builder.Configuration["Postgres:Port"];
-        var postgresPort = int.TryParse(portConfig, out int port) ? port : 56789;
-        var postgres = builder.AddPostgres("postgres", port: postgresPort)
-            .WithDataVolume("fylum_pgdata")
-            .WithLifetime(ContainerLifetime.Persistent);
+        var postgresPort = builder.Configuration.GetValue("Postgres:Port", 56789);
+        var postgres = builder.AddPostgres("postgres", port: postgresPort);
+        if (!isNonPersistent)
+        {
+            postgres.WithDataVolume("fylum_pgdata")
+                .WithLifetime(ContainerLifetime.Persistent);
+        }
+
         var database = postgres.AddDatabase("fylum");
-        postgres.WithPreconfiguredPgAdmin(database, containerName: "pgadmin");
+        if (!isNonPersistent)
+            postgres.WithPreconfiguredPgAdmin(database, containerName: "pgadmin");
 
         var api = builder.AddProject<Projects.Fylum_Api>("api")
             .WithReference(database, "postgres")

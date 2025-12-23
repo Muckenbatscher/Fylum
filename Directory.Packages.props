@@ -8,6 +8,7 @@
 		<!--Aspire Orchestration-->
 		<PackageVersion Include="Aspire.Hosting.AppHost" Version="13.1.0" />
 		<PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.1.0" />
+		<PackageVersion Include="Aspire.Hosting.Testing" Version="13.1.0" />
 		<!--Hosting and Dependency Injection-->
 		<PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
 		<PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.1" />
