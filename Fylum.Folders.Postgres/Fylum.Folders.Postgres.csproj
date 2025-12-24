@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fylum.Folders.Domain\Fylum.Folders.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
