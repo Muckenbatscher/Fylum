@@ -10,8 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      GITHUB_USER: ${{ github.repository_owner }}
 
     steps:
     - uses: actions/checkout@v5
@@ -19,12 +17,6 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 10.0.x
-    - name: Add GitHub Packages source
-      run: |
-        dotnet nuget add source "https://nuget.pkg.github.com/${{ env.GITHUB_USER }}/index.json" \
-          --username ${{ env.GITHUB_USER }} \
-          --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text \
-          --name github
     - name: Restore dependencies
       run: dotnet restore --property:EnableWindowsTargeting=true
     - name: Build
@@ -57,8 +49,6 @@ jobs:
   e2e-tests:
     needs: unit-tests
     runs-on: ubuntu-latest
-    env:
-      GITHUB_USER: ${{ github.repository_owner }}
     strategy:
       matrix:
         project: 
@@ -68,12 +58,6 @@ jobs:
       with:
         name: build-output
         path: .
-    - name: Add GitHub Packages source
-      run: |
-        dotnet nuget add source "https://nuget.pkg.github.com/${{ env.GITHUB_USER }}/index.json" \
-          --username ${{ env.GITHUB_USER }} \
-          --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text \
-          --name github
     - name: Restore Aspire Components
       run: dotnet restore ${{ matrix.project }}/${{ matrix.project }}.csproj
     - name: Restore Permissions
