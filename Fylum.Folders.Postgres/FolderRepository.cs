@@ -29,9 +29,9 @@ public class FolderRepository : IFolderRepository
     public Folder? GetById(Guid id)
     {
         var param = new { Id = id };
-        var sql = @$"SELECT id as '{nameof(FolderQueryModel.Id)}', 
-                            parent_folder_id as '{nameof(FolderQueryModel.ParentFolderId)}', 
-                            name as '{nameof(FolderQueryModel.Name)}'
+        var sql = @$"SELECT id as {nameof(FolderQueryModel.Id)}, 
+                            parent_folder_id as {nameof(FolderQueryModel.ParentFolderId)}, 
+                            name as {nameof(FolderQueryModel.Name)}
                      FROM folders
                      WHERE id = @{nameof(param.Id)};";
         var transaction = _transactionFactory.GetTransaction();
@@ -44,9 +44,9 @@ public class FolderRepository : IFolderRepository
     public IEnumerable<Folder> GetChildFolders(Guid parentFolderId)
     {
         var param = new { ParentFolderId = parentFolderId };
-        var sql = @$"SELECT id as '{nameof(FolderQueryModel.Id)}', 
-                            parent_folder_id as '{nameof(FolderQueryModel.ParentFolderId)}', 
-                            name as '{nameof(FolderQueryModel.Name)}'
+        var sql = @$"SELECT id as {nameof(FolderQueryModel.Id)}, 
+                            parent_folder_id as {nameof(FolderQueryModel.ParentFolderId)}, 
+                            name as {nameof(FolderQueryModel.Name)}
                      FROM folders
                      WHERE parent_folder_id = @{nameof(param.ParentFolderId)};";
         var transaction = _transactionFactory.GetTransaction();

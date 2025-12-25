@@ -2,6 +2,9 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Api.Shared;
+using Fylum.Folders.Api;
+using Fylum.Folders.Application;
+using Fylum.Folders.Postgres;
 using Fylum.Postgres.Shared;
 using Fylum.Users.Api;
 using Fylum.Users.Application;
@@ -51,6 +54,9 @@ public class Program
         });
         builder.Services.AddUsersPostgresServices();
 
+        builder.Services.AddFolderApplicationServices();
+        builder.Services.AddFolderPostgresServices();
+
         var app = builder.Build();
 
         app.UseAuthentication()
@@ -74,5 +80,6 @@ public class Program
     {
         yield return Assembly.GetExecutingAssembly();
         yield return typeof(UsersModule).Assembly;
+        yield return typeof(FoldersModule).Assembly;
     }
 }

@@ -16,7 +16,6 @@ public class CreateFolderEndpoint : FastEndpoints.Endpoint<CreateFolderRequest, 
         _commandHandler = commandHandler;
     }
 
-
     public override void Configure()
     {
         Post(EndpointRoutes.CreateFolderRoute);
