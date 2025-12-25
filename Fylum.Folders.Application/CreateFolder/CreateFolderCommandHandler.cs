@@ -20,6 +20,10 @@ public class CreateFolderCommandHandler : ICommandHandler<CreateFolderCommand, C
         if (parentFolder == null)
             return Result.Failure<CreateFolderResult>(Error.NotFound);
 
+        var otherChildFolders = folderRepository.GetChildFolders(parentFolder.Id);
+        if (otherChildFolders.Any(folder => folder.Name.Equals(command.Name, StringComparison.OrdinalIgnoreCase)))
+            return Result.Failure<CreateFolderResult>(Error.Conflict);
+
         var newFolder = Folder.CreateNew(command.ParentFolderId, command.Name);
 
         folderRepository.Add(newFolder);

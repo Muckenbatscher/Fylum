@@ -18,6 +18,8 @@
     <Project Path="Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Fylum.Folders/">
+    <Project Path="Fylum.Folders.Api.Shared/Fylum.Folders.Api.Shared.csproj" Id="752150c5-88ff-4cc4-8157-c2be7980f817" />
+    <Project Path="Fylum.Folders.Api/Fylum.Folders.Api.csproj" Id="3e5da428-4fc1-4b0d-bce5-13740fa411cf" />
     <Project Path="Fylum.Folders.Application/Fylum.Folders.Application.csproj" Id="7b166dbb-0c1f-4395-9127-aade3c9f3324" />
     <Project Path="Fylum.Folders.Domain/Fylum.Folders.Domain.csproj" />
     <Project Path="Fylum.Folders.Postgres/Fylum.Folders.Postgres.csproj" Id="1465c334-73f6-4a59-b78c-9011f617ca15" />
