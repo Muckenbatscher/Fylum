@@ -3,7 +3,7 @@ using Fylum.Users.Domain.Logout;
 
 namespace Fylum.Users.Application.Logout;
 
-public class LogoutCommandHandler : ILogoutCommandHandler
+public class LogoutCommandHandler : ICommandHandler<LogoutCommand>
 {
     private readonly ILogoutUnitOfWorkFactory _unitOfWorkFactory;
 

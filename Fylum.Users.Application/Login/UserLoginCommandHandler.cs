@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Application.Login;
 
-public class UserLoginCommandHandler : IUserLoginCommandHandler
+public class UserLoginCommandHandler : ICommandHandler<UserLoginCommand, UserLoginResult>
 {
     private readonly ILoginUnitOfWorkFactory _loginUnitOfWorkFactory;
     private readonly IPasswordLoginVerification _loginVerification;

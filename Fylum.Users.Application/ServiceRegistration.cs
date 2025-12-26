@@ -1,8 +1,10 @@
-﻿using Fylum.Users.Application.GetUser;
+﻿using Fylum.Application;
+using Fylum.Users.Application.GetUser;
 using Fylum.Users.Application.Login;
 using Fylum.Users.Application.Logout;
 using Fylum.Users.Application.RefreshTokens;
 using Fylum.Users.Application.Register;
+using Fylum.Users.Domain;
 using Fylum.Users.Domain.Login;
 using Fylum.Users.Domain.Logout;
 using Fylum.Users.Domain.Password;
@@ -29,11 +31,11 @@ public static class ServiceRegistration
         services.AddScoped<IUserRegisterUnitOfWorkFactory, UserRegisterUnitOfWorkFactory>();
         services.AddScoped<IRefreshTokenUnitOfWorkFactory, RefreshTokenUnitOfWorkFactory>();
 
-        services.AddTransient<IUserLoginCommandHandler, UserLoginCommandHandler>();
-        services.AddTransient<ILogoutCommandHandler, LogoutCommandHandler>();
-        services.AddTransient<IUserRegisterCommandHandler, UserRegisterCommandHandler>();
-        services.AddTransient<ITokenRefreshCommandHandler, TokenRefreshCommandHandler>();
-        services.AddTransient<IGetUserCommandHandler, GetUserCommandHandler>();
+        services.AddTransient<ICommandHandler<UserLoginCommand, UserLoginResult>, UserLoginCommandHandler>();
+        services.AddTransient<ICommandHandler<LogoutCommand>, LogoutCommandHandler>();
+        services.AddTransient<ICommandHandler<UserRegisterCommand, UserRegisterResult>, UserRegisterCommandHandler>();
+        services.AddTransient<ICommandHandler<TokenRefreshCommand, TokenRefreshResult>, TokenRefreshCommandHandler>();
+        services.AddTransient<ICommandHandler<GetUserCommand, User>, GetUserCommandHandler>();
 
         return services;
     }

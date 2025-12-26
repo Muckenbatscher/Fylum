@@ -1,6 +1,6 @@
-﻿using FastEndpoints;
-using Fylum.Api.Shared.ErrorResult;
+﻿using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
+using Fylum.Application;
 using Fylum.Users.Api.Shared;
 using Fylum.Users.Application.Register;
 using Microsoft.AspNetCore.Http;
@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Users.Api;
 
-public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Created<RegisterResponse>, Conflict>>
+public class RegisterEndpoint : FastEndpoints.Endpoint<RegisterRequest, Results<Created<RegisterResponse>, Conflict>>
 {
-    private readonly IUserRegisterCommandHandler _registerCommandHandler;
+    private readonly ICommandHandler<UserRegisterCommand, UserRegisterResult> _commandHandler;
     private readonly IJwtTokenBuilder _jwtTokenBuilder;
 
-    public RegisterEndpoint(IUserRegisterCommandHandler commandHandler,
+    public RegisterEndpoint(ICommandHandler<UserRegisterCommand, UserRegisterResult> commandHandler,
         IJwtTokenBuilder jwtTokenBuilder)
     {
-        _registerCommandHandler = commandHandler;
+        _commandHandler = commandHandler;
         _jwtTokenBuilder = jwtTokenBuilder;
     }
 
@@ -28,7 +28,7 @@ public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Created<Regist
     public override async Task HandleAsync(RegisterRequest req, CancellationToken ct)
     {
         var command = new UserRegisterCommand(req.Username, req.Password);
-        var registerResult = _registerCommandHandler.Handle(command);
+        var registerResult = _commandHandler.Handle(command);
 
         var errorHandling = await Send.EnsureErrorResultHandled(registerResult);
         if (errorHandling.ErrorResultHandlingRequired)
