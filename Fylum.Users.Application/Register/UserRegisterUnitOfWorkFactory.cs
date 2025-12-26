@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Users.Application.Register;
 
-public class UserRegisterUnitOfWorkFactory : UnitOfWorkFactory<UserRegisterUnitOfWork>, IUserRegisterUnitOfWorkFactory
+public class UserRegisterUnitOfWorkFactory : UnitOfWorkFactory<UserRegisterUnitOfWork>
 {
     public UserRegisterUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) :
         base(serviceScopeFactory)

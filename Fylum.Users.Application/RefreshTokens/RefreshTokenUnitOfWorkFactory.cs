@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Users.Application.RefreshTokens;
 
-internal class RefreshTokenUnitOfWorkFactory : UnitOfWorkFactory<RefreshTokenUnitOfWork>, IRefreshTokenUnitOfWorkFactory
+internal class RefreshTokenUnitOfWorkFactory : UnitOfWorkFactory<RefreshTokenUnitOfWork>
 {
     public RefreshTokenUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) : base(serviceScopeFactory)
     {

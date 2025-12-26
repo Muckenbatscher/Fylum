@@ -1,13 +1,14 @@
 ﻿using Fylum.Application;
+using Fylum.Domain.UnitOfWork;
 using Fylum.Users.Domain.Logout;
 
 namespace Fylum.Users.Application.Logout;
 
 public class LogoutCommandHandler : ILogoutCommandHandler
 {
-    private readonly ILogoutUnitOfWorkFactory _unitOfWorkFactory;
+    private readonly IUnitOfWorkFactory<LogoutUnitOfWork> _unitOfWorkFactory;
 
-    public LogoutCommandHandler(ILogoutUnitOfWorkFactory unitOfWorkFactory)
+    public LogoutCommandHandler(IUnitOfWorkFactory<LogoutUnitOfWork> unitOfWorkFactory)
     {
         _unitOfWorkFactory = unitOfWorkFactory;
     }
