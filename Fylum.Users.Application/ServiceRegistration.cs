@@ -1,5 +1,4 @@
 ﻿using Fylum.Application;
-using Fylum.Users.Application.GetUser;
 using Fylum.Users.Application.Login;
 using Fylum.Users.Application.Logout;
 using Fylum.Users.Application.RefreshTokens;
@@ -23,11 +22,7 @@ public static class ServiceRegistration
 
         services.AddUnitOfWorkFactories();
 
-        services.AddTransient<IUserLoginCommandHandler, UserLoginCommandHandler>();
-        services.AddTransient<ILogoutCommandHandler, LogoutCommandHandler>();
-        services.AddTransient<IUserRegisterCommandHandler, UserRegisterCommandHandler>();
-        services.AddTransient<ITokenRefreshCommandHandler, TokenRefreshCommandHandler>();
-        services.AddTransient<IGetUserCommandHandler, GetUserCommandHandler>();
+        services.AddCommandHandlers();
 
         return services;
     }

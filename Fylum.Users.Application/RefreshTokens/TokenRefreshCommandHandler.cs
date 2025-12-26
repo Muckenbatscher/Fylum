@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Application.RefreshTokens;
 
-public class TokenRefreshCommandHandler : ITokenRefreshCommandHandler
+public class TokenRefreshCommandHandler : ICommandHandler<TokenRefreshCommand, TokenRefreshResult>
 {
     private readonly IUnitOfWorkFactory<RefreshTokenUnitOfWork> _unitOfWorkFactory;
     private readonly RefreshTokenOptions _refreshTokenOptions;

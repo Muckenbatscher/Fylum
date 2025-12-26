@@ -3,7 +3,7 @@ using Fylum.Users.Domain;
 
 namespace Fylum.Users.Application.GetUser;
 
-public class GetUserCommandHandler : IGetUserCommandHandler
+public class GetUserCommandHandler : ICommandHandler<GetUserCommand, User>
 {
     private readonly IUserRepository _userRepository;
 
