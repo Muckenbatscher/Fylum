@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Users.Application.Logout;
 
-public class LogoutUnitOfWorkFactory : UnitOfWorkFactory<LogoutUnitOfWork>, ILogoutUnitOfWorkFactory
+public class LogoutUnitOfWorkFactory : UnitOfWorkFactory<LogoutUnitOfWork>
 {
     public LogoutUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) : base(serviceScopeFactory)
     {

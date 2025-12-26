@@ -1,4 +1,5 @@
 ﻿using Fylum.Application;
+using Fylum.Domain.UnitOfWork;
 using Fylum.Users.Application.RefreshTokens;
 using Fylum.Users.Domain.Login;
 using Fylum.Users.Domain.Password;
@@ -9,11 +10,11 @@ namespace Fylum.Users.Application.Login;
 
 public class UserLoginCommandHandler : ICommandHandler<UserLoginCommand, UserLoginResult>
 {
-    private readonly ILoginUnitOfWorkFactory _loginUnitOfWorkFactory;
+    private readonly IUnitOfWorkFactory<LoginUnitOfWork> _loginUnitOfWorkFactory;
     private readonly IPasswordLoginVerification _loginVerification;
     private readonly RefreshTokenOptions _refreshTokenOptions;
 
-    public UserLoginCommandHandler(ILoginUnitOfWorkFactory loginUnitOfWorkFactory,
+    public UserLoginCommandHandler(IUnitOfWorkFactory<LoginUnitOfWork> loginUnitOfWorkFactory,
         IPasswordLoginVerification loginVerification,
         IOptions<RefreshTokenOptions> refreshTokenOptions)
     {

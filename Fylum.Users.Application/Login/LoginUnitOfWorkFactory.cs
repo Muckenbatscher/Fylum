@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Users.Application.Login;
 
-public class LoginUnitOfWorkFactory : UnitOfWorkFactory<LoginUnitOfWork>, ILoginUnitOfWorkFactory
+public class LoginUnitOfWorkFactory : UnitOfWorkFactory<LoginUnitOfWork>
 {
     public LoginUnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory) : base(serviceScopeFactory)
     {
