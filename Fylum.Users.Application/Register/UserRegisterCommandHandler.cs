@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Application.Register;
 
-public class UserRegisterCommandHandler : IUserRegisterCommandHandler
+public class UserRegisterCommandHandler : ICommandHandler<UserRegisterCommand, UserRegisterResult>
 {
     private readonly IUserRegisterUnitOfWorkFactory _unitOfWorkFactory;
     private readonly IPasswordHashCalculator _hashCalculator;
