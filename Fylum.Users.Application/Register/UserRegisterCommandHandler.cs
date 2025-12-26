@@ -1,4 +1,5 @@
 ﻿using Fylum.Application;
+using Fylum.Domain.UnitOfWork;
 using Fylum.Users.Application.RefreshTokens;
 using Fylum.Users.Domain.Password;
 using Fylum.Users.Domain.RefreshTokens;
@@ -7,13 +8,13 @@ using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Application.Register;
 
-public class UserRegisterCommandHandler : IUserRegisterCommandHandler
+public class UserRegisterCommandHandler : ICommandHandler<UserRegisterCommand, UserRegisterResult>
 {
-    private readonly IUserRegisterUnitOfWorkFactory _unitOfWorkFactory;
+    private readonly IUnitOfWorkFactory<UserRegisterUnitOfWork> _unitOfWorkFactory;
     private readonly IPasswordHashCalculator _hashCalculator;
     private readonly RefreshTokenOptions _refreshTokenOptions;
 
-    public UserRegisterCommandHandler(IUserRegisterUnitOfWorkFactory unitOfWorkFactory,
+    public UserRegisterCommandHandler(IUnitOfWorkFactory<UserRegisterUnitOfWork> unitOfWorkFactory,
         IPasswordHashCalculator hashCalculator,
         IOptions<RefreshTokenOptions> refreshTokenOptions)
     {

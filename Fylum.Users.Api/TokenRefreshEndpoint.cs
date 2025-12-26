@@ -1,6 +1,6 @@
-﻿using FastEndpoints;
-using Fylum.Api.Shared.ErrorResult;
+﻿using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
+using Fylum.Application;
 using Fylum.Users.Api.Shared;
 using Fylum.Users.Application.RefreshTokens;
 using Microsoft.AspNetCore.Http;
@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Users.Api;
 
-public class TokenRefreshEndpoint : Endpoint<TokenRefreshClaimRequest, Results<Ok<TokenRefreshResponse>, UnauthorizedHttpResult, NotFound>>
+public class TokenRefreshEndpoint : FastEndpoints.Endpoint<TokenRefreshClaimRequest, Results<Ok<TokenRefreshResponse>, UnauthorizedHttpResult, NotFound>>
 {
-    private readonly ITokenRefreshCommandHandler _commandHandler;
+    private readonly ICommandHandler<TokenRefreshCommand, TokenRefreshResult> _commandHandler;
     private readonly IJwtTokenBuilder _jwtTokenBuilder;
 
-    public TokenRefreshEndpoint(ITokenRefreshCommandHandler commandHandler,
+    public TokenRefreshEndpoint(ICommandHandler<TokenRefreshCommand, TokenRefreshResult> commandHandler,
         IJwtTokenBuilder jwtTokenBuilder)
     {
         _commandHandler = commandHandler;

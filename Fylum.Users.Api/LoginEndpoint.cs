@@ -1,6 +1,6 @@
-﻿using FastEndpoints;
-using Fylum.Api.Shared.ErrorResult;
+﻿using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
+using Fylum.Application;
 using Fylum.Users.Api.Shared;
 using Fylum.Users.Application.Login;
 using Microsoft.AspNetCore.Http;
@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Users.Api;
 
-public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
+public class LoginEndpoint : FastEndpoints.Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
 {
-    private readonly IUserLoginCommandHandler _commandHandler;
+    private readonly ICommandHandler<UserLoginCommand, UserLoginResult> _commandHandler;
     private readonly IJwtTokenBuilder _jwtTokenBuilder;
 
-    public LoginEndpoint(IUserLoginCommandHandler commandHandler,
+    public LoginEndpoint(ICommandHandler<UserLoginCommand, UserLoginResult> commandHandler,
         IJwtTokenBuilder jwtTokenBuilder)
     {
         _commandHandler = commandHandler;

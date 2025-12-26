@@ -1,15 +1,16 @@
 ﻿using Fylum.Application;
+using Fylum.Domain.UnitOfWork;
 using Fylum.Users.Domain.RefreshTokens;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Application.RefreshTokens;
 
-public class TokenRefreshCommandHandler : ITokenRefreshCommandHandler
+public class TokenRefreshCommandHandler : ICommandHandler<TokenRefreshCommand, TokenRefreshResult>
 {
-    private readonly IRefreshTokenUnitOfWorkFactory _unitOfWorkFactory;
+    private readonly IUnitOfWorkFactory<RefreshTokenUnitOfWork> _unitOfWorkFactory;
     private readonly RefreshTokenOptions _refreshTokenOptions;
 
-    public TokenRefreshCommandHandler(IRefreshTokenUnitOfWorkFactory unitOfWorkFactory,
+    public TokenRefreshCommandHandler(IUnitOfWorkFactory<RefreshTokenUnitOfWork> unitOfWorkFactory,
         IOptions<RefreshTokenOptions> refreshTokenOptions)
     {
         _unitOfWorkFactory = unitOfWorkFactory;

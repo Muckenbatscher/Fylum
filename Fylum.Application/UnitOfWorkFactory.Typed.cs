@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Fylum.Application;
 
-public abstract class UnitOfWorkFactory<T> : UnitOfWorkFactory
+public abstract class UnitOfWorkFactory<T> : UnitOfWorkFactory, IUnitOfWorkFactory<T>
     where T : UnitOfWork
 {
     public UnitOfWorkFactory(IServiceScopeFactory serviceScopeFactory)
