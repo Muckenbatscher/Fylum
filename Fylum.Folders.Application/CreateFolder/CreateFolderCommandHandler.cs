@@ -1,13 +1,14 @@
 ﻿using Fylum.Application;
+using Fylum.Domain.UnitOfWork;
 using Fylum.Folders.Domain;
 
 namespace Fylum.Folders.Application.CreateFolder;
 
 public class CreateFolderCommandHandler : ICommandHandler<CreateFolderCommand, CreateFolderResult>
 {
-    private readonly IFolderUnitOfWorkFactory _unitOfWorkFactory;
+    private readonly IUnitOfWorkFactory<FolderUnitOfWork> _unitOfWorkFactory;
 
-    public CreateFolderCommandHandler(IFolderUnitOfWorkFactory unitOfWorkFactory)
+    public CreateFolderCommandHandler(IUnitOfWorkFactory<FolderUnitOfWork> unitOfWorkFactory)
     {
         _unitOfWorkFactory = unitOfWorkFactory;
     }
