@@ -10,6 +10,7 @@ public static class ServiceRegistration
         public void AddFolderApplicationServices()
         {
             services.AddUnitOfWorkFactories();
+            services.AddQueryHandlers();
             services.AddCommandHandlers();
         }
     }
