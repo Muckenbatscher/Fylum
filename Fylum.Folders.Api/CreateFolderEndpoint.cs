@@ -18,7 +18,7 @@ public class CreateFolderEndpoint : FastEndpoints.Endpoint<CreateFolderRequest, 
 
     public override void Configure()
     {
-        Post(EndpointRoutes.CreateFolderRoute);
+        Post(EndpointRoutes.FolderBaseRoute);
         Claims(JwtAuthConstants.UserIdClaim);
     }
 

@@ -3,16 +3,16 @@ using System.Reflection;
 
 namespace Fylum.Application;
 
-public static class CommandHandlerServiceRegistration
+public static class QueryHandlerServiceRegistration
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddCommandHandlers()
+        public IServiceCollection AddQueryHandlers()
         {
-            return services.AddCommandHandlers(Assembly.GetCallingAssembly());
+            return services.AddQueryHandlers(Assembly.GetCallingAssembly());
         }
 
-        public IServiceCollection AddCommandHandlers(Assembly assembly)
+        public IServiceCollection AddQueryHandlers(Assembly assembly)
         {
             var implementationMap = GetImplementationMap(assembly);
             foreach (var implementation in implementationMap)
@@ -29,13 +29,13 @@ public static class CommandHandlerServiceRegistration
     {
         var implementationTypes = assembly.GetTypes()
             .Where(t => t.IsClass && !t.IsAbstract)
-            .Where(ImplementsCommandHandlerInterface)
+            .Where(ImplementsQueryHandlerInterface)
             .ToList();
 
         var implementationMap = new Dictionary<Type, Type>();
         foreach (var implementation in implementationTypes)
         {
-            var interfaces = GetImplementedCommandHandlerInterface(implementation);
+            var interfaces = GetImplementedQueryHandlerInterfaces(implementation);
             if (interfaces.Count() > 1)
             {
                 throw new InvalidOperationException(
@@ -55,19 +55,19 @@ public static class CommandHandlerServiceRegistration
         return implementationMap;
     }
 
-    private static bool ImplementsCommandHandlerInterface(Type type)
-        => GetImplementedCommandHandlerInterface(type).Any();
+    private static bool ImplementsQueryHandlerInterface(Type type)
+        => GetImplementedQueryHandlerInterfaces(type).Any();
 
-    private static IEnumerable<Type> GetImplementedCommandHandlerInterface(Type implementation)
+    private static IEnumerable<Type> GetImplementedQueryHandlerInterfaces(Type implementation)
     {
         var interfaces = implementation.GetInterfaces()
             .Where(i => i.IsGenericType)
             .Where(i =>
             {
                 var genericDef = i.GetGenericTypeDefinition();
-                return genericDef == typeof(ICommandHandler<>)
-                    || genericDef == typeof(ICommandHandler<,>);
+                return genericDef == typeof(IQueryHandler<,>);
             });
         return interfaces;
     }
 }
+
