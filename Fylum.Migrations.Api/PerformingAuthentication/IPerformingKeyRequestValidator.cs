@@ -2,5 +2,5 @@
 
 public interface IPerformingKeyRequestValidator
 {
-    bool IsAuthenticated(PerformingKeyRequest request);
+    bool IsAuthenticated(HttpRequest request);
 }
