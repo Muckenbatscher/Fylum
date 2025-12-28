@@ -2,6 +2,7 @@
 using Fylum.Client.Auth.Token;
 using Fylum.Client.Auth.Token.Expiration;
 using Fylum.Client.Auth.Token.Storage;
+using Fylum.Client.Folders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -33,6 +34,8 @@ public static class FylumClientServiceCollectionExtensions
             services.AddConfiguredHttpClient<IAuthClient, AuthClient>();
             services.AddConfiguredHttpClient<IRefreshTokenClient, RefreshTokenClient>()
                 .AddHttpMessageHandler<RefreshTokenAuthHeaderHandler>();
+
+            services.AddConfiguredAccessTokenHttpClient<IFolderClient, FolderClient>();
 
             return services;
         }
