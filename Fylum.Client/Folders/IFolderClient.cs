@@ -2,7 +2,7 @@
 
 namespace Fylum.Client.Folders;
 
-internal interface IFolderClient
+public interface IFolderClient
 {
     Task<GetFolderResponse> GetRootFolderAsync();
     Task<GetFolderResponse> GetRootFolderAsync(CancellationToken cancellationToken);
