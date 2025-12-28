@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Fylum.Migrations.Api.Shared;
+using Microsoft.Extensions.Options;
 
 namespace Fylum.Migrations.Api.PerformingAuthentication;
 
@@ -11,8 +12,14 @@ public class PerformingKeyRequestValidator : IPerformingKeyRequestValidator
         _keyOptions = keyOptions.Value;
     }
 
-    public bool IsAuthenticated(PerformingKeyRequest request)
-        => request.MigrationPerformingKeyHeader == ExpextedKeyHeader;
+    public bool IsAuthenticated(HttpRequest request)
+    {
+        var headerName = PerfomAuthConstants.MigrationPerformingKeyHeaderName;
+        if (!request.Headers.TryGetValue(headerName, out var providedKey))
+            return false;
+
+        return providedKey == ExpextedKeyHeader;
+    }
 
     private string ExpextedKeyHeader
         => $"Key: {_keyOptions.MigrationPerformingKey}";

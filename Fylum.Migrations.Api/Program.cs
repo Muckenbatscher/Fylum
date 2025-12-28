@@ -2,6 +2,7 @@ using FastEndpoints;
 using FastEndpoints.Swagger;
 using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Postgres.Shared;
+using Microsoft.AspNetCore.Authentication;
 using Scalar.AspNetCore;
 
 namespace Fylum.Migrations.Api;
@@ -18,6 +19,13 @@ public class Program
             .AddFastEndpoints()
             .SwaggerDocument();
 
+        builder.Services
+            .AddAuthentication()
+            .AddScheme<AuthenticationSchemeOptions, MigrationKeyAuthenticationHandler>(
+                authenticationScheme: AuthSchemeConstants.MigrationPerformingKeyScheme,
+                configureOptions: null);
+        builder.Services.AddAuthorization();
+
         builder.Services.Configure<PerformingKeyOptions>(options =>
         {
             options.MigrationPerformingKey = builder.Configuration["MIGRATION_PERFORMING_KEY"]!;
@@ -32,6 +40,8 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseFastEndpoints();
 
         if (app.Environment.IsDevelopment())
