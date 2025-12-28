@@ -7,17 +7,14 @@ using Fylum.Migrations.Domain;
 
 namespace Fylum.Migrations.Api;
 
-public class PerformMigrationsUpToEndpoint : Endpoint<PerformingKeyRequest, PerformMigrationsResponse>
+public class PerformMigrationsUpToEndpoint : EndpointWithoutRequest<PerformMigrationsResponse>
 {
     private const string MigrationIdParamName = "id";
 
-    private readonly IPerformingKeyRequestValidator _requestValidator;
     private readonly IPerformMigrationsUpToCommandHandler _handler;
 
-    public PerformMigrationsUpToEndpoint(IPerformingKeyRequestValidator requestValidator,
-        IPerformMigrationsUpToCommandHandler handler)
+    public PerformMigrationsUpToEndpoint(IPerformMigrationsUpToCommandHandler handler)
     {
-        _requestValidator = requestValidator;
         _handler = handler;
     }
 
@@ -25,17 +22,11 @@ public class PerformMigrationsUpToEndpoint : Endpoint<PerformingKeyRequest, Perf
     {
         var route = $"{EndpointRoutes.MigrationsPerformUpToRoute}/{{{MigrationIdParamName}}}";
         Post(route);
-        AllowAnonymous();
+        AuthSchemes(AuthSchemeConstants.MigrationPerformingKeyScheme);
     }
 
-    public override async Task HandleAsync(PerformingKeyRequest request, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
-        if (!_requestValidator.IsAuthenticated(request))
-        {
-            await Send.ResultAsync(TypedResults.Unauthorized());
-            return;
-        }
-
         var migrationId = Route<Guid>(MigrationIdParamName);
         var command = new PerformMigrationsUpToCommand(migrationId);
 
