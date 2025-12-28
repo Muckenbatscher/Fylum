@@ -5,7 +5,7 @@ using Fylum.Folders.Api.Shared;
 using Fylum.Folders.Application.CreateFolder;
 using Microsoft.AspNetCore.Http;
 
-namespace Fylum.Folders.Api;
+namespace Fylum.Folders.Api.CreateFolder;
 
 public class CreateFolderEndpoint : FastEndpoints.Endpoint<CreateFolderRequest, CreateFolderResponse>
 {

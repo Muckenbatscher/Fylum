@@ -3,4 +3,5 @@
 public class EndpointRoutes
 {
     public const string FolderBaseRoute = "folders";
+    public const string ChildFoldersRoute = "children";
 }

@@ -1,4 +1,4 @@
-﻿namespace Fylum.Folders.Api;
+﻿namespace Fylum.Folders.Api.GetFolderById;
 
 public class GetFolderByIdRequest
 {
