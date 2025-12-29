@@ -1,9 +1,11 @@
 ﻿@page "/folders"
+@page "/folders/{Id:guid}"
 @using Fylum.Client.Folders
 @using Fylum.Folders.Api.Shared
 @using MudBlazor
 @inject IFolderClient FolderClient
 @inject ISnackbar Snackbar
+@inject NavigationManager Navigation
 
 <MudText Typo="Typo.h4" Class="mb-4">Browse folders</MudText>
 
@@ -13,8 +15,8 @@
 }
 else if (_currentFolder == null)
 {
-    <MudAlert Severity="Severity.Warning">No Folders found or an error occured while loading.</MudAlert>
-    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="LoadRoot">Try again</MudButton>
+    <MudAlert Severity="Severity.Warning">No folder found or an error occured while loading.</MudAlert>
+    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="NavigateToRoot">Back to root folder</MudButton>
 }
 else
 {
@@ -31,7 +33,8 @@ else
             {
                 @foreach (var folder in _childFolders)
                 {
-                    <MudListItem Icon="@Icons.Material.Filled.Folder" OnClick="@(() => LoadFolder(folder.FolderId))">
+                    <MudListItem Icon="@Icons.Material.Filled.Folder"
+                                 OnClick="@(() => OpenFolder(folder.FolderId))">
                         @folder.Name
                     </MudListItem>
                 }
@@ -45,43 +48,50 @@ else
     
     @if (_currentFolder.ParentFolderId != Guid.Empty) 
     {
-        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.ArrowBack" 
-                   Color="Color.Secondary" Class="mt-4" 
-                   OnClick="@(() => LoadFolder(_currentFolder.ParentFolderId))">
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.ArrowBack"
+                   Color="Color.Secondary" Class="mt-4"
+                   Disabled="@(!_canNavigateUp)"
+                   OnClick="NavigateUp">
             Back
         </MudButton>
     }
 }
 
 @code {
+    [Parameter]
+    public Guid? Id { get; set; }
+
     private bool _isLoading = true;
-    
-    // Wir verwenden hier die Response-Objekte aus dem Shared-Projekt als Model
     private GetFolderResponse? _currentFolder;
     private List<GetFolderResponse> _childFolders = new();
 
-    protected override async Task OnInitializedAsync()
+    private bool _canNavigateUp
+        => _currentFolder != null && _currentFolder.ParentFolderId != Guid.Empty;
+
+    protected override async Task OnParametersSetAsync()
     {
-        await LoadRoot();
+        await LoadFolderData();
     }
 
-    private async Task LoadRoot()
+    private async Task LoadFolderData()
     {
         _isLoading = true;
         try
         {
-            // Abruf des Root-Ordners
-            // GetRootFolderAsync liefert direkt das GetFolderResponse Objekt zurück
-            _currentFolder = await FolderClient.GetRootFolderAsync();
-            
+            if (Id.HasValue)
+                _currentFolder = await FolderClient.GetFolderByIdAsync(Id.Value);
+            else
+                _currentFolder = await FolderClient.GetRootFolderAsync();
+
             if (_currentFolder != null)
             {
-                await LoadChildren(_currentFolder.FolderId);
+                var childrenResponse = await FolderClient.GetChildFoldersAsync(_currentFolder.FolderId);
+                _childFolders = childrenResponse.Folders.ToList();
             }
         }
         catch (Exception ex)
         {
-            Snackbar.Add($"Error while loading the root folder: {ex.Message}", Severity.Error);
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
         }
         finally
         {
@@ -89,40 +99,19 @@ else
         }
     }
 
-    private async Task LoadFolder(Guid folderId)
+    private void OpenFolder(Guid folderId)
     {
-        _isLoading = true;
-        try
-        {
-            // Abruf eines spezifischen Ordners anhand der ID
-            _currentFolder = await FolderClient.GetFolderByIdAsync(folderId);
-            
-            await LoadChildren(folderId);
-        }
-        catch (Exception ex)
-        {
-            Snackbar.Add($"Error loading this folder: {ex.Message}", Severity.Error);
-        }
-        finally
-        {
-            _isLoading = false;
-        }
+        Navigation.NavigateTo($"/folders/{folderId}");
     }
 
-    private async Task LoadChildren(Guid parentId)
+    private void NavigateUp()
     {
-        try 
-        {
-            // Abruf der Unterordner
-            var response = await FolderClient.GetChildFoldersAsync(parentId);
-            
-            // Annahme: Die Property im Response heißt 'Folders' und ist eine Liste von GetFolderResponse
-            _childFolders = response.Folders.ToList();
-        }
-        catch (Exception ex)
-        {
-             Snackbar.Add($"Could not load the child folders: {ex.Message}", Severity.Error);
-             _childFolders = new List<GetFolderResponse>();
-        }
+        if (_currentFolder != null && _currentFolder.ParentFolderId != Guid.Empty)
+            Navigation.NavigateTo($"/folders/{_currentFolder.ParentFolderId}");
+    }
+
+    private void NavigateToRoot()
+    {
+        Navigation.NavigateTo("/folders");
     }
 }
