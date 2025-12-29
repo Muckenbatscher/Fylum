@@ -54,4 +54,7 @@
     <Project Path="Fylum.EndToEnd/Fylum.EndToEnd.csproj" Id="83a6eebb-9371-46ea-a7b0-ae58f3a8689f" />
     <Project Path="Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />
   </Folder>
+  <Folder Name="/Test/Api/Fylum.Folders/">
+    <Project Path="Fylum.Folders.Domain.Tests/Fylum.Folders.Domain.Tests.csproj" Id="2b70614a-5551-4c97-ad0b-6f2761458735" />
+  </Folder>
 </Solution>
