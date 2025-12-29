@@ -28,6 +28,10 @@ internal class Program
             .WithScalarDisplayNameUrls()
             .WithOpenApiSpecUrl();
 
+        var web = builder.AddProject<Projects.Fylum_Web>("web")
+            .WithReference(api, "api")
+            .WaitFor(api);
+
         var migrationPerformingKey = builder.AddParameter("MigrationPerformingKey", secret: true);
         var migrationsApi = builder.AddProject<Projects.Fylum_Migrations_Api>("migrations-api")
             .WithReference(database, "postgres")

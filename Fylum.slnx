@@ -43,6 +43,7 @@
   <Folder Name="/Source/Client/Fylum/">
     <Project Path="Fylum.Client.Cli/Fylum.Client.Cli.csproj" />
     <Project Path="Fylum.Client/Fylum.Client.csproj" />
+    <Project Path="Fylum.Web/Fylum.Web.csproj" />
   </Folder>
   <Folder Name="/Source/Client/Migrations/">
     <Project Path="Fylum.Migrations.Client.Cli/Fylum.Migrations.Client.Cli.csproj" />

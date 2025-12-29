@@ -1,22 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Sdk Name="Aspire.AppHost.Sdk" Version="13.0.1" />
+	<Sdk Name="Aspire.AppHost.Sdk" Version="13.0.1" />
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <UserSecretsId>1b2fd03d-8d27-4eea-b292-f3d705dd8552</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<UserSecretsId>1b2fd03d-8d27-4eea-b292-f3d705dd8552</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" />
-    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting.AppHost" />
+		<PackageReference Include="Aspire.Hosting.PostgreSQL" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Fylum.Api\Fylum.Api.csproj" />
-    <ProjectReference Include="..\Fylum.Migrations.Api.Shared\Fylum.Migrations.Api.Shared.csproj" IsAspireProjectResource="false" />
-    <ProjectReference Include="..\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />
-    <ProjectReference Include="..\Fylum.Migrations.Web\Fylum.Migrations.Web.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Fylum.Api\Fylum.Api.csproj" />
+		<ProjectReference Include="..\Fylum.Migrations.Api.Shared\Fylum.Migrations.Api.Shared.csproj" IsAspireProjectResource="false" />
+		<ProjectReference Include="..\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />
+		<ProjectReference Include="..\Fylum.Migrations.Web\Fylum.Migrations.Web.csproj" />
+		<ProjectReference Include="..\Fylum.Web\Fylum.Web.csproj" />
+	</ItemGroup>
 
 </Project>

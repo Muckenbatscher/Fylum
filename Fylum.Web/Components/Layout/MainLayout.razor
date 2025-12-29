@@ -1,0 +1,18 @@
+﻿@inherits LayoutComponentBase
+@using MudBlazor
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudText Typo="Typo.h5" Class="ml-3">Fylum</MudText>
+        <MudSpacer />
+    </MudAppBar>
+    <MudMainContent Class="pt-16 pa-4">
+        <MudContainer MaxWidth="MaxWidth.Large">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
