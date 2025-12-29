@@ -1,9 +1,9 @@
 ﻿using Aspire.Hosting;
 using Aspire.Hosting.Testing;
 
-namespace Fylum.EndToEnd.ApplicationBuilding;
+namespace Fylum.EndToEnd.DistributedApplicationBuilding;
 
-public record DistributedApplicationContainer(DistributedApplication DistributedApp) : IDisposable
+public record DistributedApplicationContainer(DistributedApplication DistributedApp) : IDisposable, IAsyncDisposable
 {
     const string ApiClientResourceName = "api";
     const string EndpointScheme = "https";
@@ -16,6 +16,6 @@ public record DistributedApplicationContainer(DistributedApplication Distributed
 
     public void Dispose()
         => DistributedApp.Dispose();
-    public async Task DisposeAsync()
+    public async ValueTask DisposeAsync()
         => await DistributedApp.DisposeAsync();
 }

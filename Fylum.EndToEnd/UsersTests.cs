@@ -1,5 +1,5 @@
 ﻿using Fylum.Client.Auth;
-using Fylum.EndToEnd.ApplicationBuilding;
+using Fylum.EndToEnd.DistributedApplicationBuilding;
 using Fylum.Users.Api.Shared;
 
 namespace Fylum.EndToEnd;
