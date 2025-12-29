@@ -34,6 +34,7 @@ jobs:
       matrix:
         project: 
         - Fylum.Postgres.Shared.Tests
+        - Fylum.Folders.Domain.Tests
     steps:
     - uses: actions/download-artifact@v4
       with:
