@@ -49,7 +49,7 @@ internal class Program
     {
         services.AddTransient<App>();
 
-        services.AddFylumClient(options =>
+        services.AddFylumClients(options =>
         {
             options.BaseUri = new Uri(baseUrl);
             options.Timeout = TimeSpan.FromSeconds(60);

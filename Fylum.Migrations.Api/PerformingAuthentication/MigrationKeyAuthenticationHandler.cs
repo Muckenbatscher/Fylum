@@ -1,10 +1,9 @@
-﻿using Fylum.Migrations.Api.PerformingAuthentication;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
-namespace Fylum.Migrations.Api;
+namespace Fylum.Migrations.Api.PerformingAuthentication;
 
 public class MigrationKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {

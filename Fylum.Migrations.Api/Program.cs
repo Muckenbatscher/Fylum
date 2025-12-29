@@ -1,5 +1,4 @@
 using FastEndpoints;
-using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Postgres.Shared;

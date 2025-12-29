@@ -1,6 +1,8 @@
 ﻿using Aspire.Hosting.Testing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-namespace Fylum.EndToEnd;
+namespace Fylum.EndToEnd.DistributedApplicationBuilding;
 
 internal class DistributedApplicationContainerFactory
 {
@@ -13,6 +15,8 @@ internal class DistributedApplicationContainerFactory
 
         var appHost = await DistributedApplicationTestingBuilder
             .CreateAsync<Projects.Fylum_AppHost>(args.ToArray(), cancellationToken);
+
+        appHost.Services.AddLogging(options => options.SetMinimumLevel(LogLevel.Debug));
 
         var app = await appHost.BuildAsync(cancellationToken);
         await app.StartAsync(cancellationToken);

@@ -5,6 +5,7 @@
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fylum.Folders.Api.Shared\Fylum.Folders.Api.Shared.csproj" />
     <ProjectReference Include="..\Fylum.Users.Api.Shared\Fylum.Users.Api.Shared.csproj" />
   </ItemGroup>
 </Project>

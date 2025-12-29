@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
     <ProjectReference Include="..\Fylum.Domain\Fylum.Domain.csproj" />
   </ItemGroup>
 

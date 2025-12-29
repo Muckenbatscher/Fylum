@@ -1,5 +1,7 @@
 ﻿<Project Sdk="MSTest.Sdk/4.0.2">
 
+  <PropertyGroup />
+
   <ItemGroup>
     <ProjectReference Include="..\Fylum.Postgres.Shared\Fylum.Postgres.Shared.csproj" />
   </ItemGroup>

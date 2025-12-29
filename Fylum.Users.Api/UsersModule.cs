@@ -1,3 +1,3 @@
 ﻿namespace Fylum.Users.Api;
 
-public abstract class UsersModule { }
+public abstract class UsersModule;
