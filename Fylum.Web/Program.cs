@@ -1,49 +1,45 @@
 using Fylum.Client;
+using Fylum.Web;
 using Fylum.Web.Components;
 using MudBlazor.Services;
 
-namespace Fylum.Web;
+var builder = WebApplication.CreateBuilder(args);
+builder.AddServiceDefaults();
 
-public class Program
+// Add MudBlazor services
+builder.Services.AddMudServices();
+
+// Add services to the container.
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
+
+builder.Services.AddSingleton<IThemeProvider, ThemeProvider>();
+builder.Services.AddFylumClients(options =>
 {
-    public static void Main(string[] args)
-    {
-        var builder = WebApplication.CreateBuilder(args);
+    var baseAddress = builder.Configuration["FylumClientOptions:BaseAddress"]!;
+    options.BaseUri = new Uri(baseAddress!);
 
-        builder.AddServiceDefaults();
+    int timeOutSeconds = int.TryParse(builder.Configuration["FylumClientOptions:TimeOutSeconds"], out timeOutSeconds)
+        ? timeOutSeconds : 30;
+    options.Timeout = TimeSpan.FromSeconds(timeOutSeconds);
+});
 
-        builder.Services.AddMudServices();
+var app = builder.Build();
 
-        builder.Services.AddRazorComponents()
-            .AddInteractiveServerComponents();
-
-        builder.Services.AddSingleton<IThemeProvider, ThemeProvider>();
-        builder.Services.AddFylumClients(options =>
-        {
-            var baseAddress = builder.Configuration["FylumClientOptions:BaseAddress"]!;
-            options.BaseUri = new Uri(baseAddress!);
-
-            int timeOutSeconds = int.TryParse(builder.Configuration["FylumClientOptions:TimeOutSeconds"], out timeOutSeconds)
-                ? timeOutSeconds : 30;
-            options.Timeout = TimeSpan.FromSeconds(timeOutSeconds);
-        });
-
-        var app = builder.Build();
-
-        if (!app.Environment.IsDevelopment())
-        {
-            app.UseExceptionHandler("/Error");
-            app.UseHsts();
-        }
-
-        app.UseHttpsRedirection();
-
-        app.UseAntiforgery();
-
-        app.MapStaticAssets();
-        app.MapRazorComponents<App>()
-            .AddInteractiveServerRenderMode();
-
-        app.Run();
-    }
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAntiforgery();
+
+app.MapStaticAssets();
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
+
+app.Run();
