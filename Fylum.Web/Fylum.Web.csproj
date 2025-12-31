@@ -5,6 +5,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MaterialTheming" />
 		<PackageReference Include="MudBlazor" />
 	</ItemGroup>
 

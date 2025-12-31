@@ -22,8 +22,8 @@ else
 {
     <MudPaper Class="pa-4">
         <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
-            <MudIcon Icon="@Icons.Material.Filled.FolderOpen" Size="Size.Large" />
-            <MudText Typo="Typo.h5">@_currentFolder.Name</MudText>
+            <MudIcon Color="Color.Secondary" Icon="@Icons.Material.Filled.FolderOpen" Size="Size.Large" />
+            <MudText Color="Color.Secondary" Typo="Typo.h5">@_currentFolder.Name</MudText>
         </MudStack>
         
         <MudDivider Class="mb-4" />
@@ -33,7 +33,7 @@ else
             {
                 @foreach (var folder in _childFolders)
                 {
-                    <MudListItem Icon="@Icons.Material.Filled.Folder"
+                    <MudListItem IconColor="Color.Secondary" Icon="@Icons.Material.Filled.Folder"
                                  OnClick="@(() => OpenFolder(folder.FolderId))">
                         @folder.Name
                     </MudListItem>
@@ -49,7 +49,7 @@ else
     @if (_currentFolder.ParentFolderId != Guid.Empty) 
     {
         <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.ArrowBack"
-                   Color="Color.Secondary" Class="mt-4"
+                   Color="Color.Primary" Class="mt-4"
                    Disabled="@(!_canNavigateUp)"
                    OnClick="NavigateUp">
             Back

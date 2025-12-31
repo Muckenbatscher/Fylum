@@ -17,6 +17,7 @@ public class Program
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents();
 
+        builder.Services.AddSingleton<IThemeProvider, ThemeProvider>();
         builder.Services.AddFylumClients(options =>
         {
             var baseAddress = builder.Configuration["FylumClientOptions:BaseAddress"]!;

@@ -1,7 +1,8 @@
 ﻿@inherits LayoutComponentBase
 @using MudBlazor
+@inject IThemeProvider ThemeProvider
 
-<MudThemeProvider />
+<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -9,6 +10,7 @@
     <MudAppBar Elevation="1">
         <MudText Typo="Typo.h5" Class="ml-3">Fylum</MudText>
         <MudSpacer />
+        <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
     </MudAppBar>
     <MudMainContent Class="pt-16 pa-4">
         <MudContainer MaxWidth="MaxWidth.Large">
@@ -16,3 +18,27 @@
         </MudContainer>
     </MudMainContent>
 </MudLayout>
+
+
+@code {
+    private bool _isDarkMode = true;
+    private MudTheme? _theme = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _theme = ThemeProvider.GetTheme();
+    }
+
+    private void DarkModeToggle()
+    {
+        _isDarkMode = !_isDarkMode;
+    }
+
+    public string DarkLightModeButtonIcon => _isDarkMode switch
+    {
+        true => Icons.Material.Rounded.AutoMode,
+        false => Icons.Material.Outlined.DarkMode,
+    };
+}

@@ -1,5 +1,5 @@
 ﻿@using MudBlazor.Utilities
-@inject IThemeProvider M2TThemeProvider
+@inject IThemeProvider ThemeProvider
 @inherits LayoutComponentBase
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
@@ -38,7 +38,7 @@
     {
         base.OnInitialized();
 
-        _theme = M2TThemeProvider.GetTheme();
+        _theme = ThemeProvider.GetTheme();
     }
 
     private void DrawerToggle()
