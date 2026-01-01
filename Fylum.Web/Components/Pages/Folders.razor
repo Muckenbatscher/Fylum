@@ -1,10 +1,8 @@
 ﻿@page "/folders"
 @page "/folders/{Id:guid}"
-@using Fylum.Client
 @using Fylum.Client.Folders
 @using Fylum.Folders.Api.Shared
 @using Fylum.Web.Services
-@inject IBrowserTokenStorage TokenStorage
 @inject IFolderClient FolderClient
 @inject ISnackbar Snackbar
 @inject NavigationManager Navigation
@@ -63,8 +61,6 @@ else
     [Parameter]
     public Guid? Id { get; set; }
 
-    private bool _isComponentReady = false; // Flag für den Status der Komponente
-
     private bool _isLoading = true;
     private GetFolderResponse? _currentFolder;
     private List<GetFolderResponse> _childFolders = new();
@@ -74,20 +70,7 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_isComponentReady)
-            await LoadFolderData();
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await TokenStorage.LoadFromStorageAsync();
-            _isComponentReady = true;
-            await LoadFolderData();
-
-            StateHasChanged();
-        }
+        await LoadFolderData();
     }
 
     private async Task LoadFolderData()

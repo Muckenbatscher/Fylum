@@ -1,5 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using Fylum.Web.Services
+@inherits LayoutComponentBase
 @inject IThemeProvider ThemeProvider
+@inject IBrowserTokenStorage TokenStorage
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
 <MudPopoverProvider />
@@ -17,7 +19,16 @@
         <NavMenu />
     </MudDrawer>
     <MudMainContent Class="pt-16 pa-4">
-        @Body
+        @if (_isAuthLoaded)
+        {
+            @Body
+        }
+        else
+        {
+            <div class="d-flex justify-center mt-10">
+                <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+            </div>
+        }
     </MudMainContent>
 </MudLayout>
 
@@ -30,8 +41,11 @@
 
 @code {
     private bool _drawerOpen = true;
+
     private bool _isDarkMode = true;
     private MudTheme? _theme = null;
+
+    private bool _isAuthLoaded = false;
 
     protected override void OnInitialized()
     {
@@ -55,6 +69,16 @@
         true => Icons.Material.Rounded.AutoMode,
         false => Icons.Material.Outlined.DarkMode,
     };
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await TokenStorage.LoadFromStorageAsync(); 
+            _isAuthLoaded = true;
+            StateHasChanged();
+        }
+    }
 }
 
 
