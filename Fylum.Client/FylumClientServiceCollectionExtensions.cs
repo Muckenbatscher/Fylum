@@ -23,31 +23,58 @@ public static class FylumClientServiceCollectionExtensions
         {
             services.Configure(configureClientOptions);
 
-            services.AddSingleton<ITokenStorage>(tokenStorageFactory);
+            services.AddScoped<ITokenStorage>(tokenStorageFactory);
 
-            services.AddSingleton<ITokenService, TokenService>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddTransient<ITokenExpirationValidator, TokenExpirationValidator>();
 
-            services.AddTransient<AccessTokenAuthHeaderHandler>();
-            services.AddTransient<RefreshTokenAuthHeaderHandler>();
+            services.AddScoped<AccessTokenAuthHeaderHandler>();
+            services.AddScoped<RefreshTokenAuthHeaderHandler>();
 
             services.AddConfiguredHttpClient<IAuthClient, AuthClient>();
-            services.AddConfiguredHttpClient<IRefreshTokenClient, RefreshTokenClient>()
-                .AddHttpMessageHandler<RefreshTokenAuthHeaderHandler>();
 
-            services.AddConfiguredAccessTokenHttpClient<IFolderClient, FolderClient>();
+            services.AddScopedTokenMessageHandlerClient<IRefreshTokenClient, RefreshTokenAuthHeaderHandler>(
+                (serviceProvider, httpClient) => new RefreshTokenClient(httpClient));
+
+            services.AddScopedAccessTokenMessageHandlerClient<IFolderClient>(
+                (serviceProvider, httpClient) => new FolderClient(httpClient));
 
             return services;
         }
 
-        private IHttpClientBuilder AddConfiguredAccessTokenHttpClient<TClient, TImplementation>()
-            where TImplementation : class, TClient
+        private IServiceCollection AddScopedAccessTokenMessageHandlerClient<TClient>(Func<IServiceProvider, HttpClient, TClient> clientFactory)
+             where TClient : class
+        {
+            return services.AddScopedTokenMessageHandlerClient<TClient, AccessTokenAuthHeaderHandler>(clientFactory);
+        }
+
+        private IServiceCollection AddScopedTokenMessageHandlerClient<TClient, THandler>(Func<IServiceProvider, HttpClient, TClient> clientFactory)
+            where THandler : DelegatingHandler
             where TClient : class
         {
-            return services
-                .AddConfiguredHttpClient<TClient, TImplementation>()
-                .AddHttpMessageHandler<AccessTokenAuthHeaderHandler>();
+            string clientName = typeof(TClient).Name;
+            services.AddHttpClient(clientName);
+
+            return services.AddScoped<TClient>(sp =>
+            {
+                var options = sp.GetRequiredService<IOptions<ClientOptions>>().Value;
+                var authHandler = sp.GetRequiredService<THandler>();
+
+                var handlerFactory = sp.GetRequiredService<IHttpMessageHandlerFactory>();
+                var innerHandler = handlerFactory.CreateHandler(clientName);
+
+                authHandler.InnerHandler = innerHandler;
+
+                var httpClient = new HttpClient(authHandler)
+                {
+                    BaseAddress = options.BaseUri,
+                    Timeout = options.Timeout
+                };
+
+                return clientFactory(sp, httpClient);
+            });
         }
+
         private IHttpClientBuilder AddConfiguredHttpClient<TClient, TImplementation>()
             where TClient : class
             where TImplementation : class, TClient
