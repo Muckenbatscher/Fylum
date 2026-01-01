@@ -5,7 +5,7 @@ using MaterialTheming.MaterialDesign;
 using MudBlazor;
 using MudBlazor.Utilities;
 
-namespace Fylum.Migrations.Web;
+namespace Fylum.Web;
 
 public class ThemeProvider : IThemeProvider
 {

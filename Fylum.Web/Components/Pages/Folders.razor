@@ -1,0 +1,118 @@
+﻿@page "/folders"
+@page "/folders/{Id:guid}"
+@using Fylum.Client.Folders
+@using Fylum.Folders.Api.Shared
+@using Fylum.Web.Services
+@inject IFolderClient FolderClient
+@inject ISnackbar Snackbar
+@inject NavigationManager Navigation
+
+<MudText Typo="Typo.h4" Class="mb-4">Browse folders</MudText>
+
+@if (_isLoading)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
+else if (_currentFolder == null)
+{
+    <MudAlert Severity="Severity.Warning">No folder found or an error occured while loading.</MudAlert>
+    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="NavigateToRoot">Back to root folder</MudButton>
+}
+else
+{
+    <MudPaper Class="pa-4">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+            <MudIcon Color="Color.Secondary" Icon="@Icons.Material.Filled.FolderOpen" Size="Size.Large" />
+            <MudText Color="Color.Secondary" Typo="Typo.h5">@_currentFolder.Name</MudText>
+        </MudStack>
+        
+        <MudDivider Class="mb-4" />
+
+        <MudList T="object">
+            @if (_childFolders != null && _childFolders.Any())
+            {
+                @foreach (var folder in _childFolders)
+                {
+                    <MudListItem IconColor="Color.Secondary" Icon="@Icons.Material.Filled.Folder"
+                                 OnClick="@(() => OpenFolder(folder.FolderId))">
+                        @folder.Name
+                    </MudListItem>
+                }
+            }
+            else
+            {
+                <MudText Typo="Typo.body2" Class="pa-4 text-muted">This folder is empty.</MudText>
+            }
+        </MudList>
+    </MudPaper>
+    
+    @if (_currentFolder.ParentFolderId != Guid.Empty) 
+    {
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.ArrowBack"
+                   Color="Color.Primary" Class="mt-4"
+                   Disabled="@(!_canNavigateUp)"
+                   OnClick="NavigateUp">
+            Back
+        </MudButton>
+    }
+}
+
+@code {
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    private bool _isLoading = true;
+    private GetFolderResponse? _currentFolder;
+    private List<GetFolderResponse> _childFolders = new();
+
+    private bool _canNavigateUp
+        => _currentFolder != null && _currentFolder.ParentFolderId != Guid.Empty;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadFolderData();
+    }
+
+    private async Task LoadFolderData()
+    {
+        _isLoading = true; 
+        StateHasChanged();
+        try
+        {
+            if (Id.HasValue)
+                _currentFolder = await FolderClient.GetFolderByIdAsync(Id.Value);
+            else
+                _currentFolder = await FolderClient.GetRootFolderAsync();
+
+            if (_currentFolder != null)
+            {
+                var childrenResponse = await FolderClient.GetChildFoldersAsync(_currentFolder.FolderId);
+                _childFolders = childrenResponse.Folders.ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private void OpenFolder(Guid folderId)
+    {
+        Navigation.NavigateTo($"/folders/{folderId}");
+    }
+
+    private void NavigateUp()
+    {
+        if (_currentFolder != null && _currentFolder.ParentFolderId != Guid.Empty)
+            Navigation.NavigateTo($"/folders/{_currentFolder.ParentFolderId}");
+    }
+
+    private void NavigateToRoot()
+    {
+        Navigation.NavigateTo("/folders");
+    }
+}
