@@ -6,5 +6,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Fylum.Migrations.Client\Fylum.Migrations.Client.csproj" />
     <ProjectReference Include="..\Fylum.ServiceDefaults\Fylum.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Fylum.Web.MaterialTheming\Fylum.Web.MaterialTheming.csproj" />
   </ItemGroup>
 </Project>

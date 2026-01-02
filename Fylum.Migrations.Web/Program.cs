@@ -1,6 +1,7 @@
 using Fylum.Migrations.Client;
 using Fylum.Migrations.Web;
 using Fylum.Migrations.Web.Components;
+using Fylum.Web.MaterialTheming;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddMudServices();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddMaterialThemeProvider();
 builder.Services.AddSingleton<IThemeProvider, ThemeProvider>();
 builder.Services.AddMigrationClient(options =>
 {

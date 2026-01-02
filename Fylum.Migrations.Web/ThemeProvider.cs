@@ -1,6 +1,6 @@
-﻿using MaterialTheming;
+﻿using Fylum.Web.MaterialTheming;
+using MaterialTheming;
 using MaterialTheming.ColorDefinitions;
-using MaterialTheming.Creation;
 using MaterialTheming.MaterialDesign;
 using MudBlazor;
 using MudBlazor.Utilities;
@@ -9,21 +9,22 @@ namespace Fylum.Migrations.Web;
 
 public class ThemeProvider : IThemeProvider
 {
+    private readonly IMaterialThemeProvider _themeProvider;
+
+    public ThemeProvider(IMaterialThemeProvider themeProvider)
+    {
+        _themeProvider = themeProvider;
+    }
+
     public MudTheme GetTheme()
     {
-        var color = "#EE82EE";
-
-        var themeBuilder = ThemeBuilder.Create()
-            .WithPrimaryColor(c => c.WithBaseColor(color))
-            .WithContrastLevel(ContrastLevel.Normal);
-
         var paletteDark = new PaletteDark();
-        var darkTheme = themeBuilder.WithMode(ThemeMode.Dark).Build();
-        ApplyMaterialThemeToPalette(darkTheme, paletteDark);
+        var darkTheme = _themeProvider.GetTheme(ThemeMode.Dark);
+        ApplyM2TThemeToPalette(darkTheme, paletteDark);
 
         var paletteLight = new PaletteLight();
-        var lightTheme = themeBuilder.WithMode(ThemeMode.Light).Build();
-        ApplyMaterialThemeToPalette(lightTheme, paletteLight);
+        var lightTheme = _themeProvider.GetTheme(ThemeMode.Light);
+        ApplyM2TThemeToPalette(lightTheme, paletteLight);
 
         return new MudTheme()
         {

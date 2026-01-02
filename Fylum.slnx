@@ -10,12 +10,14 @@
     <Project Path="Fylum.ServiceDefaults/Fylum.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/Source/Api/" />
-  <Folder Name="/Source/Api/Fylum/">
-    <Project Path="Fylum.Api.Shared/Fylum.Api.Shared.csproj" />
-    <Project Path="Fylum.Api/Fylum.Api.csproj" />
+  <Folder Name="/Source/Api/Common/">
     <Project Path="Fylum.Application/Fylum.Application.csproj" />
     <Project Path="Fylum.Domain/Fylum.Domain.csproj" />
     <Project Path="Fylum.Postgres.Shared/Fylum.Postgres.Shared.csproj" />
+  </Folder>
+  <Folder Name="/Source/Api/Fylum/">
+    <Project Path="Fylum.Api.Shared/Fylum.Api.Shared.csproj" />
+    <Project Path="Fylum.Api/Fylum.Api.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Fylum.Folders/">
     <Project Path="Fylum.Folders.Api.Shared/Fylum.Folders.Api.Shared.csproj" Id="752150c5-88ff-4cc4-8157-c2be7980f817" />
@@ -40,6 +42,9 @@
     <Project Path="Fylum.Migrations.Provider/Fylum.Migrations.Provider.csproj" />
   </Folder>
   <Folder Name="/Source/Client/" />
+  <Folder Name="/Source/Client/Common/">
+    <Project Path="Fylum.Web.MaterialTheming/Fylum.Web.MaterialTheming.csproj" Id="76fc7fd8-da7b-4567-81d0-db0776d29e83" />
+  </Folder>
   <Folder Name="/Source/Client/Fylum/">
     <Project Path="Fylum.Client.Cli/Fylum.Client.Cli.csproj" />
     <Project Path="Fylum.Client/Fylum.Client.csproj" />
