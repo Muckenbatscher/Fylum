@@ -19,11 +19,11 @@ public class ThemeProvider : IThemeProvider
 
         var paletteDark = new PaletteDark();
         var darkTheme = themeBuilder.WithMode(ThemeMode.Dark).Build();
-        ApplyM2TThemeToPalette(darkTheme, paletteDark);
+        ApplyMaterialThemeToPalette(darkTheme, paletteDark);
 
         var paletteLight = new PaletteLight();
         var lightTheme = themeBuilder.WithMode(ThemeMode.Light).Build();
-        ApplyM2TThemeToPalette(lightTheme, paletteLight);
+        ApplyMaterialThemeToPalette(lightTheme, paletteLight);
 
         return new MudTheme()
         {
@@ -33,26 +33,26 @@ public class ThemeProvider : IThemeProvider
         };
     }
 
-    private void ApplyM2TThemeToPalette(Theme m2tTheme, Palette palette)
+    private void ApplyMaterialThemeToPalette(Theme materialTheme, Palette palette)
     {
-        palette.Primary = GetFromRgbColor(m2tTheme.Colors.Primary);
-        palette.PrimaryContrastText = GetFromRgbColor(m2tTheme.Colors.OnPrimary);
-        palette.Secondary = GetFromRgbColor(m2tTheme.Colors.Secondary);
-        palette.SecondaryContrastText = GetFromRgbColor(m2tTheme.Colors.OnSecondary);
-        palette.Tertiary = GetFromRgbColor(m2tTheme.Colors.Tertiary);
-        palette.TertiaryContrastText = GetFromRgbColor(m2tTheme.Colors.OnTertiary);
-        palette.Error = GetFromRgbColor(m2tTheme.Colors.Error);
-        palette.ErrorContrastText = GetFromRgbColor(m2tTheme.Colors.OnError);
-        palette.Background = GetFromRgbColor(m2tTheme.Colors.Surface);
-        palette.Surface = GetFromRgbColor(m2tTheme.Colors.Surface);
-        palette.TextPrimary = GetFromRgbColor(m2tTheme.Colors.OnSurface);
-        palette.TextSecondary = GetFromRgbColor(m2tTheme.Colors.OnSurfaceVariant);
-        palette.TextDisabled = GetFromRgbColor(m2tTheme.Colors.OnSurfaceVariant);
-        palette.DrawerBackground = GetFromRgbColor(m2tTheme.Colors.SurfaceContainer);
-        palette.DrawerText = GetFromRgbColor(m2tTheme.Colors.OnSurface);
-        palette.DrawerIcon = GetFromRgbColor(m2tTheme.Colors.OnSurface);
-        palette.AppbarBackground = GetFromRgbColor(m2tTheme.Colors.SurfaceContainerHigh);
-        palette.AppbarText = GetFromRgbColor(m2tTheme.Colors.OnSurface);
+        palette.Primary = GetFromRgbColor(materialTheme.Colors.Primary);
+        palette.PrimaryContrastText = GetFromRgbColor(materialTheme.Colors.OnPrimary);
+        palette.Secondary = GetFromRgbColor(materialTheme.Colors.Secondary);
+        palette.SecondaryContrastText = GetFromRgbColor(materialTheme.Colors.OnSecondary);
+        palette.Tertiary = GetFromRgbColor(materialTheme.Colors.Tertiary);
+        palette.TertiaryContrastText = GetFromRgbColor(materialTheme.Colors.OnTertiary);
+        palette.Error = GetFromRgbColor(materialTheme.Colors.Error);
+        palette.ErrorContrastText = GetFromRgbColor(materialTheme.Colors.OnError);
+        palette.Background = GetFromRgbColor(materialTheme.Colors.Surface);
+        palette.Surface = GetFromRgbColor(materialTheme.Colors.Surface);
+        palette.TextPrimary = GetFromRgbColor(materialTheme.Colors.OnSurface);
+        palette.TextSecondary = GetFromRgbColor(materialTheme.Colors.OnSurfaceVariant);
+        palette.TextDisabled = GetFromRgbColor(materialTheme.Colors.OnSurfaceVariant);
+        palette.DrawerBackground = GetFromRgbColor(materialTheme.Colors.SurfaceContainer);
+        palette.DrawerText = GetFromRgbColor(materialTheme.Colors.OnSurface);
+        palette.DrawerIcon = GetFromRgbColor(materialTheme.Colors.OnSurface);
+        palette.AppbarBackground = GetFromRgbColor(materialTheme.Colors.SurfaceContainerHigh);
+        palette.AppbarText = GetFromRgbColor(materialTheme.Colors.OnSurface);
     }
 
     private MudColor GetFromRgbColor(RgbColor color)
