@@ -32,20 +32,20 @@ else
             <MudTd>
                 @if (context.IsAlreadyPerformed)
                 {
-                    <MudChip T="string" Color="Color.Secondary">Performed</MudChip>
-                    <MudText Inline="true" Typo="Typo.body2" Class="mud-text-secondary">@context.PerformedUtc!.Value.ToLocalTime().ToString("G")</MudText>
+                    <MudChip T="string" Class=@MaterialThemingClasses.SecondaryContainer>Performed</MudChip>
+                    <MudText Inline="true" Typo="Typo.body2" Class=@MaterialThemingClasses.SurfaceVariant>@context.PerformedUtc!.Value.ToLocalTime().ToString("G")</MudText>
                 }
                 else
                 {
-                    <MudChip T="string" Color="Color.Error">Not Performed</MudChip>
+                    <MudChip T="string" Class=@MaterialThemingClasses.Error>Not Performed</MudChip>
                 }
             </MudTd>
             <MudTd>
                 @if (!context.IsAlreadyPerformed)
                 {
                     <MudButton Disabled="@_currentlyPerformingMigration" 
-                        Variant="Variant.Filled" Color="Color.Primary" 
-                        Class="m3-primary-container"
+                        Variant="Variant.Filled" 
+                        Class=@MaterialThemingClasses.PrimaryContainer
                         OnClick="() => PerformUpToMigration(context.MigrationId)">
                         Perform up to
                     </MudButton>

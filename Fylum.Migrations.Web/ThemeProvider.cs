@@ -20,11 +20,11 @@ public class ThemeProvider : IThemeProvider
     {
         var paletteDark = new PaletteDark();
         var darkTheme = _themeProvider.GetTheme(ThemeMode.Dark);
-        ApplyM2TThemeToPalette(darkTheme, paletteDark);
+        ApplyMaterialThemeToPalette(darkTheme, paletteDark);
 
         var paletteLight = new PaletteLight();
         var lightTheme = _themeProvider.GetTheme(ThemeMode.Light);
-        ApplyM2TThemeToPalette(lightTheme, paletteLight);
+        ApplyMaterialThemeToPalette(lightTheme, paletteLight);
 
         return new MudTheme()
         {

@@ -1,5 +1,6 @@
 ﻿@using System.Text
 @using global::MaterialTheming
+@using global::MaterialTheming.ColorDefinitions
 
 @if (Theme != null)
 {
@@ -8,12 +9,12 @@
             @foreach (var cssVar in GetCssVariables())
             {
                 @cssVar
-            };
+            }
         }
 
-        .m3-primary-container {
-            background-color: var(--m3-primary-container) !important;
-            color: var(--m3-on-primary-container) !important;
+        @foreach (var cssClass in GetCssClasses())
+        {
+            @cssClass
         }
     </style>
 }
@@ -22,18 +23,88 @@
     [Parameter]
     public Theme Theme { get; set; } = new Theme();
 
-    private IList<string> GetCssVariables()
+    private IEnumerable<string> GetCssVariables()
     {
-        var cssVariables = new List<string>
-        {
-            $"--m3-primary: {Theme.Colors.Primary.CssRgbString};",
-            $"--m3-secondary: {Theme.Colors.Secondary.CssRgbString};",
-            $"--m3-tertiary: {Theme.Colors.Tertiary.CssRgbString};",
+        // Primary
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Primary, Theme.Colors.Primary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnPrimary, Theme.Colors.OnPrimary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.PrimaryContainer, Theme.Colors.PrimaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnPrimaryContainer, Theme.Colors.OnPrimaryContainer);
+        // Secondary
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Secondary, Theme.Colors.Secondary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSecondary, Theme.Colors.OnSecondary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SecondaryContainer, Theme.Colors.SecondaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSecondaryContainer, Theme.Colors.OnSecondaryContainer);
+        // Tertiary
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Tertiary, Theme.Colors.Tertiary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnTertiary, Theme.Colors.OnTertiary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.TertiaryContainer, Theme.Colors.TertiaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnTertiaryContainer, Theme.Colors.OnTertiaryContainer);
+        // Error
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Error, Theme.Colors.Error);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnError, Theme.Colors.OnError);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.ErrorContainer, Theme.Colors.ErrorContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnErrorContainer, Theme.Colors.OnErrorContainer);
+        // Surface
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Surface, Theme.Colors.Surface);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSurface, Theme.Colors.OnSurface);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSurfaceVariant, Theme.Colors.OnSurfaceVariant);
+        // Surface Container
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerLowest, Theme.Colors.SurfaceContainerLowest);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerLow, Theme.Colors.SurfaceContainerLow);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainer, Theme.Colors.SurfaceContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerHigh, Theme.Colors.SurfaceContainerHigh);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerHighest, Theme.Colors.SurfaceContainerHighest);
+    }
 
-            $"--m3-primary-container: {Theme.Colors.PrimaryContainer.CssRgbString};",
-            $"--m3-on-primary-container: {Theme.Colors.OnPrimaryContainer.CssRgbString};",
+    private string GetCssVariableFromRgbColor(string variableName, RgbColor rgbColor)
+        => $"{variableName}: {rgbColor.CssRgbString};";
 
-        };
-        return cssVariables;
+
+    private IEnumerable<string> GetCssClasses()
+    {
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.Primary, 
+            MaterialThemingVariables.Primary, MaterialThemingVariables.OnPrimary);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.PrimaryContainer,
+            MaterialThemingVariables.PrimaryContainer, MaterialThemingVariables.OnPrimaryContainer);
+
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.Secondary,
+            MaterialThemingVariables.Secondary, MaterialThemingVariables.OnSecondary);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.SecondaryContainer,
+            MaterialThemingVariables.SecondaryContainer, MaterialThemingVariables.OnSecondaryContainer);
+            
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.Tertiary, 
+            MaterialThemingVariables.Tertiary, MaterialThemingVariables.OnTertiary);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.TertiaryContainer,
+            MaterialThemingVariables.TertiaryContainer, MaterialThemingVariables.OnTertiaryContainer);
+
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.Error,
+            MaterialThemingVariables.Error, MaterialThemingVariables.OnError);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.ErrorContainer,
+            MaterialThemingVariables.ErrorContainer, MaterialThemingVariables.OnErrorContainer);
+
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.Surface,
+            MaterialThemingVariables.Surface, MaterialThemingVariables.OnSurface);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.SurfaceVariant,
+            MaterialThemingVariables.Surface, MaterialThemingVariables.OnSurfaceVariant);
+
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.SurfaceContainerLowest,
+            MaterialThemingVariables.SurfaceContainerLowest, MaterialThemingVariables.OnSurface);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.SurfaceContainerLow,
+            MaterialThemingVariables.SurfaceContainerLow, MaterialThemingVariables.OnSurfaceVariant);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.SurfaceContainer,
+            MaterialThemingVariables.SurfaceContainer, MaterialThemingVariables.OnSurfaceVariant);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.SurfaceContainerHigh,
+            MaterialThemingVariables.SurfaceContainerHigh, MaterialThemingVariables.OnSurfaceVariant);
+        yield return GetCssClassFromColorVariables(MaterialThemingClasses.SurfaceContainerHighest,
+            MaterialThemingVariables.SurfaceContainerHighest, MaterialThemingVariables.OnSurfaceVariant);
+    }
+
+    private string GetCssClassFromColorVariables(string className, string backgroundVariable, string onBackgroundVariable)
+    {
+        return @$".{className} {{
+            background-color: var({backgroundVariable}) !important;
+            color: var({onBackgroundVariable}) !important;
+    }}";
     }
 }
