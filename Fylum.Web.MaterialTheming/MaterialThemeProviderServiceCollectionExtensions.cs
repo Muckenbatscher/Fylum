@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MaterialTheming.Creation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Web.MaterialTheming;
 
@@ -8,8 +9,21 @@ public static class MaterialThemeProviderServiceCollectionExtensions
     {
         public IServiceCollection AddMaterialThemeProvider()
         {
-            services.AddSingleton<IMaterialThemeProvider, MaterialThemeProvider>();
-            return services;
+            return services.AddMaterialThemeProvider(new MaterialThemeProvider());
+        }
+        public IServiceCollection AddMaterialThemeProvider(IMaterialThemeProvider materialThemeProvider)
+        {
+            return services.AddMaterialThemeProvider(sp => materialThemeProvider);
+        }
+        public IServiceCollection AddMaterialThemeProvider(Func<IServiceProvider, IMaterialThemeProvider> materialThemeProviderFactory)
+        {
+            return services.AddSingleton(materialThemeProviderFactory);
+        }
+
+        public IServiceCollection AddMaterialThemeProviderFromConfiguredThemeBuilder(IThemeBuilder themeBuilder)
+        {
+            var themeProvider = new MaterialThemeProviderFromConfiguredThemeBuilder(themeBuilder);
+            return services.AddMaterialThemeProvider(themeProvider);
         }
     }
 }
