@@ -20,11 +20,11 @@
     <Project Path="Fylum.Api/Fylum.Api.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Fylum.Folders/">
-    <Project Path="Fylum.Folders.Api.Shared/Fylum.Folders.Api.Shared.csproj" Id="752150c5-88ff-4cc4-8157-c2be7980f817" />
-    <Project Path="Fylum.Folders.Api/Fylum.Folders.Api.csproj" Id="3e5da428-4fc1-4b0d-bce5-13740fa411cf" />
-    <Project Path="Fylum.Folders.Application/Fylum.Folders.Application.csproj" Id="7b166dbb-0c1f-4395-9127-aade3c9f3324" />
+    <Project Path="Fylum.Folders.Api.Shared/Fylum.Folders.Api.Shared.csproj" />
+    <Project Path="Fylum.Folders.Api/Fylum.Folders.Api.csproj" />
+    <Project Path="Fylum.Folders.Application/Fylum.Folders.Application.csproj" />
     <Project Path="Fylum.Folders.Domain/Fylum.Folders.Domain.csproj" />
-    <Project Path="Fylum.Folders.Postgres/Fylum.Folders.Postgres.csproj" Id="1465c334-73f6-4a59-b78c-9011f617ca15" />
+    <Project Path="Fylum.Folders.Postgres/Fylum.Folders.Postgres.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Fylum.Users/">
     <Project Path="Fylum.Users.Api.Shared/Fylum.Users.Api.Shared.csproj" />
@@ -43,7 +43,7 @@
   </Folder>
   <Folder Name="/Source/Client/" />
   <Folder Name="/Source/Client/Common/">
-    <Project Path="Fylum.Web.MaterialTheming/Fylum.Web.MaterialTheming.csproj" Id="76fc7fd8-da7b-4567-81d0-db0776d29e83" />
+    <Project Path="Fylum.Web.MaterialTheming/Fylum.Web.MaterialTheming.csproj" />
   </Folder>
   <Folder Name="/Source/Client/Fylum/">
     <Project Path="Fylum.Client.Cli/Fylum.Client.Cli.csproj" />
@@ -57,10 +57,10 @@
   </Folder>
   <Folder Name="/Test/" />
   <Folder Name="/Test/Api/">
-    <Project Path="Fylum.EndToEnd/Fylum.EndToEnd.csproj" Id="83a6eebb-9371-46ea-a7b0-ae58f3a8689f" />
+    <Project Path="Fylum.EndToEnd/Fylum.EndToEnd.csproj" />
     <Project Path="Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />
   </Folder>
   <Folder Name="/Test/Api/Fylum.Folders/">
-    <Project Path="Fylum.Folders.Domain.Tests/Fylum.Folders.Domain.Tests.csproj" Id="2b70614a-5551-4c97-ad0b-6f2761458735" />
+    <Project Path="Fylum.Folders.Domain.Tests/Fylum.Folders.Domain.Tests.csproj" />
   </Folder>
 </Solution>
