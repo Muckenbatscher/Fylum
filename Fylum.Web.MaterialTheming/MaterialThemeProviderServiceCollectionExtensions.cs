@@ -20,7 +20,7 @@ public static class MaterialThemeProviderServiceCollectionExtensions
             return services.AddSingleton(materialThemeProviderFactory);
         }
 
-        public IServiceCollection AddMaterialThemeProviderFromConfiguredThemeBuilder(IThemeBuilder themeBuilder)
+        public IServiceCollection AddMaterialThemeProviderFromConfiguredThemeBuilder(IColorPaletteThemeBuilder themeBuilder)
         {
             var themeProvider = new MaterialThemeProviderFromConfiguredThemeBuilder(themeBuilder);
             return services.AddMaterialThemeProvider(themeProvider);

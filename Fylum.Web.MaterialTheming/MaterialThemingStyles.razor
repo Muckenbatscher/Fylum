@@ -1,12 +1,11 @@
 ﻿@using System.Text
 @using global::MaterialTheming
-@using global::MaterialTheming.ColorDefinitions
 
-@if (Theme != null)
+@if (ThemeColors != null)
 {
     <style>
         :root {
-            @foreach (var cssVar in GetCssVariables())
+            @foreach (var cssVar in GetCssVariables(ThemeColors))
             {
                 @cssVar
             }
@@ -21,40 +20,40 @@
 
 @code {
     [Parameter]
-    public Theme Theme { get; set; } = new Theme();
+    public ThemeColors? ThemeColors { get; set; }
 
-    private IEnumerable<string> GetCssVariables()
+    private IEnumerable<string> GetCssVariables(ThemeColors themeColors)
     {
         // Primary
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Primary, Theme.Colors.Primary);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnPrimary, Theme.Colors.OnPrimary);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.PrimaryContainer, Theme.Colors.PrimaryContainer);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnPrimaryContainer, Theme.Colors.OnPrimaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Primary, themeColors.Primary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnPrimary, themeColors.OnPrimary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.PrimaryContainer, themeColors.PrimaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnPrimaryContainer, themeColors.OnPrimaryContainer);
         // Secondary
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Secondary, Theme.Colors.Secondary);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSecondary, Theme.Colors.OnSecondary);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SecondaryContainer, Theme.Colors.SecondaryContainer);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSecondaryContainer, Theme.Colors.OnSecondaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Secondary, themeColors.Secondary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSecondary, themeColors.OnSecondary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SecondaryContainer, themeColors.SecondaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSecondaryContainer, themeColors.OnSecondaryContainer);
         // Tertiary
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Tertiary, Theme.Colors.Tertiary);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnTertiary, Theme.Colors.OnTertiary);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.TertiaryContainer, Theme.Colors.TertiaryContainer);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnTertiaryContainer, Theme.Colors.OnTertiaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Tertiary, themeColors.Tertiary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnTertiary, themeColors.OnTertiary);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.TertiaryContainer, themeColors.TertiaryContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnTertiaryContainer, themeColors.OnTertiaryContainer);
         // Error
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Error, Theme.Colors.Error);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnError, Theme.Colors.OnError);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.ErrorContainer, Theme.Colors.ErrorContainer);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnErrorContainer, Theme.Colors.OnErrorContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Error, themeColors.Error);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnError, themeColors.OnError);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.ErrorContainer, themeColors.ErrorContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnErrorContainer, themeColors.OnErrorContainer);
         // Surface
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Surface, Theme.Colors.Surface);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSurface, Theme.Colors.OnSurface);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSurfaceVariant, Theme.Colors.OnSurfaceVariant);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.Surface, themeColors.Surface);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSurface, themeColors.OnSurface);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.OnSurfaceVariant, themeColors.OnSurfaceVariant);
         // Surface Container
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerLowest, Theme.Colors.SurfaceContainerLowest);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerLow, Theme.Colors.SurfaceContainerLow);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainer, Theme.Colors.SurfaceContainer);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerHigh, Theme.Colors.SurfaceContainerHigh);
-        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerHighest, Theme.Colors.SurfaceContainerHighest);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerLowest, themeColors.SurfaceContainerLowest);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerLow, themeColors.SurfaceContainerLow);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainer, themeColors.SurfaceContainer);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerHigh, themeColors.SurfaceContainerHigh);
+        yield return GetCssVariableFromRgbColor(MaterialThemingVariables.SurfaceContainerHighest, themeColors.SurfaceContainerHighest);
     }
 
     private string GetCssVariableFromRgbColor(string variableName, RgbColor rgbColor)

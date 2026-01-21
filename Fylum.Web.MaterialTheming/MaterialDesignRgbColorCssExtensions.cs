@@ -1,4 +1,4 @@
-﻿using MaterialTheming.ColorDefinitions;
+﻿using MaterialTheming;
 
 namespace Fylum.Web.MaterialTheming;
 

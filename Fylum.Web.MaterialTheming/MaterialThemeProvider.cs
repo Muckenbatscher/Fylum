@@ -1,21 +1,21 @@
 ﻿using MaterialTheming;
 using MaterialTheming.Creation;
-using MaterialTheming.MaterialDesign;
 
 namespace Fylum.Web.MaterialTheming;
 
 public class MaterialThemeProvider : IMaterialThemeProvider
 {
-    private readonly IThemeBuilder _configuredThemeBuilder;
+    private readonly IColorPaletteThemeBuilder _configuredThemeBuilder;
 
     public MaterialThemeProvider()
     {
-        _configuredThemeBuilder = ThemeBuilder.Create()
-            .WithPrimaryColor(c => c.WithBaseColorHue(90))
+        var sourceColor = HctColor.From(90, 50, 50);
+        _configuredThemeBuilder = ThemeBuilder
+            .CreateFromSourceColor(sourceColor)
             .WithContrastLevel(ContrastLevel.Normal);
     }
 
-    public Theme GetTheme(ThemeMode themeMode)
+    public ThemeColors GetThemeColors(ThemeMode themeMode)
     {
         return _configuredThemeBuilder
             .WithMode(themeMode)

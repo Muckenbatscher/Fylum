@@ -1,7 +1,5 @@
 ﻿using Fylum.Web.MaterialTheming;
 using MaterialTheming;
-using MaterialTheming.ColorDefinitions;
-using MaterialTheming.MaterialDesign;
 using MudBlazor;
 using MudBlazor.Utilities;
 
@@ -19,11 +17,11 @@ public class ThemeProvider : IThemeProvider
     public MudTheme GetTheme()
     {
         var paletteDark = new PaletteDark();
-        var darkTheme = _themeProvider.GetTheme(ThemeMode.Dark);
+        var darkTheme = _themeProvider.GetThemeColors(ThemeMode.Dark);
         ApplyMaterialThemeToPalette(darkTheme, paletteDark);
 
         var paletteLight = new PaletteLight();
-        var lightTheme = _themeProvider.GetTheme(ThemeMode.Light);
+        var lightTheme = _themeProvider.GetThemeColors(ThemeMode.Light);
         ApplyMaterialThemeToPalette(lightTheme, paletteLight);
 
         return new MudTheme()
@@ -34,26 +32,26 @@ public class ThemeProvider : IThemeProvider
         };
     }
 
-    private void ApplyMaterialThemeToPalette(Theme materialTheme, Palette palette)
+    private void ApplyMaterialThemeToPalette(ThemeColors materialThemeColors, Palette palette)
     {
-        palette.Primary = GetFromRgbColor(materialTheme.Colors.Primary);
-        palette.PrimaryContrastText = GetFromRgbColor(materialTheme.Colors.OnPrimary);
-        palette.Secondary = GetFromRgbColor(materialTheme.Colors.Secondary);
-        palette.SecondaryContrastText = GetFromRgbColor(materialTheme.Colors.OnSecondary);
-        palette.Tertiary = GetFromRgbColor(materialTheme.Colors.Tertiary);
-        palette.TertiaryContrastText = GetFromRgbColor(materialTheme.Colors.OnTertiary);
-        palette.Error = GetFromRgbColor(materialTheme.Colors.Error);
-        palette.ErrorContrastText = GetFromRgbColor(materialTheme.Colors.OnError);
-        palette.Background = GetFromRgbColor(materialTheme.Colors.Surface);
-        palette.Surface = GetFromRgbColor(materialTheme.Colors.Surface);
-        palette.TextPrimary = GetFromRgbColor(materialTheme.Colors.OnSurface);
-        palette.TextSecondary = GetFromRgbColor(materialTheme.Colors.OnSurfaceVariant);
-        palette.TextDisabled = GetFromRgbColor(materialTheme.Colors.OnSurfaceVariant);
-        palette.DrawerBackground = GetFromRgbColor(materialTheme.Colors.SurfaceContainer);
-        palette.DrawerText = GetFromRgbColor(materialTheme.Colors.OnSurface);
-        palette.DrawerIcon = GetFromRgbColor(materialTheme.Colors.OnSurface);
-        palette.AppbarBackground = GetFromRgbColor(materialTheme.Colors.SurfaceContainerHigh);
-        palette.AppbarText = GetFromRgbColor(materialTheme.Colors.OnSurface);
+        palette.Primary = GetFromRgbColor(materialThemeColors.Primary);
+        palette.PrimaryContrastText = GetFromRgbColor(materialThemeColors.OnPrimary);
+        palette.Secondary = GetFromRgbColor(materialThemeColors.Secondary);
+        palette.SecondaryContrastText = GetFromRgbColor(materialThemeColors.OnSecondary);
+        palette.Tertiary = GetFromRgbColor(materialThemeColors.Tertiary);
+        palette.TertiaryContrastText = GetFromRgbColor(materialThemeColors.OnTertiary);
+        palette.Error = GetFromRgbColor(materialThemeColors.Error);
+        palette.ErrorContrastText = GetFromRgbColor(materialThemeColors.OnError);
+        palette.Background = GetFromRgbColor(materialThemeColors.Surface);
+        palette.Surface = GetFromRgbColor(materialThemeColors.Surface);
+        palette.TextPrimary = GetFromRgbColor(materialThemeColors.OnSurface);
+        palette.TextSecondary = GetFromRgbColor(materialThemeColors.OnSurfaceVariant);
+        palette.TextDisabled = GetFromRgbColor(materialThemeColors.OnSurfaceVariant);
+        palette.DrawerBackground = GetFromRgbColor(materialThemeColors.SurfaceContainer);
+        palette.DrawerText = GetFromRgbColor(materialThemeColors.OnSurface);
+        palette.DrawerIcon = GetFromRgbColor(materialThemeColors.OnSurface);
+        palette.AppbarBackground = GetFromRgbColor(materialThemeColors.SurfaceContainerHigh);
+        palette.AppbarText = GetFromRgbColor(materialThemeColors.OnSurface);
     }
 
     private MudColor GetFromRgbColor(RgbColor color)
