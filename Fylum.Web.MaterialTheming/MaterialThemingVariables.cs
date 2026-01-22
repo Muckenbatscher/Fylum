@@ -21,8 +21,40 @@ public class MaterialThemingVariables
     public const string OnErrorContainer = "--m3-color-on-error-container";
 
     public const string Surface = "--m3-color-surface";
+    public const string SurfaceVariant = "--m3-color-surface-variant";
     public const string OnSurface = "--m3-color-on-surface";
     public const string OnSurfaceVariant = "--m3-color-on-surface-variant";
+    public const string SurfaceDim = "--m3-color-surface-dim";
+    public const string SurfaceBright = "--m3-color-surface-bright";
+    public const string SurfaceTint = "--m3-color-surface-tint";
+
+    public const string Background = "--m3-color-background";
+    public const string OnBackground= "--m3-color-on-background";
+
+    public const string Outline = "--m3-color-outline";
+    public const string OutlineVariant = "--m3-color-outline-variant";
+
+    public const string Shadow = "--m3-color-shadow";
+    public const string Scrim = "--m3-color-scrim";
+
+    public const string InverseSurface = "--m3-color-inverse-surface";
+    public const string InverseOnSurface = "--m3-color-inverse-on-surface";
+    public const string InversePrimary = "--m3-color-inverse-primary";
+
+    public const string PrimaryFixed = "--m3-color-primary-fixed";
+    public const string OnPrimaryFixed = "--m3-color-on-primary-fixed";
+    public const string PrimaryFixedDim = "--m3-color-primary-fixed-dim";
+    public const string OnPrimaryFixedVariant = "--m3-color-on-primary-fixed-variant";
+
+    public const string SecondaryFixed = "--m3-color-secondary-fixed";
+    public const string OnSecondaryFixed = "--m3-color-on-secondary-fixed";
+    public const string SecondaryFixedDim = "--m3-color-secondary-fixed-dim";
+    public const string OnSecondaryFixedVariant = "--m3-color-on-secondary-fixed-variant";
+
+    public const string TertiaryFixed = "--m3-color-tertiary-fixed";
+    public const string OnTertiaryFixed = "--m3-color-on-tertiary-fixed";
+    public const string TertiaryFixedDim = "--m3-color-tertiary-fixed-dim";
+    public const string OnTertiaryFixedVariant = "--m3-color-on-tertiary-fixed-variant";
 
     public const string SurfaceContainerLowest = "--m3-color-surface-container-lowest";
     public const string SurfaceContainerLow = "--m3-color-surface-container-low";
