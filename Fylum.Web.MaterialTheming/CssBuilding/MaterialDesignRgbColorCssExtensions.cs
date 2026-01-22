@@ -1,6 +1,6 @@
 ﻿using MaterialTheming;
 
-namespace Fylum.Web.MaterialTheming;
+namespace Fylum.Web.MaterialTheming.CssBuilding;
 
 internal static class MaterialDesignRgbColorCssExtensions
 {

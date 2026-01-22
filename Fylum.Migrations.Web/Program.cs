@@ -11,8 +11,10 @@ builder.AddServiceDefaults();
 builder.Services.AddMudServices();
 
 // Add MaterialTheming theme providers
-builder.Services.AddMaterialThemeProviderFromThemeBuilder(
-    ThemeBuilder.CreateFromSourceColor("#00ff00"))
+var themeBuilder = ThemeBuilder
+    .CreateFromSourceColor("#9532a8")
+    .WithVariant(Variant.Expressive);
+builder.Services.AddMaterialThemeProviderFromThemeBuilder(sp => themeBuilder)
     .AddMudBlazorThemeProvider();
 
 // Add services to the container.

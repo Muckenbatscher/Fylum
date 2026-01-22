@@ -1,4 +1,4 @@
-﻿using MaterialTheming;
+﻿using Fylum.Web.MaterialTheming.CssBuilding;
 using MaterialTheming.Creation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +8,13 @@ public static class MaterialThemeProviderServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
+        public IServiceCollection AddMaterialThemeProvider(Func<IServiceProvider, IMaterialThemeProvider> materialThemeProviderFactory)
+        {
+            return services.AddTransient(materialThemeProviderFactory)
+                .AddTransient<IMaterialThemeCssVariableExtractor, MaterialThemeCssVariableExtractor>()
+                .AddTransient<IMaterialThemeCssClassBuilder, MaterialThemeCssClassBuilder>();
+        }
+
         public IServiceCollection AddMaterialThemeProvider()
         {
             return services.AddMaterialThemeProvider(new MaterialThemeProvider());
@@ -15,10 +22,6 @@ public static class MaterialThemeProviderServiceCollectionExtensions
         public IServiceCollection AddMaterialThemeProvider(IMaterialThemeProvider materialThemeProvider)
         {
             return services.AddMaterialThemeProvider(sp => materialThemeProvider);
-        }
-        public IServiceCollection AddMaterialThemeProvider(Func<IServiceProvider, IMaterialThemeProvider> materialThemeProviderFactory)
-        {
-            return services.AddSingleton(materialThemeProviderFactory);
         }
 
         public IServiceCollection AddMaterialThemeProviderFromThemeBuilder(IColorPaletteThemeBuilder themeBuilder)

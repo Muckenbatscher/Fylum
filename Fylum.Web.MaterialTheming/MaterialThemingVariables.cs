@@ -6,7 +6,7 @@ public class MaterialThemingVariables
     public const string OnPrimary = "--m3-color-on-primary";
     public const string Secondary = "--m3-color-secondary";
     public const string OnSecondary = "--m3-color-on-secondary";
-    public const string Tertiary= "--m3-color-tertiary";
+    public const string Tertiary = "--m3-color-tertiary";
     public const string OnTertiary = "--m3-color-on-tertiary";
     public const string Error = "--m3-color-error";
     public const string OnError = "--m3-color-on-error";
@@ -29,7 +29,7 @@ public class MaterialThemingVariables
     public const string SurfaceTint = "--m3-color-surface-tint";
 
     public const string Background = "--m3-color-background";
-    public const string OnBackground= "--m3-color-on-background";
+    public const string OnBackground = "--m3-color-on-background";
 
     public const string Outline = "--m3-color-outline";
     public const string OutlineVariant = "--m3-color-outline-variant";

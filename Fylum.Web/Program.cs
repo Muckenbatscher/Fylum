@@ -2,6 +2,7 @@ using Fylum.Client;
 using Fylum.Web.Components;
 using Fylum.Web.MaterialTheming;
 using Fylum.Web.Services;
+using MaterialTheming;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using MudBlazor.Services;
 
@@ -12,7 +13,10 @@ builder.AddServiceDefaults();
 builder.Services.AddMudServices();
 
 // Add MaterialTheming theme providers
-builder.Services.AddMaterialThemeProvider()
+var themeBuilder = ThemeBuilder
+    .CreateFromSourceColor("#5dc976")
+    .WithVariant(Variant.TonalSpot);
+builder.Services.AddMaterialThemeProviderFromThemeBuilder(sp => themeBuilder)
     .AddMudBlazorThemeProvider();
 
 // Add services to the container.

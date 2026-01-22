@@ -33,7 +33,7 @@ else
                 @if (context.IsAlreadyPerformed)
                 {
                     <MudChip T="string" Class=@MaterialThemingClasses.SecondaryContainer>Performed</MudChip>
-                    <MudText Inline="true" Typo="Typo.body2" Class=@MaterialThemingClasses.SurfaceVariant>@context.PerformedUtc!.Value.ToLocalTime().ToString("G")</MudText>
+                    <MudText Inline="true" Typo="Typo.body2" Class=@MaterialThemingClasses.OnSurfaceVariant>@context.PerformedUtc!.Value.ToLocalTime().ToString("G")</MudText>
                 }
                 else
                 {
