@@ -103,7 +103,7 @@
             MaterialThemingVariables.Secondary, MaterialThemingVariables.OnSecondary);
         yield return GetCssClassFromColorVariables(MaterialThemingClasses.SecondaryContainer,
             MaterialThemingVariables.SecondaryContainer, MaterialThemingVariables.OnSecondaryContainer);
-            
+
         yield return GetCssClassFromColorVariables(MaterialThemingClasses.Tertiary, 
             MaterialThemingVariables.Tertiary, MaterialThemingVariables.OnTertiary);
         yield return GetCssClassFromColorVariables(MaterialThemingClasses.TertiaryContainer,
@@ -136,6 +136,6 @@
         return @$".{className} {{
             background-color: var({backgroundVariable}) !important;
             color: var({onBackgroundVariable}) !important;
-    }}";
+        }}";
     }
 }

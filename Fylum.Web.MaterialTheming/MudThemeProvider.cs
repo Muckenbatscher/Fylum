@@ -2,24 +2,25 @@
 using MudBlazor;
 using MudBlazor.Utilities;
 
-namespace Fylum.Web;
+namespace Fylum.Web.MaterialTheming;
 
-public class ThemeProvider : IThemeProvider
+public class MudThemeProvider : IMudThemeProvider
 {
+    private readonly IMaterialThemeProvider _materialThemeProvider;
+
+    public MudThemeProvider(IMaterialThemeProvider materialThemeProvider)
+    {
+        _materialThemeProvider = materialThemeProvider;
+    }
+
     public MudTheme GetTheme()
     {
-        var sourceColor = "#EE82EE";
-
-        var themeBuilder = ThemeBuilder
-            .CreateFromSourceColor(sourceColor)
-            .WithContrastLevel(ContrastLevel.Normal);
-
         var paletteDark = new PaletteDark();
-        var darkTheme = themeBuilder.WithMode(ThemeMode.Dark).Build();
+        var darkTheme = _materialThemeProvider.GetThemeColors(ThemeMode.Dark);
         ApplyMaterialThemeColorsToPalette(darkTheme, paletteDark);
 
         var paletteLight = new PaletteLight();
-        var lightTheme = themeBuilder.WithMode(ThemeMode.Light).Build();
+        var lightTheme = _materialThemeProvider.GetThemeColors(ThemeMode.Light);
         ApplyMaterialThemeColorsToPalette(lightTheme, paletteLight);
 
         return new MudTheme()
@@ -52,7 +53,7 @@ public class ThemeProvider : IThemeProvider
         palette.AppbarText = GetFromRgbColor(materialThemeColors.OnSurface);
     }
 
-    private MudColor GetFromRgbColor(RgbColor color)
+    private static MudColor GetFromRgbColor(RgbColor color)
     {
         return new MudColor(color.Red, color.Green, color.Blue, byte.MaxValue);
     }

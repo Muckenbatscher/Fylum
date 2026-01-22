@@ -1,10 +1,10 @@
 ﻿@using MaterialTheming
-@inject IThemeProvider ThemeProvider
+@inject IMudThemeProvider ThemeProvider
 @inject IMaterialThemeProvider MaterialThemeProvider
 @inherits LayoutComponentBase
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
-<MaterialThemingStyles ThemeColors="@_materialTheme" />
+<MaterialThemingStyles ThemeColors="@_materialThemeColors" />
 
 <MudPopoverProvider />
 <MudDialogProvider />
@@ -36,7 +36,7 @@
     private bool _drawerOpen = true;
     private bool _isDarkMode = true;
     private MudTheme? _theme = null;
-    private ThemeColors? _materialTheme = null;
+    private ThemeColors? _materialThemeColors = null;
 
     protected override void OnInitialized()
     {
@@ -49,7 +49,7 @@
     private void RefreshMaterialTheme()
     {
         var themeMode = _isDarkMode ? ThemeMode.Dark : ThemeMode.Light;
-        _materialTheme = MaterialThemeProvider.GetThemeColors(themeMode);
+        _materialThemeColors = MaterialThemeProvider.GetThemeColors(themeMode);
     }
 
     private void DrawerToggle()

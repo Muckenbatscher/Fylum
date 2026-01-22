@@ -1,6 +1,7 @@
-﻿@using Fylum.Web.Services
+﻿@using Fylum.Web.MaterialTheming
+@using Fylum.Web.Services
 @inherits LayoutComponentBase
-@inject IThemeProvider ThemeProvider
+@inject IMudThemeProvider ThemeProvider
 @inject IBrowserTokenStorage TokenStorage
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />

@@ -1,6 +1,6 @@
 using Fylum.Client;
-using Fylum.Web;
 using Fylum.Web.Components;
+using Fylum.Web.MaterialTheming;
 using Fylum.Web.Services;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using MudBlazor.Services;
@@ -11,12 +11,15 @@ builder.AddServiceDefaults();
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
+// Add MaterialTheming theme providers
+builder.Services.AddMaterialThemeProvider()
+    .AddMudBlazorThemeProvider();
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddScoped<ProtectedLocalStorage>();
 
-builder.Services.AddSingleton<IThemeProvider, ThemeProvider>();
 builder.Services.AddScoped<ITokenCacheService, TokenCacheService>();
 builder.Services.AddScoped<IBrowserTokenStorage, BrowserTokenStorage>();
 builder.Services.AddFylumClients(configureClientOptions: options =>
