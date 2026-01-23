@@ -110,22 +110,27 @@ internal class MaterialThemeCssClassBuilder : IMaterialThemeCssClassBuilder
 
     private static string GetFullCssClassFromColorVariables(string className, string backgroundVariable, string foregroundVariable)
     {
-        return @$".{className} {{
-            background-color: var({backgroundVariable}) !important;
-            color: var({foregroundVariable}) !important;
-        }}";
+        return $$"""
+        .{{className}} {
+            background - color: var({{backgroundVariable}}) !important;
+            color: var({{foregroundVariable}}) !important;
+         }
+        """;
     }
     private static string GetForegroundCssClassFromColorVariable(string className, string foregroundVariable)
     {
-        return @$".{className} {{
+        return $$"""
+        .{{className}} {
             background-color: transparent;
-            color: var({foregroundVariable}) !important;
-        }}";
+            color: var({{foregroundVariable}}) !important;        }
+        """;
     }
     private static string GetBackgroundCssClassFromColorVariable(string className, string backgroundVariable)
     {
-        return @$".{className} {{
-            background-color: var({backgroundVariable}) !important;
-        }}";
+        return $$"""
+        .{{className}} {
+            background-color: var({{backgroundVariable}}) !important;
+        }
+        """;
     }
 }
