@@ -1,8 +1,11 @@
-﻿@using MudBlazor.Utilities
-@inject IThemeProvider ThemeProvider
+﻿@using MaterialTheming
+@inject IMudThemeProvider ThemeProvider
+@inject IMaterialThemeProvider MaterialThemeProvider
 @inherits LayoutComponentBase
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
+<MaterialThemingStyles ThemeColors="@_materialThemeColors" />
+
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -33,12 +36,20 @@
     private bool _drawerOpen = true;
     private bool _isDarkMode = true;
     private MudTheme? _theme = null;
+    private ThemeColors? _materialThemeColors = null;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
         _theme = ThemeProvider.GetTheme();
+        RefreshMaterialTheme();
+    }
+
+    private void RefreshMaterialTheme()
+    {
+        var themeMode = _isDarkMode ? ThemeMode.Dark : ThemeMode.Light;
+        _materialThemeColors = MaterialThemeProvider.GetThemeColors(themeMode);
     }
 
     private void DrawerToggle()
@@ -49,6 +60,7 @@
     private void DarkModeToggle()
     {
         _isDarkMode = !_isDarkMode;
+        RefreshMaterialTheme();
     }
 
     public string DarkLightModeButtonIcon => _isDarkMode switch

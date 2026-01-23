@@ -1,7 +1,5 @@
 ﻿<Project Sdk="MSTest.Sdk/4.0.2">
 
-  <PropertyGroup />
-
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.Testing" />
   </ItemGroup>

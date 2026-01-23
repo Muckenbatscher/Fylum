@@ -1,6 +1,7 @@
 using Fylum.Migrations.Client;
-using Fylum.Migrations.Web;
 using Fylum.Migrations.Web.Components;
+using Fylum.Web.MaterialTheming;
+using MaterialTheming;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,11 +10,17 @@ builder.AddServiceDefaults();
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
+// Add MaterialTheming theme providers
+var themeBuilder = ThemeBuilder
+    .CreateFromSourceColor("#9532a8")
+    .WithVariant(Variant.Expressive);
+builder.Services.AddMaterialThemeProviderFromThemeBuilder(sp => themeBuilder)
+    .AddMudBlazorThemeProvider();
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddSingleton<IThemeProvider, ThemeProvider>();
 builder.Services.AddMigrationClient(options =>
 {
     var baseAddress = builder.Configuration["MigrationsClientOptions:BaseAddress"]!;

@@ -1,0 +1,24 @@
+﻿@inject IMaterialThemeCssVariableExtractor CssVariableExtractor
+@inject IMaterialThemeCssClassBuilder CssClassBuilder
+
+@if (ThemeColors != null)
+{
+    <style>
+        :root {
+            @foreach (var cssVar in CssVariableExtractor.ExtractCssVariables(ThemeColors))
+            {
+                @cssVar
+            }
+        }
+
+        @foreach (var cssClass in CssClassBuilder.CreateCssClasses())
+        {
+            @cssClass
+        }
+    </style>
+}
+
+@code {
+    [Parameter]
+    public ThemeColors? ThemeColors { get; set; }
+}
