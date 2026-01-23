@@ -31,7 +31,7 @@
 		<!--Web UI-->
 		<PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="10.0.2" />
 		<PackageVersion Include="MudBlazor" Version="8.15.0" />
-		<PackageVersion Include="Scalar.AspNetCore" Version="2.12.12" />
+		<PackageVersion Include="Scalar.AspNetCore" Version="2.12.14" />
 		<PackageVersion Include="MaterialTheming" Version="1.0.1" />
 		<!--OpenTelemetry Service Defaults-->
 		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.15.0" />
