@@ -2,7 +2,7 @@
 using Fylum.Domain.UnitOfWork;
 using Fylum.Folders.Domain;
 
-namespace Fylum.Folders.Postgres;
+namespace Fylum.Folders.Infrastructure.Postgres;
 
 public class FolderRepository : IFolderRepository
 {

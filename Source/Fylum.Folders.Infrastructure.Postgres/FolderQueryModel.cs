@@ -1,4 +1,4 @@
-﻿namespace Fylum.Folders.Postgres;
+﻿namespace Fylum.Folders.Infrastructure.Postgres;
 
 internal class FolderQueryModel
 {

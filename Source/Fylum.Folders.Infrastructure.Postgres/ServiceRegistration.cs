@@ -1,7 +1,7 @@
 ﻿using Fylum.Folders.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Folders.Postgres;
+namespace Fylum.Folders.Infrastructure.Postgres;
 
 public static class ServiceRegistration
 {

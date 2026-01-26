@@ -4,7 +4,7 @@ using FastEndpoints.Swagger;
 using Fylum.Api.Shared;
 using Fylum.Folders.Api;
 using Fylum.Folders.Application;
-using Fylum.Folders.Postgres;
+using Fylum.Folders.Infrastructure.Postgres;
 using Fylum.Infrastructure.Postgres.Shared;
 using Fylum.Users.Api;
 using Fylum.Users.Application;
