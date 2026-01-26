@@ -1,8 +1,8 @@
-﻿using Fylum.Client.Auth.Token;
-using Fylum.EndToEnd.DistributedApplicationBuilding;
+﻿using Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
+using Fylum.Client.Auth.Token;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.EndToEnd.ClientApplicationBuilding;
+namespace Fylum.Api.EndToEnd.Tests.ClientApplicationBuilding;
 
 internal class ClientApplication : IDisposable, IAsyncDisposable
 {

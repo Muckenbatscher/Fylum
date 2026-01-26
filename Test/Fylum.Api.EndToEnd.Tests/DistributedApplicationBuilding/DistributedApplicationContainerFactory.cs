@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Fylum.EndToEnd.DistributedApplicationBuilding;
+namespace Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
 
 internal class DistributedApplicationContainerFactory
 {

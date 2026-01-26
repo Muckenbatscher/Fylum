@@ -1,7 +1,7 @@
 ﻿using Aspire.Hosting;
 using Aspire.Hosting.Testing;
 
-namespace Fylum.EndToEnd.DistributedApplicationBuilding;
+namespace Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
 
 public record DistributedApplicationContainer(DistributedApplication DistributedApp) : IDisposable, IAsyncDisposable
 {

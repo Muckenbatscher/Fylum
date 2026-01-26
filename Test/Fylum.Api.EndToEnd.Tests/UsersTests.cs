@@ -1,8 +1,8 @@
-﻿using Fylum.Client.Auth;
-using Fylum.EndToEnd.DistributedApplicationBuilding;
+﻿using Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
+using Fylum.Client.Auth;
 using Fylum.Users.Api.Shared;
 
-namespace Fylum.EndToEnd;
+namespace Fylum.Api.EndToEnd.Tests;
 
 [TestClass]
 public sealed class UsersTests
