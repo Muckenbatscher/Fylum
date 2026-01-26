@@ -4,7 +4,7 @@ using Fylum.Users.Domain.Password;
 using Fylum.Users.Domain.RefreshTokens;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Users.Postgres;
+namespace Fylum.Users.Infrastructure.Postgres;
 
 public static class SeviceRegistration
 {

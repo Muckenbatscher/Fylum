@@ -2,7 +2,7 @@
 using Fylum.Domain.UnitOfWork;
 using Fylum.Users.Domain.RefreshTokens;
 
-namespace Fylum.Users.Postgres;
+namespace Fylum.Users.Infrastructure.Postgres;
 
 public class RefreshTokenRepository : IRefreshTokenRepository
 {

@@ -1,4 +1,4 @@
-﻿namespace Fylum.Users.Postgres;
+﻿namespace Fylum.Users.Infrastructure.Postgres;
 
 public class UserWithPasswordQueryModel
 {

@@ -2,7 +2,7 @@
 using Fylum.Domain.UnitOfWork;
 using Fylum.Users.Domain;
 
-namespace Fylum.Users.Postgres;
+namespace Fylum.Users.Infrastructure.Postgres;
 
 public class UserRepository : IUserRepository
 {

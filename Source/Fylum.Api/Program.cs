@@ -8,7 +8,7 @@ using Fylum.Folders.Postgres;
 using Fylum.Infrastructure.Postgres.Shared;
 using Fylum.Users.Api;
 using Fylum.Users.Application;
-using Fylum.Users.Postgres;
+using Fylum.Users.Infrastructure.Postgres;
 using Scalar.AspNetCore;
 using System.Reflection;
 

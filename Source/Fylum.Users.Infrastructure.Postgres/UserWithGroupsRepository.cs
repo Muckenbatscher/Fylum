@@ -3,7 +3,7 @@ using Fylum.Domain.UnitOfWork;
 using Fylum.Users.Domain;
 using Fylum.Users.Domain.Groups;
 
-namespace Fylum.Users.Postgres;
+namespace Fylum.Users.Infrastructure.Postgres;
 
 public class UserWithGroupsRepository : IUserWithGroupsRepository
 {

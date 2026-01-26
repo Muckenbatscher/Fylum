@@ -37,7 +37,7 @@
     <Project Path="Source/Fylum.Users.Api/Fylum.Users.Api.csproj" />
     <Project Path="Source/Fylum.Users.Application/Fylum.Users.Application.csproj" />
     <Project Path="Source/Fylum.Users.Domain/Fylum.Users.Domain.csproj" />
-    <Project Path="Source/Fylum.Users.Postgres/Fylum.Users.Postgres.csproj" />
+    <Project Path="Source/Fylum.Users.Infrastructure.Postgres/Fylum.Users.Infrastructure.Postgres.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Migrations/">
     <Project Path="Source/Fylum.Migrations.Api.Shared/Fylum.Migrations.Api.Shared.csproj" />
