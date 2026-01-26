@@ -1,6 +1,6 @@
-﻿using Fylum.Postgres.Shared.TableSpec;
+﻿using Fylum.Infrastructure.Postgres.Shared.TableSpec;
 
-namespace Fylum.Postgres.Shared.QueryBuilding;
+namespace Fylum.Infrastructure.Postgres.Shared.QueryBuilding;
 
 internal class SelectQueryBuilder
 {

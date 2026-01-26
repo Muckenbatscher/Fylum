@@ -5,7 +5,7 @@ using Fylum.Api.Shared;
 using Fylum.Folders.Api;
 using Fylum.Folders.Application;
 using Fylum.Folders.Postgres;
-using Fylum.Postgres.Shared;
+using Fylum.Infrastructure.Postgres.Shared;
 using Fylum.Users.Api;
 using Fylum.Users.Application;
 using Fylum.Users.Postgres;

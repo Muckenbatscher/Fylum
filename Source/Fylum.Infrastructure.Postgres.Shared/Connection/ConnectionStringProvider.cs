@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Npgsql;
 
-namespace Fylum.Postgres.Shared.Connection;
+namespace Fylum.Infrastructure.Postgres.Shared.Connection;
 
 public class ConnectionStringProvider : IConnectionStringProvider
 {

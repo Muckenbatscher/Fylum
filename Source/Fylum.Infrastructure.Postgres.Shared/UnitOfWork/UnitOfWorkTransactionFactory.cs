@@ -1,8 +1,8 @@
 ﻿using Fylum.Domain.UnitOfWork;
-using Fylum.Postgres.Shared.Connection;
+using Fylum.Infrastructure.Postgres.Shared.Connection;
 using System.Data;
 
-namespace Fylum.Postgres.Shared.UnitOfWork;
+namespace Fylum.Infrastructure.Postgres.Shared.UnitOfWork;
 
 public class UnitOfWorkTransactionFactory : IUnitOfWorkTransactionFactory
 {

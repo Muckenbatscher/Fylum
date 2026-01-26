@@ -5,7 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fylum.Postgres.Shared\Fylum.Postgres.Shared.csproj" />
+    <ProjectReference Include="..\Fylum.Infrastructure.Postgres.Shared\Fylum.Infrastructure.Postgres.Shared.csproj" />
     <ProjectReference Include="..\Fylum.Users.Domain\Fylum.Users.Domain.csproj" />
   </ItemGroup>
 

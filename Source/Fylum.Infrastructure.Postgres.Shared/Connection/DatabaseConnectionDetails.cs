@@ -1,4 +1,4 @@
-﻿namespace Fylum.Postgres.Shared.Connection;
+﻿namespace Fylum.Infrastructure.Postgres.Shared.Connection;
 
 public class DatabaseConnectionDetails
 {

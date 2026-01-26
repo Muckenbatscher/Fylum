@@ -1,9 +1,9 @@
 ﻿using Fylum.Domain.UnitOfWork;
-using Fylum.Postgres.Shared.Connection;
-using Fylum.Postgres.Shared.UnitOfWork;
+using Fylum.Infrastructure.Postgres.Shared.Connection;
+using Fylum.Infrastructure.Postgres.Shared.UnitOfWork;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Postgres.Shared;
+namespace Fylum.Infrastructure.Postgres.Shared;
 
 public static class ServiceRegistration
 {

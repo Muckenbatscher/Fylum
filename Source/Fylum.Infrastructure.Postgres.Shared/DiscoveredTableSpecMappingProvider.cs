@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Postgres.Shared;
+namespace Fylum.Infrastructure.Postgres.Shared;
 
 internal class DiscoveredTableSpecMappingProvider
 {

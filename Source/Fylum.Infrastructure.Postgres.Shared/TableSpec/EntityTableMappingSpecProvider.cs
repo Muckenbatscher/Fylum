@@ -1,7 +1,7 @@
 ﻿using Fylum.Domain;
 using System.Reflection;
 
-namespace Fylum.Postgres.Shared.TableSpec;
+namespace Fylum.Infrastructure.Postgres.Shared.TableSpec;
 
 public abstract class EntityTableMappingSpecProvider<T, K> : IEntityTableMappingSpecProvider<T, K>
     where T : IdentifiableEntity<K>

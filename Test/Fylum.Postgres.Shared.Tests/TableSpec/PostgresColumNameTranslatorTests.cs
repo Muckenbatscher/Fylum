@@ -1,4 +1,4 @@
-﻿using Fylum.Postgres.Shared.TableSpec;
+﻿using Fylum.Infrastructure.Postgres.Shared.TableSpec;
 
 namespace Fylum.Postgres.Shared.Tests.TableSpec;
 

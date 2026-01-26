@@ -1,7 +1,7 @@
-﻿using Fylum.Postgres.Shared.TableSpec;
+﻿using Fylum.Infrastructure.Postgres.Shared.TableSpec;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Postgres.Shared;
+namespace Fylum.Infrastructure.Postgres.Shared;
 
 public static class TableSpecMappingDiscovery
 {

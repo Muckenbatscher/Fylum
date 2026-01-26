@@ -1,7 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using Fylum.Infrastructure.Postgres.Shared;
 using Fylum.Migrations.Api.PerformingAuthentication;
-using Fylum.Postgres.Shared;
 using Microsoft.AspNetCore.Authentication;
 using Scalar.AspNetCore;
 

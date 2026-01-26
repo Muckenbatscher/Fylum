@@ -1,4 +1,4 @@
-﻿namespace Fylum.Postgres.Shared.TableSpec;
+﻿namespace Fylum.Infrastructure.Postgres.Shared.TableSpec;
 
 public class ColumnMappingSpec
 {
