@@ -44,7 +44,7 @@ jobs:
       run: find . -type f -path "*/bin/*" -exec chmod +x {} +
     - name: Run Unit Tests
       run: |
-        dotnet test --project ${{ matrix.project }}/${{ matrix.project }}.csproj \
+        dotnet test --project Test/${{ matrix.project }}/${{ matrix.project }}.csproj \
           --no-build -c Release --verbosity normal --property:EnableWindowsTargeting=true
 
   e2e-tests:
@@ -53,14 +53,14 @@ jobs:
     strategy:
       matrix:
         project: 
-        - Fylum.EndToEnd
+        - Fylum.Api.EndToEnd.Tests
     steps:
     - uses: actions/download-artifact@v4
       with:
         name: build-output
         path: .
     - name: Restore Aspire Components
-      run: dotnet restore ${{ matrix.project }}/${{ matrix.project }}.csproj
+      run: dotnet restore Test/${{ matrix.project }}/${{ matrix.project }}.csproj
     - name: Restore Permissions
       run: find . -type f -path "*/bin/*" -exec chmod +x {} +
     - name: Install and Trust Dotnet Dev Certificate
@@ -71,7 +71,7 @@ jobs:
         sudo update-ca-certificates
     - name: Run End To End Test
       run: |
-        dotnet test --project ${{ matrix.project }}/${{ matrix.project }}.csproj \
+        dotnet test --project Test/${{ matrix.project }}/${{ matrix.project }}.csproj \
           --no-build -c Release --verbosity normal --property:EnableWindowsTargeting=true
       env:
         Parameters__MigrationPerformingKey: "AnyRandomMigrationPerformingKey"

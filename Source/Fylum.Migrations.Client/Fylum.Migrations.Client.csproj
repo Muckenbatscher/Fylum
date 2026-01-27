@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+		<PackageReference Include="Microsoft.Extensions.Http" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Fylum.Migrations.Api.Models\Fylum.Migrations.Api.Models.csproj" />
+	</ItemGroup>
+	
+</Project>

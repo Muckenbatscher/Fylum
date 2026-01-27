@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="FastEndpoints" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Fylum.Api.Shared\Fylum.Api.Shared.csproj" />
+	  <ProjectReference Include="..\Fylum.Folders.Api.Models\Fylum.Folders.Api.Models.csproj" />
+	  <ProjectReference Include="..\Fylum.Folders.Application\Fylum.Folders.Application.csproj" />
+	</ItemGroup>
+</Project>

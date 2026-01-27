@@ -1,0 +1,9 @@
+﻿using Fylum.Domain;
+
+namespace Fylum.Infrastructure.Postgres.Shared.TableSpec;
+
+public interface IEntityTableMappingSpecProvider<T, K> : ITableMappingSpecProvider
+    where T : IdentifiableEntity<K>
+    where K : struct
+{
+}

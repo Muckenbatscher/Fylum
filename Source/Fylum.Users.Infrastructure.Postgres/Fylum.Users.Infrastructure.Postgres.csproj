@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fylum.Infrastructure.Postgres.Shared\Fylum.Infrastructure.Postgres.Shared.csproj" />
+    <ProjectReference Include="..\Fylum.Users.Domain\Fylum.Users.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

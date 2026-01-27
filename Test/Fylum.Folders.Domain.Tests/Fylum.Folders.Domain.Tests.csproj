@@ -1,0 +1,6 @@
+﻿<Project Sdk="MSTest.Sdk">
+	<PropertyGroup />
+	<ItemGroup>
+		<ProjectReference Include="..\..\Source\Fylum.Folders.Domain\Fylum.Folders.Domain.csproj" />
+	</ItemGroup>
+</Project>

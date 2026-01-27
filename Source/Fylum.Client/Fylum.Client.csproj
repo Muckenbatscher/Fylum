@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fylum.Folders.Api.Models\Fylum.Folders.Api.Models.csproj" />
+    <ProjectReference Include="..\Fylum.Users.Api.Models\Fylum.Users.Api.Models.csproj" />
+  </ItemGroup>
+</Project>

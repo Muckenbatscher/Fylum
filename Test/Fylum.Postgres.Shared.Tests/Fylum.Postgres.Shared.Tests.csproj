@@ -1,0 +1,7 @@
+﻿<Project Sdk="MSTest.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Fylum.Infrastructure.Postgres.Shared\Fylum.Infrastructure.Postgres.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
