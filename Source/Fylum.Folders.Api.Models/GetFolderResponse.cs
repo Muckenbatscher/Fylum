@@ -1,3 +1,3 @@
-﻿namespace Fylum.Folders.Api.Shared;
+﻿namespace Fylum.Folders.Api.Models;
 
 public record GetFolderResponse(Guid FolderId, string Name, Guid ParentFolderId);

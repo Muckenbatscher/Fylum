@@ -1,4 +1,4 @@
-﻿namespace Fylum.Folders.Api.Shared;
+﻿namespace Fylum.Folders.Api.Models;
 
 public class EndpointRoutes
 {

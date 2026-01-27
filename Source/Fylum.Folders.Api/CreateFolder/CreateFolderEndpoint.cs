@@ -1,7 +1,7 @@
 ﻿using Fylum.Api.Shared.ErrorResult;
 using Fylum.Api.Shared.JwtAuthentication;
 using Fylum.Application;
-using Fylum.Folders.Api.Shared;
+using Fylum.Folders.Api.Models;
 using Fylum.Folders.Application.CreateFolder;
 using Microsoft.AspNetCore.Http;
 
