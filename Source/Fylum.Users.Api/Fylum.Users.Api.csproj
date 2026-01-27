@@ -4,7 +4,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Fylum.Api.Shared\Fylum.Api.Shared.csproj" />
-	  <ProjectReference Include="..\Fylum.Users.Api.Shared\Fylum.Users.Api.Shared.csproj" />
+	  <ProjectReference Include="..\Fylum.Users.Api.Models\Fylum.Users.Api.Models.csproj" />
 	  <ProjectReference Include="..\Fylum.Users.Application\Fylum.Users.Application.csproj" />
 	  <ProjectReference Include="..\Fylum.Users.Domain\Fylum.Users.Domain.csproj" />
 	</ItemGroup>

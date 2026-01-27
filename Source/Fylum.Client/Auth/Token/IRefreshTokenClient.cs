@@ -1,4 +1,4 @@
-﻿using Fylum.Users.Api.Shared;
+﻿using Fylum.Users.Api.Models;
 
 namespace Fylum.Client.Auth.Token;
 
