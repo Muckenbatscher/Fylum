@@ -17,7 +17,7 @@
 		<ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
 		<ProjectReference Include="..\Fylum.Migrations.Api.Models\Fylum.Migrations.Api.Models.csproj" />
 		<ProjectReference Include="..\Fylum.Migrations.Application\Fylum.Migrations.Application.csproj" />
-		<ProjectReference Include="..\Fylum.Migrations.Postgres\Fylum.Migrations.Postgres.csproj" />
+		<ProjectReference Include="..\Fylum.Migrations.Postgres\Fylum.Migrations.Infrastructure.Postgres.csproj" />
 		<ProjectReference Include="..\Fylum.Migrations.Provider\Fylum.Migrations.Provider.csproj" />
 		<ProjectReference Include="..\Fylum.ServiceDefaults\Fylum.ServiceDefaults.csproj" />
 	</ItemGroup>

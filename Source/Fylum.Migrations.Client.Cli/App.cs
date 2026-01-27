@@ -1,4 +1,4 @@
-﻿using Fylum.Migrations.Api.Shared;
+﻿using Fylum.Migrations.Api.Models;
 using Fylum.Migrations.Client.Listing;
 using Fylum.Migrations.Client.Performing;
 

@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
+using Fylum.Migrations.Api.Models;
 using Fylum.Migrations.Api.PerformingAuthentication;
-using Fylum.Migrations.Api.Shared;
 using Fylum.Migrations.Application.Perform.UpTo;
 using Fylum.Migrations.Domain;
 

@@ -1,4 +1,4 @@
-﻿using Fylum.Migrations.Api.Shared;
+﻿using Fylum.Migrations.Api.Models;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Migrations.Api.PerformingAuthentication;
