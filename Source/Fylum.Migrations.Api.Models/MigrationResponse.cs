@@ -1,4 +1,8 @@
 ﻿namespace Fylum.Migrations.Api.Models;
 
-public record MigrationResponse(Guid MigrationId, string Name,
-    bool IsAlreadyPerformed, DateTime? PerformedUtc);
+public record MigrationResponse : MigrationDto
+{
+    public MigrationResponse(MigrationDto original) : base(original)
+    {
+    }
+}
