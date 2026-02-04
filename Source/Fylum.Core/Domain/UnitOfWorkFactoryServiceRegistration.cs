@@ -21,12 +21,6 @@ public static class UnitOfWorkFactoryServiceRegistration
             foreach (var implementation in implementationTypes)
             {
                 var interfaces = GetImplementedUnitOfWorkFactoryInterfaces(implementation);
-                if (interfaces.Count() > 1)
-                {
-                    throw new InvalidOperationException(
-                        $"Found Conflict: The class '{implementation.Name}' implements multiple IUnitOfWorkFactory interfaces. " +
-                        "Each UnitOfWorkFactory class should implement only one IUnitOfWorkFactory interface.");
-                }
                 foreach (var handlerInterface in interfaces)
                 {
                     if (implementationMap.ContainsKey(handlerInterface))
@@ -46,13 +40,17 @@ public static class UnitOfWorkFactoryServiceRegistration
 
     private static IEnumerable<Type> GetImplementedUnitOfWorkFactoryInterfaces(Type implementation)
     {
-        var interfaces = implementation.GetInterfaces()
-            .Where(i => i.IsGenericType)
-            .Where(i =>
-            {
-                var genericDef = i.GetGenericTypeDefinition();
-                return genericDef == typeof(IUnitOfWorkFactory<>);
-            });
-        return interfaces;
+        var allInterfaces = implementation.GetInterfaces();
+        var targetGeneric = typeof(IUnitOfWorkFactory<>);
+
+        // IUnitOfWorkFactory<MyType>
+        var directGenericInterfaces = allInterfaces
+            .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == targetGeneric);
+
+        // IMyTypedInterface : IUnitOfWorkFactory<MyUnitOfWorkType>
+        var inheritedTypedInterfaces = allInterfaces
+            .Where(i => i.GetInterfaces().Any(p => p.IsGenericType && p.GetGenericTypeDefinition() == targetGeneric));
+
+        return directGenericInterfaces.Union(inheritedTypedInterfaces);
     }
 }

@@ -36,12 +36,6 @@ public static class CommandHandlerServiceRegistration
         foreach (var implementation in implementationTypes)
         {
             var interfaces = GetImplementedCommandHandlerInterface(implementation);
-            if (interfaces.Count() > 1)
-            {
-                throw new InvalidOperationException(
-                    $"Found Conflict: The class '{implementation.Name}' implements multiple ICommandHandler interfaces. " +
-                    "Each command handler class should implement only one ICommandHandler interface.");
-            }
             foreach (var handlerInterface in interfaces)
             {
                 if (implementationMap.ContainsKey(handlerInterface))
@@ -60,14 +54,20 @@ public static class CommandHandlerServiceRegistration
 
     private static IEnumerable<Type> GetImplementedCommandHandlerInterface(Type implementation)
     {
-        var interfaces = implementation.GetInterfaces()
-            .Where(i => i.IsGenericType)
-            .Where(i =>
-            {
-                var genericDef = i.GetGenericTypeDefinition();
-                return genericDef == typeof(ICommandHandler<>)
-                    || genericDef == typeof(ICommandHandler<,>);
-            });
-        return interfaces;
+        var allInterfaces = implementation.GetInterfaces();
+        var targetDefinitions = new[]
+        {
+            typeof(ICommandHandler<>),
+            typeof(ICommandHandler<,>)
+        };
+
+        var directHandlers = allInterfaces
+            .Where(i => i.IsGenericType && targetDefinitions.Contains(i.GetGenericTypeDefinition()));
+
+        var inheritedHandlers = allInterfaces
+            .Where(i => i.GetInterfaces().Any(parent =>
+                parent.IsGenericType && targetDefinitions.Contains(parent.GetGenericTypeDefinition())));
+
+        return directHandlers.Union(inheritedHandlers);
     }
 }

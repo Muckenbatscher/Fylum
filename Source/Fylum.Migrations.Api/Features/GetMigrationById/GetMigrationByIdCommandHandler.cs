@@ -6,7 +6,7 @@ using Fylum.Migrations.SharedModels;
 
 namespace Fylum.Migrations.Api.Features.GetMigrationById;
 
-public class GetMigrationByIdCommandHandler : ICommandHandler<GetMigrationByIdCommand, MigrationDto>
+public class GetMigrationByIdCommandHandler : IGetMigrationByIdCommandHandler
 {
     private readonly IMigrationService _migrationService;
     private readonly IMapper<Migration, MigrationDto> _mapper;
