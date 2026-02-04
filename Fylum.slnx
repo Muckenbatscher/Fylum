@@ -17,7 +17,7 @@
   </Folder>
   <Folder Name="/Source/Api/" />
   <Folder Name="/Source/Api/Common/">
-    <Project Path="Fylum.Core/Fylum.Core.csproj" Id="6ad5cc72-b72e-427d-a103-f39591cbfd9d" />
+    <Project Path="Source/Fylum.Core/Fylum.Core.csproj" />
     <Project Path="Source/Fylum.Application/Fylum.Application.csproj" />
     <Project Path="Source/Fylum.Domain/Fylum.Domain.csproj" />
     <Project Path="Source/Fylum.Infrastructure.Postgres.Shared/Fylum.Infrastructure.Postgres.Shared.csproj" />

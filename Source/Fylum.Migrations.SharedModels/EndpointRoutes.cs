@@ -1,4 +1,4 @@
-﻿namespace Fylum.Migrations.Shared;
+﻿namespace Fylum.Migrations.SharedModels;
 
 public class EndpointRoutes
 {

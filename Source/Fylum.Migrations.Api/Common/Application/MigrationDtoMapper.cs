@@ -1,8 +1,9 @@
-﻿using Fylum.Migrations.Domain;
-using Fylum.Migrations.Domain.Providing;
-using Fylum.Migrations.Shared;
+﻿using Fylum.Core.Application.Mapping;
+using Fylum.Migrations.Api.Common.Domain;
+using Fylum.Migrations.Api.Common.Domain.Providing;
+using Fylum.Migrations.SharedModels;
 
-namespace Fylum.Migrations.Api;
+namespace Fylum.Migrations.Api.Common.Application;
 
 public class MigrationDtoMapper : IMapper<Migration, MigrationDto>
 {

@@ -1,17 +1,17 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
-using Fylum.Migrations.Application.GetMigrations;
-using Fylum.Migrations.Shared;
+using Fylum.Migrations.SharedModels;
+using Fylum.Migrations.SharedModels.GetMigrationById;
 
-namespace Fylum.Migrations.Api;
+namespace Fylum.Migrations.Api.Features.GetMigrationById;
 
-public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
+public class GetMigrationByIdEndpoint : EndpointWithoutRequest<GetMigrationByIdResponse>
 {
     private const string IdParamName = "id";
 
-    private readonly IGetMigrationCommandHandler _handler;
+    private readonly IGetMigrationByIdCommandHandler _handler;
 
-    public GetMigrationEndpoint(IGetMigrationCommandHandler handler)
+    public GetMigrationByIdEndpoint(IGetMigrationByIdCommandHandler handler)
     {
         _handler = handler;
     }
@@ -26,7 +26,7 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
     public override async Task HandleAsync(CancellationToken ct)
     {
         var id = Route<Guid>(IdParamName);
-        var command = new GetMigrationCommand(id);
+        var command = new GetMigrationByIdCommand(id);
         var commandResult = _handler.Handle(command);
 
         var errorHanding = await Send.EnsureErrorResultHandled(commandResult);
@@ -34,13 +34,7 @@ public class GetMigrationEndpoint : EndpointWithoutRequest<MigrationResponse>
             return;
 
         var migration = commandResult.Value;
-        var response = MapToResponse(migration);
+        var response = new GetMigrationByIdResponse(migration);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
-
-    private MigrationResponse MapToResponse(GetMigrationCommandResult migrationResult)
-        => new(migrationResult.Id,
-            migrationResult.Name,
-            migrationResult.IsPerformed,
-            migrationResult.PerformedTimestamp?.UtcDateTime);
 }

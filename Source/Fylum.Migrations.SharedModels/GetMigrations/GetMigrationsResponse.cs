@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Fylum.Migrations.Shared.GetMigrations;
+namespace Fylum.Migrations.SharedModels.GetMigrations;
 
 public record GetMigrationsResponse(
     [property: JsonPropertyName("migrations")] IEnumerable<MigrationDto> Migrations
