@@ -1,13 +1,14 @@
-﻿using Fylum.Application;
+﻿using Fylum.Core.Application.Command;
 using Fylum.Core.Application.Mapping;
+using Fylum.Core.Application.Query;
+using Fylum.Core.Domain;
+using Fylum.Core.Infrastructure.Postgres;
 using Fylum.Migrations.Api.Common.Application;
 using Fylum.Migrations.Api.Common.Domain;
 using Fylum.Migrations.Api.Common.Domain.Perform;
 using Fylum.Migrations.Api.Common.Domain.Providing;
 using Fylum.Migrations.Api.Common.Infrastructure.Postgres;
 using Fylum.Migrations.Api.Common.Infrastructure.Providing;
-using Fylum.Migrations.Api.Features.PerformAllMigrations;
-using Fylum.Migrations.Api.Features.PerformUpTo;
 using Fylum.Migrations.Api.PerformingAuthentication;
 using Fylum.Migrations.SharedModels;
 
@@ -20,10 +21,11 @@ public static class ServiceRegistration
         // Domain
         services.AddTransient<IMigrationService, MigrationService>();
         services.AddTransient<IMigrationPerformingService, MigrationPerformingService>();
-        services.AddScoped<IPerformMigrationUnitOfWorkFactory, PerformMigrationUnitOfWorkFactory>();
+        services.AddScoped<IUnitOfWorkTransactionFactory, UnitOfWorkTransactionFactory>();
+        services.AddUnitOfWorkFactories(typeof(Program).Assembly);
         // Application
-        services.AddCommandHandlers();
-        services.AddQueryHandlers();
+        services.AddCommandHandlers(typeof(Program).Assembly);
+        services.AddQueryHandlers(typeof(Program).Assembly);
         services.AddTransient<IMapper<MigrationScript, MigrationScriptDto>, MigrationScriptDtoMapper>();
         services.AddTransient<IMapper<Migration, MigrationDto>, MigrationDtoMapper>();
         // Infrastructure - Postgres

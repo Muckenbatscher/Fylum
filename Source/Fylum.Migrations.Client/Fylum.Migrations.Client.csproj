@@ -6,7 +6,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Fylum.Migrations.Api.Models\Fylum.Migrations.Shared.csproj" />
+	  <ProjectReference Include="..\Fylum.Migrations.SharedModels\Fylum.Migrations.SharedModels.csproj" />
 	</ItemGroup>
 	
 </Project>

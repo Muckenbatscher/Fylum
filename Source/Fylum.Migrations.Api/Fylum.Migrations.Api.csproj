@@ -30,7 +30,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Fylum.Api.Shared\Fylum.Api.Shared.csproj" />
-		<ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
 		<ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
 		<ProjectReference Include="..\Fylum.Migrations.SharedModels\Fylum.Migrations.SharedModels.csproj" />
 		<ProjectReference Include="..\Fylum.ServiceDefaults\Fylum.ServiceDefaults.csproj" />
