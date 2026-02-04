@@ -1,7 +1,0 @@
-CREATE TABLE users
-(
-    id uuid NOT NULL,
-    username text NOT NULL,
-    is_active boolean NOT NULL,
-    PRIMARY KEY (id)
-);

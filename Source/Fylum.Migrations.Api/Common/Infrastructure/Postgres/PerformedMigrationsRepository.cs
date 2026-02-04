@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using Fylum.Domain.UnitOfWork;
+using Fylum.Core.Domain;
 using Fylum.Migrations.Api.Common.Domain.Perform;
 using Fylum.Migrations.Api.Common.Domain.Providing;
 using Npgsql;

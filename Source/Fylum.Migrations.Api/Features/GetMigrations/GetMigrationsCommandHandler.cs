@@ -1,5 +1,5 @@
-﻿using Fylum.Application;
-using Fylum.Core.Application.Mapping;
+﻿using Fylum.Core.Application.Mapping;
+using Fylum.Core.Application.Results;
 using Fylum.Migrations.Api.Common.Domain;
 using Fylum.Migrations.SharedModels;
 
@@ -10,7 +10,7 @@ public class GetMigrationsCommandHandler : IGetMigrationsCommandHandler
     private readonly IMigrationService _migrationService;
     private readonly IMapper<Migration, MigrationDto> _mapper;
 
-    public GetMigrationsCommandHandler(IMigrationService migrationService, 
+    public GetMigrationsCommandHandler(IMigrationService migrationService,
         IMapper<Migration, MigrationDto> mapper)
     {
         _migrationService = migrationService;

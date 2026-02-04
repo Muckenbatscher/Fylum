@@ -1,4 +1,4 @@
-﻿using Fylum.Domain.UnitOfWork;
+﻿using Fylum.Core.Domain;
 
 namespace Fylum.Migrations.Api.Common.Domain.Perform;
 
