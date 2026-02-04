@@ -1,0 +1,8 @@
+﻿SET vars.id TO '120A803B-2924-4519-811C-1E3ABA90FD52';
+SET vars.parent_id = '00000000-0000-0000-0000-000000000000';
+SET vars.name TO 'root';
+
+INSERT INTO folders (id, name, parent_folder_id) 
+SELECT current_setting('vars.id')::uuid, 
+       'root',
+       NULL;

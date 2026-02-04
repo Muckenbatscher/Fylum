@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Fylum.Domain.UnitOfWork;
-using Fylum.Migrations.Domain.Perform;
+using Fylum.Migrations.Api.Common.Domain.Perform;
 
 namespace Fylum.Migrations.Api.Common.Infrastructure.Postgres;
 

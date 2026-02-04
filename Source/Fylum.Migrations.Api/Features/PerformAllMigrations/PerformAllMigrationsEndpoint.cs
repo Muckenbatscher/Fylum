@@ -1,14 +1,12 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
-using Fylum.Migrations.Api.Common.Domain;
 using Fylum.Migrations.Api.PerformingAuthentication;
-using Fylum.Migrations.Application.Perform.All;
-using Fylum.Migrations.Domain;
 using Fylum.Migrations.SharedModels;
+using Fylum.Migrations.SharedModels.PerformAllMigrations;
 
-namespace Fylum.Migrations.Api;
+namespace Fylum.Migrations.Api.Features.PerformAllMigrations;
 
-public class PerformAllMigrationsEndpoint : EndpointWithoutRequest<PerformMigrationsResponse>
+public class PerformAllMigrationsEndpoint : EndpointWithoutRequest<PerformAllMigrationsResponse>
 {
     private readonly IPerformAllMigrationsCommandHandler _handler;
 
@@ -32,15 +30,8 @@ public class PerformAllMigrationsEndpoint : EndpointWithoutRequest<PerformMigrat
         if (error.ErrorResultHandlingRequired)
             return;
 
-        var performed = result.Value.PerformedMigrations.Select(MapToResponse);
-        var response = new PerformMigrationsResponse(performed);
+        var performedMigrations = result.Value;
+        var response = new PerformAllMigrationsResponse(performedMigrations);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
-
-    private MigrationResponse MapToResponse(Migration migrationResult)
-        => new(migrationResult.ProvidedMigration.Id,
-            migrationResult.ProvidedMigration.Name,
-            migrationResult.IsPerformed,
-            migrationResult.PerformedState?.TimestampPerformed.UtcDateTime);
-
 }

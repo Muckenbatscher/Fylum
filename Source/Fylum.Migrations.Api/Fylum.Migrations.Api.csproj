@@ -5,6 +5,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\0_Migrations\migrations.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\0_Migrations\migrations_performed.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\0_Migrations\migration_schema.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\1_Users\insert_admin_user.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\1_Users\users.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\1_Users\user_groups.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\1_Users\user_group_members.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\1_Users\user_password_logins.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\2_RefreshKeys\user_refresh_keys.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\3_Folders\folders.psql" />
+	  <EmbeddedResource Include="Common\Infrastructure\Providing\MigrationFiles\3_Folders\insert_root_folder.psql" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="FastEndpoints" />
 		<PackageReference Include="FastEndpoints.Security" />
 		<PackageReference Include="FastEndpoints.Swagger" />
