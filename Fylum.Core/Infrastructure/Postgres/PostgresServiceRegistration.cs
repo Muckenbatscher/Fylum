@@ -1,23 +1,22 @@
-﻿using Fylum.Domain.UnitOfWork;
-using Fylum.Infrastructure.Postgres.Shared.Connection;
-using Fylum.Infrastructure.Postgres.Shared.UnitOfWork;
+﻿using Fylum.Core.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Infrastructure.Postgres.Shared;
+namespace Fylum.Core.Infrastructure.Postgres;
 
-public static class ServiceRegistration
+public static class PostgresServiceRegistration
 {
-    public static IServiceCollection AddPostgresSharedServices(this IServiceCollection services, Action<DatabaseConnectionDetails> dbConnectionOptions)
+    public static IServiceCollection AddPostgresCoreServices(this IServiceCollection services, 
+        Action<DatabaseConnectionDetails> dbConnectionOptions)
     {
         services.AddScoped<IUnitOfWorkTransactionFactory, UnitOfWorkTransactionFactory>();
 
         services.AddConnectionDetails(dbConnectionOptions);
         services.AddConnectionServices();
-        services.AddTableSpecMappingProviders();
         return services;
     }
 
-    private static IServiceCollection AddConnectionDetails(this IServiceCollection services, Action<DatabaseConnectionDetails> dbConnectionOptions)
+    private static IServiceCollection AddConnectionDetails(this IServiceCollection services, 
+        Action<DatabaseConnectionDetails> dbConnectionOptions)
     {
         services.Configure(dbConnectionOptions);
         return services;

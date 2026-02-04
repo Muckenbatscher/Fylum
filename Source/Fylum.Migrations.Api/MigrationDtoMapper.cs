@@ -1,6 +1,6 @@
-﻿using Fylum.Migrations.Api.Models;
-using Fylum.Migrations.Domain;
+﻿using Fylum.Migrations.Domain;
 using Fylum.Migrations.Domain.Providing;
+using Fylum.Migrations.Shared;
 
 namespace Fylum.Migrations.Api;
 

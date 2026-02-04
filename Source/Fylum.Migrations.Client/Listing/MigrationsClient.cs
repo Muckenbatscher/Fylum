@@ -1,4 +1,4 @@
-﻿using Fylum.Migrations.Api.Models;
+﻿using Fylum.Migrations.Shared;
 using System.Net.Http.Json;
 
 namespace Fylum.Migrations.Client.Listing;

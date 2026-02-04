@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using Fylum.Api.Shared.ErrorResult;
-using Fylum.Migrations.Api.Models;
 using Fylum.Migrations.Application.GetMigrations;
+using Fylum.Migrations.Shared;
 
 namespace Fylum.Migrations.Api;
 

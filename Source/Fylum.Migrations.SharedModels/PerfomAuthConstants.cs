@@ -1,4 +1,4 @@
-﻿namespace Fylum.Migrations.Api.Models;
+﻿namespace Fylum.Migrations.Shared;
 
 public class PerfomAuthConstants
 {
