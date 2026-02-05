@@ -13,7 +13,6 @@ public class ProvidedMigration
     public string Name { get; private set; }
     public IEnumerable<MigrationScript> MigrationScripts { get; private set; }
 
-
     public static ProvidedMigration CreateNew(string name)
         => new ProvidedMigration(Guid.NewGuid(), name, Enumerable.Empty<MigrationScript>());
 
