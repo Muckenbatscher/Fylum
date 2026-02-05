@@ -1,6 +1,6 @@
-﻿using Fylum.Migrations.Api.Models;
-using Fylum.Migrations.Client.Listing;
+﻿using Fylum.Migrations.Client.Listing;
 using Fylum.Migrations.Client.Performing;
+using Fylum.Migrations.SharedModels;
 
 namespace Fylum.Migrations.Client.Cli;
 
@@ -37,12 +37,12 @@ public class App
         var selectedMigration = migrations[parsedMigrationNumber - 1];
 
         var performed = await _performingClient.PerformMigrationsUpToAsync(
-            selectedMigration.MigrationId, cancellationToken);
+            selectedMigration.Id, cancellationToken);
 
         PrintMigrations(performed.PerformedMigrations.ToList());
     }
 
-    private static void PrintMigrations(IList<MigrationResponse> migrations)
+    private static void PrintMigrations(IList<MigrationDto> migrations)
     {
         for (int index = 0; index < migrations.Count; index++)
         {
@@ -50,7 +50,7 @@ public class App
             Console.WriteLine();
         }
     }
-    private static void PrintMigration(MigrationResponse migration, int index)
+    private static void PrintMigration(MigrationDto migration, int index)
     {
         const int indexWhiteSpaceChars = 8;
         string AnsiBrightBlack = "\x1b[90m";
@@ -61,20 +61,20 @@ public class App
         Console.WriteInColor(migration.Name, ConsoleColor.Blue);
         Console.WriteLine();
 
-        Console.WriteLeftPaddednColor(migration.MigrationId.ToString(),
+        Console.WriteLeftPaddednColor(migration.Id.ToString(),
             indexWhiteSpaceChars, ConsoleColor.White);
         Console.WriteLine();
 
-        var performedState = migration.IsAlreadyPerformed
+        var performedState = migration.IsPerformed
             ? "Performed" : "Not performed";
-        var performedColor = migration.IsAlreadyPerformed
+        var performedColor = migration.IsPerformed
             ? ConsoleColor.Green : ConsoleColor.Red;
         Console.WriteLeftPaddednColor(performedState,
             indexWhiteSpaceChars, performedColor);
-        Console.ForegroundColor = migration.IsAlreadyPerformed
+        Console.ForegroundColor = migration.IsPerformed
             ? ConsoleColor.Green
             : ConsoleColor.Red;
-        if (migration.IsAlreadyPerformed)
+        if (migration.IsPerformed)
             Console.Write($" {AnsiBrightBlack}{migration.PerformedUtc:G}{AnsiReset}");
         Console.WriteLine();
     }
