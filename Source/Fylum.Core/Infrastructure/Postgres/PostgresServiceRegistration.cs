@@ -5,7 +5,7 @@ namespace Fylum.Core.Infrastructure.Postgres;
 
 public static class PostgresServiceRegistration
 {
-    public static IServiceCollection AddPostgresCoreServices(this IServiceCollection services, 
+    public static IServiceCollection AddPostgresCoreServices(this IServiceCollection services,
         Action<DatabaseConnectionDetails> dbConnectionOptions)
     {
         services.AddScoped<IUnitOfWorkTransactionFactory, UnitOfWorkTransactionFactory>();
@@ -15,7 +15,7 @@ public static class PostgresServiceRegistration
         return services;
     }
 
-    private static IServiceCollection AddConnectionDetails(this IServiceCollection services, 
+    private static IServiceCollection AddConnectionDetails(this IServiceCollection services,
         Action<DatabaseConnectionDetails> dbConnectionOptions)
     {
         services.Configure(dbConnectionOptions);
