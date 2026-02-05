@@ -1,5 +1,5 @@
 ﻿using Fylum.Web.MaterialTheming.CssBuilding;
-using MaterialTheming.Creation;
+using MaterialTheming;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Web.MaterialTheming;

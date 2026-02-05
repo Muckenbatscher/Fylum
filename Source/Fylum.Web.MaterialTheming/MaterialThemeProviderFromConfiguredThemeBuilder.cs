@@ -1,5 +1,4 @@
 ﻿using MaterialTheming;
-using MaterialTheming.Creation;
 
 namespace Fylum.Web.MaterialTheming;
 

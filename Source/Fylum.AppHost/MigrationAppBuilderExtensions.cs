@@ -1,4 +1,4 @@
-﻿using Fylum.Migrations.Api.Models;
+﻿using Fylum.Migrations.SharedModels;
 
 namespace Fylum.AppHost;
 

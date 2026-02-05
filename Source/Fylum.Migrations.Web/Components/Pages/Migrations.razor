@@ -24,10 +24,10 @@ else
             <MudTh/>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel="ID">@context.MigrationId</MudTd>
+            <MudTd DataLabel="ID">@context.Id</MudTd>
             <MudTd DataLabel="Name">@context.Name</MudTd>
             <MudTd>
-                @if (context.IsAlreadyPerformed)
+                @if (context.IsPerformed)
                 {
                     <MudChip T="string" Class=@MaterialThemingClasses.SecondaryContainer>Performed</MudChip>
                     <MudText Inline="true" Typo="Typo.body2" Class=@MaterialThemingClasses.OnSurfaceVariant>@context.PerformedUtc!.Value.ToLocalTime().ToString("G")</MudText>
@@ -38,12 +38,12 @@ else
                 }
             </MudTd>
             <MudTd>
-                @if (!context.IsAlreadyPerformed)
+                @if (!context.IsPerformed)
                 {
                     <MudButton Disabled="@_currentlyPerformingMigration" 
                         Variant="Variant.Filled" 
                         Class=@MaterialThemingClasses.PrimaryContainer
-                        OnClick="() => PerformUpToMigration(context.MigrationId)">
+                        OnClick="() => PerformUpToMigration(context.Id)">
                         Perform up to
                     </MudButton>
                 }
@@ -57,7 +57,7 @@ else
 
     private readonly CancellationTokenSource _cts = new();
 
-    private MigrationResponse[]? migrations;
+    private MigrationDto[]? migrations;
 
     protected override async Task OnInitializedAsync()
     {

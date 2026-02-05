@@ -17,14 +17,16 @@ public static class ServiceRegistration
         return services;
     }
 
-    private static void AddConnectionDetails(this IServiceCollection services, Action<DatabaseConnectionDetails> dbConnectionOptions)
+    private static IServiceCollection AddConnectionDetails(this IServiceCollection services, Action<DatabaseConnectionDetails> dbConnectionOptions)
     {
         services.Configure(dbConnectionOptions);
+        return services;
     }
-    private static void AddConnectionServices(this IServiceCollection services)
+    private static IServiceCollection AddConnectionServices(this IServiceCollection services)
     {
         services.AddTransient<IConnectionStringProvider, ConnectionStringProvider>();
         services.AddScoped<IConnectionProvider, ConnectionProvider>();
         services.AddScoped<IOpenedConnectionProvider, OpenedConnectionProvider>();
+        return services;
     }
 }

@@ -12,7 +12,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Fylum.Api\Fylum.Api.csproj" />
-		<ProjectReference Include="..\Fylum.Migrations.Api.Models\Fylum.Migrations.Api.Models.csproj" IsAspireProjectResource="false" />
+		<ProjectReference Include="..\Fylum.Migrations.SharedModels\Fylum.Migrations.SharedModels.csproj" IsAspireProjectResource="false" />
 		<ProjectReference Include="..\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />
 		<ProjectReference Include="..\Fylum.Migrations.Web\Fylum.Migrations.Web.csproj" />
 		<ProjectReference Include="..\Fylum.Web\Fylum.Web.csproj" />

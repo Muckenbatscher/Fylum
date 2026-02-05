@@ -1,12 +1,13 @@
-﻿using Fylum.Migrations.Api.Models;
+﻿using Fylum.Migrations.SharedModels.PerformAllMigrations;
+using Fylum.Migrations.SharedModels.PerformMigrationsUpTo;
 
 namespace Fylum.Migrations.Client.Performing;
 
 public interface IPerformingClient
 {
-    Task<PerformMigrationsResponse> PerformAllMigrationsAsync(CancellationToken cancellationToken);
-    Task<PerformMigrationsResponse> PerformAllMigrationsAsync();
+    Task<PerformAllMigrationsResponse> PerformAllMigrationsAsync(CancellationToken cancellationToken);
+    Task<PerformAllMigrationsResponse> PerformAllMigrationsAsync();
 
-    Task<PerformMigrationsResponse> PerformMigrationsUpToAsync(Guid upToMigrationId, CancellationToken cancellationToken);
-    Task<PerformMigrationsResponse> PerformMigrationsUpToAsync(Guid upToMigrationId);
+    Task<PerformMigrationsUpToResponse> PerformMigrationsUpToAsync(Guid upToMigrationId, CancellationToken cancellationToken);
+    Task<PerformMigrationsUpToResponse> PerformMigrationsUpToAsync(Guid upToMigrationId);
 }

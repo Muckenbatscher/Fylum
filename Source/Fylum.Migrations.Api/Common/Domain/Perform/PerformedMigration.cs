@@ -1,0 +1,23 @@
+﻿using Fylum.Migrations.Api.Common.Domain.Providing;
+
+namespace Fylum.Migrations.Api.Common.Domain.Perform;
+
+public class PerformedMigration
+{
+    public Guid Id { get; }
+    public ProvidedMigration Migration { get; }
+    public DateTimeOffset Timestamp { get; }
+
+    private PerformedMigration(Guid id, DateTimeOffset timestamp, ProvidedMigration migration)
+    {
+        Id = id;
+        Timestamp = timestamp;
+        Migration = migration;
+    }
+
+    public static PerformedMigration CreateNew(ProvidedMigration migration)
+        => new PerformedMigration(Guid.NewGuid(), DateTimeOffset.UtcNow, migration);
+
+    public static PerformedMigration Create(Guid id, DateTimeOffset timestamp, ProvidedMigration migration)
+        => new PerformedMigration(id, timestamp, migration);
+}

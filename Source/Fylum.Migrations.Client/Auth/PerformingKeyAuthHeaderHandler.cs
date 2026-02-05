@@ -1,4 +1,4 @@
-﻿using Fylum.Migrations.Api.Models;
+﻿using Fylum.Migrations.SharedModels;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Migrations.Client.Auth;

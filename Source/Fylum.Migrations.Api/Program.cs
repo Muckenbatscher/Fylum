@@ -1,6 +1,6 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using Fylum.Infrastructure.Postgres.Shared;
+using Fylum.Core.Infrastructure.Postgres;
 using Fylum.Migrations.Api.PerformingAuthentication;
 using Microsoft.AspNetCore.Authentication;
 using Scalar.AspNetCore;
@@ -31,7 +31,7 @@ public class Program
             options.MigrationPerformingKey = builder.Configuration["MIGRATION_PERFORMING_KEY"]!;
         });
 
-        builder.Services.AddPostgresSharedServices(options =>
+        builder.Services.AddPostgresCoreServices(options =>
         {
             options.ConnectionString = builder.Configuration.GetConnectionString("postgres")!;
         });
