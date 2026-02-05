@@ -1,14 +1,9 @@
-﻿using Fylum.Migrations.Api.Common.Infrastructure.Providing;
-
-namespace Fylum.Migrations.Api.Common.Infrastructure.Providing.Migrations;
+﻿namespace Fylum.Migrations.Api.Common.Infrastructure.Providing.Migrations;
 
 internal class FoldersMigration : MigrationFromEmbeddedResources
 {
     public override Guid Id => Guid.Parse("B7229CA2-C0B7-46E4-983D-59D92F70E8EF");
     public override string Name => "3_Folders";
-
-    protected override IEnumerable<string> ResourceFolderNameParts
-        => ["MigrationFiles", "3_Folders"];
 
     protected override IEnumerable<string> ResourceNames
     {

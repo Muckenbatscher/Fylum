@@ -9,7 +9,9 @@ public abstract class MigrationFromEmbeddedResources
     public abstract Guid Id { get; }
     public abstract string Name { get; }
 
-    protected abstract IEnumerable<string> ResourceFolderNameParts { get; }
+    protected virtual string ResourceFolderName => Name;
+    protected IEnumerable<string> ResourceFolderNameParts
+        => ["Common", "Infrastructure", "Providing", "MigrationFiles", ResourceFolderName];
     protected abstract IEnumerable<string> ResourceNames { get; }
 
     protected virtual Assembly ResourceAssembly => GetType().Assembly;
