@@ -7,9 +7,9 @@ namespace Fylum.Migrations.Api.Features.GetMigrations;
 
 public class GetMigrationsEndpoint : EndpointWithoutRequest<GetMigrationsResponse>
 {
-    private readonly IGetMigrationsCommandHandler _handler;
+    private readonly IGetMigrationsQueryHandler _handler;
 
-    public GetMigrationsEndpoint(IGetMigrationsCommandHandler handler)
+    public GetMigrationsEndpoint(IGetMigrationsQueryHandler handler)
     {
         _handler = handler;
     }
@@ -22,7 +22,7 @@ public class GetMigrationsEndpoint : EndpointWithoutRequest<GetMigrationsRespons
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var command = new GetMigrationsCommand();
+        var command = new GetMigrationsQuery();
         var commandResult = _handler.Handle(command);
 
         var errorHanding = await Send.EnsureErrorResultHandled(commandResult);

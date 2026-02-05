@@ -1,24 +1,23 @@
-﻿using Fylum.Core.Application.Command;
-using Fylum.Core.Application.Mapping;
+﻿using Fylum.Core.Application.Mapping;
 using Fylum.Core.Application.Results;
 using Fylum.Migrations.Api.Common.Domain;
 using Fylum.Migrations.SharedModels;
 
 namespace Fylum.Migrations.Api.Features.GetMigrationById;
 
-public class GetMigrationByIdCommandHandler : IGetMigrationByIdCommandHandler
+public class GetMigrationByIdQueryHandler : IGetMigrationByIdQueryHandler
 {
     private readonly IMigrationService _migrationService;
     private readonly IMapper<Migration, MigrationDto> _mapper;
 
-    public GetMigrationByIdCommandHandler(IMigrationService migrationService, 
+    public GetMigrationByIdQueryHandler(IMigrationService migrationService,
         IMapper<Migration, MigrationDto> mapper)
     {
         _migrationService = migrationService;
         _mapper = mapper;
     }
 
-    public Result<MigrationDto> Handle(GetMigrationByIdCommand command)
+    public Result<MigrationDto> Handle(GetMigrationByIdQuery command)
     {
         var migration = _migrationService.GetMigration(command.MigrationId);
         if (migration == null)

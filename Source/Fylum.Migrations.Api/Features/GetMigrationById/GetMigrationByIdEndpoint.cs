@@ -9,9 +9,9 @@ public class GetMigrationByIdEndpoint : EndpointWithoutRequest<GetMigrationByIdR
 {
     private const string IdParamName = "id";
 
-    private readonly IGetMigrationByIdCommandHandler _handler;
+    private readonly IGetMigrationByIdQueryHandler _handler;
 
-    public GetMigrationByIdEndpoint(IGetMigrationByIdCommandHandler handler)
+    public GetMigrationByIdEndpoint(IGetMigrationByIdQueryHandler handler)
     {
         _handler = handler;
     }
@@ -26,7 +26,7 @@ public class GetMigrationByIdEndpoint : EndpointWithoutRequest<GetMigrationByIdR
     public override async Task HandleAsync(CancellationToken ct)
     {
         var id = Route<Guid>(IdParamName);
-        var command = new GetMigrationByIdCommand(id);
+        var command = new GetMigrationByIdQuery(id);
         var commandResult = _handler.Handle(command);
 
         var errorHanding = await Send.EnsureErrorResultHandled(commandResult);
