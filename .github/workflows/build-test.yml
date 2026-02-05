@@ -27,8 +27,27 @@ jobs:
         name: build-output
         path: . 
 
-  unit-tests:
+  architecture-tests:
     needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: 
+        - Fylum.Migrations.Api.Architecture.Tests
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: build-output
+        path: .
+    - name: Restore Permissions
+      run: find . -type f -path "*/bin/*" -exec chmod +x {} +
+    - name: Run Architecture Tests
+      run: |
+        dotnet test --project Test/${{ matrix.project }}/${{ matrix.project }}.csproj \
+          --no-build -c Release --verbosity normal --property:EnableWindowsTargeting=true
+
+  unit-tests:
+    needs: architecture-tests
     runs-on: ubuntu-latest
     strategy:
       matrix:

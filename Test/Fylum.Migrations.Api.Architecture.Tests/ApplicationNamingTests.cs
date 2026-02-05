@@ -18,7 +18,7 @@ public sealed class ApplicationNamingTests
             .Should()
             .HaveNameEndingWith("CommandHandler")
             .GetResult();
-        Assert.IsTrue(result.IsSuccessful, $"Failing types: { string.Join(", ", result.FailingTypes)}");
+        Assert.IsTrue(result.IsSuccessful, $"Failing types: {string.Join(", ", result.FailingTypes)}");
     }
     [TestMethod]
     public void QueryHandler_ShouldHave_NameEndingWith_QueryHandler()
