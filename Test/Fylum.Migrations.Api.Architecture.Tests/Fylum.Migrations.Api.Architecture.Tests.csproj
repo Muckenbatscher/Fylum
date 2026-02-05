@@ -1,0 +1,8 @@
+﻿<Project Sdk="MSTest.Sdk">
+	<ItemGroup>
+	  <PackageReference Include="NetArchTest.Rules" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Source\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />
+	</ItemGroup>
+</Project>

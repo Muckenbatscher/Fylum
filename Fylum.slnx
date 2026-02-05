@@ -66,4 +66,7 @@
   <Folder Name="/Test/Api/Fylum.Folders/">
     <Project Path="Test/Fylum.Folders.Domain.Tests/Fylum.Folders.Domain.Tests.csproj" />
   </Folder>
+  <Folder Name="/Test/Api/Migrations/">
+    <Project Path="Test/Fylum.Migrations.Api.Architecture.Tests/Fylum.Migrations.Api.Architecture.Tests.csproj" />
+  </Folder>
 </Solution>
