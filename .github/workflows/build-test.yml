@@ -88,6 +88,7 @@ jobs:
         dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.crt --format PEM
         sudo cp ${HOME}/.aspnet/https/aspnetapp.crt /usr/local/share/ca-certificates/aspnetapp.crt
         sudo update-ca-certificates
+        dotnet dev-certs https --check-trust-machine-readable
     - name: Run End To End Test
       run: |
         dotnet test --project Test/${{ matrix.project }}/${{ matrix.project }}.csproj \
