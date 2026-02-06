@@ -8,10 +8,10 @@ namespace Fylum.Migrations.Api.Features.GetMigrations;
 public class GetMigrationsQueryHandler : IGetMigrationsQueryHandler
 {
     private readonly IMigrationService _migrationService;
-    private readonly IMapper<Migration, MigrationDto> _mapper;
+    private readonly IMapper<IEnumerable<Migration>, IEnumerable<MigrationDto>> _mapper;
 
     public GetMigrationsQueryHandler(IMigrationService migrationService,
-        IMapper<Migration, MigrationDto> mapper)
+        IMapper<IEnumerable<Migration>, IEnumerable<MigrationDto>> mapper)
     {
         _migrationService = migrationService;
         _mapper = mapper;
@@ -20,7 +20,6 @@ public class GetMigrationsQueryHandler : IGetMigrationsQueryHandler
     public Result<IEnumerable<MigrationDto>> Handle(GetMigrationsQuery command)
     {
         var migrations = _migrationService.GetMigrations();
-        var migrationResults = migrations.Select(_mapper.Map).ToList();
-        return migrationResults;
+        return _mapper.Map(migrations).ToList();
     }
 }
