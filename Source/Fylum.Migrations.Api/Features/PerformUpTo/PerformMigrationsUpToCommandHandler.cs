@@ -10,11 +10,11 @@ public class PerformMigrationsUpToCommandHandler : IPerformMigrationsUpToCommand
 {
     private readonly IPerformMigrationUnitOfWorkFactory _unitOfWorkFactory;
     private readonly IMigrationService _migrationService;
-    private readonly IMapper<Migration, MigrationDto> _mapper;
+    private readonly IMapper<IEnumerable<Migration>, IEnumerable<MigrationDto>> _mapper;
 
     public PerformMigrationsUpToCommandHandler(IPerformMigrationUnitOfWorkFactory unitOfWorkFactory,
         IMigrationService migrationService,
-        IMapper<Migration, MigrationDto> mapper)
+        IMapper<IEnumerable<Migration>, IEnumerable<MigrationDto>> mapper)
     {
         _unitOfWorkFactory = unitOfWorkFactory;
         _migrationService = migrationService;
@@ -54,6 +54,6 @@ public class PerformMigrationsUpToCommandHandler : IPerformMigrationsUpToCommand
         }
         unitOfWork.Commit();
 
-        return performedMigrations.Select(_mapper.Map).ToList();
+        return _mapper.Map(performedMigrations).ToList();
     }
 }
