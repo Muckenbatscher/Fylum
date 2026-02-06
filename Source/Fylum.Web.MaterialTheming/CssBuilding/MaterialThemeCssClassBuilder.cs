@@ -112,7 +112,7 @@ internal class MaterialThemeCssClassBuilder : IMaterialThemeCssClassBuilder
     {
         return $$"""
         .{{className}} {
-            background - color: var({{backgroundVariable}}) !important;
+            background-color: var({{backgroundVariable}}) !important;
             color: var({{foregroundVariable}}) !important;
          }
         """;

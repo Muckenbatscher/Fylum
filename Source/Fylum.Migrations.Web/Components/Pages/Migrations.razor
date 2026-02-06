@@ -16,40 +16,15 @@
 }
 else
 {
-    <MudTable Items="migrations" Hover="true" SortLabel="Sort By" Elevation="0" AllowUnsorted="false">
-        <HeaderContent>
-            <MudTh>ID</MudTh>
-            <MudTh>Name</MudTh>
-            <MudTh>Performed</MudTh>
-            <MudTh/>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="ID">@context.Id</MudTd>
-            <MudTd DataLabel="Name">@context.Name</MudTd>
-            <MudTd>
-                @if (context.IsPerformed)
-                {
-                    <MudChip T="string" Class=@MaterialThemingClasses.SecondaryContainer>Performed</MudChip>
-                    <MudText Inline="true" Typo="Typo.body2" Class=@MaterialThemingClasses.OnSurfaceVariant>@context.PerformedUtc!.Value.ToLocalTime().ToString("G")</MudText>
-                }
-                else
-                {
-                    <MudChip T="string" Class=@MaterialThemingClasses.Error>Not Performed</MudChip>
-                }
-            </MudTd>
-            <MudTd>
-                @if (!context.IsPerformed)
-                {
-                    <MudButton Disabled="@_currentlyPerformingMigration" 
-                        Variant="Variant.Filled" 
-                        Class=@MaterialThemingClasses.PrimaryContainer
-                        OnClick="() => PerformUpToMigration(context.Id)">
-                        Perform up to
-                    </MudButton>
-                }
-            </MudTd>
-        </RowTemplate>
-    </MudTable>
+    <MudStack>
+        @foreach (var migration in migrations)
+        {
+            <Migration
+                DisplayedMigration="migration" 
+                CanClickPerformUpTo="!_currentlyPerformingMigration"
+                OnPerformUpToClicked="PerformUpToMigration"/>    
+        }
+    </MudStack>
 }
 
 @code {

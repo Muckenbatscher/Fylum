@@ -1,0 +1,67 @@
+﻿<MudCard Class=@MaterialThemingClasses.SurfaceContainerHigh>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText>@DisplayedMigration.Name</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudStack Row="true">
+                <MudButton Variant="Variant.Filled"
+                           Class=@MaterialThemingClasses.SecondaryContainer
+                           OnClick="ScriptExpansionToggled">
+                    @ScriptsExpanderToggleName
+                </MudButton>
+
+                @if (!DisplayedMigration.IsPerformed)
+                {
+                    <MudButton Disabled="!CanClickPerformUpTo"
+                               Variant="Variant.Filled"
+                               Class=@MaterialThemingClasses.PrimaryContainer
+                               OnClick="RaiseOnPerformUpToClicked">
+                        Perform up to
+                    </MudButton>
+                }
+            </MudStack>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudText Class=@MaterialThemingClasses.OnSurfaceVariant>@DisplayedMigration.Id</MudText>
+
+        <MudCollapse Expanded="_scriptsExpanded">
+            <MudStack Row="true" Wrap="Wrap.Wrap">
+                @foreach (var script in DisplayedMigration.Scripts)
+                {
+                    <MudPaper Style="padding: 10pt">
+                        <MudText style="white-space: pre-wrap;">
+                            @script.Command
+                        </MudText>
+                    </MudPaper>
+                }
+            </MudStack>
+        </MudCollapse>
+    </MudCardContent>
+</MudCard>
+
+@code {
+    public Migration()
+    {
+        DisplayedMigration = new MigrationDto(Guid.Empty, string.Empty, [], false, null);
+    }
+
+    [Parameter]
+    public MigrationDto DisplayedMigration { get; set; }
+
+    [Parameter]
+    public bool CanClickPerformUpTo { get; set; }
+
+    [Parameter]
+    public EventCallback<Guid> OnPerformUpToClicked { get; set; }
+
+    private void RaiseOnPerformUpToClicked()
+    {
+        OnPerformUpToClicked.InvokeAsync(DisplayedMigration.Id);
+    }
+
+    private bool _scriptsExpanded = false;
+    private string ScriptsExpanderToggleName => _scriptsExpanded ? "Hide scripts" : "Show scripts";
+    private void ScriptExpansionToggled() => _scriptsExpanded = !_scriptsExpanded;
+}
