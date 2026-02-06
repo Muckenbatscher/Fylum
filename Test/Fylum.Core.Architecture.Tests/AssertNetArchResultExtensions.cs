@@ -1,6 +1,6 @@
 ﻿using TestResult = NetArchTest.Rules.TestResult;
 
-namespace Fylum.Migrations.Api.Architecture.Tests;
+namespace Fylum.Core.Architecture.Tests;
 
 internal static class AssertNetArchResultExtensions
 {

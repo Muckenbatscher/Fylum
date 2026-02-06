@@ -34,6 +34,7 @@ jobs:
       matrix:
         project: 
         - Fylum.Migrations.Api.Architecture.Tests
+        - Fylum.Core.Architecture.Tests
     steps:
     - uses: actions/download-artifact@v4
       with:
