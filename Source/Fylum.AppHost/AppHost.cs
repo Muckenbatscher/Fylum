@@ -7,18 +7,18 @@ internal class Program
     private static void Main(string[] args)
     {
         var builder = DistributedApplication.CreateBuilder(args);
-        bool isNonPersistent = builder.Configuration.GetValue("NonPersistent", false);
+        bool isPersistent = !builder.Configuration.GetValue("NonPersistent", false);
 
         var postgresPort = builder.Configuration.GetValue("Postgres:Port", 56789);
         var postgres = builder.AddPostgres("postgres", port: postgresPort);
-        if (!isNonPersistent)
+        if (isPersistent)
         {
             postgres.WithDataVolume("fylum_pgdata")
                 .WithLifetime(ContainerLifetime.Persistent);
         }
 
         var database = postgres.AddDatabase("fylum");
-        if (!isNonPersistent)
+        if (isPersistent)
             postgres.WithPreconfiguredPgAdmin(database, containerName: "pgadmin");
 
         var api = builder.AddProject<Projects.Fylum_Api>("api")
