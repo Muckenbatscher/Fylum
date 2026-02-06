@@ -25,38 +25,38 @@ public sealed class ApplicationNamingTests
     [TestMethod]
     public void CommandHandler_ShouldHave_NameEndingWith_CommandHandler()
     {
-        var result = CommandHandlerImplementations()
+        CommandHandlerImplementations()
             .Should()
             .HaveNameEndingWith("CommandHandler")
-            .GetResult();
-        Assert.Successful(result);
+            .GetResult()
+            .AssertSuccessful();
     }
     [TestMethod]
     public void CommandHandlers_Should_Match_CommandName()
     {
-        var result = CommandHandlerImplementations()
+        CommandHandlerImplementations()
             .Should()
             .MeetCustomRule(new CommandHandlerNameMatchesCommandRule())
-            .GetResult();
-        Assert.Successful(result);
+            .GetResult()
+            .AssertSuccessful();
     }
 
     [TestMethod]
     public void QueryHandler_ShouldHave_NameEndingWith_QueryHandler()
     {
-        var result = QueryHandlerImplementations()
+        QueryHandlerImplementations()
             .Should()
             .HaveNameEndingWith("QueryHandler")
-            .GetResult();
-        Assert.Successful(result);
+            .GetResult()
+            .AssertSuccessful();
     }
     [TestMethod]
     public void QueryHandlers_Should_Match_QueryName()
     {
-        var result = QueryHandlerImplementations()
+        QueryHandlerImplementations()
             .Should()
             .MeetCustomRule(new QueryHandlerNameMatchesQueryRule())
-            .GetResult();
-        Assert.Successful(result);
+            .GetResult()
+            .AssertSuccessful();
     }
 }

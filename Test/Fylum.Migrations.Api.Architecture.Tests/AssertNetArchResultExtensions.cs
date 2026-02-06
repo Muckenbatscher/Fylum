@@ -4,9 +4,9 @@ namespace Fylum.Migrations.Api.Architecture.Tests;
 
 internal static class AssertNetArchResultExtensions
 {
-    extension(Assert)
+    extension(TestResult result)
     {
-        public static void Successful(TestResult result)
+        public void AssertSuccessful()
         {
             Assert.IsTrue(result.IsSuccessful, $"Failing types: {string.Join(", ", result.FailingTypes)}");
         }
