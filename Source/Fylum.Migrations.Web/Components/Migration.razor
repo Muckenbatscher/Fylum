@@ -24,20 +24,32 @@
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>
-        <MudText Class=@MaterialThemingClasses.OnSurfaceVariant>@DisplayedMigration.Id</MudText>
+        <MudStack>
+            <MudText Class=@MaterialThemingClasses.OnSurfaceVariant>@DisplayedMigration.Id</MudText>
 
-        <MudCollapse Expanded="_scriptsExpanded">
-            <MudStack Row="true" Wrap="Wrap.Wrap">
-                @foreach (var script in DisplayedMigration.Scripts)
-                {
-                    <MudPaper Style="padding: 10pt">
-                        <MudText style="white-space: pre-wrap;">
-                            @script.Command
-                        </MudText>
-                    </MudPaper>
-                }
-            </MudStack>
-        </MudCollapse>
+            @if (DisplayedMigration.IsPerformed)
+            {
+                <MudChip T="string" Variant="Variant.Text" Class=@MaterialThemingClasses.Tertiary>Performed</MudChip>
+                <MudText Class=@MaterialThemingClasses.OnSurfaceVariant>@PerformedTimestamp</MudText>
+            }
+            else
+            {
+                <MudChip T="string" Variant="Variant.Text" Class=@MaterialThemingClasses.ErrorContainer>Not performed</MudChip>
+            }
+
+            <MudCollapse Expanded="_scriptsExpanded">
+                <MudStack Row="true" Wrap="Wrap.Wrap">
+                    @foreach (var script in DisplayedMigration.Scripts)
+                    {
+                        <MudPaper Style="padding: 10pt">
+                            <MudText style="white-space: pre-wrap;">
+                                @script.Command
+                            </MudText>
+                        </MudPaper>
+                    }
+                </MudStack>
+            </MudCollapse>
+        </MudStack>
     </MudCardContent>
 </MudCard>
 
@@ -60,6 +72,8 @@
     {
         OnPerformUpToClicked.InvokeAsync(DisplayedMigration.Id);
     }
+
+    private string PerformedTimestamp => $"{DisplayedMigration.PerformedUtc?.ToLocalTime():G}";
 
     private bool _scriptsExpanded = false;
     private string ScriptsExpanderToggleName => _scriptsExpanded ? "Hide scripts" : "Show scripts";
