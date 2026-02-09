@@ -26,6 +26,8 @@ jobs:
       with:
         name: build-output
         path: |
+          global.json
+          Directory.*.props
           **/bin/**
           **/*.csproj
 
