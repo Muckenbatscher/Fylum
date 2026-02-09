@@ -30,6 +30,7 @@ jobs:
           Directory.*.props
           **/bin/**
           **/*.csproj
+          **/launchSettings.json
 
   architecture-tests:
     needs: build
