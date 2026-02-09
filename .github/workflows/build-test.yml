@@ -31,6 +31,8 @@ jobs:
           **/bin/**
           **/*.csproj
           **/launchSettings.json
+          **/appsettings.json
+          **/appsettings.*.json
 
   architecture-tests:
     needs: build
