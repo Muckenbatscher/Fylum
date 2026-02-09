@@ -125,12 +125,4 @@ internal class MaterialThemeCssClassBuilder : IMaterialThemeCssClassBuilder
             color: var({{foregroundVariable}}) !important;        }
         """;
     }
-    private static string GetBackgroundCssClassFromColorVariable(string className, string backgroundVariable)
-    {
-        return $$"""
-        .{{className}} {
-            background-color: var({{backgroundVariable}}) !important;
-        }
-        """;
-    }
 }

@@ -1,7 +1,7 @@
 ﻿<MudCard Class=@MaterialThemingClasses.SurfaceContainerHigh>
     <MudCardHeader>
         <CardHeaderContent>
-            <MudText>@DisplayedMigration.Name</MudText>
+            <MudText Typo="Typo.h6">@DisplayedMigration.Name</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
             <MudStack Row="true">
@@ -24,32 +24,31 @@
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>
-        <MudStack>
-            <MudText Class=@MaterialThemingClasses.OnSurfaceVariant>@DisplayedMigration.Id</MudText>
-
+        <MudText Class=@MaterialThemingClasses.OnSurfaceVariant>@DisplayedMigration.Id</MudText>
+        <MudStack Row="true" AlignItems="AlignItems.Center">
             @if (DisplayedMigration.IsPerformed)
             {
-                <MudChip T="string" Variant="Variant.Text" Class=@MaterialThemingClasses.Tertiary>Performed</MudChip>
+                <MudChip T="string" Variant="Variant.Text" Class=@MaterialThemingClasses.SecondaryContainer>Performed</MudChip>
                 <MudText Class=@MaterialThemingClasses.OnSurfaceVariant>@PerformedTimestamp</MudText>
             }
             else
             {
                 <MudChip T="string" Variant="Variant.Text" Class=@MaterialThemingClasses.ErrorContainer>Not performed</MudChip>
             }
-
-            <MudCollapse Expanded="_scriptsExpanded">
-                <MudStack Row="true" Wrap="Wrap.Wrap">
-                    @foreach (var script in DisplayedMigration.Scripts)
-                    {
-                        <MudPaper Style="padding: 10pt">
-                            <MudText style="white-space: pre-wrap;">
-                                @script.Command
-                            </MudText>
-                        </MudPaper>
-                    }
-                </MudStack>
-            </MudCollapse>
         </MudStack>
+
+        <MudCollapse Expanded="_scriptsExpanded">
+            <MudStack Row="true" Wrap="Wrap.Wrap">
+                @foreach (var script in DisplayedMigration.Scripts)
+                {
+                    <MudPaper Style="padding: 10pt">
+                        <MudText style="white-space: pre-wrap;">
+                            @script.Command
+                        </MudText>
+                    </MudPaper>
+                }
+            </MudStack>
+        </MudCollapse>
     </MudCardContent>
 </MudCard>
 
