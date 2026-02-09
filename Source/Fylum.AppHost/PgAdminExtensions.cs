@@ -6,7 +6,13 @@ namespace Fylum.AppHost;
 public static class PgAdminExtensions
 {
     private static JsonSerializerOptions JsonSerializerOptions
-        => field ?? new JsonSerializerOptions { WriteIndented = true };
+    {
+        get
+        {
+            field ??= new JsonSerializerOptions { WriteIndented = true };
+            return field;
+        }
+    }
 
     public static IResourceBuilder<PgAdminContainerResource> WithSecureDynamicConfiguration(
             this IResourceBuilder<PgAdminContainerResource> pgAdminBuilder,

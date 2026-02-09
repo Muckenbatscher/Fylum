@@ -13,21 +13,21 @@ internal class MaterialThemeCssClassBuilder : IMaterialThemeCssClassBuilder
 
         yield return GetFullCssClassFromColorVariables(MaterialThemingClasses.Secondary,
             MaterialThemingVariables.Secondary, MaterialThemingVariables.OnSecondary);
-        yield return GetForegroundCssClassFromColorVariable(MaterialThemingClasses.Secondary,
+        yield return GetForegroundCssClassFromColorVariable(MaterialThemingClasses.SecondaryTransparent,
             MaterialThemingVariables.Secondary);
         yield return GetFullCssClassFromColorVariables(MaterialThemingClasses.SecondaryContainer,
             MaterialThemingVariables.SecondaryContainer, MaterialThemingVariables.OnSecondaryContainer);
 
         yield return GetFullCssClassFromColorVariables(MaterialThemingClasses.Tertiary,
             MaterialThemingVariables.Tertiary, MaterialThemingVariables.OnTertiary);
-        yield return GetForegroundCssClassFromColorVariable(MaterialThemingClasses.Tertiary,
+        yield return GetForegroundCssClassFromColorVariable(MaterialThemingClasses.TertiaryTransparent,
             MaterialThemingVariables.Tertiary);
         yield return GetFullCssClassFromColorVariables(MaterialThemingClasses.TertiaryContainer,
             MaterialThemingVariables.TertiaryContainer, MaterialThemingVariables.OnTertiaryContainer);
 
         yield return GetFullCssClassFromColorVariables(MaterialThemingClasses.Error,
             MaterialThemingVariables.Error, MaterialThemingVariables.OnError);
-        yield return GetForegroundCssClassFromColorVariable(MaterialThemingClasses.Error,
+        yield return GetForegroundCssClassFromColorVariable(MaterialThemingClasses.ErrorTransparent,
             MaterialThemingVariables.Error);
         yield return GetFullCssClassFromColorVariables(MaterialThemingClasses.ErrorContainer,
             MaterialThemingVariables.ErrorContainer, MaterialThemingVariables.OnErrorContainer);
@@ -112,7 +112,7 @@ internal class MaterialThemeCssClassBuilder : IMaterialThemeCssClassBuilder
     {
         return $$"""
         .{{className}} {
-            background - color: var({{backgroundVariable}}) !important;
+            background-color: var({{backgroundVariable}}) !important;
             color: var({{foregroundVariable}}) !important;
          }
         """;
@@ -123,14 +123,6 @@ internal class MaterialThemeCssClassBuilder : IMaterialThemeCssClassBuilder
         .{{className}} {
             background-color: transparent;
             color: var({{foregroundVariable}}) !important;        }
-        """;
-    }
-    private static string GetBackgroundCssClassFromColorVariable(string className, string backgroundVariable)
-    {
-        return $$"""
-        .{{className}} {
-            background-color: var({{backgroundVariable}}) !important;
-        }
         """;
     }
 }
