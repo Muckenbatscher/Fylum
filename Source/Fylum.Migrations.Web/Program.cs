@@ -13,7 +13,7 @@ builder.Services.AddMudServices();
 // Add MaterialTheming theme providers
 var themeBuilder = ThemeBuilder
     .CreateFromSourceColor("#9532a8")
-    .WithVariant(Variant.Expressive);
+    .WithVariant(Variant.Content);
 builder.Services.AddMaterialThemeProviderFromThemeBuilder(sp => themeBuilder)
     .AddMudBlazorThemeProvider();
 
