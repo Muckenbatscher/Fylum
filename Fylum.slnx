@@ -22,14 +22,14 @@
   <Folder Name="/Source/Api/Fylum/">
     <Project Path="Source/Fylum.Api/Fylum.Api.csproj" />
   </Folder>
-  <Folder Name="/Source/Api/Fylum/Fylum.Folders/">
+  <Folder Name="/Source/Api/Fylum/Folders/">
     <Project Path="Source/Fylum.Folders.Api.Models/Fylum.Folders.Api.Models.csproj" />
     <Project Path="Source/Fylum.Folders.Api/Fylum.Folders.Api.csproj" />
     <Project Path="Source/Fylum.Folders.Application/Fylum.Folders.Application.csproj" />
     <Project Path="Source/Fylum.Folders.Domain/Fylum.Folders.Domain.csproj" />
     <Project Path="Source/Fylum.Folders.Infrastructure.Postgres/Fylum.Folders.Infrastructure.Postgres.csproj" />
   </Folder>
-  <Folder Name="/Source/Api/Fylum/Fylum.UsersFolder/">
+  <Folder Name="/Source/Api/Fylum/Users/">
     <Project Path="Source/Fylum.Users.Api/Fylum.Users.Api.csproj" />
     <Project Path="Source/Fylum.Users.SharedModels/Fylum.Users.SharedModels.csproj" />
   </Folder>
