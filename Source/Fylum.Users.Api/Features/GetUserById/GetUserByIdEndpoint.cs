@@ -1,6 +1,6 @@
-﻿using Fylum.Api.Shared.JwtAuthentication;
-using Fylum.Core.Application.Query;
+﻿using Fylum.Core.Application.Query;
 using Fylum.Core.Presentation.Api.ErrorResult;
+using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Users.Api.Common.Domain;
 using Fylum.Users.SharedModels;
 using Microsoft.AspNetCore.Http;

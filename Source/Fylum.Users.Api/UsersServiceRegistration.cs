@@ -1,4 +1,5 @@
-﻿using Fylum.Core.Application.Command;
+﻿using Fylum.Core;
+using Fylum.Core.Application.Command;
 using Fylum.Core.Application.Query;
 using Fylum.Core.Domain;
 using Fylum.Users.Api.Common.Application.PasswordHash;
@@ -24,10 +25,7 @@ public static class UsersServiceRegistration
         services.AddTransient<IPasswordHashCalculator, PasswordHashCalculator>();
         services.AddTransient<IPasswordLoginVerification, PasswordLoginVerification>();
 
-        services.AddUnitOfWorkFactories();
-
-        services.AddCommandHandlers();
-        services.AddQueryHandlers();
+        services.AddCoreServices();
 
         services.AddPostgresRepositories();
 

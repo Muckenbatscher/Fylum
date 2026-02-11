@@ -20,7 +20,6 @@
     <Project Path="Source/Fylum.Core/Fylum.Core.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/">
-    <Project Path="Source/Fylum.Api.Shared/Fylum.Api.Shared.csproj" />
     <Project Path="Source/Fylum.Api/Fylum.Api.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Fylum.Folders/">

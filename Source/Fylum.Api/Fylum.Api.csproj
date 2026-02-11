@@ -13,7 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Fylum.Api.Shared\Fylum.Api.Shared.csproj" />
 		<ProjectReference Include="..\Fylum.Folders.Api\Fylum.Folders.Api.csproj" />
 		<ProjectReference Include="..\Fylum.Folders.Application\Fylum.Folders.Application.csproj" />
 		<ProjectReference Include="..\Fylum.Folders.Infrastructure.Postgres\Fylum.Folders.Infrastructure.Postgres.csproj" />

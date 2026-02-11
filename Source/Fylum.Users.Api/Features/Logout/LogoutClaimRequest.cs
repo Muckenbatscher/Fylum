@@ -1,5 +1,5 @@
 ﻿using FastEndpoints;
-using Fylum.Api.Shared.JwtAuthentication;
+using Fylum.Core.Presentation.Api.JwtAuthentication;
 
 namespace Fylum.Users.Api.Features.Logout;
 

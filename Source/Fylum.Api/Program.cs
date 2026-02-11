@@ -1,8 +1,8 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using Fylum.Api.Shared;
 using Fylum.Core.Infrastructure.Postgres;
+using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Folders.Api;
 using Fylum.Folders.Application;
 using Fylum.Folders.Infrastructure.Postgres;
@@ -26,7 +26,7 @@ public class Program
             .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
             .SwaggerDocument();
 
-        builder.Services.AddApiSharedServices(options =>
+        builder.Services.AddJwtTokenCoreServices(options =>
         {
             options.SigningKey = builder.Configuration.GetValue<string>("JwtAuth:SigningKey")!;
             options.AccessTokenExpirationInMinutes = builder.Configuration.GetValue("JwtAuth:AccessTokenExpirationMinutes", 1);

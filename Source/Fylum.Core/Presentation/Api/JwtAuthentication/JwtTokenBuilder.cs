@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
-namespace Fylum.Api.Shared.JwtAuthentication;
+namespace Fylum.Core.Presentation.Api.JwtAuthentication;
 
 public class JwtTokenBuilder : IJwtTokenBuilder
 {

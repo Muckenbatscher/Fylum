@@ -1,6 +1,6 @@
-﻿using Fylum.Api.Shared.JwtAuthentication;
-using Fylum.Core.Application.Query;
+﻿using Fylum.Core.Application.Query;
 using Fylum.Core.Presentation.Api.ErrorResult;
+using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Folders.Api.Models;
 using Fylum.Folders.Application;
 using Fylum.Folders.Application.GetFolder;

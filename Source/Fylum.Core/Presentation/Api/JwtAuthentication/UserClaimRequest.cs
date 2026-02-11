@@ -1,7 +1,6 @@
 ﻿using FastEndpoints;
-using Fylum.Api.Shared.JwtAuthentication;
 
-namespace Fylum.Api.Shared;
+namespace Fylum.Core.Presentation.Api.JwtAuthentication;
 
 public class UserClaimRequest
 {
