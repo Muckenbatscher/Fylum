@@ -1,6 +1,6 @@
 ﻿using Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
 using Fylum.Client.Auth;
-using Fylum.Users.Api.Models;
+using Fylum.Users.SharedModels;
 
 namespace Fylum.Api.EndToEnd.Tests;
 

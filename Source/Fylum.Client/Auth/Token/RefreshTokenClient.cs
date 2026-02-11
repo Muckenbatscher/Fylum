@@ -1,4 +1,4 @@
-﻿using Fylum.Users.Api.Models;
+﻿using Fylum.Users.SharedModels;
 using System.Net.Http.Json;
 
 namespace Fylum.Client.Auth.Token;

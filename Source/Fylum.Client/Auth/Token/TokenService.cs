@@ -1,6 +1,6 @@
 ﻿using Fylum.Client.Auth.Token.Expiration;
 using Fylum.Client.Auth.Token.Storage;
-using Fylum.Users.Api.Models;
+using Fylum.Users.SharedModels;
 
 namespace Fylum.Client.Auth.Token;
 

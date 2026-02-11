@@ -2,13 +2,11 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using Fylum.Api.Shared;
+using Fylum.Core.Infrastructure.Postgres;
 using Fylum.Folders.Api;
 using Fylum.Folders.Application;
 using Fylum.Folders.Infrastructure.Postgres;
-using Fylum.Infrastructure.Postgres.Shared;
 using Fylum.Users.Api;
-using Fylum.Users.Application;
-using Fylum.Users.Infrastructure.Postgres;
 using Scalar.AspNetCore;
 using System.Reflection;
 
@@ -34,13 +32,13 @@ public class Program
             options.AccessTokenExpirationInMinutes = builder.Configuration.GetValue("JwtAuth:AccessTokenExpirationMinutes", 1);
         });
 
-        builder.Services.AddPostgresSharedServices(options =>
+        builder.Services.AddPostgresCoreServices(options =>
         {
             options.ConnectionString = builder.Configuration.GetConnectionString("postgres")
                 ?? string.Empty;
         });
 
-        builder.Services.AddUsersApplicationServices(passwordHashOptions =>
+        builder.Services.AddUsersServices(passwordHashOptions =>
         {
             passwordHashOptions.IterationCount = builder.Configuration.GetValue<int>("PasswordHashing:IterationCount");
             passwordHashOptions.SaltBitsCount = builder.Configuration.GetValue<int>("PasswordHashing:SaltBits");
@@ -52,7 +50,6 @@ public class Program
             var expirationDays = builder.Configuration.GetValue("RefreshToken:RefreshTokenExpirationDays", 1);
             refreshTokenOptions.RefreshTokenExpirationInDays = expirationDays;
         });
-        builder.Services.AddUsersPostgresServices();
 
         builder.Services.AddFolderApplicationServices();
         builder.Services.AddFolderPostgresServices();

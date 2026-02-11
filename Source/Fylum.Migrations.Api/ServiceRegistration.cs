@@ -3,12 +3,12 @@ using Fylum.Core.Application.Mapping;
 using Fylum.Core.Application.Query;
 using Fylum.Core.Domain;
 using Fylum.Core.Infrastructure.Postgres;
+using Fylum.Migrations.Api.Authentication;
 using Fylum.Migrations.Api.Common.Domain;
 using Fylum.Migrations.Api.Common.Domain.Perform;
 using Fylum.Migrations.Api.Common.Domain.Providing;
 using Fylum.Migrations.Api.Common.Infrastructure.Postgres;
 using Fylum.Migrations.Api.Common.Infrastructure.Providing;
-using Fylum.Migrations.Api.PerformingAuthentication;
 
 namespace Fylum.Migrations.Api;
 
