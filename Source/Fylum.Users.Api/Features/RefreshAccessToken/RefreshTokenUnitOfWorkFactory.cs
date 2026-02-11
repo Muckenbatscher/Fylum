@@ -1,4 +1,4 @@
-﻿using Fylum.Application;
+﻿using Fylum.Core.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Users.Api.Features.RefreshAccessToken;

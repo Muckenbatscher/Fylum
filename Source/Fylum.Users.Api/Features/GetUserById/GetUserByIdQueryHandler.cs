@@ -1,4 +1,5 @@
-﻿using Fylum.Application;
+﻿using Fylum.Core.Application.Query;
+using Fylum.Core.Application.Results;
 using Fylum.Users.Api.Common.Domain;
 
 namespace Fylum.Users.Api.Features.GetUserById;

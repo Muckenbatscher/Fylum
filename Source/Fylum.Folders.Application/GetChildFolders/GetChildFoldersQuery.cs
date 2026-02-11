@@ -1,4 +1,4 @@
-﻿using Fylum.Application;
+﻿using Fylum.Core.Application.Query;
 
 namespace Fylum.Folders.Application.GetChildFolders;
 

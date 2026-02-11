@@ -1,4 +1,6 @@
-﻿using Fylum.Application;
+﻿using Fylum.Core.Application.Command;
+using Fylum.Core.Application.Query;
+using Fylum.Core.Domain;
 using Fylum.Users.Api.Common.Application.PasswordHash;
 using Fylum.Users.Api.Common.Domain;
 using Fylum.Users.Api.Common.Domain.Password;

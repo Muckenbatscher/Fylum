@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\Fylum.Domain\Fylum.Domain.csproj" />
+    <ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
   </ItemGroup>
 </Project>

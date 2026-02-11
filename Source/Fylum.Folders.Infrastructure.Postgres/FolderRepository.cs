@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using Fylum.Domain.UnitOfWork;
+using Fylum.Core.Domain;
 using Fylum.Folders.Domain;
 
 namespace Fylum.Folders.Infrastructure.Postgres;

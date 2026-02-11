@@ -1,4 +1,4 @@
-﻿namespace Fylum.Domain;
+﻿namespace Fylum.Core.Domain;
 
 public abstract class IdentifiableEntity<Key>
     where Key : struct

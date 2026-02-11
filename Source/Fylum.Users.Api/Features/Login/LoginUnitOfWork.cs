@@ -1,4 +1,4 @@
-﻿using Fylum.Domain.UnitOfWork;
+﻿using Fylum.Core.Domain;
 using Fylum.Users.Api.Common.Domain.Password;
 using Fylum.Users.Api.Common.Domain.RefreshToken;
 

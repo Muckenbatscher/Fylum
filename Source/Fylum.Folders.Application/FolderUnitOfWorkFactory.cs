@@ -1,4 +1,4 @@
-﻿using Fylum.Application;
+﻿using Fylum.Core.Domain;
 using Fylum.Folders.Domain;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,4 +1,4 @@
-﻿using Fylum.Domain.UnitOfWork;
+﻿using Fylum.Core.Domain;
 
 namespace Fylum.Folders.Domain;
 

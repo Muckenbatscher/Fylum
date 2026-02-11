@@ -1,5 +1,6 @@
-﻿using Fylum.Application;
-using Fylum.Domain.UnitOfWork;
+﻿using Fylum.Core.Application.Command;
+using Fylum.Core.Application.Results;
+using Fylum.Core.Domain;
 using Fylum.Users.Api.Common.Domain.Password;
 using Fylum.Users.Api.Common.Domain.RefreshToken;
 using Fylum.Users.Api.Features.RefreshAccessToken;

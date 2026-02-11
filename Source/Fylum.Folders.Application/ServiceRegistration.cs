@@ -1,4 +1,6 @@
-﻿using Fylum.Application;
+﻿using Fylum.Core.Application.Command;
+using Fylum.Core.Application.Query;
+using Fylum.Core.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fylum.Folders.Application;

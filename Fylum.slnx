@@ -17,10 +17,7 @@
   </Folder>
   <Folder Name="/Source/Api/" />
   <Folder Name="/Source/Api/Common/">
-    <Project Path="Source/Fylum.Application/Fylum.Application.csproj" />
     <Project Path="Source/Fylum.Core/Fylum.Core.csproj" />
-    <Project Path="Source/Fylum.Domain/Fylum.Domain.csproj" />
-    <Project Path="Source/Fylum.Infrastructure.Postgres.Shared/Fylum.Infrastructure.Postgres.Shared.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/">
     <Project Path="Source/Fylum.Api.Shared/Fylum.Api.Shared.csproj" />
@@ -58,7 +55,6 @@
   <Folder Name="/Test/" />
   <Folder Name="/Test/Api/">
     <Project Path="Test/Fylum.Api.EndToEnd.Tests/Fylum.Api.EndToEnd.Tests.csproj" />
-    <Project Path="Test/Fylum.Postgres.Shared.Tests/Fylum.Postgres.Shared.Tests.csproj" />
   </Folder>
   <Folder Name="/Test/Api/Core/">
     <Project Path="Test/Fylum.Core.Architecture.Tests/Fylum.Core.Architecture.Tests.csproj" Id="47476730-d9d3-4719-a799-74aaf254006c" />

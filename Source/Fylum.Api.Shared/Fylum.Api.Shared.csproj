@@ -7,7 +7,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Fylum.Application\Fylum.Application.csproj" />
+	  <ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
 	</ItemGroup>
 	
 </Project>

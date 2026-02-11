@@ -1,4 +1,4 @@
-﻿using Fylum.Domain;
+﻿using Fylum.Core.Domain;
 
 namespace Fylum.Users.Api.Common.Domain;
 
