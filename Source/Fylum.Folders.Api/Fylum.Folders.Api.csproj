@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+		<PackageReference Include="Dapper" />
 		<PackageReference Include="FastEndpoints" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
 	  <ProjectReference Include="..\Fylum.Folders.SharedModels\Fylum.Folders.SharedModels.csproj" />
-	  <ProjectReference Include="..\Fylum.Folders.Application\Fylum.Folders.Application.csproj" />
 	</ItemGroup>
 </Project>

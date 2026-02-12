@@ -1,4 +1,4 @@
-﻿using Fylum.Folders.Api.Models;
+﻿using Fylum.Folders.SharedModels;
 
 namespace Fylum.Client.Folders;
 

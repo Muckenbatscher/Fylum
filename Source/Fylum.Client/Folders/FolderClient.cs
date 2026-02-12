@@ -1,5 +1,5 @@
 ﻿using Fylum.Client.HttpMessaging;
-using Fylum.Folders.Api.Models;
+using Fylum.Folders.SharedModels;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;

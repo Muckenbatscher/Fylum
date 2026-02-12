@@ -4,8 +4,6 @@ using FastEndpoints.Swagger;
 using Fylum.Core.Infrastructure.Postgres;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Folders.Api;
-using Fylum.Folders.Application;
-using Fylum.Folders.Infrastructure.Postgres;
 using Fylum.Users.Api;
 using Scalar.AspNetCore;
 using System.Reflection;
@@ -50,9 +48,7 @@ public class Program
             var expirationDays = builder.Configuration.GetValue("RefreshToken:RefreshTokenExpirationDays", 1);
             refreshTokenOptions.RefreshTokenExpirationInDays = expirationDays;
         });
-
-        builder.Services.AddFolderApplicationServices();
-        builder.Services.AddFolderPostgresServices();
+        builder.Services.AddFoldersServices();
 
         var app = builder.Build();
 
