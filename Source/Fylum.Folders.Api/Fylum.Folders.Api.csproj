@@ -3,7 +3,7 @@
 		<PackageReference Include="FastEndpoints" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Fylum.Folders.Api.Models\Fylum.Folders.Api.Models.csproj" />
+	  <ProjectReference Include="..\Fylum.Folders.SharedModels\Fylum.Folders.SharedModels.csproj" />
 	  <ProjectReference Include="..\Fylum.Folders.Application\Fylum.Folders.Application.csproj" />
 	</ItemGroup>
 </Project>

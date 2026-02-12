@@ -23,7 +23,7 @@
     <Project Path="Source/Fylum.Api/Fylum.Api.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Folders/">
-    <Project Path="Source/Fylum.Folders.Api.Models/Fylum.Folders.Api.Models.csproj" />
+    <Project Path="Source/Fylum.Folders.SharedModels/Fylum.Folders.SharedModels.csproj" />
     <Project Path="Source/Fylum.Folders.Api/Fylum.Folders.Api.csproj" />
     <Project Path="Source/Fylum.Folders.Application/Fylum.Folders.Application.csproj" />
     <Project Path="Source/Fylum.Folders.Domain/Fylum.Folders.Domain.csproj" />
