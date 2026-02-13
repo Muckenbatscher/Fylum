@@ -1,6 +1,8 @@
 ﻿using Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
 using Fylum.Client.Auth;
 using Fylum.Users.SharedModels;
+using Fylum.Users.SharedModels.Login;
+using Fylum.Users.SharedModels.Register;
 
 namespace Fylum.Api.EndToEnd.Tests;
 
@@ -42,8 +44,8 @@ public sealed class UsersTests
         var loginRequest = new LoginRequest(testUsername, testPassword);
         var loginResult = await authClient.LoginAsync(loginRequest, TestContext.CancellationToken);
 
-        Assert.IsFalse(string.IsNullOrWhiteSpace(loginResult.AccessToken));
-        Assert.IsFalse(string.IsNullOrWhiteSpace(loginResult.RefreshToken));
+        Assert.IsFalse(string.IsNullOrWhiteSpace(loginResult.Tokens.AccessToken));
+        Assert.IsFalse(string.IsNullOrWhiteSpace(loginResult.Tokens.RefreshToken));
     }
 
     [TestMethod]
@@ -61,7 +63,7 @@ public sealed class UsersTests
         var loginRequest = new LoginRequest(seedAdminUsername, seedAdminPassword);
         var loginResult = await authClient.LoginAsync(loginRequest, TestContext.CancellationToken);
 
-        Assert.IsFalse(string.IsNullOrWhiteSpace(loginResult.AccessToken));
-        Assert.IsFalse(string.IsNullOrWhiteSpace(loginResult.RefreshToken));
+        Assert.IsFalse(string.IsNullOrWhiteSpace(loginResult.Tokens.AccessToken));
+        Assert.IsFalse(string.IsNullOrWhiteSpace(loginResult.Tokens.RefreshToken));
     }
 }

@@ -1,27 +1,32 @@
-﻿using Fylum.Core.Application.Command;
+﻿using Fylum.Core.Application.Mapping;
 using Fylum.Core.Application.Results;
 using Fylum.Core.Domain;
 using Fylum.Users.Api.Common.Application.PasswordHash;
+using Fylum.Users.Api.Common.Domain;
 using Fylum.Users.Api.Common.Domain.Password;
 using Fylum.Users.Api.Common.Domain.RefreshToken;
 using Fylum.Users.Api.Features.RefreshAccessToken;
+using Fylum.Users.SharedModels;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Api.Features.Register;
 
-public class UserRegisterCommandHandler : ICommandHandler<UserRegisterCommand, UserRegisterResult>
+public class UserRegisterCommandHandler : IUserRegisterCommandHandler
 {
     private readonly IUnitOfWorkFactory<UserRegisterUnitOfWork> _unitOfWorkFactory;
     private readonly IPasswordHashCalculator _hashCalculator;
     private readonly RefreshTokenOptions _refreshTokenOptions;
+    private readonly IMapper<User, UserDto> _userMapper;
 
     public UserRegisterCommandHandler(IUnitOfWorkFactory<UserRegisterUnitOfWork> unitOfWorkFactory,
         IPasswordHashCalculator hashCalculator,
-        IOptions<RefreshTokenOptions> refreshTokenOptions)
+        IOptions<RefreshTokenOptions> refreshTokenOptions,
+        IMapper<User, UserDto> userMapper)
     {
         _unitOfWorkFactory = unitOfWorkFactory;
         _hashCalculator = hashCalculator;
         _refreshTokenOptions = refreshTokenOptions.Value;
+        _userMapper = userMapper;
     }
 
     public Result<UserRegisterResult> Handle(UserRegisterCommand command)
@@ -42,6 +47,7 @@ public class UserRegisterCommandHandler : ICommandHandler<UserRegisterCommand, U
         unitOfWork.RefreshTokenRepository.Add(refreshToken);
 
         unitOfWork.Commit();
-        return new UserRegisterResult(userLogin.User.Id, refreshToken.Id, refreshToken.ExpiresAt);
+        var userDto = _userMapper.Map(userLogin.User);
+        return new UserRegisterResult(userDto, refreshToken.Id, refreshToken.ExpiresAt);
     }
 }

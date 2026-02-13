@@ -1,21 +1,22 @@
-﻿using Fylum.Core.Application.Command;
+﻿using FastEndpoints;
 using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Users.SharedModels;
+using Fylum.Users.SharedModels.Login;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Users.Api.Features.Login;
 
-public class LoginEndpoint : FastEndpoints.Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
+public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok<LoginResponse>, UnauthorizedHttpResult>>
 {
-    private readonly ICommandHandler<UserLoginCommand, UserLoginResult> _commandHandler;
+    private readonly IUserLoginCommandHandler _handler;
     private readonly IJwtTokenBuilder _jwtTokenBuilder;
 
-    public LoginEndpoint(ICommandHandler<UserLoginCommand, UserLoginResult> commandHandler,
+    public LoginEndpoint(IUserLoginCommandHandler commandHandler,
         IJwtTokenBuilder jwtTokenBuilder)
     {
-        _commandHandler = commandHandler;
+        _handler = commandHandler;
         _jwtTokenBuilder = jwtTokenBuilder;
     }
 
@@ -29,17 +30,19 @@ public class LoginEndpoint : FastEndpoints.Endpoint<LoginRequest, Results<Ok<Log
     public override async Task HandleAsync(LoginRequest req, CancellationToken ct)
     {
         var command = new UserLoginCommand(req.Username, req.Password);
-        var loginResult = _commandHandler.Handle(command);
+        var loginResult = _handler.Handle(command);
 
         var errorHanding = await Send.EnsureErrorResultHandled(loginResult);
         if (errorHanding.ErrorResultHandlingRequired)
             return;
 
         var result = loginResult.Value;
-        var accessToken = _jwtTokenBuilder.BuildAccessToken(result.UserId);
+        var accessToken = _jwtTokenBuilder.BuildAccessToken(result.User.Id);
         var refreshToken = _jwtTokenBuilder.BuildRefreshToken(
-            result.UserId, result.RefreshTokenId, result.RefreshTokenExpiration);
-        var response = new LoginResponse(accessToken, refreshToken);
+            result.User.Id, result.RefreshTokenId, result.RefreshTokenExpiration);
+
+        var tokenPairDto = new TokenPairDto(accessToken, refreshToken);
+        var response = new LoginResponse(tokenPairDto);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
 }

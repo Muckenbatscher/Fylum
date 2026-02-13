@@ -1,4 +1,4 @@
-﻿using Fylum.Core.Application.Command;
+﻿using FastEndpoints;
 using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Users.SharedModels;
@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Fylum.Users.Api.Features.Logout;
 
-public class LogoutEndpoint : FastEndpoints.Endpoint<LogoutClaimRequest, Results<Ok, UnauthorizedHttpResult>>
+public class LogoutEndpoint : Endpoint<LogoutClaimRequest, Results<Ok, UnauthorizedHttpResult>>
 {
-    private readonly ICommandHandler<LogoutCommand> _commandHandler;
+    private readonly ILogoutCommandHandler _commandHandler;
 
-    public LogoutEndpoint(ICommandHandler<LogoutCommand> commandHandler)
+    public LogoutEndpoint(ILogoutCommandHandler commandHandler)
     {
         _commandHandler = commandHandler;
     }

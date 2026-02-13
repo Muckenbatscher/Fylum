@@ -1,4 +1,4 @@
-﻿using Fylum.Users.SharedModels;
+﻿using Fylum.Users.SharedModels.RefreshAccessToken;
 
 namespace Fylum.Client.Auth.Token;
 

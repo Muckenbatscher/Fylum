@@ -1,3 +1,5 @@
-﻿namespace Fylum.Users.Api.Features.RefreshAccessToken;
+﻿using Fylum.Users.SharedModels;
 
-public record TokenRefreshResult(Guid UserId, Guid TokenRefreshId, DateTimeOffset RefreshTokenExpiration);
+namespace Fylum.Users.Api.Features.RefreshAccessToken;
+
+public record TokenRefreshResult(UserDto User, Guid TokenRefreshId, DateTimeOffset RefreshTokenExpiration);

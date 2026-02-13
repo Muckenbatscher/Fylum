@@ -1,6 +1,6 @@
 ﻿using Fylum.Client.Auth.Token.Expiration;
 using Fylum.Client.Auth.Token.Storage;
-using Fylum.Users.SharedModels;
+using Fylum.Users.SharedModels.Login;
 
 namespace Fylum.Client.Auth.Token;
 
@@ -35,7 +35,7 @@ public class TokenService : ITokenService
         var loginRequest = new LoginRequest(username, password);
         var loginResult = await _authClient.LoginAsync(loginRequest, cancellationToken);
 
-        var tokenPair = new TokenPair(loginResult.AccessToken, loginResult.RefreshToken);
+        var tokenPair = new TokenPair(loginResult.Tokens.AccessToken, loginResult.Tokens.RefreshToken);
         await _storage.StoreTokenPairAsync(tokenPair);
     }
     public async Task LoginAsync(string username, string password) => await LoginAsync(username, password, CancellationToken.None);
@@ -65,7 +65,7 @@ public class TokenService : ITokenService
             var refreshResult = await _refreshTokenClient.RefreshTokenAsync(cancellationToken);
 
             var newTokenPair = new TokenPair(
-                refreshResult.AccessToken, refreshResult.RefreshToken);
+                refreshResult.Tokens.AccessToken, refreshResult.Tokens.RefreshToken);
             await _storage.StoreTokenPairAsync(newTokenPair);
         }
         finally

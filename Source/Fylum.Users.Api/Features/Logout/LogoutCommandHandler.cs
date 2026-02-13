@@ -1,10 +1,9 @@
-﻿using Fylum.Core.Application.Command;
-using Fylum.Core.Application.Results;
+﻿using Fylum.Core.Application.Results;
 using Fylum.Core.Domain;
 
 namespace Fylum.Users.Api.Features.Logout;
 
-public class LogoutCommandHandler : ICommandHandler<LogoutCommand>
+public class LogoutCommandHandler : ILogoutCommandHandler
 {
     private readonly IUnitOfWorkFactory<LogoutUnitOfWork> _unitOfWorkFactory;
 

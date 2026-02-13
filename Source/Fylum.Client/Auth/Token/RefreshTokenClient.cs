@@ -1,4 +1,5 @@
 ﻿using Fylum.Users.SharedModels;
+using Fylum.Users.SharedModels.RefreshAccessToken;
 using System.Net.Http.Json;
 
 namespace Fylum.Client.Auth.Token;

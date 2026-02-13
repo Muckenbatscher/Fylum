@@ -1,9 +1,12 @@
 ﻿using Fylum.Core.Application.Command;
+using Fylum.Core.Application.Mapping;
 using Fylum.Core.Application.Results;
 using Fylum.Core.Domain;
+using Fylum.Users.Api.Common.Domain;
 using Fylum.Users.Api.Common.Domain.Password;
 using Fylum.Users.Api.Common.Domain.RefreshToken;
 using Fylum.Users.Api.Features.RefreshAccessToken;
+using Fylum.Users.SharedModels;
 using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Api.Features.Login;
@@ -13,14 +16,17 @@ public class UserLoginCommandHandler : ICommandHandler<UserLoginCommand, UserLog
     private readonly IUnitOfWorkFactory<LoginUnitOfWork> _loginUnitOfWorkFactory;
     private readonly IPasswordLoginVerification _loginVerification;
     private readonly RefreshTokenOptions _refreshTokenOptions;
+    private readonly IMapper<User, UserDto> _userMapper;
 
     public UserLoginCommandHandler(IUnitOfWorkFactory<LoginUnitOfWork> loginUnitOfWorkFactory,
         IPasswordLoginVerification loginVerification,
-        IOptions<RefreshTokenOptions> refreshTokenOptions)
+        IOptions<RefreshTokenOptions> refreshTokenOptions,
+        IMapper<User, UserDto> userMapper)
     {
         _loginUnitOfWorkFactory = loginUnitOfWorkFactory;
         _loginVerification = loginVerification;
         _refreshTokenOptions = refreshTokenOptions.Value;
+        _userMapper = userMapper;
     }
 
     public Result<UserLoginResult> Handle(UserLoginCommand command)
@@ -45,6 +51,7 @@ public class UserLoginCommandHandler : ICommandHandler<UserLoginCommand, UserLog
 
         loginUnitOfWork.Commit();
 
-        return new UserLoginResult(userLogin.User.Id, refreshToken.Id, refreshToken.ExpiresAt);
+        var userDto = _userMapper.Map(userLogin.User);
+        return new UserLoginResult(userDto, refreshToken.Id, refreshToken.ExpiresAt);
     }
 }

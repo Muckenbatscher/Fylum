@@ -2,6 +2,7 @@
 using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Users.SharedModels;
+using Fylum.Users.SharedModels.RefreshAccessToken;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -9,10 +10,10 @@ namespace Fylum.Users.Api.Features.RefreshAccessToken;
 
 public class TokenRefreshEndpoint : FastEndpoints.Endpoint<TokenRefreshClaimRequest, Results<Ok<TokenRefreshResponse>, UnauthorizedHttpResult, NotFound>>
 {
-    private readonly ICommandHandler<TokenRefreshCommand, TokenRefreshResult> _commandHandler;
+    private readonly ITokenRefreshCommandHandler _commandHandler;
     private readonly IJwtTokenBuilder _jwtTokenBuilder;
 
-    public TokenRefreshEndpoint(ICommandHandler<TokenRefreshCommand, TokenRefreshResult> commandHandler,
+    public TokenRefreshEndpoint(ITokenRefreshCommandHandler commandHandler,
         IJwtTokenBuilder jwtTokenBuilder)
     {
         _commandHandler = commandHandler;
@@ -36,10 +37,12 @@ public class TokenRefreshEndpoint : FastEndpoints.Endpoint<TokenRefreshClaimRequ
             return;
 
         var result = refreshResult.Value;
-        var accessToken = _jwtTokenBuilder.BuildAccessToken(result.UserId);
+        var accessToken = _jwtTokenBuilder.BuildAccessToken(result.User.Id);
         var refreshToken = _jwtTokenBuilder.BuildRefreshToken(
-            result.UserId, result.TokenRefreshId, result.RefreshTokenExpiration);
-        var response = new TokenRefreshResponse(accessToken, refreshToken);
+            result.User.Id, result.TokenRefreshId, result.RefreshTokenExpiration);
+
+        var tokenPair = new TokenPairDto(accessToken, refreshToken);
+        var response = new TokenRefreshResponse(tokenPair);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
 }

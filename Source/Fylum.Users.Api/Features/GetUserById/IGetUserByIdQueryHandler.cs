@@ -3,6 +3,6 @@ using Fylum.Users.SharedModels;
 
 namespace Fylum.Users.Api.Features.GetUserById;
 
-public record GetUserByIdQuery(Guid UserId) : IQuery<UserDto>
+public interface IGetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, UserDto>
 {
 }

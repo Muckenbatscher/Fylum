@@ -1,3 +1,5 @@
-﻿namespace Fylum.Users.Api.Features.Login;
+﻿using Fylum.Users.SharedModels;
 
-public record UserLoginResult(Guid UserId, Guid RefreshTokenId, DateTimeOffset RefreshTokenExpiration);
+namespace Fylum.Users.Api.Features.Login;
+
+public record UserLoginResult(UserDto User, Guid RefreshTokenId, DateTimeOffset RefreshTokenExpiration);
