@@ -4,8 +4,10 @@ public class EndpointRoutes
 {
     public static string UsersBaseRoute => "users";
     public static string UserGroupsBaseRoute => $"{UsersBaseRoute}/groups";
-    public static string LoginRoute => "auth/login";
-    public static string LogoutRoute => "auth/logout";
-    public static string RegisterRoute => "auth/register";
-    public static string TokenRefreshRoute => "auth/token-refresh";
+
+    public static string AuthBaseRoute => "auth";
+    public static string LoginRoute => $"{AuthBaseRoute}/login";
+    public static string LogoutRoute => $"{AuthBaseRoute}/logout";
+    public static string RegisterRoute => $"{AuthBaseRoute}/register";
+    public static string TokenRefreshRoute => $"{AuthBaseRoute}/token-refresh";
 }
