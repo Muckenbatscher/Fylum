@@ -1,5 +1,4 @@
-﻿using Fylum.Core.Application.Command;
-using Fylum.Core.Application.Mapping;
+﻿using Fylum.Core.Application.Mapping;
 using Fylum.Core.Application.Results;
 using Fylum.Core.Domain;
 using Fylum.Users.Api.Common.Domain;
@@ -11,7 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Fylum.Users.Api.Features.Login;
 
-public class UserLoginCommandHandler : ICommandHandler<UserLoginCommand, UserLoginResult>
+public class UserLoginCommandHandler : IUserLoginCommandHandler
 {
     private readonly IUnitOfWorkFactory<LoginUnitOfWork> _loginUnitOfWorkFactory;
     private readonly IPasswordLoginVerification _loginVerification;
