@@ -1,5 +1,9 @@
 ﻿using Fylum.Client.HttpMessaging;
 using Fylum.Folders.SharedModels;
+using Fylum.Folders.SharedModels.CreateFolder;
+using Fylum.Folders.SharedModels.GetChildFolders;
+using Fylum.Folders.SharedModels.GetFolderById;
+using Fylum.Folders.SharedModels.GetRootFolder;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -15,21 +19,21 @@ public class FolderClient : IFolderClient
         _httpClient = httpClient;
     }
 
-    public async Task<GetFolderResponse> GetRootFolderAsync() => await GetRootFolderAsync(CancellationToken.None);
-    public async Task<GetFolderResponse> GetRootFolderAsync(CancellationToken cancellationToken)
+    public async Task<GetRootFolderResponse> GetRootFolderAsync() => await GetRootFolderAsync(CancellationToken.None);
+    public async Task<GetRootFolderResponse> GetRootFolderAsync(CancellationToken cancellationToken)
     {
         var route = $"{EndpointRoutes.FolderBaseRoute}/{EndpointRoutes.RootFolderRoute}";
         var response = await _httpClient.GetAsync(route, cancellationToken);
         if (!response.IsSuccessStatusCode)
             throw new Exception("Could not get root folder");
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
-        var result = JsonSerializer.Deserialize<GetFolderResponse>(responseContent, JsonSerializerOptions.Web)
-            ?? throw new JsonParsingException<GetFolderResponse>(responseContent);
+        var result = JsonSerializer.Deserialize<GetRootFolderResponse>(responseContent, JsonSerializerOptions.Web)
+            ?? throw new JsonParsingException<GetRootFolderResponse>(responseContent);
         return result;
     }
 
-    public async Task<GetFolderResponse> GetFolderByIdAsync(Guid folderId) => await GetFolderByIdAsync(folderId, CancellationToken.None);
-    public async Task<GetFolderResponse> GetFolderByIdAsync(Guid folderId, CancellationToken cancellationToken)
+    public async Task<GetFolderByResponse> GetFolderByIdAsync(Guid folderId) => await GetFolderByIdAsync(folderId, CancellationToken.None);
+    public async Task<GetFolderByResponse> GetFolderByIdAsync(Guid folderId, CancellationToken cancellationToken)
     {
         var route = $"{EndpointRoutes.FolderBaseRoute}/{folderId}";
         var response = await _httpClient.GetAsync(route, cancellationToken);
@@ -38,13 +42,13 @@ public class FolderClient : IFolderClient
         if (!response.IsSuccessStatusCode)
             throw new Exception("Could not get folder");
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
-        var result = JsonSerializer.Deserialize<GetFolderResponse>(responseContent, JsonSerializerOptions.Web)
-            ?? throw new JsonParsingException<GetFolderResponse>(responseContent);
+        var result = JsonSerializer.Deserialize<GetFolderByResponse>(responseContent, JsonSerializerOptions.Web)
+            ?? throw new JsonParsingException<GetFolderByResponse>(responseContent);
         return result;
     }
 
-    public async Task<GetFoldersResponse> GetChildFoldersAsync(Guid parentFolderId) => await GetChildFoldersAsync(parentFolderId, CancellationToken.None);
-    public async Task<GetFoldersResponse> GetChildFoldersAsync(Guid parentFolderId, CancellationToken cancellationToken)
+    public async Task<GetChildFoldersResponse> GetChildFoldersAsync(Guid parentFolderId) => await GetChildFoldersAsync(parentFolderId, CancellationToken.None);
+    public async Task<GetChildFoldersResponse> GetChildFoldersAsync(Guid parentFolderId, CancellationToken cancellationToken)
     {
         var route = $"{EndpointRoutes.FolderBaseRoute}/{parentFolderId}/{EndpointRoutes.ChildFoldersRoute}";
         var response = await _httpClient.GetAsync(route, cancellationToken);
@@ -53,8 +57,8 @@ public class FolderClient : IFolderClient
         if (!response.IsSuccessStatusCode)
             throw new Exception("Could not get child folders");
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
-        var result = JsonSerializer.Deserialize<GetFoldersResponse>(responseContent, JsonSerializerOptions.Web)
-            ?? throw new JsonParsingException<GetFoldersResponse>(responseContent);
+        var result = JsonSerializer.Deserialize<GetChildFoldersResponse>(responseContent, JsonSerializerOptions.Web)
+            ?? throw new JsonParsingException<GetChildFoldersResponse>(responseContent);
         return result;
     }
 

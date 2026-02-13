@@ -9,5 +9,5 @@ public class JsonParsingException<TargetType> : Exception
 
     public string Json { get; }
 
-    public new string Message => $"Could not convert to type: {typeof(TargetType)}\r\n{Json}";
+    public new string Message => $"Could not convert to type: {typeof(TargetType)}{Environment.NewLine}{Json}";
 }
