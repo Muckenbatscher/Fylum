@@ -1,17 +1,17 @@
-﻿using Fylum.Core.Application.Query;
+﻿using FastEndpoints;
 using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
-using Fylum.Folders.Api.Common.Application;
 using Fylum.Folders.SharedModels;
+using Fylum.Folders.SharedModels.GetFolderById;
 using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Folders.Api.Features.GetFolderById;
 
-public class GetFolderByIdEndpoint : FastEndpoints.Endpoint<GetFolderByIdRequest, GetFolderResponse>
+public class GetFolderByIdEndpoint : Endpoint<GetFolderByIdRequest, GetFolderByResponse>
 {
-    private readonly IQueryHandler<GetFolderByIdQuery, FolderDto> _queryHandler;
+    private readonly IGetFolderByIdQueryHandler _queryHandler;
 
-    public GetFolderByIdEndpoint(IQueryHandler<GetFolderByIdQuery, FolderDto> queryHandler)
+    public GetFolderByIdEndpoint(IGetFolderByIdQueryHandler queryHandler)
     {
         _queryHandler = queryHandler;
     }
@@ -31,7 +31,7 @@ public class GetFolderByIdEndpoint : FastEndpoints.Endpoint<GetFolderByIdRequest
             return;
 
         var result = getFolderResult.Value!;
-        var response = new GetFolderResponse(result.Id, result.Name, result.ParentFolderId);
+        var response = new GetFolderByResponse(result);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
 }

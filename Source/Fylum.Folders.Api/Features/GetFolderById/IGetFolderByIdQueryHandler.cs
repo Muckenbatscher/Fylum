@@ -3,4 +3,6 @@ using Fylum.Folders.SharedModels;
 
 namespace Fylum.Folders.Api.Features.GetFolderById;
 
-public record GetFolderByIdQuery(Guid FolderId) : IQuery<FolderDto>;
+public interface IGetFolderByIdQueryHandler : IQueryHandler<GetFolderByIdQuery, FolderDto>
+{
+}

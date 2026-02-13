@@ -1,19 +1,20 @@
-﻿using Fylum.Core.Application.Query;
+﻿using FastEndpoints;
 using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
-using Fylum.Folders.Api.Common.Application;
 using Fylum.Folders.SharedModels;
+using Fylum.Folders.SharedModels.GetChildFolders;
+using Fylum.Folders.SharedModels.GetFolderById;
 using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Folders.Api.Features.GetChildFolders;
 
-public class GetChildFoldersEndpoint : FastEndpoints.Endpoint<GetChildFoldersByParentIdRequest, GetFoldersResponse>
+public class GetChildFoldersEndpoint : Endpoint<GetChildFoldersByParentIdRequest, GetChildFoldersResponse>
 {
-    private readonly IQueryHandler<GetChildFoldersQuery, IList<FolderDto>> _queryHandler;
+    private readonly IGetChildFoldersQueryHandler _handler;
 
-    public GetChildFoldersEndpoint(IQueryHandler<GetChildFoldersQuery, IList<FolderDto>> queryHandler)
+    public GetChildFoldersEndpoint(IGetChildFoldersQueryHandler handler)
     {
-        _queryHandler = queryHandler;
+        _handler = handler;
     }
 
     public override void Configure()
@@ -25,18 +26,13 @@ public class GetChildFoldersEndpoint : FastEndpoints.Endpoint<GetChildFoldersByP
     public override async Task HandleAsync(GetChildFoldersByParentIdRequest req, CancellationToken ct)
     {
         var query = new GetChildFoldersQuery(req.ParentId);
-        var getFoldersResult = _queryHandler.Handle(query);
+        var getFoldersResult = _handler.Handle(query);
         var errorHandling = await Send.EnsureErrorResultHandled(getFoldersResult);
         if (errorHandling.ErrorResultHandlingRequired)
             return;
 
-        var result = GetFolderResponses(getFoldersResult.Value!);
-        var response = new GetFoldersResponse(result);
+        var result = getFoldersResult.Value!;
+        var response = new GetChildFoldersResponse(result);
         await Send.ResultAsync(TypedResults.Ok(response));
-    }
-
-    private IList<GetFolderResponse> GetFolderResponses(IList<FolderDto> folderDtos)
-    {
-        return folderDtos.Select(dto => new GetFolderResponse(dto.Id, dto.Name, dto.ParentFolderId)).ToList();
     }
 }

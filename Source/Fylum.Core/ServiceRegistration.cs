@@ -1,4 +1,5 @@
 ﻿using Fylum.Core.Application.Command;
+using Fylum.Core.Application.Mapping;
 using Fylum.Core.Application.Query;
 using Fylum.Core.Domain;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ public static class ServiceRegistration
         return services
             .AddUnitOfWorkFactories(assembly)
             .AddQueryHandlers(assembly)
-            .AddCommandHandlers(assembly);
+            .AddCommandHandlers(assembly)
+            .AddMappers(assembly);
     }
 }

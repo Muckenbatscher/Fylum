@@ -31,7 +31,8 @@ public sealed class FolderTests
         await _app.AdminLogin(TestContext.CancellationToken);
         var folderClient = _app.GetService<IFolderClient>();
 
-        var rootFolder = await folderClient.GetRootFolderAsync(TestContext.CancellationToken);
+        var rootFolderResponse = await folderClient.GetRootFolderAsync(TestContext.CancellationToken);
+        var rootFolder = rootFolderResponse.RootFolder;
 
         Assert.AreEqual("root", rootFolder.Name);
         Assert.AreEqual(Guid.Empty, rootFolder.ParentFolderId);

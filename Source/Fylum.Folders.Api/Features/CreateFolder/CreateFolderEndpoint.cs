@@ -1,18 +1,19 @@
-﻿using Fylum.Core.Application.Command;
+﻿using FastEndpoints;
 using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Folders.SharedModels;
+using Fylum.Folders.SharedModels.CreateFolder;
 using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Folders.Api.Features.CreateFolder;
 
-public class CreateFolderEndpoint : FastEndpoints.Endpoint<CreateFolderRequest, CreateFolderResponse>
+public class CreateFolderEndpoint : Endpoint<CreateFolderRequest, CreateFolderResponse>
 {
-    private readonly ICommandHandler<CreateFolderCommand, CreateFolderResult> _commandHandler;
+    private readonly ICreateFolderCommandHandler _handler;
 
-    public CreateFolderEndpoint(ICommandHandler<CreateFolderCommand, CreateFolderResult> commandHandler)
+    public CreateFolderEndpoint(ICreateFolderCommandHandler handler)
     {
-        _commandHandler = commandHandler;
+        _handler = handler;
     }
 
     public override void Configure()
@@ -24,13 +25,13 @@ public class CreateFolderEndpoint : FastEndpoints.Endpoint<CreateFolderRequest, 
     public override async Task HandleAsync(CreateFolderRequest req, CancellationToken ct)
     {
         var command = new CreateFolderCommand(req.Name, req.ParentFolderId);
-        var createFolderResult = _commandHandler.Handle(command);
+        var createFolderResult = _handler.Handle(command);
         var errorHandling = await Send.EnsureErrorResultHandled(createFolderResult);
         if (errorHandling.ErrorResultHandlingRequired)
             return;
 
         var result = createFolderResult.Value!;
-        var response = new CreateFolderResponse(result.Id, result.Name, result.ParentFolderId);
+        var response = new CreateFolderResponse(result);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
 }

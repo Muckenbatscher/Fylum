@@ -1,21 +1,20 @@
-﻿using Fylum.Core.Application.Query;
+﻿using FastEndpoints;
 using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
-using Fylum.Folders.Api.Common.Application;
 using Fylum.Folders.Api.Features.GetFolderById;
 using Fylum.Folders.SharedModels;
+using Fylum.Folders.SharedModels.GetRootFolder;
 using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Folders.Api.Features.GetRootFolder;
 
-public class GetRootFolderEndpoint : FastEndpoints.EndpointWithoutRequest<GetFolderResponse>
+public class GetRootFolderEndpoint : EndpointWithoutRequest<GetRootFolderResponse>
 {
-    private readonly IQueryHandler<GetFolderByIdQuery, FolderDto> _queryHandler;
-    private const string RootFolderId = "120A803B-2924-4519-811C-1E3ABA90FD52";
+    private readonly IGetRootFolderQueryHandler _handler;
 
-    public GetRootFolderEndpoint(IQueryHandler<GetFolderByIdQuery, FolderDto> queryHandler)
+    public GetRootFolderEndpoint(IGetRootFolderQueryHandler queryHandler)
     {
-        _queryHandler = queryHandler;
+        _handler = queryHandler;
     }
 
     public override void Configure()
@@ -26,15 +25,14 @@ public class GetRootFolderEndpoint : FastEndpoints.EndpointWithoutRequest<GetFol
     }
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var rootFolderGuid = Guid.Parse(RootFolderId);
-        var query = new GetFolderByIdQuery(rootFolderGuid);
-        var getFolderResult = _queryHandler.Handle(query);
+        var query = new GetRootFolderQuery();
+        var getFolderResult = _handler.Handle(query);
         var errorHandling = await Send.EnsureErrorResultHandled(getFolderResult);
         if (errorHandling.ErrorResultHandlingRequired)
             return;
 
         var result = getFolderResult.Value!;
-        var response = new GetFolderResponse(result.Id, result.Name, result.ParentFolderId);
+        var response = new GetRootFolderResponse(result);
         await Send.ResultAsync(TypedResults.Ok(response));
     }
 }
