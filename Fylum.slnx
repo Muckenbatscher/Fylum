@@ -51,9 +51,10 @@
   <Folder Name="/Test/" />
   <Folder Name="/Test/Api/">
     <Project Path="Test/Fylum.Api.EndToEnd.Tests/Fylum.Api.EndToEnd.Tests.csproj" />
+    <Project Path="Test/Fylum.ArchitectureTest.Common/Fylum.ArchitectureTest.Common.csproj" />
   </Folder>
   <Folder Name="/Test/Api/Core/">
-    <Project Path="Test/Fylum.Core.Architecture.Tests/Fylum.Core.Architecture.Tests.csproj" Id="47476730-d9d3-4719-a799-74aaf254006c" />
+    <Project Path="Test/Fylum.Core.Architecture.Tests/Fylum.Core.Architecture.Tests.csproj" />
   </Folder>
   <Folder Name="/Test/Api/Fylum/" />
   <Folder Name="/Test/Api/Fylum/Folders/">

@@ -1,19 +1,26 @@
 ﻿using NetArchTest.Rules;
 
-namespace Fylum.Migrations.Api.Architecture.Tests;
+namespace Fylum.ArchitectureTest.Common;
 
 [TestClass]
-public class DependencyDirectionTests
+public abstract class DependencyDirectionTests
 {
     private const string CoreApplicationNamespace = "Fylum.Core.Application";
     private const string CoreInfrastructureNamespace = "Fylum.Core.Infrastructure";
 
-    private const string DomainNamespace = "Fylum.Migrations.Api.Common.Domain";
-    private const string ApplicationNamespace = "Fylum.Migrations.Api.Common.Application";
-    private const string InfrastructureNamespace = "Fylum.Migrations.Api.Common.Infrastructure";
-    private const string FeaturesNamespace = "Fylum.Migrations.Api.Features";
+    private const string CommonDomainNamespaceExtension = "Common.Domain";
+    private const string CommonApplicationNamespaceExtension = "Common.Application";
+    private const string CommonInfrastructureNamespaceExtension = "Common.Infrastructure";
+    private const string FeaturesNamespaceExtension = "Features";
 
-    private Types AssemblyTypes() => Types.InCurrentDomain();
+    private string DomainNamespace => $"{RootNamespace}.{CommonDomainNamespaceExtension}";
+    private string ApplicationNamespace => $"{RootNamespace}.{CommonApplicationNamespaceExtension}";
+    private string InfrastructureNamespace => $"{RootNamespace}.{CommonInfrastructureNamespaceExtension}";
+    private string FeaturesNamespace => $"{RootNamespace}.{FeaturesNamespaceExtension}";
+
+    protected abstract string RootNamespace { get; }
+
+    protected virtual Types AssemblyTypes() => Types.InCurrentDomain();
 
     [TestMethod]
     public void CommonDomainLayer_ShouldNot_HaveDependencyOnApplication()

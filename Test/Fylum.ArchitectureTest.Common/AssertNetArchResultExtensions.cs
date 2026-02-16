@@ -1,8 +1,8 @@
 ﻿using TestResult = NetArchTest.Rules.TestResult;
 
-namespace Fylum.Core.Architecture.Tests;
+namespace Fylum.ArchitectureTest.Common;
 
-internal static class AssertNetArchResultExtensions
+public static class AssertNetArchResultExtensions
 {
     extension(TestResult result)
     {

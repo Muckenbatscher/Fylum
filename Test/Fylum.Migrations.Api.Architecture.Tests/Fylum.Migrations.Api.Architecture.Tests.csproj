@@ -4,5 +4,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Source\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />
+		<ProjectReference Include="..\Fylum.ArchitectureTest.Common\Fylum.ArchitectureTest.Common.csproj" />
 	</ItemGroup>
 </Project>

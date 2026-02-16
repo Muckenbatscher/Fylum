@@ -1,4 +1,5 @@
-﻿using NetArchTest.Rules;
+﻿using Fylum.ArchitectureTest.Common;
+using NetArchTest.Rules;
 
 namespace Fylum.Core.Architecture.Tests;
 
