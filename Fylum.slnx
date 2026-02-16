@@ -23,8 +23,8 @@
     <Project Path="Source/Fylum.Api/Fylum.Api.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Folders/">
-    <Project Path="Source/Fylum.Folders.SharedModels/Fylum.Folders.SharedModels.csproj" />
     <Project Path="Source/Fylum.Folders.Api/Fylum.Folders.Api.csproj" />
+    <Project Path="Source/Fylum.Folders.SharedModels/Fylum.Folders.SharedModels.csproj" />
   </Folder>
   <Folder Name="/Source/Api/Fylum/Users/">
     <Project Path="Source/Fylum.Users.Api/Fylum.Users.Api.csproj" />
@@ -49,18 +49,15 @@
     <Project Path="Source/Fylum.Migrations.Web/Fylum.Migrations.Web.csproj" />
   </Folder>
   <Folder Name="/Test/" />
-  <Folder Name="/Test/Api/">
-    <Project Path="Test/Fylum.Api.EndToEnd.Tests/Fylum.Api.EndToEnd.Tests.csproj" />
+  <Folder Name="/Test/Architecture/">
     <Project Path="Test/Fylum.ArchitectureTest.Common/Fylum.ArchitectureTest.Common.csproj" />
-  </Folder>
-  <Folder Name="/Test/Api/Core/">
     <Project Path="Test/Fylum.Core.Architecture.Tests/Fylum.Core.Architecture.Tests.csproj" />
-  </Folder>
-  <Folder Name="/Test/Api/Fylum/" />
-  <Folder Name="/Test/Api/Fylum/Folders/">
-    <Project Path="Test/Fylum.Folders.Api.UnitTests/Fylum.Folders.Api.UnitTests.csproj" />
-  </Folder>
-  <Folder Name="/Test/Api/Migrations/">
     <Project Path="Test/Fylum.Migrations.Api.Architecture.Tests/Fylum.Migrations.Api.Architecture.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Test/EndToEnd/">
+    <Project Path="Test/Fylum.Api.EndToEnd.Tests/Fylum.Api.EndToEnd.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Test/Unit/">
+    <Project Path="Test/Fylum.Folders.Api.UnitTests/Fylum.Folders.Api.UnitTests.csproj" />
   </Folder>
 </Solution>
