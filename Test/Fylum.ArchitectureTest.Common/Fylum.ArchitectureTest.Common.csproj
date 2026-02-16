@@ -2,4 +2,7 @@
 	<ItemGroup>
 		<PackageReference Include="NetArchTest.Rules" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Source\Fylum.Core\Fylum.Core.csproj" />
+	</ItemGroup>
 </Project>

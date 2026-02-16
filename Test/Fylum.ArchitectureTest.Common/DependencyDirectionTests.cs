@@ -2,7 +2,6 @@
 
 namespace Fylum.ArchitectureTest.Common;
 
-[TestClass]
 public abstract class DependencyDirectionTests
 {
     private const string CoreApplicationNamespace = "Fylum.Core.Application";

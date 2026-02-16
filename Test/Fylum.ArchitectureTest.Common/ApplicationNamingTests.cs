@@ -1,21 +1,22 @@
-﻿using Fylum.Core.Application.Query;
-using Fylum.Migrations.Api.Architecture.Tests.CustomRules;
+﻿using Fylum.ArchitectureTest.Common.CustomRules;
+using Fylum.Core.Application.Query;
 using NetArchTest.Rules;
 
-namespace Fylum.Migrations.Api.Architecture.Tests;
+namespace Fylum.ArchitectureTest.Common;
 
-[TestClass]
-public sealed class ApplicationNamingTests
+public abstract class ApplicationNamingTests
 {
+    protected virtual Types AssemblyTypes() => Types.InCurrentDomain();
+
     private PredicateList CommandHandlerImplementations()
     {
-        return Types.InAssembly(typeof(Program).Assembly)
+        return AssemblyTypes()
             .That()
             .MeetCustomRule(new CommandHandlerImplementationRule());
     }
     private PredicateList QueryHandlerImplementations()
     {
-        return Types.InAssembly(typeof(Program).Assembly)
+        return AssemblyTypes()
             .That()
             .AreClasses()
             .And()

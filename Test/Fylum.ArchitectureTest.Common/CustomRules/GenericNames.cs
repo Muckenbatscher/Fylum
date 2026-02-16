@@ -1,7 +1,7 @@
 ﻿using Fylum.Core.Application.Command;
 using Fylum.Core.Application.Query;
 
-namespace Fylum.Migrations.Api.Architecture.Tests.CustomRules;
+namespace Fylum.ArchitectureTest.Common.CustomRules;
 
 internal class GenericNames
 {

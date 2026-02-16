@@ -1,7 +1,7 @@
 ﻿using Mono.Cecil;
 using NetArchTest.Rules;
 
-namespace Fylum.Migrations.Api.Architecture.Tests.CustomRules;
+namespace Fylum.ArchitectureTest.Common.CustomRules;
 
 internal class CommandHandlerNameMatchesCommandRule : ICustomRule
 {
