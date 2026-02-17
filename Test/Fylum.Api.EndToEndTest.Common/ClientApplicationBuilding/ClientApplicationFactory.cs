@@ -1,12 +1,12 @@
-﻿using Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
+﻿using Fylum.Api.EndToEndTest.Common.DistributedApplicationBuilding;
 using Fylum.Client;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fylum.Api.EndToEnd.Tests.ClientApplicationBuilding;
+namespace Fylum.Api.EndToEndTest.Common.ClientApplicationBuilding;
 
-internal class ClientApplicationFactory
+public class ClientApplicationFactory
 {
-    internal static async Task<ClientApplication> CreateAsync(CancellationToken cancellationToken)
+    public static async Task<ClientApplication> CreateAsync(CancellationToken cancellationToken)
     {
         var distributedApp = await DistributedApplicationContainerFactory.CreateAsync(cancellationToken,
             migrate: true, persistent: false);

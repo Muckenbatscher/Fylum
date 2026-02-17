@@ -1,6 +1,5 @@
-﻿using Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
+﻿using Fylum.Api.EndToEndTest.Common.DistributedApplicationBuilding;
 using Fylum.Client.Auth;
-using Fylum.Users.SharedModels;
 using Fylum.Users.SharedModels.Login;
 using Fylum.Users.SharedModels.Register;
 

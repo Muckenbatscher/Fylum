@@ -1,4 +1,4 @@
-﻿using Fylum.Api.EndToEnd.Tests.ClientApplicationBuilding;
+﻿using Fylum.Api.EndToEndTest.Common.ClientApplicationBuilding;
 using Fylum.Client.Folders;
 
 namespace Fylum.Api.EndToEnd.Tests;

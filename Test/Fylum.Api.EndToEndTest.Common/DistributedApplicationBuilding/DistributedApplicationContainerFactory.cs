@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Fylum.Api.EndToEnd.Tests.DistributedApplicationBuilding;
+namespace Fylum.Api.EndToEndTest.Common.DistributedApplicationBuilding;
 
-internal class DistributedApplicationContainerFactory
+public class DistributedApplicationContainerFactory
 {
     public static async Task<DistributedApplicationContainer> CreateAsync(CancellationToken cancellationToken,
         bool migrate = true, bool persistent = false)
