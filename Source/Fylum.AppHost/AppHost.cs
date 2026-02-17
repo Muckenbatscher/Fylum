@@ -7,6 +7,7 @@ internal class Program
     private static void Main(string[] args)
     {
         var builder = DistributedApplication.CreateBuilder(args);
+        var compose = builder.AddDockerComposeEnvironment("compose");
         bool isPersistent = !builder.Configuration.GetValue("NonPersistent", false);
 
         var postgresPort = builder.Configuration.GetValue("Postgres:Port", 56789);
