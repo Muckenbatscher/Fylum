@@ -3,7 +3,7 @@ using Fylum.Client.Auth;
 using Fylum.Users.SharedModels.Login;
 using Fylum.Users.SharedModels.Register;
 
-namespace Fylum.Api.EndToEnd.Tests;
+namespace Fylum.Users.Api.EndToEnd.Tests;
 
 [TestClass]
 public sealed class UsersTests

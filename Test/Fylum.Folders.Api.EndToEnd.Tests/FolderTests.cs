@@ -1,7 +1,7 @@
 ﻿using Fylum.Api.EndToEndTest.Common.ClientApplicationBuilding;
 using Fylum.Client.Folders;
 
-namespace Fylum.Api.EndToEnd.Tests;
+namespace Fylum.Folders.Api.EndToEnd.Tests;
 
 [TestClass]
 public sealed class FolderTests

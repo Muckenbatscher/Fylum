@@ -57,8 +57,9 @@
     <Project Path="Test/Fylum.Users.Api.Architecture.Tests/Fylum.Users.Api.Architecture.Tests.csproj" />
   </Folder>
   <Folder Name="/Test/EndToEnd/">
-    <Project Path="Test/Fylum.Api.EndToEnd.Tests/Fylum.Api.EndToEnd.Tests.csproj" />
     <Project Path="Test/Fylum.Api.EndToEndTest.Common/Fylum.Api.EndToEndTest.Common.csproj" />
+    <Project Path="Test/Fylum.Folders.Api.EndToEnd.Tests/Fylum.Folders.Api.EndToEnd.Tests.csproj" />
+    <Project Path="Test/Fylum.Users.Api.EndToEnd.Tests/Fylum.Users.Api.EndToEnd.Tests.csproj" />
   </Folder>
   <Folder Name="/Test/Unit/">
     <Project Path="Test/Fylum.Folders.Api.UnitTests/Fylum.Folders.Api.UnitTests.csproj" />

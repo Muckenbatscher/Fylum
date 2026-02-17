@@ -74,7 +74,8 @@ jobs:
     strategy:
       matrix:
         project: 
-        - Fylum.Api.EndToEnd.Tests
+        - Fylum.Users.Api.EndToEnd.Tests
+        - Fylum.Folders.Api.EndToEnd.Tests
     steps:
     - uses: actions/download-artifact@v4
       with:
