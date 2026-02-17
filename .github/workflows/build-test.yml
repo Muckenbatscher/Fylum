@@ -20,12 +20,18 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore -c Release
+      run: dotnet build --no-restore -c Release 
+    - name: Remove unneeded directories before artifact upload
+      run: |
+        rm -rf ./**/runtimes/**
+        rm -rf ./**/obj/**
     - name: Upload Build
       uses: actions/upload-artifact@v4
       with:
         name: build-output
-        path: . 
+        path: |
+          .
+          !./**/bin/**/runtimes/**
 
   architecture-tests:
     needs: build
