@@ -33,8 +33,10 @@ jobs:
     strategy:
       matrix:
         project: 
-        - Fylum.Migrations.Api.Architecture.Tests
         - Fylum.Core.Architecture.Tests
+        - Fylum.Migrations.Api.Architecture.Tests
+        - Fylum.Users.Api.Architecture.Tests
+        - Fylum.Folders.Api.Architecture.Tests
     steps:
     - uses: actions/download-artifact@v4
       with:

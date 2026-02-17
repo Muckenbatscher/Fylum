@@ -52,7 +52,9 @@
   <Folder Name="/Test/Architecture/">
     <Project Path="Test/Fylum.ArchitectureTest.Common/Fylum.ArchitectureTest.Common.csproj" />
     <Project Path="Test/Fylum.Core.Architecture.Tests/Fylum.Core.Architecture.Tests.csproj" />
+    <Project Path="Test/Fylum.Folders.Api.Architecture.Tests/Fylum.Folders.Api.Architecture.Tests.csproj" />
     <Project Path="Test/Fylum.Migrations.Api.Architecture.Tests/Fylum.Migrations.Api.Architecture.Tests.csproj" />
+    <Project Path="Test/Fylum.Users.Api.Architecture.Tests/Fylum.Users.Api.Architecture.Tests.csproj" />
   </Folder>
   <Folder Name="/Test/EndToEnd/">
     <Project Path="Test/Fylum.Api.EndToEnd.Tests/Fylum.Api.EndToEnd.Tests.csproj" />
