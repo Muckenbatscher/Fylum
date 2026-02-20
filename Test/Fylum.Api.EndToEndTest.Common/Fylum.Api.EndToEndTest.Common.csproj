@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting.Testing" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Source\Fylum.AppHost\Fylum.AppHost.csproj" />
+		<ProjectReference Include="..\..\Source\Fylum.Client\Fylum.Client.csproj" />
+	</ItemGroup>
+</Project>

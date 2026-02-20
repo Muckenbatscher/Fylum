@@ -1,4 +1,5 @@
-﻿using Fylum.Users.Api.Models;
+﻿using Fylum.Users.SharedModels.Login;
+using Fylum.Users.SharedModels.Register;
 
 namespace Fylum.Client.Auth;
 

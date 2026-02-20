@@ -9,7 +9,7 @@
 
 @if (_isLoading)
 {
-    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    //leave empty while loading
 }
 else if (_currentFolder == null)
 {
@@ -32,7 +32,7 @@ else
                 @foreach (var folder in _childFolders)
                 {
                     <MudListItem IconColor="Color.Secondary" Icon="@Icons.Material.Filled.Folder"
-                                 OnClick="@(() => OpenFolder(folder.FolderId))">
+                                 OnClick="@(() => OpenFolder(folder.Id))">
                         @folder.Name
                     </MudListItem>
                 }
@@ -47,7 +47,7 @@ else
     @if (_currentFolder.ParentFolderId != Guid.Empty) 
     {
         <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.ArrowBack"
-                   Color="Color.Primary" Class="mt-4"
+                   Class=@MaterialThemingClasses.Secondary
                    Disabled="@(!_canNavigateUp)"
                    OnClick="NavigateUp">
             Back
@@ -60,8 +60,8 @@ else
     public Guid? Id { get; set; }
 
     private bool _isLoading = true;
-    private GetFolderResponse? _currentFolder;
-    private List<GetFolderResponse> _childFolders = new();
+    private FolderDto? _currentFolder;
+    private List<FolderDto> _childFolders = new();
 
     private bool _canNavigateUp
         => _currentFolder != null && _currentFolder.ParentFolderId != Guid.Empty;
@@ -78,15 +78,18 @@ else
         try
         {
             if (Id.HasValue)
-                _currentFolder = await FolderClient.GetFolderByIdAsync(Id.Value);
-            else
-                _currentFolder = await FolderClient.GetRootFolderAsync();
-
-            if (_currentFolder != null)
             {
-                var childrenResponse = await FolderClient.GetChildFoldersAsync(_currentFolder.FolderId);
-                _childFolders = childrenResponse.Folders.ToList();
+                var folderResponse = await FolderClient.GetFolderByIdAsync(Id.Value);
+                _currentFolder = folderResponse.Folder;
             }
+            else
+            {
+                var rootFolderResponse = await FolderClient.GetRootFolderAsync();
+                _currentFolder = rootFolderResponse.RootFolder;
+            }
+
+            var childrenResponse = await FolderClient.GetChildFoldersAsync(_currentFolder.Id);
+            _childFolders = childrenResponse.Folders.ToList();
         }
         catch (Exception ex)
         {
