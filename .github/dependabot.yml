@@ -3,10 +3,13 @@ updates:
 - package-ecosystem: nuget
   directory: "/"
   schedule:
-    interval: daily
+    interval: "cron"
+    cronjob: "15 4 * * *" # every day 04:15 UTC
   open-pull-requests-limit: 10
-  reviewers:
+  assignees:
   - Muckenbatscher
+  labels:
+  - dependencies
   groups:
     aspire:
       patterns:
