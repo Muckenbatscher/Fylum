@@ -9,7 +9,7 @@ updates:
   assignees:
   - Muckenbatscher
   labels:
-  - dependencies
+  - Dependencies
   groups:
     aspire:
       patterns:
