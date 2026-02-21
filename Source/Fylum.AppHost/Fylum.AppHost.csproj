@@ -12,6 +12,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+  	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  	<PackageReference Include="Microsoft.Extensions.Http" />
 		<ProjectReference Include="..\Fylum.Api\Fylum.Api.csproj" />
 		<ProjectReference Include="..\Fylum.Migrations.SharedModels\Fylum.Migrations.SharedModels.csproj" IsAspireProjectResource="false" />
 		<ProjectReference Include="..\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />

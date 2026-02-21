@@ -5,6 +5,7 @@
 		<PackageReference Include="FastEndpoints.Security" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+	<PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
 		<PackageReference Include="Npgsql" />
 	</ItemGroup>
 	

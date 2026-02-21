@@ -4,6 +4,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+  	<PackageReference Include="Microsoft.Extensions.Http.Resilience" />
 		<ProjectReference Include="..\..\Source\Fylum.AppHost\Fylum.AppHost.csproj" />
 		<ProjectReference Include="..\..\Source\Fylum.Client\Fylum.Client.csproj" />
 	</ItemGroup>
