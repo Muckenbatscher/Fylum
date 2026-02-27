@@ -4,7 +4,6 @@
 		<PackageReference Include="FastEndpoints" />
 	</ItemGroup>
 	<ItemGroup>
-  	<PackageReference Include="FastEndpoints.Security" VersionOverride="8.0.1" />
 	  <ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
 	  <ProjectReference Include="..\Fylum.Users.SharedModels\Fylum.Users.SharedModels.csproj" />
 	</ItemGroup>
