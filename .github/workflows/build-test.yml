@@ -104,4 +104,4 @@ jobs:
           --no-build -c Release --verbosity normal
       env:
         Parameters__MigrationPerformingKey: "AnyRandomMigrationPerformingKey"
-        JwtAuth__SigningKey: "Any sufficiently long enough key to sign the JWT Access Token with"
+        Parameters__JwtSigningKey: "Any sufficiently long enough key to sign the JWT Access Token with"
