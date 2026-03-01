@@ -22,12 +22,14 @@ internal class Program
         if (isPersistent)
             postgres.WithPreconfiguredPgAdmin(database, containerName: "pgadmin");
 
+        var jwtSigningKey = builder.AddParameter("JwtSigningKey", secret: true);
         var api = builder.AddProject<Projects.Fylum_Api>("api")
             .WithReference(database, "postgres")
             .WaitFor(database)
             .WithExternalHttpEndpoints()
             .WithScalarDisplayNameUrls()
-            .WithOpenApiSpecUrl();
+            .WithOpenApiSpecUrl()
+            .WithEnvironment("JWT_SIGNING_KEY", jwtSigningKey);
 
         var web = builder.AddProject<Projects.Fylum_Web>("web")
             .WithReference(api, "api")
