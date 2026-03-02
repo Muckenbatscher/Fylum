@@ -19,14 +19,14 @@ public class Program
         builder.AddServiceDefaults(); // from Aspire Service Defaults
 
         builder.Services
-            .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration.GetValue<string>("JwtAuth:SigningKey")!)
+            .AddAuthenticationJwtBearer(o => o.SigningKey = builder.Configuration.GetValue<string>("JWT_SIGNING_KEY")!)
             .AddAuthorization()
             .AddFastEndpoints(o => o.Assemblies = GetApiEndpointAssemblies())
             .SwaggerDocument();
 
         builder.Services.AddJwtTokenCoreServices(options =>
         {
-            options.SigningKey = builder.Configuration.GetValue<string>("JwtAuth:SigningKey")!;
+            options.SigningKey = builder.Configuration.GetValue<string>("JWT_SIGNING_KEY")!;
             options.AccessTokenExpirationInMinutes = builder.Configuration.GetValue("JwtAuth:AccessTokenExpirationMinutes", 1);
         });
 

@@ -22,16 +22,20 @@ internal class Program
         if (isPersistent)
             postgres.WithPreconfiguredPgAdmin(database, containerName: "pgadmin");
 
+        var jwtSigningKey = builder.AddParameter("JwtSigningKey", secret: true);
         var api = builder.AddProject<Projects.Fylum_Api>("api")
             .WithReference(database, "postgres")
             .WaitFor(database)
             .WithExternalHttpEndpoints()
             .WithScalarDisplayNameUrls()
-            .WithOpenApiSpecUrl();
+            .WithOpenApiSpecUrl()
+            .WithEnvironment("JWT_SIGNING_KEY", jwtSigningKey);
 
         var web = builder.AddProject<Projects.Fylum_Web>("web")
             .WithReference(api, "api")
-            .WaitFor(api);
+            .WithChildRelationship(api)
+            .WaitFor(api)
+            .WithExternalHttpEndpoints();
 
         var migrationPerformingKey = builder.AddParameter("MigrationPerformingKey", secret: true);
         var migrationsApi = builder.AddProject<Projects.Fylum_Migrations_Api>("migrations-api")
@@ -40,13 +44,14 @@ internal class Program
             .WithExternalHttpEndpoints()
             .WithScalarDisplayNameUrls()
             .WithOpenApiSpecUrl()
-            .WithChildRelationship(migrationPerformingKey)
             .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey)
             .WithMigrationCommands(migrationPerformingKey);
 
         var migrationsWeb = builder.AddProject<Projects.Fylum_Migrations_Web>("migrations-web")
             .WithReference(migrationsApi, "migrations-api")
+            .WithChildRelationship(migrationsApi)
             .WaitFor(migrationsApi)
+            .WithExternalHttpEndpoints()
             .WithEnvironment("MIGRATION_PERFORMING_KEY", migrationPerformingKey);
 
         var app = builder.Build();
