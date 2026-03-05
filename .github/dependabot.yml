@@ -24,3 +24,6 @@ updates:
       patterns:
         - "Microsoft*"
         - "System*"
+  ignore:
+      - dependency-name: "Scalar.AspNetCore"
+        update-types: ["version-update:semver-patch"]
