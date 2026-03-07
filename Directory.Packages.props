@@ -26,7 +26,7 @@
     <PackageVersion Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.0.2" />
     <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.16.0" />
     <!--Database Access-->
-    <PackageVersion Include="Dapper" Version="2.1.66" />
+    <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Npgsql" Version="10.0.1" />
     <!--Web UI-->
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="10.0.3" />
