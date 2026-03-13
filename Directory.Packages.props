@@ -27,7 +27,7 @@
     <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.16.0" />
     <!--Database Access-->
     <PackageVersion Include="Dapper" Version="2.1.72" />
-    <PackageVersion Include="Npgsql" Version="10.0.1" />
+    <PackageVersion Include="Npgsql" Version="10.0.2" />
     <!--Web UI-->
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="10.0.5" />
     <PackageVersion Include="MudBlazor" Version="9.1.0" />

@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+  	<PackageReference Include="Npgsql" />
 		<ProjectReference Include="..\Fylum.Api\Fylum.Api.csproj" />
 		<ProjectReference Include="..\Fylum.Migrations.SharedModels\Fylum.Migrations.SharedModels.csproj" IsAspireProjectResource="false" />
 		<ProjectReference Include="..\Fylum.Migrations.Api\Fylum.Migrations.Api.csproj" />
