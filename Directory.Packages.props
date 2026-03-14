@@ -8,8 +8,8 @@
     <!--Aspire Orchestration-->
     <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.1.2" />
     <PackageVersion Include="Aspire.Hosting.Testing" Version="13.1.2" />
-	<!--Aspire Publish as Docker-Compose-->
-	<PackageVersion Include="Aspire.Hosting.Docker" Version="13.1.2-preview.1.26125.13" />
+    <!--Aspire Publish as Docker-Compose-->
+    <PackageVersion Include="Aspire.Hosting.Docker" Version="13.1.2-preview.1.26125.13" />
     <!--Hosting and Dependency Injection-->
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.5" />
@@ -27,7 +27,7 @@
     <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.16.0" />
     <!--Database Access-->
     <PackageVersion Include="Dapper" Version="2.1.72" />
-    <PackageVersion Include="Npgsql" Version="10.0.1" />
+    <PackageVersion Include="Npgsql" Version="10.0.2" />
     <!--Web UI-->
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="10.0.5" />
     <PackageVersion Include="MudBlazor" Version="9.1.0" />
