@@ -20,10 +20,13 @@ updates:
     opentelemetry:
       patterns:
         - "OpenTelemetry*"
+    mstest:
+      patterns:
+        - "MSTest*"
     core:
       patterns:
         - "Microsoft*"
         - "System*"
   ignore:
       - dependency-name: "Scalar.AspNetCore"
-        update-types: ["version-update:semver-patch"]
+        update-types: ["version-update:semver-patch"] # updated very frequently
