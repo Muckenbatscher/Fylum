@@ -1,5 +1,6 @@
 version: 2
 updates:
+
 - package-ecosystem: nuget
   directory: "/"
   schedule:
@@ -30,3 +31,12 @@ updates:
   ignore:
       - dependency-name: "Scalar.AspNetCore"
         update-types: ["version-update:semver-patch"] # updated very frequently
+
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "daily"
+  assignees:
+  - Muckenbatscher
+  labels:
+  - Dependencies
