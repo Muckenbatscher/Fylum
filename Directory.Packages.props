@@ -30,7 +30,7 @@
     <PackageVersion Include="Npgsql" Version="10.0.2" />
     <!--Web UI-->
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="10.0.7" />
-    <PackageVersion Include="MudBlazor" Version="9.3.0" />
+    <PackageVersion Include="MudBlazor" Version="9.4.0" />
     <PackageVersion Include="Scalar.AspNetCore" Version="2.13.17" />
     <PackageVersion Include="MaterialTheming" Version="2.2.1" />
     <!--OpenTelemetry Service Defaults-->
