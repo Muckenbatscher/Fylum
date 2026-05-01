@@ -24,7 +24,7 @@
     <PackageVersion Include="FastEndpoints.Swagger" Version="8.1.0" />
     <!--JWT Authentication-->
     <PackageVersion Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.0.2" />
-    <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.17.0" />
+    <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.18.0" />
     <!--Database Access-->
     <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Npgsql" Version="10.0.2" />
