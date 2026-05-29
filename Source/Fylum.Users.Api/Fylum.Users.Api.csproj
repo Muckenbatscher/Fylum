@@ -3,9 +3,7 @@
 		<PackageReference Include="Dapper" />
 	</ItemGroup>
 	<ItemGroup>
-  		<PackageReference Include="FastEndpoints" />
-  		<PackageReference Include="FastEndpoints.Security" /> 
-		<ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
+  		<ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
 		<ProjectReference Include="..\Fylum.Users.SharedModels\Fylum.Users.SharedModels.csproj" />
 	</ItemGroup>
 </Project>
