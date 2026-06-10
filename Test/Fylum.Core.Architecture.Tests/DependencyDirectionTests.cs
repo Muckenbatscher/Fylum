@@ -19,7 +19,7 @@ public class DependencyDirectionTests
     {
         AssemblyTypes()
             .That()
-            .ResideInNamespace(DomainNamespace)
+            .ResideInNamespaceStartingWith(DomainNamespace)
             .ShouldNot()
             .HaveDependencyOn(ApplicationNamespace)
             .GetResult()
@@ -30,7 +30,7 @@ public class DependencyDirectionTests
     {
         AssemblyTypes()
             .That()
-            .ResideInNamespace(DomainNamespace)
+            .ResideInNamespaceStartingWith(DomainNamespace)
             .ShouldNot()
             .HaveDependencyOn(InfrastructureNamespace)
             .GetResult()
@@ -41,7 +41,7 @@ public class DependencyDirectionTests
     {
         AssemblyTypes()
             .That()
-            .ResideInNamespace(DomainNamespace)
+            .ResideInNamespaceStartingWith(DomainNamespace)
             .ShouldNot()
             .HaveDependencyOn(PresentationNamespace)
             .GetResult()
@@ -54,7 +54,7 @@ public class DependencyDirectionTests
     {
         AssemblyTypes()
             .That()
-            .ResideInNamespace(ApplicationNamespace)
+            .ResideInNamespaceStartingWith(ApplicationNamespace)
             .ShouldNot()
             .HaveDependencyOn(InfrastructureNamespace)
             .GetResult()
@@ -65,7 +65,7 @@ public class DependencyDirectionTests
     {
         AssemblyTypes()
             .That()
-            .ResideInNamespace(ApplicationNamespace)
+            .ResideInNamespaceStartingWith(ApplicationNamespace)
             .ShouldNot()
             .HaveDependencyOn(PresentationNamespace)
             .GetResult()
@@ -78,7 +78,7 @@ public class DependencyDirectionTests
     {
         AssemblyTypes()
             .That()
-            .ResideInNamespace(InfrastructureNamespace)
+            .ResideInNamespaceStartingWith(InfrastructureNamespace)
             .ShouldNot()
             .HaveDependencyOn(PresentationNamespace)
             .GetResult()
@@ -91,7 +91,7 @@ public class DependencyDirectionTests
     {
         AssemblyTypes()
             .That()
-            .ResideInNamespace(PresentationNamespace)
+            .ResideInNamespaceStartingWith(PresentationNamespace)
             .ShouldNot()
             .HaveDependencyOn(InfrastructureNamespace)
             .GetResult()
