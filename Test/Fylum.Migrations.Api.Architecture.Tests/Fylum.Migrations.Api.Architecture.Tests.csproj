@@ -1,5 +1,6 @@
 ﻿<Project Sdk="MSTest.Sdk">
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Http" />
 	  <PackageReference Include="NetArchTest.Rules" />
 	</ItemGroup>
 	<ItemGroup>
