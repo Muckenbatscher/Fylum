@@ -1,5 +1,4 @@
-﻿using Fylum.Core.Application.Command;
-using Fylum.Core.Presentation.Api.ErrorResult;
+﻿using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Users.SharedModels;
 using Fylum.Users.SharedModels.RefreshAccessToken;

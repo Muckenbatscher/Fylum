@@ -3,7 +3,6 @@ using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
 using Fylum.Folders.SharedModels;
 using Fylum.Folders.SharedModels.GetChildFolders;
-using Fylum.Folders.SharedModels.GetFolderById;
 using Microsoft.AspNetCore.Http;
 
 namespace Fylum.Folders.Api.Features.GetChildFolders;

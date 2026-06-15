@@ -11,7 +11,9 @@ public class DependencyDirectionTests
     private const string InfrastructureNamespace = "Fylum.Core.Infrastructure";
     private const string PresentationNamespace = "Fylum.Core.Presentation";
 
-    private Types AssemblyTypes() => Types.InCurrentDomain();
+    private Types AssemblyTypes() => Types.InAssemblies([
+        typeof(Core.ServiceRegistration).Assembly
+        ]);
 
     // Domain
     [TestMethod]
