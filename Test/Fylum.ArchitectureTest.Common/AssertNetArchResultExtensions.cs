@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestResult = NetArchTest.Rules.TestResult;
+﻿using TestResult = NetArchTest.Rules.TestResult;
 
 namespace Fylum.ArchitectureTest.Common;
 

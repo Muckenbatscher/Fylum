@@ -1,7 +1,6 @@
 ﻿using FastEndpoints;
 using Fylum.Core.Presentation.Api.ErrorResult;
 using Fylum.Core.Presentation.Api.JwtAuthentication;
-using Fylum.Folders.Api.Features.GetFolderById;
 using Fylum.Folders.SharedModels;
 using Fylum.Folders.SharedModels.GetRootFolder;
 using Microsoft.AspNetCore.Http;

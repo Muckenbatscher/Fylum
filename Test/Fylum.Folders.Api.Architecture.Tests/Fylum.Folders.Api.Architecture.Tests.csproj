@@ -1,5 +1,6 @@
 ﻿<Project Sdk="MSTest.Sdk">
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Fylum.Folders.Api\Fylum.Folders.Api.csproj" />
     <ProjectReference Include="..\Fylum.ArchitectureTest.Common\Fylum.ArchitectureTest.Common.csproj" />
   </ItemGroup>
 </Project>
