@@ -1,6 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSTest.Sdk">
 	<ItemGroup>
-		<PackageReference Include="MSTest.TestFramework" />
 		<PackageReference Include="NetArchTest.Rules" />
 	</ItemGroup>
 	<ItemGroup>
