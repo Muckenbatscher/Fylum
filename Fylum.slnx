@@ -3,6 +3,11 @@
     <File Path=".editorconfig" />
   </Folder>
   <Folder Name="/Solution Items/GitHub/">
+    <File Path=".github/dependabot.yml" />
+    <File Path=".github/workflows/build-test.yml" />
+    <File Path=".github/workflows/style-check.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/GitHub/Workflows/">
     <File Path=".github/workflows/build-test.yml" />
     <File Path=".github/workflows/style-check.yml" />
   </Folder>
