@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
 		<PackageReference Include="Dapper" />
+		<PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" VersionOverride="8.19.2" />
 	</ItemGroup>
 	<ItemGroup>
   		<ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
