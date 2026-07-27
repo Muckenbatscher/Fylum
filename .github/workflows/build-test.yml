@@ -55,7 +55,7 @@ jobs:
           --no-build -c Release --verbosity normal
 
   unit-tests:
-    needs: architecture-tests
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -74,7 +74,7 @@ jobs:
           --no-build -c Release --verbosity normal
 
   e2e-tests:
-    needs: unit-tests
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -104,3 +104,24 @@ jobs:
       env:
         Parameters__MigrationPerformingKey: "AnyRandomMigrationPerformingKey"
         Parameters__JwtSigningKey: "Any sufficiently long enough key to sign the JWT Access Token with"
+
+  workflow-status:
+    needs: 
+      - architecture-tests
+      - unit-tests
+      - e2e-tests
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+    - name: Check test results
+      run: |
+        if [ "${{ needs.architecture-tests.result }}" != "success" ]; then
+          exit 1
+        fi
+        if [ "${{ needs.unit-tests.result }}" != "success" ]; then
+          exit 1
+        fi
+        if [ "${{ needs.e2e-tests.result }}" != "success" ]; then
+          exit 1
+        fi
+        echo "All Tests succeeded!"
