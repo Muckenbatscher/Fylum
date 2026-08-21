@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
 		<PackageReference Include="Dapper" />
+		<PackageReference Include="FastEndpoints" />
+		<PackageReference Include="FastEndpoints.Security" />
 	</ItemGroup>
 	<ItemGroup>
   		<ProjectReference Include="..\Fylum.Core\Fylum.Core.csproj" />
