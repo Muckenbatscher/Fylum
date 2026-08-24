@@ -19,9 +19,9 @@
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.9.0" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.9.0" />
     <!--FastEndpoints-->
-    <PackageVersion Include="FastEndpoints" Version="8.2.0" />
-    <PackageVersion Include="FastEndpoints.Security" Version="8.2.0" />
-    <PackageVersion Include="FastEndpoints.Swagger" Version="8.2.0" />
+    <PackageVersion Include="FastEndpoints" Version="8.3.0" />
+    <PackageVersion Include="FastEndpoints.Security" Version="8.3.0" />
+    <PackageVersion Include="FastEndpoints.Swagger" Version="8.3.0" />
     <!--JWT Authentication-->
     <PackageVersion Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.0.2" />
     <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.22.0" />
