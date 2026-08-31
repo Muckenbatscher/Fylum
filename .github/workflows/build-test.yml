@@ -8,15 +8,17 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v7
     - name: Setup .NET
       uses: actions/setup-dotnet@v6
       with:
         dotnet-version: 10.0.x
+    - name: Install Aspire CLI
+      run: |
+        curl -sSL https://aspire.dev/install.sh | bash
+        echo "$HOME/.aspire/bin" >> $GITHUB_PATH
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -31,6 +33,13 @@ jobs:
           !./**/runtimes/**
           !./**/bin/**/runtimes/**
           !./**/obj/**
+    - name: Upload Aspire Bundle
+      uses: actions/upload-artifact@v7
+      with:
+        retention-days: 3
+        name: aspire-bundle
+        path: /home/runner/.aspire
+        include-hidden-files: true
 
   architecture-tests:
     needs: build
@@ -82,14 +91,21 @@ jobs:
         - Fylum.Users.Api.EndToEnd.Tests
         - Fylum.Folders.Api.EndToEnd.Tests
     steps:
-    - uses: actions/download-artifact@v8
+    - name: Download Build Output
+      uses: actions/download-artifact@v8
       with:
         name: build-output
         path: .
-    - name: Restore Aspire Components
-      run: dotnet restore Test/${{ matrix.project }}/${{ matrix.project }}.csproj
+    - name: Download Aspire Bundle
+      uses: actions/download-artifact@v8
+      with:
+        name: aspire-bundle
+        path: /home/runner/.aspire
     - name: Restore Permissions
-      run: find . -type f -path "*/bin/*" -exec chmod +x {} +
+      run: |
+        find . -type f -path "*/bin/*" -exec chmod +x {} +
+        chmod +x $HOME/.aspire/bin/aspire
+        chmod +x $HOME/.aspire/bundle/dcp/dcp
     - name: Install and Trust Dotnet Dev Certificate
       run: |
         mkdir -p ${HOME}/.aspnet/https
