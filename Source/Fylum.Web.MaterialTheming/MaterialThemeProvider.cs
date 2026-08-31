@@ -14,6 +14,8 @@ public class MaterialThemeProvider : IMaterialThemeProvider
             .WithContrastLevel(ContrastLevel.Normal);
     }
 
+    public IColorPaletteThemeBuilder GetThemeBuilder() => _configuredThemeBuilder;
+
     public ThemeColors GetThemeColors(ThemeMode themeMode)
     {
         return _configuredThemeBuilder

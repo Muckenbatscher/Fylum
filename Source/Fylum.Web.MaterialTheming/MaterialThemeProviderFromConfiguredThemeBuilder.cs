@@ -11,6 +11,8 @@ public class MaterialThemeProviderFromConfiguredThemeBuilder : IMaterialThemePro
         _themeBuilder = themeBuilder;
     }
 
+    public IColorPaletteThemeBuilder GetThemeBuilder() => _themeBuilder;
+
     public ThemeColors GetThemeColors(ThemeMode themeMode)
     {
         return _themeBuilder.WithMode(themeMode).Build();

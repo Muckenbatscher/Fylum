@@ -42,7 +42,7 @@
     {
         base.OnInitialized();
 
-        _theme = ThemeProvider.GetTheme();
+        _theme = MaterialThemeProvider.GetThemeBuilder().BuildMudTheme();
         RefreshMaterialTheme();
     }
 
