@@ -1,6 +1,6 @@
 version: 2
-updates:
 
+updates:
 - package-ecosystem: nuget
   directory: "/"
   schedule:
@@ -8,9 +8,13 @@ updates:
     cronjob: "15 4 * * *" # every day 04:15 UTC
   open-pull-requests-limit: 10
   assignees:
-  - Muckenbatscher
+    - Muckenbatscher
   labels:
-  - Dependencies
+    - Dependencies
+  ignore:
+    - dependency-name: "Scalar.AspNetCore"
+      update-types:
+        - "version-update:semver-patch" # updated very frequently
   groups:
     aspire:
       patterns:
@@ -18,13 +22,6 @@ updates:
     fastendpoints:
       patterns:
         - "FastEndpoints*"
-    scalar:
-      patterns:
-        - "Scalar*"
-      update-types:
-        - major
-        - minor 
-        # - patch # updated very frequently
     opentelemetry:
       patterns:
         - "OpenTelemetry*"
@@ -39,8 +36,9 @@ updates:
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
-    interval: "daily"
+    interval: "cron"
+    cronjob: "15 4 * * *" # every day 04:15 UTC
   assignees:
-  - Muckenbatscher
+    - Muckenbatscher
   labels:
-  - Dependencies
+    - Dependencies
