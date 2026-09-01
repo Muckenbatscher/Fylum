@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v7
     - name: Setup .NET
@@ -82,12 +80,16 @@ jobs:
         - Fylum.Users.Api.EndToEnd.Tests
         - Fylum.Folders.Api.EndToEnd.Tests
     steps:
-    - uses: actions/download-artifact@v8
+    - name: Download Build Output
+      uses: actions/download-artifact@v8
       with:
         name: build-output
         path: .
-    - name: Restore Aspire Components
-      run: dotnet restore Test/${{ matrix.project }}/${{ matrix.project }}.csproj
+    - name: Install and Setup Aspire
+      run: |
+        curl -sSL https://aspire.dev/install.sh | bash
+        echo "$HOME/.aspire/bin" >> $GITHUB_PATH
+        $HOME/.aspire/bin/aspire setup
     - name: Restore Permissions
       run: find . -type f -path "*/bin/*" -exec chmod +x {} +
     - name: Install and Trust Dotnet Dev Certificate
