@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<ItemGroup>
-		<PackageReference Include="MaterialTheming" />
+		<PackageReference Include="MaterialTheming.MudBlazor" />
 		<PackageReference Include="MudBlazor" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" />
 	</ItemGroup>
