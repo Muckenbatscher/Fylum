@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<ItemGroup>
 		<PackageReference Include="MaterialTheming.MudBlazor" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
 		<PackageReference Include="MudBlazor" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" />
 	</ItemGroup>
