@@ -10,7 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-26.04
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@v7    
+    - name: Setup .NET and Aspire
+      uses: actions/setup-dotnet@v6
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
