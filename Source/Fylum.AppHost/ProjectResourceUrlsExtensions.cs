@@ -1,8 +1,10 @@
-﻿namespace Fylum.AppHost;
+﻿using Aspire.Hosting.Dotnet;
+
+namespace Fylum.AppHost;
 
 public static class ProjectResourceUrlsExtensions
 {
-    public static IResourceBuilder<ProjectResource> WithScalarDisplayNameUrls(this IResourceBuilder<ProjectResource> project,
+    public static IResourceBuilder<DotnetProjectResource> WithScalarDisplayNameUrls(this IResourceBuilder<DotnetProjectResource> project,
         string scalarUrlIdentifier = "scalar",
         Func<EndpointReference?, bool>? isHttpsEndpoint = null)
     {
@@ -23,7 +25,7 @@ public static class ProjectResourceUrlsExtensions
         });
     }
 
-    public static IResourceBuilder<ProjectResource> WithOpenApiSpecUrl(this IResourceBuilder<ProjectResource> project,
+    public static IResourceBuilder<DotnetProjectResource> WithOpenApiSpecUrl(this IResourceBuilder<DotnetProjectResource> project,
         string openApiSpecPath = "/openapi/v1.json",
         string displayText = "Open API Spec",
         string endpointName = "https",
