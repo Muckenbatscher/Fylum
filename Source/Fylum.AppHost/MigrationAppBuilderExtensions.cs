@@ -1,10 +1,11 @@
-﻿using Fylum.Migrations.SharedModels;
+﻿using Aspire.Hosting.Dotnet;
+using Fylum.Migrations.SharedModels;
 
 namespace Fylum.AppHost;
 
 internal static class MigrationAppBuilderExtensions
 {
-    extension<TProject>(IResourceBuilder<TProject> projectBuilder) where TProject : ProjectResource
+    extension<TProject>(IResourceBuilder<TProject> projectBuilder) where TProject : DotnetProjectResource
     {
         public IResourceBuilder<TProject> WithMigrationCommands(IResourceBuilder<ParameterResource> migrationPerformingKey)
         {
