@@ -11,6 +11,7 @@
 		<PackageReference Include="Aspire.Hosting.Dotnet" />
 		<PackageReference Include="Aspire.Hosting.Docker" />
 		<PackageReference Include="Aspire.Hosting.PostgreSQL" />
+		<PackageReference Include="Npgsql" />
 		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
 		<PackageReference Include="OpenTelemetry.Extensions.Hosting" />
 	</ItemGroup>
